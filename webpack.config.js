@@ -20,6 +20,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.pug$/,
         use: [
           'pug-loader'
@@ -32,7 +40,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './pages/colors-and-type.pug',
       filename: 'colors-and-type.html',
-      chunks: []
+      chunks: ['colorsAndType']
     })
   ]
 }
