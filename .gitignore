@@ -62,3 +62,6 @@ typings/
 
 # Visual Studio Code files
 *.code-workspace
+
+# webpack output
+dist/
