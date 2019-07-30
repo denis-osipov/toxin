@@ -1,0 +1,20 @@
+{
+  "name": "toxin",
+  "version": "",
+  "description": "FSD education program. The 2nd task",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denis-osipov/toxin.git"
+  },
+  "keywords": [],
+  "author": "Denis Osipov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denis-osipov/toxin/issues"
+  },
+  "homepage": "https://github.com/denis-osipov/toxin#readme"
+}
