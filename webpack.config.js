@@ -6,8 +6,7 @@ module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
-    writeToDisk: true,
-    hot: true
+    writeToDisk: true
   },
   context: path.resolve(__dirname, 'src'),
   entry: {
