@@ -1,6 +1,8 @@
+include ./bem
+
 doctype html
 html
   head
     title Colors & Type
-  include ../blocks/page/page
-    include ../blocks/logo-sign/logo-sign
+  +bem('page')
+    +bem('logo-sign')
