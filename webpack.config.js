@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const EntryGenerationPlugin = require('./generator/EntryGenerationPlugin');
 
 module.exports = {
   mode: 'development',
@@ -41,6 +42,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new EntryGenerationPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './pages/colors-and-type.pug',
