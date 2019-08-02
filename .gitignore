@@ -67,4 +67,4 @@ typings/
 dist/
 
 # Generated files
-src/pages/*.js
+src/pages/**.js
