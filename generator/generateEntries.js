@@ -32,7 +32,7 @@ function generateEntryPoinst(context, entry) {
 // Get bem list from pug template (bem entities added with +bem('name'))
 function getBemList(data) {
   let bems = new Set();
-  const re = /\+bem\('(.+?)'\)/g;
+  const re = /\+([^(\s]+)/g;
   let match;
   while (match = re.exec(data)) {
     bems.add(match[1]);
