@@ -6,7 +6,13 @@ const fs = require('fs');
 function generateEntryPoinst(context, entry) {
   const blocksPath = path.join(context, 'blocks');
   for (point in entry) {
-    const entryPath = path.resolve(context, entry[point]);
+    let entryPath;
+    if (typeof entry[point] === "string") {
+      entryPath = path.resolve(context, entry[point]);
+    }
+    else {
+      entryPath = path.resolve(context, entry[point][1]);
+    }
     const templatePath = entryPath.replace('.js', '.pug');
 
     const templateContent = fs.readFileSync(templatePath, 'utf-8');
