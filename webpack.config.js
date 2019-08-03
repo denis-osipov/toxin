@@ -49,5 +49,10 @@ module.exports = {
       filename: 'colors-and-type.html',
       chunks: ['colorsAndType']
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      blocksPath: path.resolve(__dirname, 'src/blocks')
+    }
+  }
 }
