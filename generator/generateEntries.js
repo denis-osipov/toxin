@@ -3,7 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 
-function generateEntryPoinst(context, entry) {
+function generateEntries(context, entry) {
   const blocksPath = path.join(context, 'blocks');
   for (point in entry) {
     let entryPath;
@@ -40,4 +40,4 @@ function getBemList(data) {
   return Array.from(bems);
 }
 
-module.exports = generateEntryPoinst;
+module.exports = generateEntries;
