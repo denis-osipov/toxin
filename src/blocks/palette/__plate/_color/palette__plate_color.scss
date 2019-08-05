@@ -1,0 +1,23 @@
+.palette__plate_color {
+  &_dark-shade-100 {
+    background-color: rgba($color: #1f2041, $alpha: 1.0);
+  }
+  &_dark-shade-75 {
+    background-color: rgba($color: #1f2041, $alpha: 0.75)
+  }
+  &_dark-shade-50 {
+    background-color: rgba($color: #1f2041, $alpha: 0.5)
+  }
+  &_dark-shade-25 {
+    background-color: rgba($color: #1f2041, $alpha: 0.25)
+  }
+  &_dark-shade-5 {
+    background-color: rgba($color: #1f2041, $alpha: 0.05)
+  }
+  &_purple {
+    background-color: rgba($color: #bc9cff, $alpha: 1.0);
+  }
+  &_green {
+    background-color: rgba($color: #6fcf97, $alpha: 1.0);
+  }
+}

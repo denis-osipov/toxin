@@ -1,0 +1,17 @@
+-
+  const colorNames = {
+    'Dark Shade 100%': 'dark-shade-100',
+    'Dark Shade 75%': 'dark-shade-75',
+    'Dark Shade 50%': 'dark-shade-50',
+    'Dark Shade 25%': 'dark-shade-25',
+    'Dark Shade 5%': 'dark-shade-5',
+    'Purple': 'purple',
+    'Green': 'green'
+  }
+
+mixin palette__plate(color)
+  if color
+    - let modifier = 'palette__plate_color_' + colorNames[color];
+    .palette__plate(class=[modifier])
+  else
+    .palette__plate

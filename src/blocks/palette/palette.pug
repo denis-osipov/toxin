@@ -1,0 +1,4 @@
+mixin palette(colors)
+  ul.palette
+    each color in colors
+      +palette__item(color.name, color.code)
