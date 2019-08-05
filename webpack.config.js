@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EntryGenerationPlugin = require('./generator/EntryGenerationPlugin');
+const MixinsAggregatorPlugin = require('./generator/MixinsAggregationPlugin')
 
 module.exports = {
   mode: 'development',
@@ -36,12 +37,18 @@ module.exports = {
       {
         test: /\.pug$/,
         use: [
-          'pug-loader'
+          {
+            loader: 'pug-loader',
+            options: {
+              root: path.resolve(__dirname, 'src/blocks')
+            }
+          }
         ]
       }
     ]
   },
   plugins: [
+    new MixinsAggregatorPlugin(),
     new EntryGenerationPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
