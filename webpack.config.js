@@ -1,8 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const EntryGenerationPlugin = require('./generator/EntryGenerationPlugin');
-const MixinsAggregatorPlugin = require('./generator/MixinsAggregationPlugin')
+const AssetsGenerationPlugin = require('./generator/AssetsGenerationPlugin');
 
 module.exports = {
   mode: 'development',
@@ -48,8 +47,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new MixinsAggregatorPlugin(),
-    new EntryGenerationPlugin(),
+    new AssetsGenerationPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './pages/colors-and-type.pug',
