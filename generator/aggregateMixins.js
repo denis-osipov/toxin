@@ -9,7 +9,7 @@ function aggregateMixins(context, entry) {
   let bems = [];
   getBemFilesList(blocksPath, bems);
 
-  let message = '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n';
+  let message = '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n';
   fs.writeFileSync(bemFilePath, message);
   bems.forEach(function(entityPath) {
       const include = `include /${path.relative(blocksPath, entityPath).replace(/\\/g, '/')}\n`;
