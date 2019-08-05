@@ -65,3 +65,7 @@ typings/
 
 # webpack output
 dist/
+
+# Generated files
+src/pages/**.js
+src/blocks/mixins.pug

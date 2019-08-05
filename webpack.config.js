@@ -1,13 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const AssetsGenerationPlugin = require('./generator/AssetsGenerationPlugin');
 
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
-    writeToDisk: true,
-    hot: true
+    writeToDisk: true
   },
   context: path.resolve(__dirname, 'src'),
   entry: {
@@ -36,17 +36,28 @@ module.exports = {
       {
         test: /\.pug$/,
         use: [
-          'pug-loader'
+          {
+            loader: 'pug-loader',
+            options: {
+              root: path.resolve(__dirname, 'src/blocks')
+            }
+          }
         ]
       }
     ]
   },
   plugins: [
+    new AssetsGenerationPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './pages/colors-and-type.pug',
       filename: 'colors-and-type.html',
       chunks: ['colorsAndType']
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      blocksPath: path.resolve(__dirname, 'src/blocks')
+    }
+  }
 }
