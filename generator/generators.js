@@ -15,11 +15,15 @@ function generateEntries(context, entry) {
       entryPath = path.resolve(context, entry[point][1]);
     }
     const templatePath = entryPath.replace('.js', '.pug');
+    const stylePath = entryPath.replace('.js', '.scss');
 
     const templateContent = fs.readFileSync(templatePath, 'utf-8');
     const bems = getBemList(templateContent);
 
     let entryContent = '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n';
+
+    entryContent += `import './${path.basename(stylePath)}';\n`;
+
     bems.forEach(function(entity) {
       const entityPath = path.join(blocksPath, entity, entity + '.js');
       if (fs.existsSync(entityPath)) {

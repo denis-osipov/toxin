@@ -27,15 +27,23 @@ module.exports = {
         ]
       },
       {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader'
+        ]
+      },
+      {
         test: /\.scss$/,
         use: [
           'style-loader',
           'css-loader',
+          'resolve-url-loader',
           {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
-              fiber: Fiber
+              fiber: Fiber,
+              sourceMap: true
             }
           }
         ]
