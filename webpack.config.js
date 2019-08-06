@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const Fiber = require('fibers');
 const AssetsGenerationPlugin = require('./generator/AssetsGenerationPlugin');
 
 module.exports = {
@@ -41,8 +40,6 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('sass'),
-              fiber: Fiber,
               sourceMap: true
             }
           }
