@@ -22,7 +22,10 @@ function generateEntries(context, entry) {
 
     let entryContent = '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n';
 
-    entryContent += `import './${path.basename(stylePath)}';\n`;
+    // Import page styles, if exist
+    if (fs.existsSync(stylePath)) {
+      entryContent += `import './${path.basename(stylePath)}';\n`;
+    }
 
     bems.forEach(function(entity) {
       const entityPath = path.join(blocksPath, entity, entity + '.js');
