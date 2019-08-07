@@ -51,27 +51,33 @@ function getBemList(data) {
 // Aggregate mixins of all bem entities in one file
 function aggregateMixins(context) {
   const blocksPath = path.join(context, 'blocks');
-  const templateMixins = path.join(blocksPath, 'mixins.pug');
-  const styleMixins = path.join(blocksPath, 'mixins.scss');
-  let message = '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n';
 
-  // Aggregate template mixins
-  let templateBems = [];
-  getBemFilesList(blocksPath, templateBems, 'pug');
-  fs.writeFileSync(templateMixins, message);
-  templateBems.forEach(function(entityPath) {
-      const include = `include /${path.relative(blocksPath, entityPath).replace(/\\/g, '/')}\n`;
-      fs.appendFileSync(templateMixins, include, 'utf-8');
-  });
+  let bems = {
+    pug: {
+      file: path.join(blocksPath, 'mixins.pug'),
+      message: '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n',
+      include: function(entityPath) {
+        return `include /${path.relative(blocksPath, entityPath).replace(/\\/g, '/')}\n`;
+      },
+      fileList: []
+    },
+    scss: {
+      file: path.join(blocksPath, 'mixins.scss'),
+      message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n',
+      include: function(entityPath) {
+        return `@import '${path.relative(blocksPath, entityPath).replace(/\\/g, '/')}';\n`;
+      },
+      fileList: []
+    }
+  };
 
-  // Aggregate style mixins
-  let styleBems = [];
-  getBemFilesList(blocksPath, styleBems, 'scss');
-  fs.writeFileSync(styleMixins, message);
-  styleBems.forEach(function(entityPath) {
-      const include = `@import '${path.relative(blocksPath, entityPath).replace(/\\/g, '/')}';\n`;
-      fs.appendFileSync(styleMixins, include, 'utf-8');
-  });
+  for (type in bems) {
+    getBemFilesList(blocksPath, bems[type].fileList, type);
+    fs.writeFileSync(bems[type].file, bems[type].message);
+    bems[type].fileList.forEach(function(entityPath) {
+      fs.appendFileSync(bems[type].file, bems[type].include(entityPath), 'utf-8');
+    });
+  }
 }
 
 // Get bem files list
