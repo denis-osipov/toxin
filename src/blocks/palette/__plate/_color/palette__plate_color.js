@@ -1,1 +1,0 @@
-import './palette__plate_color.scss'

@@ -1,1 +1,0 @@
-import './__plate/palette__plate'
