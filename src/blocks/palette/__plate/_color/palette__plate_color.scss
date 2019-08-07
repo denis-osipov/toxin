@@ -1,4 +1,4 @@
-@import '../../../colors/colors.scss';
+@import '../../../../colors/colors.scss';
 .palette__plate_color {
   @each $opacity in (100, 75, 50, 25, 5) {
     &_dark-shade-#{$opacity} {
