@@ -68,4 +68,5 @@ dist/
 
 # Generated files
 src/pages/**.js
+src/pages/**.scss
 src/blocks/mixins.*
