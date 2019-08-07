@@ -40,7 +40,12 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              outFile: 'style.css', // node-sass docs says outFile is required for sourceMap
+              includePaths: [
+                path.resolve(__dirname, 'src/blocks'),
+                path.resolve(__dirname, 'src')
+              ]
             }
           }
         ]

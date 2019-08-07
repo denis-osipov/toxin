@@ -51,28 +51,39 @@ function getBemList(data) {
 // Aggregate mixins of all bem entities in one file
 function aggregateMixins(context) {
   const blocksPath = path.join(context, 'blocks');
-  const bemFilePath = path.join(blocksPath, 'mixins.pug');
-  let bems = [];
-  getBemFilesList(blocksPath, bems);
-
+  const templateMixins = path.join(blocksPath, 'mixins.pug');
+  const styleMixins = path.join(blocksPath, 'mixins.scss');
   let message = '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n';
-  fs.writeFileSync(bemFilePath, message);
-  bems.forEach(function(entityPath) {
+
+  // Aggregate template mixins
+  let templateBems = [];
+  getBemFilesList(blocksPath, templateBems, 'pug');
+  fs.writeFileSync(templateMixins, message);
+  templateBems.forEach(function(entityPath) {
       const include = `include /${path.relative(blocksPath, entityPath).replace(/\\/g, '/')}\n`;
-      fs.appendFileSync(bemFilePath, include, 'utf-8');
+      fs.appendFileSync(templateMixins, include, 'utf-8');
+  });
+
+  // Aggregate style mixins
+  let styleBems = [];
+  getBemFilesList(blocksPath, styleBems, 'scss');
+  fs.writeFileSync(styleMixins, message);
+  styleBems.forEach(function(entityPath) {
+      const include = `@import '${path.relative(blocksPath, entityPath).replace(/\\/g, '/')}';\n`;
+      fs.appendFileSync(styleMixins, include, 'utf-8');
   });
 }
 
 // Get bem files list
-function getBemFilesList(root, list) {
+function getBemFilesList(root, list, type) {
   const blocks = fs.readdirSync(root, { encoding: 'utf-8', withFileTypes: true });
   blocks.forEach(function(entity){
     const entityPath = path.join(root, entity.name);
-    if (entity.isFile() && entity.name.endsWith('.pug') && entity.name !== 'mixins.pug') {
+    if (entity.isFile() && entity.name.endsWith(`.${type}`) && entity.name !== `mixins.${type}`) {
       list.push(entityPath);
     }
     else if (entity.isDirectory()) {
-      getBemFilesList(entityPath, list);
+      getBemFilesList(entityPath, list, type);
     }
   })
 }
