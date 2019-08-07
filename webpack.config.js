@@ -11,7 +11,10 @@ module.exports = {
   },
   context: path.resolve(__dirname, 'src'),
   entry: {
-    colorsAndType: './pages/colors-and-type.js'
+    colorsAndType: [
+      './pages/colors-and-type.js',
+      './pages/colors-and-type.scss'
+    ]
   },
   output: {
     filename: '[name].js',

@@ -1,5 +1,8 @@
-.palette__plate {
-  border-radius: 5px;
-  height: 50px;
-  width: 10%;
+@mixin palette__plate {
+  .palette__plate {
+    border-radius: 5px;
+    height: 50px;
+    width: 10%;
+  }
+  @include palette__plate_color
 }

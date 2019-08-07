@@ -1,14 +1,15 @@
-@import '../../../../colors/colors.scss';
-.palette__plate_color {
-  @each $opacity in (100, 75, 50, 25, 5) {
-    &_dark-shade-#{$opacity} {
-      background-color: map-get($dark-shade-opacity, $opacity);
+@mixin palette__plate_color {
+  .palette__plate_color {
+    @each $opacity in (100, 75, 50, 25, 5) {
+      &_dark-shade-#{$opacity} {
+        background-color: map-get($dark-shade-opacity, $opacity);
+      }
     }
-  }
-  &_purple {
-    background-color: $purple;
-  }
-  &_green {
-    background-color: $green;
+    &_purple {
+      background-color: $purple;
+    }
+    &_green {
+      background-color: $green;
+    }
   }
 }
