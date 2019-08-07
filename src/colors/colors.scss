@@ -1,0 +1,10 @@
+$dark-shade: #1f2041;
+$dark-shade-opacity: (
+  100: $dark-shade,
+  75: change-color($dark-shade, $alpha: 0.75),
+  50: change-color($dark-shade, $alpha: 0.5),
+  25: change-color($dark-shade, $alpha: 0.25),
+  5: change-color($dark-shade, $alpha: 0.05)
+);
+$purple: #bc9cff;
+$green: #6fcf97;
