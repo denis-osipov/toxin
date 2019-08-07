@@ -3,6 +3,7 @@
 const path = require('path');
 const generator = require('./generators').generateEntries;
 const aggregator = require('./generators').aggregateMixins;
+const getFileList = require('./generators').getFileList;
 
 class AssetsGenerationPlugin {
   apply(compiler) {
@@ -18,14 +19,22 @@ class AssetsGenerationPlugin {
       'AssetsGenerationPlugin',
       (fileName, changeTime) => {
 
-        if (fileName !== path.resolve(compiler.context, 'blocks/mixins.pug')) {
+        // Don't respond to changes of generated files
+        if (
+          fileName !== path.resolve(compiler.context, 'blocks/mixins.pug') &&
+          fileName !== path.resolve(compiler.context, 'blocks/mixins.scss')
+        ) {
           aggregator(compiler.context);
         }
 
-        for (let entry in Object.values(compiler.options.entry)) {
-          entry = typeof entry === 'string' ? entry : entry[1];
-          if (fileName === path.resolve(compiler.context, entry)) {
-            return;
+        // Don't respond to changes of generated files
+        for (let entryPoint of Object.values(compiler.options.entry)) {
+          let entryFiles = getFileList(entryPoint, compiler.context);
+          for (let file of entryFiles) {
+            // Check if invalid file is one of generated
+            if (fileName === file) {
+              return;
+            }
           }
         }
         generator(compiler.context, compiler.options.entry);

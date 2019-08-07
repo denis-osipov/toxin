@@ -11,7 +11,10 @@ module.exports = {
   },
   context: path.resolve(__dirname, 'src'),
   entry: {
-    colorsAndType: './pages/colors-and-type.js'
+    colorsAndType: [
+      './pages/colors-and-type.js',
+      './pages/colors-and-type.scss'
+    ]
   },
   output: {
     filename: '[name].js',
@@ -40,7 +43,12 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              outFile: 'style.css', // node-sass docs says outFile is required for sourceMap
+              includePaths: [
+                path.resolve(__dirname, 'src/blocks'),
+                path.resolve(__dirname, 'src')
+              ]
             }
           }
         ]

@@ -68,4 +68,4 @@ dist/
 
 # Generated files
 src/pages/**.js
-src/blocks/mixins.pug
+src/blocks/mixins.*
