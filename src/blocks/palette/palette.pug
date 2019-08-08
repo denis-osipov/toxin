@@ -1,4 +1,14 @@
-mixin palette(colors)
-  ul.palette
+mixin palette
+  -
+    let colors = [
+      {name: 'Dark Shade 100%', code: '#1F2041'},
+      {name: 'Dark Shade 75%', code: '#1F2041'},
+      {name: 'Dark Shade 50%', code: '#1F2041'},
+      {name: 'Dark Shade 25%', code: '#1F2041'},
+      {name: 'Dark Shade 5%', code: '#1F2041'},
+      {name: 'Purple', code: '#BC9CFF'},
+      {name: 'Green', code: '#6FCF97'}
+    ]
+  ul.palette(class=[attributes.mix])
     each color in colors
       +palette__item(color.name, color.code)
