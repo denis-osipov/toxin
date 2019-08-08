@@ -4,24 +4,7 @@ doctype html
 html
   head
     title Colors & Type
-  +page
+  +page()(mix='text')
     +logo-sign
-    -
-      let colors = [
-        {name: 'Dark Shade 100%', code: '#1F2041'},
-        {name: 'Dark Shade 75%', code: '#1F2041'},
-        {name: 'Dark Shade 50%', code: '#1F2041'},
-        {name: 'Dark Shade 25%', code: '#1F2041'},
-        {name: 'Dark Shade 5%', code: '#1F2041'},
-        {name: 'Purple', code: '#BC9CFF'},
-        {name: 'Green', code: '#6FCF97'}
-      ]
-    +palette(colors)
-
-    -
-      let fontSamples = {
-        'H1': 'This one is the sub-section or widget title',
-        'H2': 'Next one is the item title inside widgets',
-        'H3': 'This is a label or cta text',
-        'Body': 'This is the body text which is used for most of the design, like paragraphs, lists, etc.'
-      }
+    +palette
+    +font-sample

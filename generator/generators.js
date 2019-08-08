@@ -79,10 +79,14 @@ function getFileList(entryPoint, context) {
 // Get bem list from pug template (bem entities added with +bem('name'))
 function getBemList(data) {
   let bems = new Set();
-  const re = /\+([^(\s]+)/g;
+  const re = /\+([^(\s]+)(?:\(.*?\))?(?:\(mix='(.*?)'\))?/g;
   let match;
   while (match = re.exec(data)) {
-    bems.add(match[1]);
+    match.slice(1).forEach(block => {
+      if (block) {
+        bems.add(block);
+      }
+    });
   }
   return Array.from(bems);
 }
