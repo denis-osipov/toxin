@@ -1,0 +1,12 @@
+@mixin text {
+  .text {
+    font: {
+      family: 'Montserrat', sans-serif;
+      weight: normal;
+      size: 14px;
+    }
+    line-height: 24px;
+    color: map-get($dark-shade-opacity, 75);
+  }
+  @include text_level;
+}

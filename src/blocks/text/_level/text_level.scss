@@ -1,0 +1,56 @@
+@mixin text_level {
+  %text_header {
+    font: {
+      family: 'Quicksand', sans-serif;
+      weight: bold;
+    }
+    color: $dark-shade;
+  }
+  .text_level {
+    &_h1 {
+      @extend %text_header;
+      font-size: 24px;
+      line-height: 30px;
+    }
+    &_h2 {
+      @extend %text_header;
+      font-size: 19px;
+      line-height: 24px;
+    }
+    &_h3 {
+      font: {
+        weight: bold;
+        size: 12px;
+      }
+      color: $dark-shade;
+      line-height: 15px;
+      text-transform: uppercase;
+    }
+    &_color-code {
+      @extend %text_header;
+      font: {
+        weight: normal;
+        size: 19px;
+      }
+      line-height: 29px;
+    }
+    &_sample-h1 {
+      font-size: 24px;
+      line-height: 29px;
+      color: map-get($dark-shade-opacity, 25)
+    }
+    &_sample-h2 {
+      font-size: 19px;
+      line-height: 23px;
+      color: map-get($dark-shade-opacity, 25)
+    }
+    &_sample-h3 {
+      font-size: 12px;
+      line-height: 15px;
+      color: map-get($dark-shade-opacity, 25)
+    }
+    &_sample-body {
+      color: map-get($dark-shade-opacity, 25)
+    }
+  }
+}
