@@ -1,3 +1,8 @@
 @mixin palette {
-  @include palette__plate
+  .palette {
+    flex: 400px;
+    margin: 0;
+    width: 40%;
+  }
+  @include palette__plate;
 }
