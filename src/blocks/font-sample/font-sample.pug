@@ -1,0 +1,11 @@
+mixin font-sample
+  ul.font-sample(class=[attributes.mix])
+    -
+      let fontSamples = {
+        'H1': 'This one is the sub-section or widget title',
+        'H2': 'Next one is the item title inside widgets',
+        'H3': 'This is a label or cta text',
+        'Body': 'This is the body text which is used for most of the design, like paragraphs, lists, etc.'
+      }
+    each text, label in fontSamples
+      +font-sample__item(label, text)

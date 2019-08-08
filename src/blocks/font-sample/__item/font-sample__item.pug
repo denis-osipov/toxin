@@ -1,0 +1,15 @@
+mixin font-sample__item(label, text)
+
+  -
+    const classes = {
+      'H1': ['text_level_sample-h1', 'text_level_h1'],
+      'H2': ['text_level_sample-h2', 'text_level_h2'],
+      'H3': ['text_level_sample-h3', 'text_level_h3'],
+      'Body': ['text_level_sample-body', '']
+    };
+
+  li.font-sample__item(class=[attributes.mix])
+    .div(class=classes[label][0])
+      =label
+    .div(class=classes[label][1])
+      =text
