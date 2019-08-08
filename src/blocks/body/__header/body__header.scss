@@ -1,0 +1,6 @@
+@mixin body__header {
+  .body__header {
+    line-height: 0; // set to make header height equal to logo-sign height
+    padding: 30px;
+  }
+}

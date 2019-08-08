@@ -1,0 +1,8 @@
+@mixin body__main {
+  .body__main {
+    padding: 37px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}

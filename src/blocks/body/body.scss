@@ -1,5 +1,9 @@
 @mixin body {
   .body {
+    margin: 0;
+    padding: 0;
     width: 1440px;
   }
+  @include body__header;
+  @include body__main;
 }
