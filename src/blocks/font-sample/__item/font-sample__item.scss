@@ -1,0 +1,14 @@
+@mixin font-sample__item {
+  .font-sample__item {
+    display: grid;
+    grid-template-columns: 37px 1fr;
+    margin-bottom: 50px;
+    // grid-auto-rows: 10%;
+    grid-gap: 30px /*10%*/; // grid-column-gap
+    gap: 30px; // column-gap
+
+    &:last-child {
+      margin-top: -4px;
+    }
+  }
+}

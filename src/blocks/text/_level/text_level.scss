@@ -6,6 +6,10 @@
     }
     color: $dark-shade;
   }
+  %text_sample {
+    text-align: right;
+    color: map-get($dark-shade-opacity, 25);
+  }
   .text_level {
     &_h1 {
       @extend %text_header;
@@ -32,25 +36,25 @@
         weight: normal;
         size: 19px;
       }
-      line-height: 29px;
+      line-height: 34px;
     }
     &_sample-h1 {
+      @extend %text_sample;
       font-size: 24px;
       line-height: 29px;
-      color: map-get($dark-shade-opacity, 25)
     }
     &_sample-h2 {
+      @extend %text_sample;
       font-size: 19px;
       line-height: 23px;
-      color: map-get($dark-shade-opacity, 25)
     }
     &_sample-h3 {
+      @extend %text_sample;
       font-size: 12px;
       line-height: 15px;
-      color: map-get($dark-shade-opacity, 25)
     }
     &_sample-body {
-      color: map-get($dark-shade-opacity, 25)
+      @extend %text_sample;
     }
   }
 }

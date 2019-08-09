@@ -8,6 +8,7 @@ const rules = {
   js: {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
     prepend: [],
+    append: [],
     use: function(entityFile, entryFile) {
       return `import '${path.relative(path.dirname(entryFile), entityFile).replace(/\\/g, '/')}';\n`;
     }
@@ -19,6 +20,7 @@ const rules = {
       `@import 'colors/colors.scss';\n`,
       `@import 'mixins';\n`
     ],
+    append: [`@import './page-style';\n`],
     use: function(entityFile) {
       const entity = path.basename(entityFile, '.scss');
       return `@include ${entity};\n`;
@@ -46,7 +48,7 @@ function generateEntries(context, entry) {
       const type = path.extname(file).slice(1);
       fs.writeFileSync(file, rules[type].message); // warning about autogeneration
 
-      // Mandatory imports
+      // Mandatory initial imports
       rules[type].prepend.forEach(function(row) {
         fs.appendFileSync(file, row, 'utf-8');
       });
@@ -57,6 +59,11 @@ function generateEntries(context, entry) {
         if (fs.existsSync(entityFile)) {
           fs.appendFileSync(file, rules[type].use(entityFile, file), 'utf-8');
         }
+      });
+
+      // Mandatory imports at the end
+      rules[type].append.forEach(function(row) {
+        fs.appendFileSync(file, row, 'utf-8');
       });
     });
   }

@@ -1,0 +1,30 @@
+@mixin ui-kit {
+  .ui-kit {
+    &__header {
+      margin: 0;
+      padding: 30px;
+    }
+    &__logo {
+      display: block;
+    }
+    &__flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between; // space-between / space-around / space-evenly
+      // grid-gap: 50px;
+      // gap: 50px; // column-gap
+      padding: 37px 150px;
+    }
+    &__flex-item {
+      width: 403px;
+      // min-width: 400px;
+      // max-width: 500px;
+      margin: 0;
+      padding: 0;
+
+      &:last-child {
+        margin-right: 41px;
+      }
+    }
+  }
+}

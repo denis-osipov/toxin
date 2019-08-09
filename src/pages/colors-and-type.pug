@@ -1,12 +1,14 @@
 include /mixins
+//- Comment add ui-kit styles
+//- +ui-kit
 
 doctype html
 html
   head
     title Colors & Type
   +body()(mix='text')
-    +header
-      +logo-sign
-    +main
-      +palette
-      +font-sample
+    +header()(mix='ui-kit__header')
+      +logo-sign()(mix='ui-kit__logo')
+    +main()(mix='ui-kit__flex-container')
+      +palette()(mix='ui-kit__flex-item')
+      +font-sample()(mix='ui-kit__flex-item')

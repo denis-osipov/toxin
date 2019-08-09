@@ -1,0 +1,11 @@
+@mixin palette__item {
+  .palette__item {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    align-items: center;
+    margin-bottom: 20px;
+    // grid-auto-rows: 10%;
+    grid-gap: 40px /*10%*/; // grid-column-gap
+    gap: 40px; // column-gap
+  }
+}
