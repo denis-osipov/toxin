@@ -17,7 +17,7 @@ const rules = {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
     prepend: [
       `@import 'fonts/fonts';\n`,
-      `@import 'colors/colors.scss';\n`,
+      `@import 'variables';\n`,
       `@import 'mixins';\n`
     ],
     append: [`@import './page-style';\n`],
