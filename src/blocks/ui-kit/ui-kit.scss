@@ -10,20 +10,20 @@
     &__flex-container {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between; // space-between / space-around / space-evenly
+      justify-content: space-around; // space-between / space-around / space-evenly
       // grid-gap: 50px;
       // gap: 50px; // column-gap
-      padding: 37px 150px;
+      padding: 37px 23px;
     }
     &__flex-item {
-      width: 403px;
+      width: 445px;
       // min-width: 400px;
       // max-width: 500px;
       margin: 0;
       padding: 0;
 
       &:last-child {
-        margin-right: 41px;
+        // margin-right: 41px;
       }
     }
   }
