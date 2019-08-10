@@ -13,6 +13,9 @@ module.exports = {
   entry: {
     colorsAndType: [
       './pages/colors-and-type/colors-and-type.scss'
+    ],
+    formElements: [
+      './pages/form-elements/form-elements.scss'
     ]
   },
   output: {
@@ -72,6 +75,11 @@ module.exports = {
       template: './pages/colors-and-type/colors-and-type.pug',
       filename: 'colors-and-type.html',
       chunks: ['colorsAndType']
+    }),
+    new HtmlWebpackPlugin({
+      template: './pages/form-elements/form-elements.pug',
+      filename: 'form-elements.html',
+      chunks: ['formElements']
     })
   ],
   resolve: {
