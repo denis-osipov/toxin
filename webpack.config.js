@@ -12,7 +12,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     colorsAndType: [
-      './pages/colors-and-type.scss'
+      './pages/colors-and-type/colors-and-type.scss'
     ]
   },
   output: {
@@ -69,7 +69,7 @@ module.exports = {
     new AssetsGenerationPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './pages/colors-and-type.pug',
+      template: './pages/colors-and-type/colors-and-type.pug',
       filename: 'colors-and-type.html',
       chunks: ['colorsAndType']
     })
