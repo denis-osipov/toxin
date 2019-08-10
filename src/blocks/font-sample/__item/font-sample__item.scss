@@ -1,0 +1,17 @@
+$ref-rem: 1 !default;
+
+@mixin font-sample__item {
+  .font-sample__item {
+    display: grid;
+    grid-column-gap: 29px / $ref-rem;
+    grid-template-columns: #{37px / $ref-rem} 1fr;
+    margin-bottom: 50px / $ref-rem;
+    padding-right: 40px / $ref-rem;
+
+    // For perfect pixel perfect
+    &:last-child {
+      margin-top: -3px;
+      padding-right: 60px / $ref-rem;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+$max-width: null !default;
+$min-width: null !default;
+
+@mixin body {
+  .body {
+    max-width: $max-width;
+    min-width: $min-width;
+  }
+}

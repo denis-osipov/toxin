@@ -1,0 +1,6 @@
+@mixin font-sample {
+  .font-sample {
+    list-style: none;
+  }
+  @include font-sample__item;
+}

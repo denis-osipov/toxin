@@ -1,0 +1,32 @@
+$flex-item-width: 443px;
+$container-padding: 37px;
+
+@mixin ui-kit {
+  .ui-kit {
+    &__header {
+      margin: 0;
+      padding: 30px;
+    }
+    &__logo {
+      display: block;
+    }
+    &__flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      grid-gap: 30px / $ref-rem;
+      padding: $container-padding;
+    }
+    &__flex-item {
+      @media (max-width: 1023px) {
+        width: percentage($flex-item-width / 1023px);
+      }
+      @media (min-width: 1024px) {
+        width: $flex-item-width;
+      }
+      margin: 0;
+      min-width: $min-width - $container-padding * 2;
+      padding: 0;
+    }
+  }
+}

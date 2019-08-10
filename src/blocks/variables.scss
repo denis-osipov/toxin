@@ -1,0 +1,26 @@
+// Sizing
+$min-width: 320px;
+$max-width: 1920px;
+$ref-width: 1440px;
+$ref-rem: 16px/rem;
+
+@media (max-width: 879px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media (min-width: 880px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+// Colors
+$dark-shade: #1f2041;
+$dark-shade-100: $dark-shade;
+$dark-shade-75: change-color($dark-shade, $alpha: 0.75);
+$dark-shade-50: change-color($dark-shade, $alpha: 0.5);
+$dark-shade-25: change-color($dark-shade, $alpha: 0.25);
+$dark-shade-5: change-color($dark-shade, $alpha: 0.05);
+$purple: #bc9cff;
+$green: #6fcf97;
