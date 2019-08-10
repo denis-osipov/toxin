@@ -16,8 +16,8 @@ const rules = {
   scss: {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
     prepend: [
-      `@import 'fonts/fonts';\n`,
       `@import 'variables';\n`,
+      `@import 'fonts/fonts';\n`,
       `@import 'mixins';\n`
     ],
     append: [`@import './page-style';\n`],
@@ -137,7 +137,7 @@ function fillBemFilesList(root, lists) {
   blocks.forEach(function(entity){
     const entityPath = path.join(root, entity.name);
     if (entity.isFile()) {
-      if (path.extname(entity.name) in lists && path.parse(entity.name).name !== 'mixins') {
+      if (path.extname(entity.name) in lists && !['mixins', 'variables'].includes(path.parse(entity.name).name)) {
         lists[path.extname(entity.name)].push(entityPath);
       }
     }

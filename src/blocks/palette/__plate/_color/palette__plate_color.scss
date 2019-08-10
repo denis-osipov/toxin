@@ -1,9 +1,19 @@
 @mixin palette__plate_color {
   .palette__plate_color {
-    @each $opacity in (100, 75, 50, 25, 5) {
-      &_dark-shade-#{$opacity} {
-        background-color: map-get($dark-shade-opacity, $opacity);
-      }
+    &_dark-shade-100 {
+      background-color: $dark-shade-100;
+    }
+    &_dark-shade-75 {
+      background-color: $dark-shade-75;
+    }
+    &_dark-shade-50 {
+      background-color: $dark-shade-50;
+    }
+    &_dark-shade-25 {
+      background-color: $dark-shade-25;
+    }
+    &_dark-shade-5 {
+      background-color: $dark-shade-5;
     }
     &_purple {
       background-color: $purple;

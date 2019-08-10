@@ -1,57 +1,68 @@
+$ref-rem: 1 !default;
+$dark-shade: black !default;
+$dark-shade-25: rgba(0, 0, 0, 0.25) !default;
+
+$h1-font-size: 24px / $ref-rem;
+$h1-line-height: 30px / 24px;
+$h2-font-size: 19px / $ref-rem;
+$h2-line-height: 24px / 19px;
+$h3-font-size: 12px / $ref-rem;
+$h3-line-height: 15px / 12px;
+
 @mixin text_level {
   %text_header {
+    color: $dark-shade;
     font: {
       family: 'Quicksand', sans-serif;
       weight: bold;
     }
-    color: $dark-shade;
   }
   %text_sample {
+    color: $dark-shade-25;
     text-align: right;
-    color: map-get($dark-shade-opacity, 25);
   }
   .text_level {
     &_h1 {
       @extend %text_header;
-      font-size: 24px;
-      line-height: 30px;
+      font-size: $h1-font-size;
+      line-height: $h1-line-height;
     }
     &_h2 {
       @extend %text_header;
-      font-size: 19px;
-      line-height: 24px;
+      font-size: $h2-font-size;
+      line-height: $h2-line-height;
     }
     &_h3 {
-      font: {
-        weight: bold;
-        size: 12px;
-      }
       color: $dark-shade;
-      line-height: 15px;
+      font: {
+        size: $h3-font-size;
+        weight: bold;
+      }
+      line-height: $h3-line-height;
       text-transform: uppercase;
     }
     &_color-code {
       @extend %text_header;
       font: {
+        size: 19px / $ref-rem;
         weight: normal;
-        size: 19px;
       }
-      line-height: 34px;
+      line-height: #{(34px/19px)};
     }
     &_sample-h1 {
       @extend %text_sample;
-      font-size: 24px;
-      line-height: 29px;
+      font-size: $h1-font-size;
+      line-height: $h1-line-height;
     }
     &_sample-h2 {
       @extend %text_sample;
-      font-size: 19px;
-      line-height: 23px;
+      font-size: $h2-font-size;
+      line-height: $h2-line-height;
     }
     &_sample-h3 {
       @extend %text_sample;
-      font-size: 12px;
-      line-height: 15px;
+      font-size: $h3-font-size;
+      line-height: $h3-line-height;
     }
     &_sample-body {
       @extend %text_sample;

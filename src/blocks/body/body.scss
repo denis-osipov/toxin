@@ -1,7 +1,9 @@
+$max-width: null !default;
+$min-width: null !default;
+
 @mixin body {
   .body {
-    // Remove after PP setting
-    margin: 0;
-    width: 1440px;
+    max-width: $max-width;
+    min-width: $min-width;
   }
 }
