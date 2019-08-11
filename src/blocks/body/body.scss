@@ -3,6 +3,8 @@ $min-width: null !default;
 
 @mixin body {
   .body {
+    width: 1440px;
+    margin: 0;
     max-width: $max-width;
     min-width: $min-width;
   }

@@ -11,21 +11,26 @@ $container-padding: 37px;
       display: block;
     }
     &__flex-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      grid-gap: 30px / $ref-rem;
+      // grid-gap: 253px / ($ref-width - 150px * 2) * 100%;
+      $total: 150px * 2 + 586px;
+      grid-gap: calc(100% - #{$total});
       padding: $container-padding;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      // justify-items: center;
+      $side-padding: 150px;
+      padding-left: $side-padding / $ref-width * 100%;
+      padding-right: $side-padding / $ref-width * 100%;
     }
     &__flex-item {
-      @media (max-width: 1023px) {
-        width: percentage($flex-item-width / 1023px);
-      }
-      @media (min-width: 1024px) {
-        width: $flex-item-width;
-      }
+      // @media (max-width: 1023px) {
+      //   width: percentage($flex-item-width / 1023px);
+      // }
+      // @media (min-width: 1024px) {
+      //   width: $flex-item-width;
+      // }
       margin: 0;
-      min-width: $min-width - $container-padding * 2;
+      // min-width: $min-width - $container-padding * 2;
       padding: 0;
     }
   }
