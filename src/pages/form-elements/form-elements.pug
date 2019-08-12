@@ -10,5 +10,7 @@ html
     +header()(mix='ui-kit__header')
       +logo-sign()(mix='ui-kit__logo')
     +main
-      +field()(type='email', placeholder='Email')
-      +field()(type='text', value='This is pretty awesome')
+      +sample-form('Text field', 'Default')
+        +field()(type='email', placeholder='Email')
+      +sample-form('Text field', 'Hover / Focus')
+        +field()(type='text', value='This is pretty awesome')

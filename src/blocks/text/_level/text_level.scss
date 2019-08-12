@@ -67,5 +67,11 @@ $h3-line-height: 15px / 12px;
     &_sample-body {
       @extend %text_sample;
     }
+    &_element-status {
+      color: $dark-shade-50;
+      font-size: $h3-font-size;
+      line-height: $h3-line-height;
+      text-transform: uppercase;
+    }
   }
 }
