@@ -1,5 +1,6 @@
-$flex-item-width: 443px;
-$container-padding: 37px;
+$container-padding: 37px !default;
+$ref-width: 1440px !default;
+$side-padding: 150px !default;
 
 @mixin ui-kit {
   .ui-kit {
@@ -10,22 +11,17 @@ $container-padding: 37px;
     &__logo {
       display: block;
     }
-    &__flex-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      grid-gap: 30px / $ref-rem;
+    &__grid-container {
+      display: grid;
+      grid-column-gap: calc(100% - #{$side-padding * 2 + 586px});
+      grid-row-gap: 50px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       padding: $container-padding;
+      padding-left: percentage($side-padding / $ref-width);
+      padding-right: percentage($side-padding / $ref-width);
     }
-    &__flex-item {
-      @media (max-width: 1023px) {
-        width: percentage($flex-item-width / 1023px);
-      }
-      @media (min-width: 1024px) {
-        width: $flex-item-width;
-      }
+    &__grid-item {
       margin: 0;
-      min-width: $min-width - $container-padding * 2;
       padding: 0;
     }
   }
