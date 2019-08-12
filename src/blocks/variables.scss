@@ -4,12 +4,12 @@ $max-width: 1920px;
 $ref-width: 1440px;
 $ref-rem: 16px/rem;
 
-@media (max-width: 879px) {
+@media (max-width: 819px) {
   html {
     font-size: 12px;
   }
 }
-@media (min-width: 880px) {
+@media (min-width: 820px) {
   html {
     font-size: 16px;
   }

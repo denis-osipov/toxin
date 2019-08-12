@@ -6,6 +6,6 @@ $ref-rem: 1 !default;
     display: grid;
     grid-column-gap: 40px / $ref-rem;
     grid-template-columns: #{70px / $ref-rem} 1fr;
-    margin-bottom: 20px;
+    margin-bottom: 20px / $ref-rem;
   }
 }
