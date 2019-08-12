@@ -1,5 +1,6 @@
-$flex-item-width: 443px;
-$container-padding: 37px;
+$container-padding: 37px !default;
+$ref-width: 1440px !default;
+$side-padding: 150px !default;
 
 @mixin ui-kit {
   .ui-kit {
@@ -10,27 +11,17 @@ $container-padding: 37px;
     &__logo {
       display: block;
     }
-    &__flex-container {
-      // grid-gap: 253px / ($ref-width - 150px * 2) * 100%;
-      $total: 150px * 2 + 586px;
-      grid-gap: calc(100% - #{$total});
-      padding: $container-padding;
+    &__grid-container {
       display: grid;
+      grid-column-gap: calc(100% - #{$side-padding * 2 + 586px});
+      grid-row-gap: 50px;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      // justify-items: center;
-      $side-padding: 150px;
-      padding-left: $side-padding / $ref-width * 100%;
-      padding-right: $side-padding / $ref-width * 100%;
+      padding: $container-padding;
+      padding-left: percentage($side-padding / $ref-width);
+      padding-right: percentage($side-padding / $ref-width);
     }
-    &__flex-item {
-      // @media (max-width: 1023px) {
-      //   width: percentage($flex-item-width / 1023px);
-      // }
-      // @media (min-width: 1024px) {
-      //   width: $flex-item-width;
-      // }
+    &__grid-item {
       margin: 0;
-      // min-width: $min-width - $container-padding * 2;
       padding: 0;
     }
   }
