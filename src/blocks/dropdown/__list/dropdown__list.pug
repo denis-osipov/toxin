@@ -1,0 +1,4 @@
+mixin dropdown__list(items)
+  ul.dropdown__list.dropdown__list_hidden
+    each item in items
+      +dropdown__item(item)

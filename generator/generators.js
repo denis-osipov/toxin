@@ -8,7 +8,7 @@ const rules = {
   js: {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
     prepend: [],
-    append: [],
+    append: [`import './page-script.js';\n`],
     use: function(entityFile, entryFile) {
       return `import '${path.relative(path.dirname(entryFile), entityFile).replace(/\\/g, '/')}';\n`;
     }

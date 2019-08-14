@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const AssetsGenerationPlugin = require('./generator/AssetsGenerationPlugin');
@@ -15,7 +16,8 @@ module.exports = {
       './pages/colors-and-type/colors-and-type.scss'
     ],
     formElements: [
-      './pages/form-elements/form-elements.scss'
+      './pages/form-elements/form-elements.scss',
+      './pages/form-elements/form-elements.js'
     ]
   },
   output: {
@@ -70,6 +72,10 @@ module.exports = {
   },
   plugins: [
     new AssetsGenerationPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './pages/colors-and-type/colors-and-type.pug',
