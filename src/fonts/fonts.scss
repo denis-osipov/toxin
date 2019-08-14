@@ -1,4 +1,4 @@
-$fonts: ('Montserrat': regular bold, 'Quicksand': regular bold);
+$fonts: ('Montserrat': regular bold, 'Quicksand': regular bold, 'Material Icons': regular);
 $formats: ('woff': 'woff', 'ttf': 'truetype', 'svg': 'svg');
 
 @function font-src($font, $formats) {
