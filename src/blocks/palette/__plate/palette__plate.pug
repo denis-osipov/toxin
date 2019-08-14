@@ -12,6 +12,6 @@
 mixin palette__plate(color)
   if color
     - let modifier = 'palette__plate_color_' + colorNames[color];
-    .palette__plate(class=[modifier])
+    .palette__plate(class=modifier)&attributes(attributes)
   else
     .palette__plate

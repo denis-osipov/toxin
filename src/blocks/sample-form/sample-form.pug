@@ -1,4 +1,4 @@
 mixin sample-form(elementName, status)
-  form.sample-form(class=[attributes.mix])
+  form.sample-form&attributes(attributes)
     +sample-form__header(elementName, status)
     block

@@ -8,7 +8,7 @@ mixin font-sample__item(label, text)
       'Body': ['text_level_sample-body', '']
     };
 
-  li.font-sample__item(class=[attributes.mix])
+  li.font-sample__item&attributes(attributes)
     .div(class=classes[label][0])
       =label
     .div(class=classes[label][1])

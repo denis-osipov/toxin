@@ -9,6 +9,6 @@ mixin palette
       {name: 'Purple', code: '#BC9CFF'},
       {name: 'Green', code: '#6FCF97'}
     ]
-  ul.palette(class=[attributes.mix])
+  ul.palette&attributes(attributes)
     each color in colors
       +palette__item(color.name, color.code)
