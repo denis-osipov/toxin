@@ -67,7 +67,8 @@ typings/
 dist/
 
 # Generated files
-src/pages/**.js
 src/blocks/mixins.*
-src/pages/colors-and-type/colors-and-type.scss
-src/pages/form-elements/form-elements.scss
+src/pages/*/*.scss
+!src/pages/*/page-style.scss
+src/pages/*/*.js
+!src/pages/*/page-script.js
