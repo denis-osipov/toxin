@@ -1,4 +1,4 @@
-mixin dropdown(options, items)
-  .dropdown
-    +field()(type='text', value=[options.zero, options.plural].join(' '),readonly)
+mixin dropdown(...items)
+  .dropdown&attributes(attributes)
+    +dropdown__total
     +dropdown__list(items)

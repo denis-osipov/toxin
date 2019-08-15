@@ -16,18 +16,4 @@ html
       +sample-form('Text field', 'Hover / Focus')
         +field()(type='text', value='This is pretty awesome')
       +sample-form('Dropdown', 'Default')
-        -
-          const options = {
-            zero: 'Сколько',
-            single: 'гость',
-            plural: 'гостей',
-            specialPlural: {
-              word: 'гостя',
-              condition: (value) => {
-                const remMain = value % 100;
-                const remSub = remMain % 10;
-                return remSub > 1 && remSub < 5 && !(remMain > 11 && remMain < 15);
-              }
-            }
-          }
-        +dropdown(options, ['Взрослые', 'Дети', 'Младенцы'])
+        +dropdown('Взрослые', 'Дети', 'Младенцы')(class='dropdown_type_guests')

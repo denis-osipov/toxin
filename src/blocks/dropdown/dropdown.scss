@@ -1,3 +1,4 @@
 @mixin dropdown {
   @include dropdown__list;
+  @include icon;
 }
