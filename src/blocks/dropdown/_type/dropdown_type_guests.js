@@ -1,5 +1,6 @@
 function setGuests( jQuery ) {
   $( '.dropdown_type_guests' ).dropdown({
+    total: true,
     wording: (value) => {
       if (value == 0) {
         return 'Сколько гостей';
