@@ -1,4 +1,9 @@
 mixin dropdown(...items)
+  -
+    if (attributes.class === 'dropdown_type_conveniences') {
+      items = ['Спальни', 'Кровати', 'Ванные комнаты'];
+    }
+
   .dropdown&attributes(attributes)
     +dropdown__total
     +dropdown__list(items)

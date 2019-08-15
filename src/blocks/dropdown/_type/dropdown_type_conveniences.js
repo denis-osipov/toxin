@@ -4,10 +4,7 @@ function setConveniences( jQuery ) {
     sep: ', ',
     wording: [
       (value) => {
-        if (value == 0) {
-          return '0 спален';
-        }
-        else if (value === 1 || (value % 100 !== 11 && value % 10 === 1)) {
+        if (value === 1 || (value % 100 !== 11 && value % 10 === 1)) {
           return value + ' спальня';
         }
         else if ((function() {
@@ -22,10 +19,7 @@ function setConveniences( jQuery ) {
         }
       },
       (value) => {
-        if (value == 0) {
-          return '0 кроватей';
-        }
-        else if (value === 1 || (value % 100 !== 11 && value % 10 === 1)) {
+        if (value === 1 || (value % 100 !== 11 && value % 10 === 1)) {
           return value + ' кровать';
         }
         else if ((function() {
@@ -40,10 +34,7 @@ function setConveniences( jQuery ) {
         }
       },
       (value) => {
-        if (value == 0) {
-          return '0 ванных комнат';
-        }
-        else if (value === 1 || (value % 100 !== 11 && value % 10 === 1)) {
+        if (value === 1 || (value % 100 !== 11 && value % 10 === 1)) {
           return value + ' ванная комната';
         }
         else if ((function() {
