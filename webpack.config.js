@@ -90,7 +90,8 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      blocksPath: path.resolve(__dirname, 'src/blocks')
+      blocksPath: path.resolve(__dirname, 'src/blocks'),
+      './dependencyLibs/inputmask.dependencyLib': './dependencyLibs/inputmask.dependencyLib.jquery'
     }
   }
 }
