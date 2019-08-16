@@ -4,19 +4,34 @@ import './_type/dropdown_type_conveniences';
 (function( $ ) {
   $.fn.dropdown = function( options ) {
 
+    let settings = $.extend({
+      total: true,
+      sep: ', ',
+      wording: [
+        (value) => {
+          if (value === 1) {
+            return value + ' item';
+          }
+          else {
+            return value + ' items';
+          }
+        }
+      ]
+    }, options);
+
     return this.each(function() {
 
       function update() {
-        if (options.total) {
+        if (settings.total) {
           const total = values.reduce((prev, current) => prev + current);
-          input.val(options.wording(total));
+          input.val(settings.wording[0](total));
         }
         else {
           let totals = [];
-          options.wording.forEach((fun, index) => {
+          settings.wording.forEach((fun, index) => {
             totals.push(fun(values[index]));
           });
-          input.val(totals.join(options.sep));
+          input.val(totals.join(settings.sep));
         }
       }
 

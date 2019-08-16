@@ -1,7 +1,6 @@
 function setConveniences( jQuery ) {
   $( '.dropdown_type_conveniences' ).dropdown({
     total: false,
-    sep: ', ',
     wording: [
       (value) => {
         if (value === 1 || (value % 100 !== 11 && value % 10 === 1)) {

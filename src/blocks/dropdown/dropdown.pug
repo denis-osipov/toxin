@@ -1,9 +1,19 @@
 mixin dropdown(...items)
   -
-    if (attributes.class === 'dropdown_type_conveniences') {
-      items = ['Спальни', 'Кровати', 'Ванные комнаты'];
-    }
+    const typeItems = {
+      'dropdown_type_guests': [
+        'Взрослые',
+        'Дети',
+        'Младенцы'
+      ],
+      'dropdown_type_conveniences': [
+        'Спальни',
+        'Кровати',
+        'Ванные комнаты'
+      ]
+    };
+    const listItems = items.length ? items : typeItems[attributes.class];
 
   .dropdown&attributes(attributes)
     +dropdown__total
-    +dropdown__list(items)
+    +dropdown__list(listItems)
