@@ -75,3 +75,9 @@ import './_type/dropdown_type_conveniences';
     });
   }
 })( jQuery );
+
+function setDropdown( jQuery ) {
+  $( '.dropdown:not([class*="dropdown_type_"])' ).dropdown();
+}
+
+$( document ).ready( setDropdown );

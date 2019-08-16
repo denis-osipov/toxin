@@ -12,7 +12,8 @@ mixin dropdown(...items)
         'Ванные комнаты'
       ]
     };
-    const listItems = items.length ? items : typeItems[attributes.class];
+    const listItems = (items && items.length) ? items :
+                      (attributes.class && typeItems[attributes.class]) ? typeItems[attributes.class] : [];
 
   .dropdown&attributes(attributes)
     +dropdown__total
