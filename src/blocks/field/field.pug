@@ -1,2 +1,6 @@
 mixin field
+  -
+    if (attributes.class === 'field_masked_date') {
+      attributes.placeholder = 'ДД.ММ.ГГГГ'
+    }
   input.field&attributes(attributes)
