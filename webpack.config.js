@@ -43,12 +43,13 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'resolve-url-loader',
+          'resolve-url-loader', // needed for correct path resolving
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
+              sourceMap: true, // must be set for resolve-url-loader working
               outFile: 'style.css', // node-sass docs says outFile is required for sourceMap
+              // Where looking for files to import with absolute paths
               includePaths: [
                 path.resolve(__dirname, 'src/blocks'),
                 path.resolve(__dirname, 'src')
@@ -63,6 +64,7 @@ module.exports = {
           {
             loader: 'pug-loader',
             options: {
+              // Base dir for absolute imports
               root: path.resolve(__dirname, 'src/blocks')
             }
           }
@@ -90,7 +92,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      blocksPath: path.resolve(__dirname, 'src/blocks'),
+      blocksPath: path.resolve(__dirname, 'src/blocks'), // for correct paths to required assets in pug mixins
       './dependencyLibs/inputmask.dependencyLib': './dependencyLibs/inputmask.dependencyLib.jquery'
     }
   }

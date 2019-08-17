@@ -3,7 +3,14 @@
 const path = require('path');
 const fs = require('fs');
 
-// Global rules for file types
+/*
+Global rules for file types:
+
+message - string of warning message about file generation
+prepend - array of strings to place at the beginning of file, before main content
+append - array of strings to place at the end of file, after main content
+use - function generating strings for file
+*/
 const rules = {
   js: {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
@@ -31,12 +38,13 @@ const rules = {
   }
 };
 
-// Generate entries js files
+// Generate entries files
 function generateEntries(context, entry) {
   const blocksPath = path.join(context, 'blocks');
   for (point in entry) {
 
-    let entryFiles = getFileList(entry[point], context);
+    // Get files paths for entry point
+    const entryFiles = getFileList(entry[point], context);
 
     // Get list of used bem entities
     const templateFile = entryFiles[0].replace(/\.(js|scss)$/, '.pug');
@@ -69,12 +77,16 @@ function generateEntries(context, entry) {
   }
 }
 
+// Get files paths from entry point
 function getFileList(entryPoint, context) {
   let entryFiles = [];
   if (typeof entryPoint === "string") {
+    // If path is string use as is
     entryFiles.push(path.resolve(context, entryPoint));
   }
   else {
+    // Else exclude paths with node_modules
+    // (webpack-dev-server files, prepended to entry files in the array)
     const filteredPaths = entryPoint.filter(entryPath => !entryPath.includes('node_modules'));
     filteredPaths.forEach(entryPath => {
       entryFiles.push(path.resolve(context, entryPath));
@@ -83,7 +95,8 @@ function getFileList(entryPoint, context) {
   return entryFiles;
 }
 
-// Get bem list from pug template (bem entities added with +bem('name'))
+// Get BEM list from pug template. 
+// BEM entities added with +bem('name') or as classes.
 function getBemList(data) {
   let bems = new Set();
   const re = /\+([^(\s]+)(?:\(.*?\))?(?:\(class='(.*?)'\))?/g;
@@ -102,7 +115,12 @@ function getBemList(data) {
 function aggregateMixins(context) {
   const blocksPath = path.join(context, 'blocks');
 
-  // Rules for mixins aggregation
+  /*
+  Rules for mixins aggregation:
+  file - string, containg path to generated file
+  include - function generating string for including/importing files
+  fileList - array of paths to files
+  */
   let bems = {
     pug: {
       file: path.join(blocksPath, 'mixins.pug'),
@@ -137,6 +155,7 @@ function fillBemFilesList(root, lists) {
   blocks.forEach(function(entity){
     const entityPath = path.join(root, entity.name);
     if (entity.isFile()) {
+      // Add only pug and scss files; don't add generated files and variables (both added in page files).
       if (path.extname(entity.name) in lists && !['mixins', 'variables'].includes(path.parse(entity.name).name)) {
         lists[path.extname(entity.name)].push(entityPath);
       }

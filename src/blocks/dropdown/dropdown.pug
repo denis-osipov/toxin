@@ -12,6 +12,7 @@ mixin dropdown(...items)
         'Ванные комнаты'
       ]
     };
+    // Use given array of items or defaults
     const listItems = (items && items.length) ? items :
                       (attributes.class && typeItems[attributes.class]) ? typeItems[attributes.class] : [];
 

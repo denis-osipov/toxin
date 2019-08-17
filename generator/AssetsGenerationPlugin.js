@@ -7,6 +7,8 @@ const getFileList = require('./generators').getFileList;
 
 class AssetsGenerationPlugin {
   apply(compiler) {
+
+    // Generate at startup
     compiler.hooks.entryOption.tap(
       'AssetsGenerationPlugin',
       (context, entry) => {
@@ -15,6 +17,7 @@ class AssetsGenerationPlugin {
       }
     );
 
+    // Regenerate in watching mode
     compiler.hooks.invalid.tap(
       'AssetsGenerationPlugin',
       (fileName, changeTime) => {

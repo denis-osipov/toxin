@@ -1,6 +1,7 @@
 $fonts: ('Montserrat': regular bold, 'Quicksand': regular bold, 'Material Icons': regular);
 $formats: ('woff': 'woff', 'ttf': 'truetype', 'svg': 'svg');
 
+// Generate src property for given fonts and formats
 @function font-src($font, $formats) {
   $sources: ();
   @each $extension, $format in $formats {
@@ -9,6 +10,7 @@ $formats: ('woff': 'woff', 'ttf': 'truetype', 'svg': 'svg');
   @return $sources;
 }
 
+// Make @font-face for each variant of font
 @mixin custom-font($font, $variants) {
   @each $variant in $variants {
     @font-face {

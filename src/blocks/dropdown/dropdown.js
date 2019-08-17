@@ -2,6 +2,7 @@ import './_type/dropdown_type_guests';
 import './_type/dropdown_type_conveniences';
 
 (function( $ ) {
+  // Main method creating dropdown
   $.fn.dropdown = function( options ) {
 
     const settings = $.extend( {}, $.fn.dropdown.defaults, options);
@@ -40,6 +41,7 @@ import './_type/dropdown_type_conveniences';
     });
   };
 
+  // Update dropdown's total line
   $.fn.dropdown.update = function () {
     if (this.settings.total) {
       const total = this.values.reduce((prev, current) => prev + current);
@@ -54,10 +56,12 @@ import './_type/dropdown_type_conveniences';
     }
   };
 
+  // Expand dropdown list
   $.fn.dropdown.expand = function(event) {
     $( event.currentTarget ).siblings('.dropdown__list').toggleClass('dropdown__list_hidden');
   };
 
+  // Change quantity of items and update total
   $.fn.dropdown.change = function(event) {
     const button = $( event.target );
     const item = $( event.delegateTarget );
@@ -81,6 +85,7 @@ import './_type/dropdown_type_conveniences';
     this.update();
   };
 
+  // Format total string depending on value
   $.fn.dropdown.format = function(value) {
     if (value === 1) {
       return value + ' item';
@@ -98,6 +103,7 @@ import './_type/dropdown_type_conveniences';
 
 })( jQuery );
 
+// Create default dropdown if type is'n unspecified
 function setDropdown( jQuery ) {
   $( '.dropdown:not([class*="dropdown_type_"])' ).dropdown();
 }

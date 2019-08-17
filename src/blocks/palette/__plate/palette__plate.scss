@@ -1,6 +1,7 @@
 @mixin palette__plate {
   .palette__plate {
     border-radius: 6px;
+    // Keep plate square during width change
     height: 0;
     padding: 50%; // paddings are calculated relative to width
   }
