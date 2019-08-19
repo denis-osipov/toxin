@@ -2,10 +2,10 @@ mixin dropdown__button
   +button()(class='dropdown__button')&attributes(attributes)
     -
       let val;
-      if (attributes.class === 'dropdown__button_type_decrement') {
+      if (attributes.class && attributes.class.includes('dropdown__button_type_decrement')) {
         val = '-';
       }
-      else if (attributes.class === 'dropdown__button_type_increment') {
+      else if (attributes.class && attributes.class.includes('dropdown__button_type_increment')) {
         val = '+';
       }
       else {
