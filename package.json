@@ -39,7 +39,6 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
-    "flatpickr": "^4.6.2",
     "inputmask": "^4.0.8",
     "jquery": "^3.4.1"
   }

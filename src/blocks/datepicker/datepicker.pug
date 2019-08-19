@@ -1,3 +1,4 @@
 mixin datepicker
   .datepicker&attributes(attributes)
-    +field()(class='datepicker__input')
+    +field()(class='datepicker__input field_masked_date', data-inputmask='"clearMaskOnLostFocus": false')
+    +icon('expand_more')
