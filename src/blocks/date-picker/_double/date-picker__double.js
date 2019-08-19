@@ -1,22 +1,15 @@
-import 'air-datepicker';
-import './_double/date-picker__double'
-
-function setDatepicker( jQuery ) {
-  // Use lower case for monthShort
-  $.fn.datepicker.language.ru.monthsShort.forEach(function(value, index, array) {
-    array[index] = value.toLowerCase();
-  });
-
-  $( '.date-picker:not([class*="date-picker_double"])' ).each(function() {
+function setDoubleDatepicker( jQuery ) {
+  $( '.date-picker_double' ).each(function() {
     $( this ).find( '.field' ).datepicker({
-      dateFormat: 'dd M',
+      dateFormat: 'dd.mm.yyyy',
       toggleSelected: true,
       multipleDatesSeparator: ' - ',
       range: true,
       moveToOtherMonthsOnSelect: false,
       moveToOtherYearsOnSelect: false,
       clearButton: true,
-      showEvent: null
+      showEvent: null,
+      onSelect: onSelect
     });
 
     $( this ).find('.date-picker__field').on('click', function(event) {
@@ -28,7 +21,13 @@ function setDatepicker( jQuery ) {
         datepicker.hide.bind(datepicker)();
       }
     });
+
+    function onSelect(formattedDate, date, inst) {
+      if (date.length < 2) {
+        return;
+      }
+    }
   });
 }
 
-$( document ).ready( setDatepicker );
+$( document ).ready( setDoubleDatepicker );
