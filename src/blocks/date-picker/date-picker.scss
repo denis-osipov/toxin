@@ -1,5 +1,5 @@
 @mixin date-picker {
-  body {
-    @import 'air-datepicker/dist/css/datepicker.min';
+  .date-picker {
+    @import '../../../node_modules/air-datepicker/dist/css/datepicker.min.css';
   }
 }

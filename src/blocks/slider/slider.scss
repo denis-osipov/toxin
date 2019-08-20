@@ -1,5 +1,5 @@
 @mixin slider {
-  body {
-    @import 'ion-rangeslider/css/ion.rangeSlider.min';
+  .slider {
+    @import '../../../node_modules/ion-rangeslider/css/ion.rangeSlider.min.css';
   }
 }
