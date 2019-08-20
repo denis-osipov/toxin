@@ -1,3 +1,6 @@
 mixin date-picker
   .date-picker&attributes(attributes)
-    +date-picker__field
+    - const type = (attributes.class && attributes.class.includes('date-picker_double')) ? 'double' : 'single';
+    //- data-pickers for double inputs are coupled:
+    //- for each two sequent the first is for begin date, the second is for end date
+    +date-picker__field(type)

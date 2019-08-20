@@ -1,4 +1,7 @@
-mixin date-picker__field
+mixin date-picker__field(type)
   span.date-picker__field
-    +field()(readonly)
+    if type === 'single'
+      +field()(readonly)
+    else if type === 'double'
+      +field()(class='field_masked_date', data-inputmask='"clearMaskOnLostFocus": false', readonly)
     +icon('expand_more')
