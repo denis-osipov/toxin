@@ -1,0 +1,14 @@
+mixin checkbox(label)
+  -
+    let classes;
+    if (attributes && attributes.class) {
+      classes = attributes.class;
+      delete attributes.class;
+    }
+    else {
+      classes = [];
+    }
+
+  label.checkbox(class=classes)
+    +field()(type='checkbox')&attributes(attributes)
+    =label
