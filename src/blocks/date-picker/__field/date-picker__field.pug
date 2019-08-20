@@ -1,5 +1,5 @@
 mixin date-picker__field(type)
-  span.date-picker__field
+  span.date-picker__field&attributes(attributes)
     if type === 'single'
       +field()(readonly)
     else if type === 'double'
