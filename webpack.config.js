@@ -52,7 +52,8 @@ module.exports = {
               // Where looking for files to import with absolute paths
               includePaths: [
                 path.resolve(__dirname, 'src/blocks'),
-                path.resolve(__dirname, 'src')
+                path.resolve(__dirname, 'src'),
+                path.resolve(__dirname, 'node_modules')
               ]
             }
           }
