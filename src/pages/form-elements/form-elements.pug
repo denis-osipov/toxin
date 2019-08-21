@@ -49,3 +49,23 @@ html
         +field()(type='range', min='0', max='5', value='5')
       +sample-form('Range slider')
         +slider
+      +sample-form('Buttons')
+        +button
+          ='Click me'
+        +button
+          ='Click me'
+        +button
+          ='Click me'
+        +button
+          ='Click me'
+        +button
+          ='Click me'
+        +button
+          ='Click me'
+        +button
+          ='Перейти к оплате'
+          +icon('arrow_forward')
+      +sample-form('Pagination')
+        -
+          const pages = [1, 2, 3, { value: '...', placeholder: true }, 15, { next: true }];
+        +pagination(pages)
