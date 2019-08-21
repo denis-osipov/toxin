@@ -23,4 +23,6 @@ $( document ).ready(function(jQery) {
   thirdGuestDropdown.items.eq(1).find('.dropdown__button_type_decrement').prop('disabled', false);
   thirdGuestDropdown.update();
   thirdGuestDropdown.expand();
+
+  $( '.exp-list' ).eq(1).removeClass('exp-list_hidden');
 });
