@@ -44,12 +44,10 @@ import './_type/dropdown_type_conveniences';
 
       if (dropdown.clear) {
         dropdown.clear.on('click', function() {
-          dropdown.items.find('.dropdown__item-value').each(function(index, element) {
-            $( element ).text(0);
+          dropdown.items.each(function(index, element) {
+            $( element ).find('.dropdown__item-value').text(0);
+            $( element ).find('.dropdown__button_type_decrement').prop('disabled', true);
           });
-          dropdown.values.forEach(function(value, index, array) {
-            array[index] = 0;
-          })
           dropdown.update();
         })
       }
@@ -58,14 +56,25 @@ import './_type/dropdown_type_conveniences';
         dropdown.apply.on('click', dropdown.expand);
       }
 
+      $.data(this, 'dropdown', dropdown);
+
     });
   };
 
   // Update dropdown's total line
   $.fn.dropdown.update = function () {
+    this.setValues();
+    const sum = this.values.reduce((prev, current) => prev + current);
+    if (this.dropdown.find('.dropdown__controls').length) {
+      if (sum === 0) {
+        this.clear.addClass('dropdown__button_hidden');
+      }
+      else {
+        this.clear.removeClass('dropdown__button_hidden');
+      }
+    }
     if (this.settings.total) {
-      const total = this.values.reduce((prev, current) => prev + current);
-      this.input.val(this.settings.wording(total));
+      this.input.val(this.settings.wording(sum));
     }
     else {
       let totals = [];
@@ -85,22 +94,22 @@ import './_type/dropdown_type_conveniences';
   $.fn.dropdown.change = function(event) {
     const button = $( event.target );
     const item = $( event.delegateTarget );
-    const index = item.index();
     const valueField = item.find('.dropdown__item-value');
+    let value = parseInt(valueField.text());
     if (button.hasClass('dropdown__button_type_decrement')) {
-      this.values[index] -= 1;
-      if (this.values[index] < 1) {
+      value -= 1;
+      if (value < 1) {
         button.prop('disabled', true);
       }
     }
     else {
-      this.values[index] += 1;
+      value += 1;
       const decrButton = item.find('.dropdown__button_type_decrement');
       if (decrButton.prop('disabled')) {
         decrButton.prop('disabled', false);
       };
     }
-    valueField.text(this.values[index]);
+    valueField.text(value);
 
     this.update();
   };
