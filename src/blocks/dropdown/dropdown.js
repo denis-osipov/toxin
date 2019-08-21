@@ -14,7 +14,7 @@ import './_type/dropdown_type_conveniences';
         init: function() {
           dropdown.settings = settings;
           dropdown.update = $.fn.dropdown.update;
-          dropdown.expand = $.fn.dropdown.expand;
+          dropdown.expand = $.fn.dropdown.expand.bind(dropdown.dropdown);
           dropdown.change = $.fn.dropdown.change.bind(this);
           dropdown.setElements();
           dropdown.setValues();
@@ -24,12 +24,15 @@ import './_type/dropdown_type_conveniences';
           dropdown.items = dropdown.dropdown.find('.dropdown__item');
           dropdown.total = dropdown.dropdown.find('.dropdown__total');
           dropdown.list = dropdown.dropdown.find('.dropdown__list');
+          if (dropdown.dropdown.find('.dropdown__controls').length) {
+            dropdown.clear = dropdown.dropdown.find('.dropdown__button_type_clear');
+            dropdown.apply = dropdown.dropdown.find('.dropdown__button_type_apply');
+          }
         },
         setValues: function() {
           dropdown.values = [];
-          dropdown.items.each(function(index, element) {
-            const valueField = $( element ).find('.dropdown__item-value');
-            dropdown.values.push(parseInt(valueField.text()));
+          dropdown.items.find('.dropdown__item-value').each(function(index, element) {
+            dropdown.values.push(parseInt($( element ).text()));
           });
         }
       }
@@ -38,6 +41,23 @@ import './_type/dropdown_type_conveniences';
 
       dropdown.total.on('click', dropdown.expand);
       dropdown.items.on('click', '.button', dropdown.change);
+
+      if (dropdown.clear) {
+        dropdown.clear.on('click', function() {
+          dropdown.items.find('.dropdown__item-value').each(function(index, element) {
+            $( element ).text(0);
+          });
+          dropdown.values.forEach(function(value, index, array) {
+            array[index] = 0;
+          })
+          dropdown.update();
+        })
+      }
+
+      if (dropdown.apply) {
+        dropdown.apply.on('click', dropdown.expand);
+      }
+
     });
   };
 
@@ -58,7 +78,7 @@ import './_type/dropdown_type_conveniences';
 
   // Expand dropdown list
   $.fn.dropdown.expand = function(event) {
-    $( event.currentTarget ).siblings('.dropdown__list').toggleClass('dropdown__list_hidden');
+    this.find('.dropdown__container').toggleClass('dropdown__container_hidden');
   };
 
   // Change quantity of items and update total
