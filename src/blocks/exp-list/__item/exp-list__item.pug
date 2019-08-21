@@ -1,5 +1,3 @@
 mixin exp-list__item(item)
   li.exp-list__item&attributes(attributes)
-    legend
-      +field()(type='checkbox')
-      =item
+    +checkbox(item)
