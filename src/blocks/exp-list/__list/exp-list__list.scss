@@ -1,0 +1,5 @@
+@mixin exp-list__list {
+  .exp-list_hidden .exp-list__list {
+    display: none;
+  }
+}
