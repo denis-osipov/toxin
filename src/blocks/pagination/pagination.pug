@@ -1,0 +1,16 @@
+mixin pagination(pages)
+  .pagination&attributes(attributes)
+    each page in pages
+      if typeof page === 'string' || typeof page === 'number'
+        +link()
+          =page
+      else if page.placeholder
+        span= page.value
+      else if page.next || page.previous
+        - const arrow = page.next ? 'arrow_forward' : 'arrow_backward';
+        - const icon = page.value || arrow;
+        +link()
+          +icon(icon)
+      else
+        +link()(href=page.href)
+          =page.value
