@@ -8,108 +8,119 @@ html
   +body()(class='text')
     +header()(class='ui-kit__header')
       +logo-sign()(class='ui-kit__logo')
-    +main
-      +sample-form('Text field', 'Default')
-        +field()(type='email', placeholder='Email')
-      +sample-form('Text field', 'Hover / Focus')
-        +field()(type='text', value='This is pretty awesome')
-      +sample-form('Dropdown', 'Default')
-        +dropdown()(class='dropdown_type_guests')
-      +sample-form('Masked text field', 'Default')
-        +field()(type='text', class='field_masked_date')
-      +sample-form('Date dropdown')
-        +date-picker()(class='date-picker_double')
-      +sample-form('Date dropdown')
-        +date-picker()(class='date-picker_double')
-      +sample-form('Date dropdown')
-        +date-picker
-      +sample-form('Subscription text field')
-        +subscription
-      +sample-form('Checkbox buttons')
-        +checkbox('Можно курить')
-        +checkbox('Можно с питомцами')
-        +checkbox('Можно пригласить гостей (до 10 человек)')
-      +sample-form('Radio buttons')
-        +radio('Мужчина')(name='sex')
-        +radio('Женщина')(name='sex')
-      +sample-form('Toggle')
-        +checkbox('Получать спецпредложения')(class='checkbox_toggle')
-        +checkbox('Получать спецпредложения')(class='checkbox_toggle')
-      +sample-form('Like button')
-        +like(false, 2)
-        +like(true, 12)
-      +sample-form('Rate button')
-        +rating(4)
-        +rating(5)
-      +sample-form('Range slider')
-        +slider
-      +sample-form('Buttons')
-        +button
-          ='Click me'
-        +button
-          ='Click me'
-        +button
-          ='Click me'
-        +button
-          ='Click me'
-        +button
-          ='Click me'
-        +button
-          ='Click me'
-        +button
-          ='Перейти к оплате'
-          +icon('arrow_forward')
-      +sample-form('Pagination')
-        -
-          const pages = [1, 2, 3, { value: '...', placeholder: true }, 15, { next: true }];
-        +pagination(pages)
-      +sample-form('Dropdown', 'Default')
-        +dropdown()(class='dropdown_type_conveniences')
-      +sample-form('Dropdown', 'Expanded')
-        +dropdown()(class='dropdown_type_conveniences')
-      +sample-form('Dropdown')
-        +dropdown()(class='dropdown_type_guests')
-      +sample-form('Dropdown')
-        +dropdown()(class='dropdown_type_guests')
-      +sample-form
-        +exp-list('Expandable checkbox list', [
-          'Завтрак',
-          'Письменный стол',
-          'Стул для кормления',
-          'Кроватка',
-          'Телевизор',
-          'Шампунь',
-          'Телевизор',
-          'Шампунь'
-        ])
-      +sample-form
-        +exp-list('Expandable checkbox list', [
-          'Завтрак',
-          'Письменный стол',
-          'Стул для кормления',
-          'Кроватка',
-          'Телевизор',
-          'Шампунь',
-          'Телевизор',
-          'Шампунь'
-        ])
-      +sample-form('Rich checkbox buttons')
+    +main()(class='ui-kit__grid-container')
+      .form-elements__cell1
+        +sample-form('Text field', 'Default')
+          +field()(type='email', placeholder='Email')
+        +sample-form('Text field', 'Hover / Focus')
+          +field()(type='text', value='This is pretty awesome')
+        +sample-form('Dropdown', 'Default')
+          +dropdown()(class='dropdown_type_guests')
+        +sample-form('Masked text field', 'Default')
+          +field()(type='text', class='field_masked_date')
+        +sample-form('Date dropdown')
+          +date-picker()(class='date-picker_double')
+        +sample-form('Date dropdown')
+          +date-picker()(class='date-picker_double')
+        +sample-form('Date dropdown')
+          +date-picker
+        +sample-form('Subscription text field')
+          +subscription
+      .form-elements__cell2
+        +sample-form('Checkbox buttons')
+          +checkbox('Можно курить')
+          +checkbox('Можно с питомцами')
+          +checkbox('Можно пригласить гостей (до 10 человек)')
+        +sample-form('Radio buttons')
+          +radio('Мужчина')(name='sex')
+          +radio('Женщина')(name='sex')
+        +sample-form('Toggle')
+          +checkbox('Получать спецпредложения')(class='checkbox_toggle')
+          +checkbox('Получать спецпредложения')(class='checkbox_toggle')
+        +sample-form('Like button')
+          +like(false, 2)
+          +like(true, 12)
+        +sample-form('Rate button')
+          +rating(4)
+          +rating(5)
+      .form-elements__cell3
+        +sample-form('Range slider')
+          +slider
+        +sample-form('Buttons')
+          +button
+            ='Click me'
+          +button
+            ='Click me'
+          +button
+            ='Click me'
+          +button
+            ='Click me'
+          +button
+            ='Click me'
+          +button
+            ='Click me'
+          +button
+            ='Перейти к оплате'
+            +icon('arrow_forward')
+        +sample-form('Pagination')
+          -
+            const pages = [1, 2, 3, { value: '...', placeholder: true }, 15, { next: true }];
+          +pagination(pages)
+      .form-elements__cell4
+        +sample-form('Dropdown', 'Default')
+          +dropdown()(class='dropdown_type_conveniences')
+        +sample-form('Dropdown', 'Expanded')
+          +dropdown()(class='dropdown_type_conveniences')
+      .form-elements__cell5
+        +sample-form('Dropdown')
+          +dropdown()(class='dropdown_type_guests')
+      .form-elements__cell6
+        +sample-form('Dropdown')
+          +dropdown()(class='dropdown_type_guests')
+      .form-elements__cell7
+        +sample-form
+          +exp-list('Expandable checkbox list', [
+            'Завтрак',
+            'Письменный стол',
+            'Стул для кормления',
+            'Кроватка',
+            'Телевизор',
+            'Шампунь',
+            'Телевизор',
+            'Шампунь'
+          ])
+        +sample-form
+          +exp-list('Expandable checkbox list', [
+            'Завтрак',
+            'Письменный стол',
+            'Стул для кормления',
+            'Кроватка',
+            'Телевизор',
+            'Шампунь',
+            'Телевизор',
+            'Шампунь'
+          ])
+      .form-elements__cell8
+        +sample-form('Rich checkbox buttons')
+          +list([
+            ['Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
+            ['Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
+          ], 'checkbox')
+      .form-elements__cell9
+        +sample-form('Bullet list')
+          +list([
+            'Нельзя с питомцами',
+            'Без вечеринок и мероприятий',
+            'Время прибытия — после 13:00, а выезд до 12:00'
+          ])
+      .form-elements__cell10
         +list([
-          ['Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
-          ['Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
-        ], 'checkbox')
-      +sample-form('Bullet list')
-        +list([
-          'Нельзя с питомцами',
-          'Без вечеринок и мероприятий',
-          'Время прибытия — после 13:00, а выезд до 12:00'
-        ])
-      +list([
-        ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
-        ['location_city', 'Удобство', 'Окно в каждой из спален']
-      ], 'icon')
-      +comment(
-        'Мурад Сарафанов',
-        '5 дней назад',
-        'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
-        [true, 12])
+          ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
+          ['location_city', 'Удобство', 'Окно в каждой из спален']
+        ], 'icon')
+      .form-elements__cell11
+        +comment(
+          'Мурад Сарафанов',
+          '5 дней назад',
+          'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
+          [true, 12])

@@ -1,0 +1,21 @@
+.body {
+  max-width: $max-width;
+  min-width: $min-width;
+  width: 1440px;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-kit {
+  &__header {
+    margin: 0;
+    padding: 30px;
+  }
+  &__logo {
+    display: block;
+  }
+  &__grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
