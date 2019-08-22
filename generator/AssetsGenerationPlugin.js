@@ -24,13 +24,12 @@ class AssetsGenerationPlugin {
 
         // Don't respond to changes of generated files
         if (
-          fileName !== path.resolve(compiler.context, 'blocks/mixins.pug') &&
-          fileName !== path.resolve(compiler.context, 'blocks/mixins.scss')
+          fileName === path.resolve(compiler.context, 'blocks/mixins.pug') ||
+          fileName === path.resolve(compiler.context, 'blocks/mixins.scss')
         ) {
-          aggregator(compiler.context);
+          return;
         }
 
-        // Don't respond to changes of generated files
         for (let entryPoint of Object.values(compiler.options.entry)) {
           let entryFiles = getFileList(entryPoint, compiler.context);
           for (let file of entryFiles) {
@@ -40,6 +39,7 @@ class AssetsGenerationPlugin {
             }
           }
         }
+        aggregator(compiler.context);
         generator(compiler.context, compiler.options.entry);
       }
     );
