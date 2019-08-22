@@ -1,4 +1,4 @@
-mixin checkbox(label)
+mixin checkbox(name, description)
   -
     let classes;
     if (attributes && attributes.class) {
@@ -11,5 +11,5 @@ mixin checkbox(label)
 
   label.checkbox(class=classes)
     +field()(type='checkbox')&attributes(attributes)
-    =label
-    block
+    =name
+    p.checkbox__description= description
