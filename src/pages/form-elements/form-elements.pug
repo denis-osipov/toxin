@@ -38,12 +38,8 @@ html
         +checkbox('Получать спецпредложения')(class='checkbox_toggle')
         +checkbox('Получать спецпредложения')(class='checkbox_toggle')
       +sample-form('Like button')
-        +button
-          +icon('favorite_border')
-          =2
-        +button
-          +icon('favorite')
-          =12
+        +like(false, 2)
+        +like(true, 12)
       +sample-form('Rate button')
         +rating(4)
         +rating(5)
