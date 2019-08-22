@@ -1,2 +1,6 @@
-mixin list__item(item)
-  li.list__item&attributes(attributes)= item
+mixin list__item(item, type)
+  li.list__item(class=`list__item_type_${type}`)&attributes(attributes)
+    case type
+      when 'list': +list__item_type_list(item)
+      when 'checkbox': +list__item_type_checkbox(item)
+      when 'icon': +list__item_type_icon(item)
