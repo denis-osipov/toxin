@@ -13,16 +13,17 @@ html
         +sample-form('Text field', 'Default')
           +field()(type='email', placeholder='Email')
         +sample-form('Text field', 'Hover / Focus')
-          +field()(type='text', value='This is pretty awesome')
+          +field()(class='field_active', type='text', value='This is pretty awesome')
         +sample-form('Dropdown', 'Default')
           +dropdown()(class='dropdown_type_guests')
         +sample-form('Masked text field', 'Default')
           +field()(type='text', class='field_masked_date')
-        +sample-form('Date dropdown')
-          +date-picker()(class='date-picker_double')
-        +sample-form('Date dropdown')
-          +date-picker()(class='date-picker_double')
-        +sample-form('Date dropdown')
+        .double-date-picker
+          +sample-form('Date dropdown')
+            +date-picker('double')
+          +sample-form('Date dropdown')
+            +date-picker('double')
+        +sample-form('Filter date dropdown')
           +date-picker
         +sample-form('Subscription text field')
           +subscription

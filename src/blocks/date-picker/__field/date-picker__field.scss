@@ -1,0 +1,11 @@
+@mixin date-picker__field {
+  .date-picker__field {
+    display: grid;
+    grid-template-columns: 1fr 44px;
+    align-items: center;
+    border: 1px solid $dark-shade-25;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 44px;
+  }
+}
