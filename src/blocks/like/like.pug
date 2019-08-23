@@ -1,5 +1,5 @@
 mixin like(liked, number)
-  - const iconName = liked ? 'favorite' : 'favorite_border'
-  +button
-    +icon(iconName)
-    =number
+  - const likeClass = liked ? 'like like_liked' : 'like';
+  +button()(class=likeClass)
+    +icon()(class='like__icon')
+    span.like__count= number
