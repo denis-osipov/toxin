@@ -1,23 +1,4 @@
-mixin dropdown__button
-  +button()(class='dropdown__button')&attributes(attributes)
-    -
-      let val;
-      if (attributes.class) {
-        if (attributes.class.includes('dropdown__button_type_decrement')) {
-          val = '-';
-        }
-        else if (attributes.class.includes('dropdown__button_type_increment')) {
-          val = '+';
-        }
-        else if (attributes.class.includes('dropdown__button_type_clear')) {
-          val = 'Очистить';
-        }
-        else if (attributes.class.includes('dropdown__button_type_apply')) {
-          val = 'Применить';
-        }
-        else {
-          val = '';
-        }
-      }
-
-    =val
+mixin dropdown__button(value, type)
+  - const buttonClass = type ? `dropdown__button dropdown__button_type_${type}` : 'dropdown__button';
+  +button()(class=buttonClass)&attributes(attributes)
+    =value

@@ -15,7 +15,7 @@ html
         +sample-form('Text field', 'Hover / Focus')
           +field()(class='field_active', type='text', value='This is pretty awesome')
         +sample-form('Dropdown', 'Default')
-          +dropdown()(class='dropdown_type_guests')
+          +dropdown('guests')
         +sample-form('Masked text field', 'Default')
           +field()(type='text', class='field_masked_date')
         .double-date-picker
@@ -69,15 +69,15 @@ html
           +pagination(pages)
       .form-elements__cell4
         +sample-form('Dropdown', 'Default')
-          +dropdown()(class='dropdown_type_conveniences')
+          +dropdown('conveniences')
         +sample-form('Dropdown', 'Expanded')
-          +dropdown()(class='dropdown_type_conveniences')
+          +dropdown('conveniences')
       .form-elements__cell5
         +sample-form('Dropdown')
-          +dropdown()(class='dropdown_type_guests')
+          +dropdown('guests')
       .form-elements__cell6
         +sample-form('Dropdown')
-          +dropdown()(class='dropdown_type_guests')
+          +dropdown('guests')
       .form-elements__cell7
         +sample-form
           +exp-list('Expandable checkbox list', [

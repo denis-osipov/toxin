@@ -1,12 +1,15 @@
-mixin dropdown(...items)
+mixin dropdown(type='', items)
+  //- type should be one of:
+  //-   guests
+  //-   conveniences
   -
     const typeItems = {
-      'dropdown_type_guests': [
+      'guests': [
         'Взрослые',
         'Дети',
         'Младенцы'
       ],
-      'dropdown_type_conveniences': [
+      'conveniences': [
         'Спальни',
         'Кровати',
         'Ванные комнаты'
@@ -14,11 +17,12 @@ mixin dropdown(...items)
     };
     // Use given array of items or defaults
     const listItems = (items && items.length) ? items :
-                      (attributes.class && typeItems[attributes.class]) ? typeItems[attributes.class] : [];
+                      typeItems[type] ? typeItems[type] : [];
+    const typeClass = type ? `dropdown_type_${type}` : '';
 
-  .dropdown&attributes(attributes)
+  .dropdown(class=typeClass)&attributes(attributes)
     +dropdown__total
     .dropdown__container.dropdown__container_hidden
       +dropdown__list(listItems)
-      if attributes.class && attributes.class.includes('dropdown_type_guests')
+      if type === 'guests'
         +dropdown__controls

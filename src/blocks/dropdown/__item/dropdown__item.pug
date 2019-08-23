@@ -1,5 +1,5 @@
 mixin dropdown__item(name)
   li.dropdown__item&attributes(attributes)= name
-    +dropdown__button()(class='dropdown__button_type_decrement', disabled)
+    +dropdown__button('-', 'decrement')(class='dropdown__button_type_decrement', disabled)
     +dropdown__item-value
-    +dropdown__button()(class='dropdown__button_type_increment')
+    +dropdown__button('+', 'increment')(class='dropdown__button_type_increment')
