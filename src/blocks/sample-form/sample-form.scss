@@ -1,0 +1,5 @@
+@mixin sample-form {
+  @include sample-form__header;
+  @include sample-form__name;
+  @include sample-form__status;
+}
