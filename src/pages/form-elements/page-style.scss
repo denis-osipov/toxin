@@ -17,5 +17,21 @@
   &__grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-column-gap: 97px;
+    grid-row-gap: 20px;
+    padding-left: 141px;
+    padding-right: 141px;
+    padding-top: 23px;
+  }
+}
+
+.form-elements__cell2 {
+  margin-left: 27px;
+  // margin-left: auto;
+}
+
+.form-elements__cell11 {
+  @media (min-width: 820px) {
+    grid-column-end: span 2;
   }
 }
