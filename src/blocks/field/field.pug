@@ -3,4 +3,5 @@ mixin field
     if (attributes.class && attributes.class.includes('field_masked_date')) {
       attributes.placeholder = 'ДД.ММ.ГГГГ'
     }
-  input.field&attributes(attributes)
+  - const typeClass = attributes.type ? `field_type_${attributes.type}` : '';
+  input.field(class=typeClass)&attributes(attributes)

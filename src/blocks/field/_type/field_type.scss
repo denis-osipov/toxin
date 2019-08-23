@@ -1,0 +1,28 @@
+@mixin field_type {
+  %text {
+    line-height: 44px;
+    width: 320px;
+    height: 44px;
+
+    padding-left: 13px;
+    padding-right:13px;
+
+    background: #FFFFFF;
+    border: 1px solid $dark-shade-25;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    &::placeholder {
+      color: $dark-shade-25;
+    }
+  }
+  .field_type {
+    &_text {
+      @extend %text;
+    }
+
+    &_email {
+      @extend %text;
+    }
+  }
+}
