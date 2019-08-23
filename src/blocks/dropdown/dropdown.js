@@ -1,3 +1,19 @@
+// Dropdown with counting
+// Should be setted on inputs: $(selector).dropdown(settings)
+//
+// Settings is object with all optional properties:
+//
+// $.fn.dropdown.defaults = {
+//   total: true,                  // will result be a sum of values of all items; if false, all items will be presented separately
+//   special: [],                  // array of objects { index: [array of indices for items quantified separately],
+//                                                       wording: [array of formatting functions] }
+//   zeroSpecial: false,           // should special sums be shown if equal to 0
+//   sep: ', ',                    // separator for items quantities if total is false
+//   wording: $.fn.dropdown.format // if setted must be function (for total: true) or array of functions (for total: false)
+//                                 // function get integer and must return formatted string
+// };
+
+
 import './_type/dropdown_type_guests';
 import './_type/dropdown_type_conveniences';
 
@@ -73,8 +89,25 @@ import './_type/dropdown_type_conveniences';
         this.clear.removeClass('dropdown__button_hidden');
       }
     }
-    if (this.settings.total) {
+    if (this.settings.total && !this.settings.special.length) {
       this.input.val(this.settings.wording(sum));
+    }
+    else if (this.settings.total && this.settings.special.length) {
+      let values = this.values.slice();
+      let totals = [];
+      this.settings.special.forEach((specialCase) => {
+        let sum = 0;
+        specialCase.index.forEach((index) => {
+          sum += values[index];
+          values[index] = 0;
+        });
+        if (sum > 0 || this.settings.zeroSpecial) {
+          totals.push(specialCase.wording(sum));
+        }
+      });
+      const generalSum = values.reduce((prev, current) => prev + current);
+      totals.splice(0, 0, this.settings.wording(generalSum));
+      this.input.val(totals.join(this.settings.sep));
     }
     else {
       let totals = [];
@@ -126,6 +159,8 @@ import './_type/dropdown_type_conveniences';
 
   $.fn.dropdown.defaults = {
     total: true,
+    special: [],
+    zeroSpecial: false,
     sep: ', ',
     wording: $.fn.dropdown.format
   };
