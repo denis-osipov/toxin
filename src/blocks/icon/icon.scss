@@ -24,4 +24,5 @@
     /* Support for IE. */
     font-feature-settings: 'liga';
   }
+  @include icon_color;
 }
