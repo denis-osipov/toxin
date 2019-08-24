@@ -1,7 +1,8 @@
-mixin field
+mixin field(mask=false)
   -
-    if (attributes.class && attributes.class.includes('field_masked_date')) {
-      attributes.placeholder = 'ДД.ММ.ГГГГ'
+    let typeClass = attributes.type ? `field_type_${attributes.type}` : 'field_type_text';
+    if (mask === 'date') {
+      attributes.placeholder = 'ДД.ММ.ГГГГ';
+      typeClass += ' field_masked_date'
     }
-  - const typeClass = attributes.type ? `field_type_${attributes.type}` : '';
-  input.field(class=typeClass)&attributes(attributes)
+  input.field(class=[typeClass])&attributes(attributes)

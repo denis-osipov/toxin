@@ -13,11 +13,11 @@ html
         +sample-form('Text field', 'Default')
           +field()(type='email', placeholder='Email')
         +sample-form('Text field', 'Hover / Focus')
-          +field()(class='field_active', type='text', value='This is pretty awesome')
+          +field()(class='field_active', value='This is pretty awesome')
         +sample-form('Dropdown', 'Default')
           +dropdown('guests')
         +sample-form('Masked text field', 'Default')
-          +field()(type='text', class='field_masked_date')
+          +field('date')
         .double-date-picker
           +sample-form('Date dropdown')
             +date-picker('double')

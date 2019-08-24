@@ -5,7 +5,7 @@ function maskInput( jQuery ) {
   $( '.field_masked_date' ).inputmask('datetime', {
     placeholder: 'ДД.ММ.ГГГГ',
     inputFormat: 'dd.mm.yyyy',
-    showMaskOnFocus: false,
+    showMaskOnFocus: true,
     showMaskOnHover: false
   });
 }
