@@ -1,4 +1,3 @@
 mixin dropdown__total
-  .dropdown__total&attributes(attributes)
-    +field()(class='dropdown__input', type='text', readonly)
-    +icon('expand_more')(class='dropdown__icon')
+  - attributes.class = attributes.class ? attributes.class + ' dropdown__total' : 'dropdown__total';
+  +icon-field('expand_more', false, false, {readonly: true})&attributes(attributes)
