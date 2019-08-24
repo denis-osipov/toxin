@@ -1,7 +1,10 @@
 @mixin icon_color {
   .icon_color {
-    &_gradient {
-      background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+    &_dark-50 {
+      color: $dark-50;
+    }
+    &_primary-gradient {
+      background: $primary-gradient;
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;

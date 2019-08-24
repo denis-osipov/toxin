@@ -23,4 +23,7 @@ $dark-50: change-color($dark, $alpha: 0.5);
 $dark-25: change-color($dark, $alpha: 0.25);
 $dark-5: change-color($dark, $alpha: 0.05);
 $primary-color: #bc9cff;
+$primary-color-for-gradient: #8ba4f9;
 $secondary-color: #6fcf97;
+
+$primary-gradient: linear-gradient(180deg, $primary-color 0%, $primary-color-for-gradient 100%);
