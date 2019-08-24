@@ -1,14 +1,3 @@
 mixin subscription
-  -
-    let classes;
-    if (attributes && attributes.class) {
-      classes = attributes.class;
-      delete attributes.class;
-    }
-    else {
-      classes = [];
-    }
-
-  .subscription(class=classes)
-    +field()(type='email', placeholder='Email')&attributes(attributes)
-    +icon('arrow_forward')
+  - attributes.class = attributes.class ? attributes.class + ' subscription' : 'subscription';
+  +icon-field('arrow_forward', false, false, {type: 'email', placeholder: 'Email'})&attributes(attributes)
