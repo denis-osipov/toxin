@@ -10,17 +10,17 @@
     padding-bottom: 0;
 
     background: #FFFFFF;
-    border: 1px solid $dark-shade-25;
+    border: 1px solid $dark-25;
     border-radius: 4px;
 
     &::placeholder {
-      color: $dark-shade-25;
+      color: $dark-25;
     }
 
     &:hover,
     &:focus,
     &.field_active {
-      border-color: $dark-shade-50;
+      border-color: $dark-50;
     }
   }
   .field_type {

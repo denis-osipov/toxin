@@ -1,6 +1,6 @@
 $ref-rem: 1 !default;
-$dark-shade: black !default;
-$dark-shade-25: rgba(0, 0, 0, 0.25) !default;
+$dark: black !default;
+$dark-25: rgba(0, 0, 0, 0.25) !default;
 
 $h1-font-size: 24px / $ref-rem;
 $h1-line-height: 30px / 24px;
@@ -11,14 +11,14 @@ $h3-line-height: 15px / 12px;
 
 @mixin text_level {
   %text_header {
-    color: $dark-shade;
+    color: $dark;
     font: {
       family: 'Quicksand', sans-serif;
       weight: bold;
     }
   }
   %text_sample {
-    color: $dark-shade-25;
+    color: $dark-25;
     text-align: right;
   }
   .text_level {
@@ -33,7 +33,7 @@ $h3-line-height: 15px / 12px;
       line-height: $h2-line-height;
     }
     &_h3 {
-      color: $dark-shade;
+      color: $dark;
       font: {
         size: $h3-font-size;
         weight: bold;
@@ -68,7 +68,7 @@ $h3-line-height: 15px / 12px;
       @extend %text_sample;
     }
     &_element-status {
-      color: $dark-shade-50;
+      color: $dark-50;
       font-size: $h3-font-size;
       line-height: $h3-line-height;
       text-transform: uppercase;

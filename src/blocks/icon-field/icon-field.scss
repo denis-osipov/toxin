@@ -3,14 +3,14 @@
     display: grid;
     grid-template-columns: 1fr 44px;
     align-items: center;
-    border: 1px solid $dark-shade-25;
+    border: 1px solid $dark-25;
     border-radius: 4px;
     box-sizing: border-box;
     height: 44px;
 
     &:hover,
     &:focus {
-      border-color: $dark-shade-50;
+      border-color: $dark-50;
     }
   }
 

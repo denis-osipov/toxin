@@ -1,5 +1,5 @@
 $ref-rem: 1 !default;
-$dark-shade-75: rgba(0, 0, 0, 0.75) !default;
+$dark-75: rgba(0, 0, 0, 0.75) !default;
 
 @mixin text {
   $body-font-size: 14px / $ref-rem;
@@ -11,7 +11,7 @@ $dark-shade-75: rgba(0, 0, 0, 0.75) !default;
       size: $body-font-size;
     }
     line-height: $body-line-height;
-    color: $dark-shade-75;
+    color: $dark-75;
   }
   @include text_level;
 }
