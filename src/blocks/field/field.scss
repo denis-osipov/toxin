@@ -1,7 +1,6 @@
-$dark-25: rgba(0, 0, 0, 0.25) !default;
-$dark-25: rgba(0, 0, 0, 0.5) !default;
-
 @mixin field {
+  $dark-25: rgba(0, 0, 0, 0.25) !default;
+  $dark-25: rgba(0, 0, 0, 0.5) !default;
   .field {
     color: inherit;
     font: inherit;

@@ -1,7 +1,6 @@
-$ref-rem: 1 !default;
-$dark-75: rgba(0, 0, 0, 0.75) !default;
-
 @mixin text {
+  $ref-rem: 1 !default;
+  $dark-75: rgba(0, 0, 0, 0.75) !default;
   $body-font-size: 14px / $ref-rem;
   $body-line-height: 24px / 14px;
   .text {

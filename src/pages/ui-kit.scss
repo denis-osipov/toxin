@@ -1,8 +1,7 @@
-$container-padding: 37px !default;
-$ref-width: 1440px !default;
-$side-padding: 150px !default;
-
 .ui-kit {
+  $container-padding: 37px !default;
+  $ref-width: 1440px !default;
+  $side-padding: 150px !default;
   &__header {
     margin: 0;
     padding: 30px;

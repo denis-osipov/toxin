@@ -1,6 +1,5 @@
-$ref-rem: 1 !default;
-
 @mixin font-sample__item {
+  $ref-rem: 1 !default;
   .font-sample__item {
     display: grid;
     grid-column-gap: 29px / $ref-rem;
