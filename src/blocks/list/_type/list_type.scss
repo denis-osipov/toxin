@@ -1,0 +1,7 @@
+@mixin list_type {
+  .list_type {
+    &_checkbox {
+      list-style: none;
+    }
+  }
+}

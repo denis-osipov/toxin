@@ -1,0 +1,7 @@
+@mixin list {
+  .list {
+    padding-left: 0;
+  }
+  @include list_type;
+  @include list__item;
+}
