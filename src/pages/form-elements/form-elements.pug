@@ -29,9 +29,11 @@ html
           +subscription
       .form-elements__cell2
         +sample-form('Checkbox buttons')
-          +checkbox('Можно курить')
-          +checkbox('Можно с питомцами')
-          +checkbox('Можно пригласить гостей (до 10 человек)')
+          +list([
+            'Можно курить',
+            'Можно с питомцами',
+            'Можно пригласить гостей (до 10 человек)'
+          ], 'checkbox')
         +sample-form('Radio buttons')
           +radio('Мужчина')(name='sex')
           +radio('Женщина')(name='sex')
