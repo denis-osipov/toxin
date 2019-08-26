@@ -37,8 +37,10 @@ html
         +sample-form('Radio buttons')
           +list(['Мужчина', 'Женщина'], 'radio', 'sex')
         +sample-form('Toggle')
-          +checkbox('Получать спецпредложения')(class='checkbox_toggle')
-          +checkbox('Получать спецпредложения')(class='checkbox_toggle')
+          +list([
+            ['offer', 'Получать спецпредложения'],
+            ['offer', 'Получать спецпредложения']
+          ], 'toggle')
         +sample-form('Like button')
           +like(false, 2)
           +like(true, 12)

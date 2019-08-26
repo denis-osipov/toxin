@@ -3,7 +3,10 @@
     &_checkbox {
       color: $dark-50;
       list-style: none;
-      width: 230px;
+    }
+    &_toggle {
+      list-style: none;
+      margin-top: 11px;
     }
     &_radio {
       color: $dark-50;

@@ -1,3 +1,7 @@
 @mixin list__item_type {
-  
+  .list__item_type {
+    &_toggle {
+      margin-bottom: 13px;
+    }
+  }
 }

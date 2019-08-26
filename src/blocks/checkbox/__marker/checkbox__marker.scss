@@ -1,25 +1,48 @@
 @mixin checkbox__marker {
   .checkbox__marker {
-    background: $primary-gradient;
-    display: none;
-    height: 8px;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    width: 6px;
-
-    &::after {
-      background: #fff;
-      content: '';
-      height: 7px;
-      left: -1px;
-      position: absolute;
-      top: -1px;
-      width: 5px;
-    }
     .checkbox__input:checked ~ .checkbox__box & {
-      display: block;
+      background: $primary-gradient;
+      height: 8px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 6px;
+
+      &::after {
+        background: #fff;
+        content: '';
+        height: 7px;
+        left: -1px;
+        position: absolute;
+        top: -1px;
+        width: 5px;
+      }
+    }
+
+    .checkbox_toggle & {
+      background: $dark-25;
+      border-radius: 50%;
+      height: 12px;
+      left: 25%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+    }
+
+    .checkbox_toggle .checkbox__input:checked ~ .checkbox__box & {
+      background: $primary-gradient;
+      border-radius: 50%;
+      height: 12px;
+      left: 75%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      &::after {
+        display: none;
+      }
     }
   }
 }

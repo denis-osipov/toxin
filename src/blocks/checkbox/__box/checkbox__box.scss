@@ -14,5 +14,11 @@
     .checkbox__input:checked ~ & {
       border-color: $primary-color;
     }
+
+    .checkbox_toggle & {
+      border-radius: 10px;
+      height: 20px;
+      width: 40px;
+    }
   }
 }

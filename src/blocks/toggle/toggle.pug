@@ -1,0 +1,3 @@
+mixin toggle(item)
+  - const [name, label, description] = typeof item === 'string' ? [null, item] : item
+  +checkbox(name, label, description)(class='checkbox_toggle')&attributes(attributes)
