@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
     "open": "webpack-dev-server --open",
-    "hot": "webpack-dev-server --open --hot",
+    "hot": "webpack-dev-server --hot",
     "dev": "webpack",
     "dev-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
     "server-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
