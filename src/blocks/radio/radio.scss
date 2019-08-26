@@ -1,0 +1,8 @@
+@mixin radio {
+  .radio {
+    column-gap: 10px;
+    display: flex;
+    line-height: 20px;
+  }
+  @include radio__button;
+}

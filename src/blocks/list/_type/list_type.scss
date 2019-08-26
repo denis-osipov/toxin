@@ -4,6 +4,13 @@
       color: $dark-50;
       list-style: none;
       width: 230px;
+      @include checkbox;
+    }
+    &_radio {
+      color: $dark-50;
+      list-style: none;
+      display: flex;
+      @include radio;
     }
   }
 }

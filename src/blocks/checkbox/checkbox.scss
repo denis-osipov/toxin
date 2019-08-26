@@ -3,7 +3,6 @@
     column-gap: 10px;
     display: flex;
     line-height: 20px;
-    position: relative;
   }
   @include checkbox__box;
   @include checkbox__marker;
