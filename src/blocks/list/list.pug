@@ -1,16 +1,20 @@
-mixin list(items, type='list')
+mixin list(items, type='list', radioName)
   //- type - one of 'list', 'checkbox', 'icon'
   //- items - array of strings or arrays of 1 to 3 elements
   //-
   //- If type is 'list' items should be an array of strings or arrays of one element.
   //-
-  //- If type is 'checkbox' or 'radio' items should be an array of strings or arrays of two or three elements.
-  //- The first one will be an input element name property, the second ont - an input label, 
+  //- If type is 'checkbox' items should be an array of strings or arrays of two or three elements.
+  //- The first one will be an input element's name property, the second one - an input label, 
   //- the third one (optional) - an item description.
+  //- 
+  //- If type is 'radio' items should be an array of strings or arrays of two elements.
+  //- The first one will be an input element label, and the second one - an item description.
+  //- radioName will be an input element's name property.
   //-
   //- If type is 'icon' items should be an array of two or three elements.
   //- The first one will be an icon name, the secon one - an item name,
   //- the third one (optional) - an item description.
   ul.list(class=`list_type_${type}`)&attributes(attributes)
     each item in items
-      +list__item(item, type=type)
+      +list__item(item, type, radioName)

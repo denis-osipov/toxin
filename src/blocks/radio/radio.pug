@@ -1,4 +1,4 @@
-mixin radio(label)
+mixin radio(name, label, description)
   -
     let classes;
     if (attributes && attributes.class) {
@@ -10,5 +10,7 @@ mixin radio(label)
     }
 
   label.radio(class=classes)
-    +input()(type='radio')&attributes(attributes)
-    =label
+    +input()(type='radio', name=name)&attributes(attributes)
+    span.radio__label= label
+    if description
+      span.radio__description= description

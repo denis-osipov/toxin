@@ -35,8 +35,7 @@ html
             ['guests', 'Можно пригласить гостей (до 10 человек)']
           ], 'checkbox')
         +sample-form('Radio buttons')
-          +radio('Мужчина')(name='sex')
-          +radio('Женщина')(name='sex')
+          +list(['Мужчина', 'Женщина'], 'radio', 'sex')
         +sample-form('Toggle')
           +checkbox('Получать спецпредложения')(class='checkbox_toggle')
           +checkbox('Получать спецпредложения')(class='checkbox_toggle')

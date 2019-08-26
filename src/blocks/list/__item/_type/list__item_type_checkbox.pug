@@ -1,3 +1,3 @@
 mixin list__item_type_checkbox(item)
-  - const [name, label, description] = typeof item === 'string' ? [item, null] : item
+  - const [name, label, description] = typeof item === 'string' ? [null, item] : item
   +checkbox(name, label, description)
