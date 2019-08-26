@@ -3,7 +3,7 @@
 
 function setDoubleDatepicker( jQuery ) {
   $( '.date-picker_double' ).each(function() {
-    $( this ).find( '.field' ).datepicker({
+    $( this ).find( '.input' ).datepicker({
       dateFormat: 'dd.mm.yyyy',
       toggleSelected: true,
       range: true,
@@ -15,7 +15,7 @@ function setDoubleDatepicker( jQuery ) {
     });
 
     $( this ).find('.date-picker__field').on('click', function(event) {
-      let datepicker = $( event.currentTarget ).find('.field').data('datepicker');
+      let datepicker = $( event.currentTarget ).find('.input').data('datepicker');
       if (!datepicker.visible) {
         datepicker.show.bind(datepicker)();
       }
@@ -38,7 +38,7 @@ function setDoubleDatepicker( jQuery ) {
       // and the pair date-picker is the next one. Otherwise the pair date-picker is the previous one.
       const otherIndex = index % 2 === 0 ? index + 1 : index - 1;
       inst.$el.val(formattedDate.split(inst.opts.multipleDatesSeparator)[index % 2]);
-      const otherField = $( '.date-picker_double' ).eq(otherIndex).find('.field');
+      const otherField = $( '.date-picker_double' ).eq(otherIndex).find('.input');
       let otherPicker = otherField.data('datepicker');
       otherPicker.selectDate(date);
       otherPicker.$el.val(formattedDate.split(inst.opts.multipleDatesSeparator)[(index + 1) % 2]);

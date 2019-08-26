@@ -36,7 +36,7 @@ import './_type/dropdown_type_conveniences';
           dropdown.setValues();
         },
         setElements: function() {
-          dropdown.input = dropdown.dropdown.find('.field');
+          dropdown.input = dropdown.dropdown.find('.input');
           dropdown.items = dropdown.dropdown.find('.dropdown__item');
           dropdown.total = dropdown.dropdown.find('.dropdown__total');
           dropdown.list = dropdown.dropdown.find('.dropdown__list');

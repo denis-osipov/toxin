@@ -1,8 +1,0 @@
-mixin field(mask=false)
-  -
-    let typeClass = attributes.type ? `field_type_${attributes.type}` : 'field_type_text';
-    if (mask === 'date') {
-      attributes.placeholder = 'ДД.ММ.ГГГГ';
-      typeClass += ' field_masked_date'
-    }
-  input.field(class=[typeClass])&attributes(attributes)

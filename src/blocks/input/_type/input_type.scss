@@ -1,4 +1,4 @@
-@mixin field_type {
+@mixin input_type {
   %text {
     line-height: 44px;
     width: 100%;
@@ -19,11 +19,11 @@
 
     &:hover,
     &:focus,
-    &.field_active {
+    &.input_active {
       border-color: $dark-50;
     }
   }
-  .field_type {
+  .input_type {
     &_text {
       @extend %text;
     }

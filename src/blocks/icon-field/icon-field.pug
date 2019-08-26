@@ -3,5 +3,5 @@ mixin icon-field(icon, iconColor=false, mask=false, inputAttrs)
   //- inputAttrs.class if present must be a string containing input classes
   - inputAttrs.class = inputAttrs.class ? inputAttrs.class + ' icon-field__input' : 'icon-field__input';
   .icon-field&attributes(attributes)
-    +field(mask)&attributes(inputAttrs)
+    +input(mask)&attributes(inputAttrs)
     +icon(icon, iconColor)(class='icon-field__icon')

@@ -1,11 +1,11 @@
-@mixin field {
+@mixin input {
   $dark-25: rgba(0, 0, 0, 0.25) !default;
   $dark-25: rgba(0, 0, 0, 0.5) !default;
-  .field {
+  .input {
     color: inherit;
     font: inherit;
     line-height: inherit;
     text-overflow: ellipsis;
   }
-  @include field_type;
+  @include input_type;
 }

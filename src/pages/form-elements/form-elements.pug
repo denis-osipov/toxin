@@ -11,13 +11,13 @@ html
     +main()(class='ui-kit__grid-container')
       .form-elements__cell1
         +sample-form('Text field', 'Default')
-          +field()(type='email', placeholder='Email')
+          +input()(type='email', placeholder='Email')
         +sample-form('Text field', 'Hover / Focus')
-          +field()(class='field_active', value='This is pretty awesome')
+          +input()(class='input_active', value='This is pretty awesome')
         +sample-form('Dropdown', 'Default')
           +dropdown('guests')
         +sample-form('Masked text field', 'Default')
-          +field('date')
+          +input('date')
         .double-date-picker
           +sample-form('Date dropdown')
             +date-picker('double')

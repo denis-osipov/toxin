@@ -8,7 +8,7 @@ function setDatepicker( jQuery ) {
   });
 
   $( '.date-picker:not([class*="date-picker_double"])' ).each(function() {
-    $( this ).find( '.field' ).datepicker({
+    $( this ).find( '.input' ).datepicker({
       dateFormat: 'dd M',
       toggleSelected: true,
       multipleDatesSeparator: ' - ',
@@ -20,7 +20,7 @@ function setDatepicker( jQuery ) {
     });
 
     $( this ).find('.date-picker__field').on('click', function(event) {
-      let datepicker = $( event.currentTarget ).find('.field').data('datepicker');
+      let datepicker = $( event.currentTarget ).find('.input').data('datepicker');
       if (!datepicker.visible) {
         datepicker.show.bind(datepicker)();
       }
