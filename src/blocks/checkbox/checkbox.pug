@@ -12,6 +12,6 @@ mixin checkbox(name, description)
   label.checkbox(class=classes)
     +field()(type='checkbox', class='checkbox__input')&attributes(attributes)
     +checkbox__box
-    =name
+    span.checkbox__name= name
     if description
-      p.checkbox__description= description
+      span.checkbox__description= description

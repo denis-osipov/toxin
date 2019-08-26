@@ -1,7 +1,9 @@
 @mixin list_type {
   .list_type {
     &_checkbox {
+      color: $dark-50;
       list-style: none;
+      width: 230px;
     }
   }
 }
