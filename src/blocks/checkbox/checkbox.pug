@@ -1,4 +1,4 @@
-mixin checkbox(name, description)
+mixin checkbox(name, label, description)
   -
     let classes;
     if (attributes && attributes.class) {
@@ -10,8 +10,8 @@ mixin checkbox(name, description)
     }
 
   label.checkbox(class=classes)
-    +input()(type='checkbox', class='checkbox__input')&attributes(attributes)
+    +input()(type='checkbox', class='checkbox__input', name=name)&attributes(attributes)
     +checkbox__box
-    span.checkbox__name= name
+    span.checkbox__label= label
     if description
       span.checkbox__description= description

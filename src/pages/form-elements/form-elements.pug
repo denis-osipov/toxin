@@ -30,9 +30,9 @@ html
       .form-elements__cell2
         +sample-form('Checkbox buttons')
           +list([
-            'Можно курить',
-            'Можно с питомцами',
-            'Можно пригласить гостей (до 10 человек)'
+            ['smoke', 'Можно курить'],
+            ['pets', 'Можно с питомцами'],
+            ['guests', 'Можно пригласить гостей (до 10 человек)']
           ], 'checkbox')
         +sample-form('Radio buttons')
           +radio('Мужчина')(name='sex')
