@@ -4,13 +4,15 @@
       color: $dark-50;
       list-style: none;
       width: 230px;
-      @include checkbox;
     }
     &_radio {
       color: $dark-50;
-      list-style: none;
+      column-gap: 10px;
       display: flex;
-      @include radio;
+      list-style: none;
+      margin-top: 11px;
     }
   }
+  @include checkbox;
+  @include radio;
 }

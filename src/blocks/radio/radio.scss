@@ -2,7 +2,9 @@
   .radio {
     column-gap: 10px;
     display: flex;
-    line-height: 20px;
+    line-height: 18px;
   }
   @include radio__button;
+  @include radio__input;
+  @include radio__label;
 }

@@ -10,7 +10,7 @@ mixin radio(name, label, description)
     }
 
   label.radio(class=classes)
-    +input()(type='radio', name=name)&attributes(attributes)
+    +input()(type='radio', class='radio__input', name=name)&attributes(attributes)
     .radio__button
     span.radio__label= label
     if description

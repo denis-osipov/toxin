@@ -8,17 +8,18 @@
     top: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
     width: 6px;
-  }
-  .checkbox__marker::after {
-    background: #fff;
-    content: '';
-    height: 7px;
-    left: -1px;
-    position: absolute;
-    top: -1px;
-    width: 5px;
-  }
-  .checkbox__input:checked ~ .checkbox__box .checkbox__marker {
-    display: block;
+
+    &::after {
+      background: #fff;
+      content: '';
+      height: 7px;
+      left: -1px;
+      position: absolute;
+      top: -1px;
+      width: 5px;
+    }
+    .checkbox__input:checked ~ .checkbox__box & {
+      display: block;
+    }
   }
 }
