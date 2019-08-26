@@ -1,9 +1,10 @@
 @mixin like__icon {
-  .like_liked .like__icon::after {
-    content: 'favorite'
-  }
-
-  .like__icon::after {
-    content: 'favorite_border'
+  .like__icon {
+    .like_liked &::after {
+      content: 'favorite'
+    }
+    &::after {
+      content: 'favorite_border'
+    }
   }
 }
