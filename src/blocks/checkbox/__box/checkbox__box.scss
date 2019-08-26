@@ -1,0 +1,16 @@
+@mixin checkbox__box {
+  $dark-25: rgba(0, 0, 0, 0.25) !default;
+  $primary-color: purple !default;
+  .checkbox__box {
+    background: #fff;
+    border: 1px solid $dark-25;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 20px;
+    position: relative;
+    width: 20px;
+  }
+  .checkbox__input:checked ~ .checkbox__box {
+    border-color: $primary-color;
+  }
+}
