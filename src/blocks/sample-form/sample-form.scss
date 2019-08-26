@@ -1,4 +1,7 @@
 @mixin sample-form {
+  .sample-form {
+    margin-bottom: 8px;
+  }
   @include sample-form__header;
   @include sample-form__name;
   @include sample-form__status;

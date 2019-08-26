@@ -16,8 +16,9 @@
   }
   &__grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-column-gap: 97px;
+    // grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 320px);
+    grid-column-gap: 99px;
     grid-row-gap: 20px;
     padding-left: 141px;
     padding-right: 141px;
@@ -34,4 +35,27 @@
   @media (min-width: 820px) {
     grid-column-end: span 2;
   }
+}
+
+.form-elements__cell1 {
+  & .sample-form:nth-child(3) {
+    margin-bottom: 11px;
+  }
+  & .sample-form:nth-child(4) {
+    margin-bottom: 28px;
+  }
+  & .sample-form:nth-child(6) {
+    margin-right: 53px;
+    margin-bottom: 29px;
+  }
+  & .sample-form:nth-child(7) {
+    margin-right: 53px;
+  }
+}
+
+.double-date-picker {
+  display: flex;
+  justify-content: space-between;
+  grid-column-gap: 20px;
+  margin-bottom: 21px;
 }
