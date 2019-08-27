@@ -79,9 +79,18 @@
   }
 
   .sample-form:nth-child(4) {
+    margin-bottom: 28px;
     .likes {
       padding-top: 10px;
       column-gap: 10px;
+      display: flex;
+    }
+  }
+
+  .sample-form:nth-child(5) {
+    .rates {
+      padding-top: 9px;
+      column-gap: 20px;
       display: flex;
     }
   }
