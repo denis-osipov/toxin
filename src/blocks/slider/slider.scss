@@ -1,5 +1,7 @@
 @mixin slider {
   .slider {
     @import '../../../node_modules/ion-rangeslider/css/ion.rangeSlider.min.css';
+    @import './toxin.scss';
   }
+  @include slider__header;
 }

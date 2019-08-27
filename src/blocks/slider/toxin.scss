@@ -1,0 +1,28 @@
+.irs--toxin {
+  height: 42px;
+
+  .irs-line {
+    top: 18px;
+    height: 6px;
+    background: #fff;
+    border: 1px solid $dark-25;
+    box-sizing: border-box;
+    border-radius: 3px;
+  }
+
+  .irs-bar {
+    top: 18px;
+    height: 6px;
+    background: $secondary-gradient;
+    border-radius: 3px;
+  }
+
+  .irs-handle {
+    top: 13px;
+    width: 16px;
+    height: 16px;
+    background: $secondary-gradient;
+    border: 2px solid #fff;
+    border-radius: 50%;
+  }
+}

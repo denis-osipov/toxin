@@ -1,2 +1,4 @@
-mixin slider
-  +input()(class='slider', type="text")&attributes(attributes)
+mixin slider(name)
+  .slider
+    +slider__header(name)
+    +input()(class='slider__input', type="text")&attributes(attributes)
