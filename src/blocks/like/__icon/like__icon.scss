@@ -1,10 +1,16 @@
 @mixin like__icon {
   .like__icon {
+    justify-self: end;
+    position: relative;
+
     .like_liked &::after {
-      content: 'favorite'
+      content: 'favorite';
     }
+
     &::after {
-      content: 'favorite_border'
+      content: 'favorite_border';
+      position: absolute;
+      right: -4px;
     }
   }
 }

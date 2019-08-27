@@ -1,5 +1,9 @@
 @mixin like_liked {
   .like_liked {
     color: $primary-color;
+
+    &::before {
+      background: $primary-gradient;
+    }
   }
 }

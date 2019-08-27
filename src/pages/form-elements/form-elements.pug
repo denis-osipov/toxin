@@ -42,8 +42,9 @@ html
             ['offer', 'Получать спецпредложения']
           ], 'toggle')
         +sample-form('Like button')
-          +like(false, 2)
-          +like(true, 12)
+          .likes
+            +like(false, 2)
+            +like(true, 12)
         +sample-form('Rate button')
           +rating(4)
           +rating(5)

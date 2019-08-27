@@ -1,14 +1,33 @@
 @mixin like {
   .like {
     background: #fff;
-    border: 1px solid $dark-25;
+    background-clip: padding-box;
+    border: 1px solid transparent;
     border-radius: 10px;
     box-sizing: border-box;
     color: $dark-25;
+    display: grid;
     font-size: 10px;
+    grid-template-columns: 10px 28px;
     height: 20px;
-    line-height: 18px;
+    justify-items: center;
+    line-height: 17px;
+    padding: 0;
+    position: relative;
     width: 40px;
+
+    &::before {
+      background-color: $dark-25;
+      border-radius: inherit;
+      bottom: 0;
+      content: '';
+      left: 0;
+      margin: -1px;
+      position: absolute;
+      right:0;
+      top: 0;
+      z-index: -1;
+    }
   }
   @include like__icon;
   @include like_liked;
