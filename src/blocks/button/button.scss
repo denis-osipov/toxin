@@ -1,0 +1,18 @@
+@mixin button {
+  .button {
+    width: 99px;
+    height: 44px;
+    background: $primary-gradient;
+    border-radius: 22px;
+    color: #fff;
+    border: none;
+    position: relative;
+    z-index: 1;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  @include button_type;
+}

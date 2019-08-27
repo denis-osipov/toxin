@@ -1,0 +1,21 @@
+@mixin button_type {
+  .button_type {
+    &_fill {
+
+    }
+    &_border {
+      color: $primary-color;
+      &::after {
+        content: '';
+        background-color: #fff;
+        position: absolute;
+        top: 1px;
+        bottom: 1px;
+        right: 1px;
+        left: 1px;
+        border-radius: inherit;
+        z-index: -1;
+      }
+    }
+  }
+}
