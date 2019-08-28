@@ -1,5 +1,5 @@
 mixin rating(stars)
-  button.rating(type='button')
+  +button({}, 'text', 'min')(class='rating')
     - let filled = 0;
     while filled < stars
       +icon('star', 'primary-gradient')
