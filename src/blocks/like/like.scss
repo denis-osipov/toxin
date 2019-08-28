@@ -1,31 +1,30 @@
 @mixin like {
   .like {
-    background: #fff;
-    background-clip: padding-box;
-    border: 1px solid transparent;
+    align-items: center;
+    background-color: $dark-25;
+    border: none;
     border-radius: 10px;
     box-sizing: border-box;
     color: $dark-25;
     display: grid;
     font-size: 10px;
-    grid-template-columns: 10px 28px;
+    grid-template-columns: 15px 18px;
     height: 20px;
     justify-items: center;
-    line-height: 17px;
     padding: 0;
     position: relative;
     width: 40px;
+    z-index: 0;
 
-    &::before {
-      background-color: $dark-25;
+    &::after {
+      background-color: #fff;
       border-radius: inherit;
-      bottom: 0;
+      bottom: 1px;
       content: '';
-      left: 0;
-      margin: -1px;
+      left: 1px;
       position: absolute;
-      right:0;
-      top: 0;
+      right: 1px;
+      top: 1px;
       z-index: -1;
     }
   }
