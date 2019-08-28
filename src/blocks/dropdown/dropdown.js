@@ -32,6 +32,7 @@ import './_type/dropdown_type_conveniences';
           dropdown.update = $.fn.dropdown.update;
           dropdown.expand = $.fn.dropdown.expand.bind(dropdown.dropdown);
           dropdown.change = $.fn.dropdown.change.bind(this);
+          dropdown.set = $.fn.dropdown.set.bind(this);
           dropdown.setElements();
           dropdown.setValues();
         },
@@ -146,6 +147,13 @@ import './_type/dropdown_type_conveniences';
 
     this.update();
   };
+
+  $.fn.dropdown.set = function(values) {
+    values.forEach((value, index) => {
+      this.items.find('.dropdown__item-value').eq(index).text(value);
+    });
+    this.update();
+  }
 
   // Format total string depending on value
   $.fn.dropdown.format = function(value) {
