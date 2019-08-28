@@ -103,4 +103,20 @@
     margin-bottom: 15px;
   }
 
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 30px;
+    margin-top: 10px;
+    margin-bottom: 31px;
+    width: 230px;
+    & .button_type_text {
+      margin-right: -2px;
+    }
+  }
+
+  & .button_size_big {
+    margin-top: -1px;
+  }
 }

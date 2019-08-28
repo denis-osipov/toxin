@@ -1,7 +1,23 @@
-mixin button(type='fill', disabled=false)
+mixin button(content, type='fill', size='normal', disabled=false)
+  //- content should be an object with properties:
+  //-   text - text content for button
+  //-   icon - icon name for button
+  //-   iconColor - color type for icon
+  //- Content can be also supplied as block.
+  //- 
+  //- type - string (can be 'fill', 'border' or 'text')
+  //- 
+  //- size - string (can be 'normal', 'big' or 'min')
+  //- 
+  //- If disabled is true, button with disabled property will be created.
   -
     if (disabled) {
       attributes.disabled = '';
     }
-  button.text.text_level_h3.button(type='button', class=`button_type_${type}`)&attributes(attributes)
+  button.button.text.text_level_h3(type='button', class=`button_type_${type} button_size_${size}`)&attributes(attributes)
+    if content
+      if content.text
+        span.button__text= content.text
+      if content.icon
+        +icon(content.icon, content.iconColor)(class='button__icon')
     block

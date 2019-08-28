@@ -1,0 +1,18 @@
+@mixin button_size {
+  .button_size {
+    &_normal {
+      height: 44px;
+      width: 99px;
+    }
+
+    &_big {
+      height: 44px;
+      width: 100%;
+    }
+
+    &_min {
+      padding-right: 1px;
+      padding-left: 1px;
+    }
+  }
+}

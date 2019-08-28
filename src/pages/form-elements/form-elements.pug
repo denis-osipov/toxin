@@ -53,21 +53,15 @@ html
         form
           +slider('Range slider')
         +sample-form('Buttons')
-          +button('fill')
-            ='Click me'
-          +button('fill', 'disabled')
-            ='Click me'
-          +button('border')
-            ='Click me'
-          +button('border', 'disabled')
-            ='Click me'
-          +button
-            ='Click me'
-          +button
-            ='Click me'
-          +button
-            ='Перейти к оплате'
-            +icon('arrow_forward')
+          .buttons
+            +button({text: 'Click me'}, 'fill')
+            +button({text: 'Click me'}, 'fill', 'normal', 'disabled')
+            +button({text: 'Click me'}, 'border')
+            +button({text: 'Click me'}, 'border', 'normal', 'disabled')
+          .buttons
+            +button({text: 'Click me'}, 'text', 'min')
+            +button({text: 'Click me'}, 'text', 'min', 'disabled')
+          +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
         +sample-form('Pagination')
           -
             const pages = [1, 2, 3, { value: '...', placeholder: true }, 15, { next: true }];

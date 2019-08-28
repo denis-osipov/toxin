@@ -1,20 +1,37 @@
 @mixin button_type {
   .button_type {
     &_fill {
-
+      background: $primary-gradient;
+      color: #fff;
+      &:disabled {
+        background: $primary-gradient-50;
+      }
     }
+
     &_border {
+      background: $primary-gradient;
       color: $primary-color;
       &::after {
-        content: '';
         background-color: #fff;
-        position: absolute;
-        top: 1px;
-        bottom: 1px;
-        right: 1px;
-        left: 1px;
         border-radius: inherit;
+        bottom: 2px;
+        content: '';
+        left: 2px;
+        position: absolute;
+        right: 2px;
+        top: 2px;
         z-index: -1;
+      }
+      &:disabled {
+        background: $primary-gradient-50;
+      }
+    }
+
+    &_text {
+      background: none;
+      color: $primary-color;
+      &:disabled {
+        color: $dark-50;
       }
     }
   }
