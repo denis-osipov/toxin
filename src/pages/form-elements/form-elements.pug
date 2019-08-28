@@ -31,14 +31,17 @@ html
         +sample-form('Checkbox buttons')
           +list([
             ['smoke', 'Можно курить'],
-            ['pets', 'Можно с питомцами'],
-            ['guests', 'Можно пригласить гостей (до 10 человек)']
+            {name: 'pets', label: 'Можно с питомцами', checked: ''},
+            {name: 'guests', label: 'Можно пригласить гостей (до 10 человек)', checked: ''}
           ], 'checkbox')
         +sample-form('Radio buttons')
-          +list(['Мужчина', 'Женщина'], 'radio', 'sex')
+          +list([
+            {name: 'sex', label: 'Мужчина', checked: ''},
+            ['sex', 'Женщина']
+          ], 'radio')
         +sample-form('Toggle')
           +list([
-            ['offer', 'Получать спецпредложения'],
+            {name: 'offer', label: 'Получать спецпредложения', checked: ''},
             ['offer', 'Получать спецпредложения']
           ], 'toggle')
         +sample-form('Like button')

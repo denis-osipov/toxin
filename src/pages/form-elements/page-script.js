@@ -25,12 +25,4 @@ $( document ).ready(function(jQery) {
   thirdGuestDropdown.expand();
 
   $( '.exp-list' ).eq(1).removeClass('exp-list_hidden');
-
-  $( '.list_type_checkbox:first' ).find('li').each(function(index, element) {
-    if (index > 0) {
-      $( element ).find('input').prop('checked', true);
-    }
-  })
-
-  $( '.list_type_radio:first' ).find('input').eq(0).prop('checked', true);
 });
