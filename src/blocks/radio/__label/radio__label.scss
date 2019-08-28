@@ -1,7 +1,0 @@
-@mixin radio__label {
-  .radio__label {
-    .radio__input:checked ~ & {
-      color: $dark-75;
-    }
-  }
-}

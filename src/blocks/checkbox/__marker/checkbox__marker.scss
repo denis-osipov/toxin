@@ -20,7 +20,7 @@
       }
     }
 
-    .checkbox_toggle & {
+    .checkbox_type_toggle & {
       background: $dark-25;
       border-radius: 50%;
       height: 12px;
@@ -31,7 +31,7 @@
       width: 12px;
     }
 
-    .checkbox_toggle .checkbox__input:checked ~ .checkbox__box & {
+    .checkbox_type_toggle .checkbox__input:checked ~ .checkbox__box & {
       background: $primary-gradient;
       border-radius: 50%;
       height: 12px;
@@ -43,6 +43,9 @@
       &::after {
         display: none;
       }
+    }
+    .checkbox_type_radio & {
+      display: none;
     }
   }
 }
