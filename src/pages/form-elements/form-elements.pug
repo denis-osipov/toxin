@@ -67,8 +67,15 @@ html
           +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
         +sample-form('Pagination')
           -
-            const pages = [1, 2, 3, { value: '...', placeholder: true }, 15, { next: true }];
-          +pagination(pages)
+            const pages = [
+              {value: 1, href: '#'},
+              {value: 2, href: '#'},
+              {value: 3, href: '#'},
+              { value: '...', placeholder: true },
+              {value: 15, href: '#'},
+              { next: true }
+              ];
+          +pagination(pages, '1 – 12 из 100+ вариантов аренды')
       .form-elements__cell4
         +sample-form('Dropdown', 'Default')
           +dropdown('conveniences')

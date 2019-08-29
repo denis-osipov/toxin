@@ -1,0 +1,23 @@
+@mixin pagination__page {
+  .pagination__page {
+    border-radius: 50%;
+    color: $dark-50;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    width: 40px;
+
+    &:first-child {
+      background: $primary-gradient;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    &:last-child {
+      background: $secondary-gradient;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}
