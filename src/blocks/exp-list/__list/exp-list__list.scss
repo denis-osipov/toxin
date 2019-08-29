@@ -1,5 +1,9 @@
 @mixin exp-list__list {
-  .exp-list_hidden .exp-list__list {
+  .exp-list__list {
     display: none;
+
+    .exp-list_expanded & {
+      display: block;
+    }
   }
 }

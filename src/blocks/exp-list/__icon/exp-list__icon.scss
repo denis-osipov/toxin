@@ -1,9 +1,7 @@
 @mixin exp-list__icon {
-  .exp-list_hidden .exp-list__icon::after {
-    content: 'expand_more'
-  }
-
-  .exp-list__icon::after {
-    content: 'expand_less'
+  .exp-list__icon {
+    .exp-list_expanded & {
+      transform: rotate(-180deg);
+    }
   }
 }

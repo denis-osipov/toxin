@@ -14,5 +14,5 @@ $( document ).ready(function(jQery) {
   thirdGuestDropdown.set([2, 1]);
   thirdGuestDropdown.expand();
 
-  $( '.exp-list' ).eq(1).removeClass('exp-list_hidden');
+  $( '.exp-list' ).eq(1).addClass('exp-list_expanded');
 });
