@@ -17,8 +17,8 @@
   &__grid-container {
     display: grid;
     // grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-template-columns: repeat(3, 320px);
-    grid-column-gap: 99px;
+    grid-template-columns: 320px 1fr 320px;
+    grid-column-gap: 72px;
     grid-row-gap: 40px;
     padding-left: 141px;
     padding-right: 141px;
@@ -26,9 +26,9 @@
   }
 }
 
-.form-elements__cell2 {
-  margin-left: 27px;
-  // margin-left: auto;
+.form-elements__cell2,
+.form-elements__cell5 {
+  margin-left: 54px;
 }
 
 .form-elements__cell11 {

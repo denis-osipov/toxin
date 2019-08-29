@@ -13,9 +13,14 @@ $( document ).ready(function(jQery) {
     }
   });
 
-  const thirdGuestDropdown = $( '.dropdown_type_guests' ).eq(2).data('dropdown');
-  thirdGuestDropdown.set([2, 1]);
-  thirdGuestDropdown.expand();
+  $( '.dropdown_type_guests' ).each((index, element) => {
+    if (index > 0) {
+      $( element ).data('dropdown').expand();
+      if (index === 2) {
+        $( element ).data('dropdown').set([2, 2]);
+      }
+    }
+  });
 
   $( '.exp-list' ).eq(1).addClass('exp-list_expanded');
 });
