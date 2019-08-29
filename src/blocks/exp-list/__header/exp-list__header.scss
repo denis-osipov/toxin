@@ -1,0 +1,7 @@
+@mixin exp-list__header {
+  .exp-list__header {
+    display: grid;
+    grid-template-columns: 1fr 44px;
+    align-items: center;
+  }
+}
