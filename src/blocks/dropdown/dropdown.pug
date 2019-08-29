@@ -1,4 +1,4 @@
-mixin dropdown(type='', items)
+mixin dropdown(type='', items, controls=true)
   //- type should be one of:
   //-   guests
   //-   conveniences
@@ -22,7 +22,7 @@ mixin dropdown(type='', items)
 
   .dropdown(class=typeClass)&attributes(attributes)
     +dropdown__total
-    .dropdown__container.dropdown__container_hidden
+    .dropdown__container
       +dropdown__list(listItems)
-      if type === 'guests'
+      if controls
         +dropdown__controls

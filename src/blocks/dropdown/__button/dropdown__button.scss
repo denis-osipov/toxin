@@ -1,3 +1,17 @@
 @mixin dropdown__button {
+  .dropdown__button {
+    background: #fff;
+    border: 1px solid $dark-25;
+    border-radius: 50%;
+    color: $dark-50;
+    font-size: 18px;
+    height: 30px;
+    line-height: 22px;
+    width: 30px;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
   @include dropdown__button_hidden;
 }

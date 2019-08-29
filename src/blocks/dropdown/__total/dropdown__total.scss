@@ -1,3 +1,12 @@
 @mixin dropdown__total {
   @include icon-field;
+  .dropdown__total {
+    column-gap: 45px;
+
+    .dropdown_expanded & {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-color: $dark-50;
+    }
+  }
 }

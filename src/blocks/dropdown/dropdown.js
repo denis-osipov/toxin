@@ -57,7 +57,7 @@ import './_type/dropdown_type_conveniences';
       dropdown.update();
 
       dropdown.total.on('click', dropdown.expand);
-      dropdown.items.on('click', '.button', dropdown.change);
+      dropdown.items.on('click', '.dropdown__button', dropdown.change);
 
       if (dropdown.clear) {
         dropdown.clear.on('click', function() {
@@ -81,7 +81,17 @@ import './_type/dropdown_type_conveniences';
   // Update dropdown's total line
   $.fn.dropdown.update = function () {
     this.setValues();
-    const sum = this.values.reduce((prev, current) => prev + current);
+    this.values.forEach((value, index) => {
+      if (value < 1) {
+        $( this.items[index] ).find('.dropdown__button_type_decrement').prop('disabled', true);
+      }
+      else {
+        $( this.items[index] ).find('.dropdown__button_type_decrement').prop('disabled', false);
+      }
+    });
+    const sum = this.values.reduce((prev, current) => {
+      return prev + current;
+    });
     if (this.dropdown.find('.dropdown__controls').length) {
       if (sum === 0) {
         this.clear.addClass('dropdown__button_hidden');
@@ -121,7 +131,7 @@ import './_type/dropdown_type_conveniences';
 
   // Expand dropdown list
   $.fn.dropdown.expand = function(event) {
-    this.find('.dropdown__container').toggleClass('dropdown__container_hidden');
+    this.toggleClass('dropdown_expanded');
   };
 
   // Change quantity of items and update total
@@ -132,16 +142,9 @@ import './_type/dropdown_type_conveniences';
     let value = parseInt(valueField.text());
     if (button.hasClass('dropdown__button_type_decrement')) {
       value -= 1;
-      if (value < 1) {
-        button.prop('disabled', true);
-      }
     }
     else {
       value += 1;
-      const decrButton = item.find('.dropdown__button_type_decrement');
-      if (decrButton.prop('disabled')) {
-        decrButton.prop('disabled', false);
-      };
     }
     valueField.text(value);
 
