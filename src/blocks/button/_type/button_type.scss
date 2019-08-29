@@ -3,7 +3,10 @@
     &_fill {
       background: $primary-gradient;
       color: #fff;
-      &:disabled {
+
+      &.button_focused,
+      &:hover,
+      &:focus {
         background: $primary-gradient-50;
       }
     }
@@ -22,7 +25,10 @@
         top: 2px;
         z-index: -1;
       }
-      &:disabled {
+
+      &.button_focused,
+      &:hover,
+      &:focus {
         background: $primary-gradient-50;
       }
     }
@@ -30,7 +36,10 @@
     &_text {
       background: none;
       color: $primary-color;
-      &:disabled {
+      
+      &.button_focused,
+      &:hover,
+      &:focus {
         color: $dark-50;
       }
     }

@@ -57,13 +57,13 @@ html
           +slider('Range slider')
         +sample-form('Buttons')
           .buttons
-            +button({text: 'Click me'}, 'fill')
-            +button({text: 'Click me'}, 'fill', 'normal', 'disabled')
+            +button({text: 'Click me'})
+            +button({text: 'Click me'})(class='button_focused')
             +button({text: 'Click me'}, 'border')
-            +button({text: 'Click me'}, 'border', 'normal', 'disabled')
+            +button({text: 'Click me'}, 'border')(class='button_focused')
           .buttons
             +button({text: 'Click me'}, 'text', 'min')
-            +button({text: 'Click me'}, 'text', 'min', 'disabled')
+            +button({text: 'Click me'}, 'text', 'min')(class='button_focused')
           +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
         +sample-form('Pagination')
           -
