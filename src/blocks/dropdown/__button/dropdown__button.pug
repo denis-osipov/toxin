@@ -1,3 +1,6 @@
 mixin dropdown__button(value, type)
   - const buttonClass = type ? `dropdown__button dropdown__button_type_${type}` : 'dropdown__button';
-  button.text(type='button', class=buttonClass)&attributes(attributes)= value
+  if type === 'clear' || type === 'apply'
+    +button({text: value}, 'text', 'min')
+  else
+    button.text(type='button', class=buttonClass)&attributes(attributes)= value

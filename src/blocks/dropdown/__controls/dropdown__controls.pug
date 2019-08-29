@@ -1,4 +1,4 @@
 mixin dropdown__controls
   .dropdown__controls
-    +dropdown__button('Очистить', 'clear')
-    +dropdown__button('Применить', 'apply')
+    +button({text: 'Очистить'}, 'text', 'min')(class='dropdown__control dropdown__control_type_clear')
+    +button({text: 'Применить'}, 'text', 'min')(class='dropdown__control dropdown__control_type_apply')

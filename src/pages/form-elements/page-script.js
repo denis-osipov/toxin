@@ -17,7 +17,8 @@ $( document ).ready(function(jQery) {
     if (index > 0) {
       $( element ).data('dropdown').expand();
       if (index === 2) {
-        $( element ).data('dropdown').set([2, 2]);
+        $( element ).data('dropdown').set([2, 1]);
+        $( element ).find('.dropdown__control_type_clear').addClass('button_focused');
       }
     }
   });

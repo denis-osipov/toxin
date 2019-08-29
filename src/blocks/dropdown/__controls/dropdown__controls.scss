@@ -1,0 +1,10 @@
+@mixin dropdown__controls {
+  .dropdown__controls {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 19px;
+    padding-left: 13px;
+    padding-right: 6px;
+    padding-bottom: 6px;
+  }
+}

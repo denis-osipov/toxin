@@ -42,8 +42,8 @@ import './_type/dropdown_type_conveniences';
           dropdown.total = dropdown.dropdown.find('.dropdown__total');
           dropdown.list = dropdown.dropdown.find('.dropdown__list');
           if (dropdown.dropdown.find('.dropdown__controls').length) {
-            dropdown.clear = dropdown.dropdown.find('.dropdown__button_type_clear');
-            dropdown.apply = dropdown.dropdown.find('.dropdown__button_type_apply');
+            dropdown.clear = dropdown.dropdown.find('.dropdown__control_type_clear');
+            dropdown.apply = dropdown.dropdown.find('.dropdown__control_type_apply');
           }
         },
         setValues: function() {
@@ -94,10 +94,10 @@ import './_type/dropdown_type_conveniences';
     });
     if (this.dropdown.find('.dropdown__controls').length) {
       if (sum === 0) {
-        this.clear.addClass('dropdown__button_hidden');
+        this.clear.addClass('dropdown__control_hidden');
       }
       else {
-        this.clear.removeClass('dropdown__button_hidden');
+        this.clear.removeClass('dropdown__control_hidden');
       }
     }
     if (this.settings.total && !this.settings.special.length) {
