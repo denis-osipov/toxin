@@ -1,6 +1,6 @@
 @mixin sample-form {
   .sample-form {
-    margin-bottom: 8px;
+    padding-bottom: 8px;
   }
   @include sample-form__header;
   @include sample-form__name;

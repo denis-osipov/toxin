@@ -1,6 +1,7 @@
 @mixin list {
   .list {
-    margin-top: 12px;
+    margin: 0;
+    padding-top: 12px;
     padding-left: 0;
   }
   @include list_type;

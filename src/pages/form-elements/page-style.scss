@@ -39,14 +39,14 @@
 
 .form-elements__cell1 {
   & .sample-form:nth-child(3) {
-    margin-bottom: 11px;
+    margin-bottom: 3px;
   }
   & .sample-form:nth-child(4) {
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
   & .sample-form:nth-child(6) {
     margin-right: 53px;
-    margin-bottom: 29px;
+    margin-bottom: 21px;
   }
   & .sample-form:nth-child(7) {
     margin-right: 53px;
@@ -63,7 +63,7 @@
 .form-elements__cell2 {
 
   .sample-form:nth-child(1) {
-    margin-bottom: 28px;
+    margin-bottom: 10px;
 
     .list_type_checkbox {
       width: 230px;
@@ -71,15 +71,15 @@
   }
 
   .sample-form:nth-child(2) {
-    margin-bottom: 19px;
+    margin-bottom: 11px;
   }
 
   .sample-form:nth-child(3) {
-    margin-bottom: 34px;
+    margin-bottom: 12px;
   }
 
   .sample-form:nth-child(4) {
-    margin-bottom: 28px;
+    margin-bottom: 21px;
     .likes {
       padding-top: 10px;
       column-gap: 10px;
@@ -100,7 +100,7 @@
 
   form:nth-child(1) {
     width: 266px;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
   }
 
   .buttons {
@@ -108,7 +108,7 @@
     flex-wrap: wrap;
     column-gap: 20px;
     row-gap: 30px;
-    margin-top: 10px;
+    margin-top: 11px;
     margin-bottom: 31px;
     width: 230px;
     & .button_type_text {
@@ -116,7 +116,11 @@
     }
   }
 
-  & .button_size_big {
+  .button_size_big {
     margin-top: -1px;
+  }
+
+  .sample-form::nth-child(2) {
+    margin-bottom: 20px;
   }
 }

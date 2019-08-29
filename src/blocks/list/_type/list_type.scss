@@ -6,14 +6,14 @@
     }
     &_toggle {
       list-style: none;
-      margin-top: 11px;
+      padding-top: 11px;
     }
     &_radio {
       color: $dark-50;
       column-gap: 10px;
       display: flex;
       list-style: none;
-      margin-top: 11px;
+      padding-top: 11px;
     }
   }
   @include checkbox;
