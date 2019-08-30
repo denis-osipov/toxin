@@ -3,5 +3,18 @@
     &_toggle {
       margin-bottom: 13px;
     }
+    &_list {
+      display: flex;
+      column-gap: 10px;
+      &::before {
+        margin-top: 7px;
+        content: '';
+        width: 10px;
+        height: 10px;
+        background-color: $dark-25;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+    }
   }
 }
