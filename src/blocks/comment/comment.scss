@@ -1,0 +1,13 @@
+@mixin comment {
+  .comment {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+    padding-top: 12px;
+  }
+  @include comment__user;
+  @include comment__like;
+  @include comment__text;
+  @include avatar;
+}
