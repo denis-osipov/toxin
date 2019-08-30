@@ -3,7 +3,7 @@ mixin checkbox(name, label, description, type)
     attributes.class = attributes.class ? attributes.class + `checkbox_type_${type}` : `checkbox_type_${type}`;
 
     if (!attributes.type) {
-      if (type === 'checkbox' || type === 'toggle') {
+      if (type === 'checkbox' || type === 'toggle' || type === 'rich') {
         attributes.type = 'checkbox';
       }
       else if (type === 'radio') {

@@ -3,9 +3,14 @@
     column-gap: 10px;
     display: flex;
     line-height: 20px;
+
+    &_type_rich {
+      flex-wrap: wrap;
+    }
   }
   @include checkbox__box;
   @include checkbox__marker;
   @include checkbox__input;
   @include checkbox__label;
+  @include checkbox__description;
 }

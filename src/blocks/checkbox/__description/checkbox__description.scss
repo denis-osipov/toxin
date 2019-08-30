@@ -1,0 +1,12 @@
+@mixin checkbox__description {
+  .checkbox__description {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding-left: 30px;
+    font-size: 12px;
+    color: $dark-50;
+    padding-top: 5px;
+    line-height: 14px;
+  }
+}

@@ -27,7 +27,8 @@
 }
 
 .form-elements__cell2,
-.form-elements__cell5 {
+.form-elements__cell5,
+.form-elements__cell8 {
   margin-left: 54px;
 }
 
@@ -38,7 +39,7 @@
 }
 
 .form-elements__cell1 {
-  margin-bottom: 50px;
+  margin-bottom: 51px;
 
   & .sample-form:nth-child(3) {
     margin-bottom: 3px;
@@ -133,7 +134,7 @@
 
 .form-elements__cell4 {
   margin-left: -1px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   width: 266px;
 }
 
@@ -147,5 +148,12 @@
 
   .sample-form:nth-child(2) {
     margin-left: -1px;
+  }
+}
+
+.form-elements__cell8 {
+  width: 255px;
+  .list__item:first-child .checkbox__description {
+    padding-right: 20px;
   }
 }
