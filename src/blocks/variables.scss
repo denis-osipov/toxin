@@ -21,6 +21,7 @@ $dark-100: $dark;
 $dark-75: change-color($dark, $alpha: 0.75);
 $dark-50: change-color($dark, $alpha: 0.5);
 $dark-25: change-color($dark, $alpha: 0.25);
+$dark-10: change-color($dark, $alpha: 0.1);
 $dark-5: change-color($dark, $alpha: 0.05);
 $primary-color: #bc9cff;
 $primary-color-50: change-color($primary-color, $alpha: 0.5);

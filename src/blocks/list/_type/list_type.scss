@@ -23,6 +23,10 @@
       list-style: none;
       padding-top: 11px;
     }
+    &_icon {
+      list-style: none;
+      padding-top: 2px;
+    }
   }
   @include checkbox;
 }

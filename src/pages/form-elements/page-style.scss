@@ -19,7 +19,7 @@
     // grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-template-columns: 320px 1fr 320px;
     grid-column-gap: 72px;
-    grid-row-gap: 29px;
+    grid-row-gap: 20px;
     padding-left: 141px;
     padding-right: 141px;
     padding-top: 23px;
@@ -39,7 +39,7 @@
 }
 
 .form-elements__cell1 {
-  margin-bottom: 51px;
+  margin-bottom: 60px;
 
   & .sample-form:nth-child(3) {
     margin-bottom: 3px;
@@ -134,13 +134,14 @@
 
 .form-elements__cell4 {
   margin-left: -1px;
-  margin-bottom: 5px;
+  margin-bottom: 14px;
   width: 266px;
 }
 
 .form-elements__cell7 {
   padding-top: 5px;
   width: 266px;
+  // margin-bottom: 35px;
 
   .sample-form:nth-child(1) {
     margin-bottom: 26px;
@@ -160,4 +161,8 @@
 
 .form-elements__cell9 {
   width: 255px;
+}
+
+.form-elements__cell10 {
+  margin-left: -1px;
 }

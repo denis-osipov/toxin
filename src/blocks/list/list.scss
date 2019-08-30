@@ -6,4 +6,6 @@
   }
   @include list_type;
   @include list__item;
+  @include list__item-icon;
+  @include list__item-label;
 }
