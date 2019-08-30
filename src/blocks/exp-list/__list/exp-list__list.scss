@@ -1,6 +1,7 @@
 @mixin exp-list__list {
   .exp-list__list {
     display: none;
+    padding-top: 10px;
 
     .exp-list_expanded & {
       display: block;
