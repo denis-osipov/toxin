@@ -4,7 +4,7 @@
   .irs-line {
     top: 18px;
     height: 6px;
-    background: #fff;
+    background: $light;
     border: 1px solid $dark-25;
     box-sizing: border-box;
     border-radius: 3px;
@@ -22,7 +22,7 @@
     width: 16px;
     height: 16px;
     background: $secondary-gradient;
-    border: 2px solid #fff;
+    border: 2px solid $light;
     border-radius: 50%;
   }
 }

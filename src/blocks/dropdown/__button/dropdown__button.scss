@@ -1,6 +1,6 @@
 @mixin dropdown__button {
   .dropdown__button {
-    background: #fff;
+    background: $light;
     border: 1px solid $dark-25;
     border-radius: 50%;
     color: $dark-50;

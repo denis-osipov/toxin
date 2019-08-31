@@ -10,13 +10,13 @@
 
     &:first-child {
       background: $primary-gradient;
-      color: #fff;
+      color: $light;
       font-weight: bold;
     }
 
     &:last-child {
       background: $secondary-gradient;
-      color: #fff;
+      color: $light;
       font-weight: bold;
     }
   }
