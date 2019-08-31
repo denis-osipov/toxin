@@ -1,8 +1,9 @@
-mixin input(mask=false)
+mixin input(mask=false, position='external')
   -
-    let typeClass = attributes.type ? `input_type_${attributes.type}` : 'input_type_text';
+    let inputClass = attributes.type ? `input_type_${attributes.type}` : 'input_type_text';
+    inputClass += ` input_position_${position}`;
     if (mask === 'date') {
       attributes.placeholder = 'ДД.ММ.ГГГГ';
       typeClass += ' input_masked_date'
     }
-  input.input(class=[typeClass])&attributes(attributes)
+  input.input(class=inputClass)&attributes(attributes)

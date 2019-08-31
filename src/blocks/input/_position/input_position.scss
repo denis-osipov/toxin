@@ -1,0 +1,14 @@
+@mixin input_position {
+  .input_position {
+    &_external {
+      border: 1px solid $dark-25;
+      height: 44px;
+      line-height: 44px;
+    }
+    &_internal {
+      border: none;
+      height: 42px;
+      line-height: 42px;
+    }
+  }
+}
