@@ -16,6 +16,7 @@ $ref-rem: 16px/rem;
 }
 
 // Colors
+$light: #fff;
 $dark: #1f2041;
 $dark-100: $dark;
 $dark-75: change-color($dark, $alpha: 0.75);
@@ -37,3 +38,14 @@ $secondary-gradient: linear-gradient(180deg, $secondary-color 0%, $secondary-col
 // Fonts
 $header-font-family: 'Quicksand', sans-serif;
 $text-font-family: 'Montserrat', sans-serif;
+
+$body-font-size: 14px / $ref-rem;
+$body-line-height: 24px / 14px;
+$h1-font-size: 24px / $ref-rem;
+$h1-line-height: 30px / 24px;
+$h2-font-size: 19px / $ref-rem;
+$h2-line-height: 24px / 19px;
+$h3-font-size: 12px / $ref-rem;
+$h3-line-height: 15px / 12px;
+
+$normal-icon-font-size: 24px / $ref-rem;
