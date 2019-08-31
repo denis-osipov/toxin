@@ -3,12 +3,12 @@
   $dark-25: rgba(0, 0, 0, 0.25) !default;
   $ref-rem: 1 !default;
 
-  $h1-font-size: 24px / $ref-rem;
-  $h1-line-height: 30px / 24px;
-  $h2-font-size: 19px / $ref-rem;
-  $h2-line-height: 24px / 19px;
-  $h3-font-size: 12px / $ref-rem;
-  $h3-line-height: 15px / 12px;
+  $h1-font-size: 24px / $ref-rem !default;
+  $h1-line-height: 30px / 24px !default;
+  $h2-font-size: 19px / $ref-rem !default;
+  $h2-line-height: 24px / 19px !default;
+  $h3-font-size: 12px / $ref-rem !default;
+  $h3-line-height: 15px / 12px !default;
 
   %text_header {
     color: $dark;
