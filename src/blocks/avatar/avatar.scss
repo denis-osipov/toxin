@@ -4,7 +4,6 @@
     border: 2px solid $light;
     box-shadow: 0px 10px 20px $dark-10;
     box-sizing: border-box;
-    height: 48px / $ref-rem;
-    width: 48px / $ref-rem;
+    max-width: 100%;
   }
 }
