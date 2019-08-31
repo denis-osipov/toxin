@@ -1,5 +1,15 @@
 mixin like(liked, number)
-  - const likeClass = liked ? 'like like_liked' : 'like';
-  button(type='button', class=likeClass)&attributes(attributes)
+  -
+    const likeClass = liked ? 'like like_liked' : 'like';
+    let inputAttrs = {
+      type:'checkbox',
+      class: 'like__input',
+      name: 'like'
+    }
+    if (liked) {
+      inputAttrs.checked = '';
+    }
+  label(class=likeClass)&attributes(attributes)
+    +input()&attributes(inputAttrs)
     +icon()(class='like__icon')
     span.like__count= number
