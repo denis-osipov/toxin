@@ -28,7 +28,12 @@ $primary-color-50: change-color($primary-color, $alpha: 0.5);
 $primary-color-for-gradient: #8ba4f9;
 $primary-color-for-gradient-50: change-color($primary-color-for-gradient, $alpha: 0.5);
 $secondary-color: #6fcf97;
+$secondary-color-for-gradient: #66d2ea;
 
 $primary-gradient: linear-gradient(180deg, $primary-color 0%, $primary-color-for-gradient 100%);
 $primary-gradient-50: linear-gradient(180deg, $primary-color-50 0%, $primary-color-for-gradient-50 100%);
-$secondary-gradient: linear-gradient(180deg, $secondary-color 0%, #66d2ea 100%);
+$secondary-gradient: linear-gradient(180deg, $secondary-color 0%, $secondary-color-for-gradient 100%);
+
+// Fonts
+$header-font-family: 'Quicksand', sans-serif;
+$text-font-family: 'Montserrat', sans-serif;

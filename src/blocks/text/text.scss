@@ -1,16 +1,16 @@
 @mixin text {
-  $ref-rem: 1 !default;
   $dark-75: rgba(0, 0, 0, 0.75) !default;
+  $ref-rem: 1 !default;
   $body-font-size: 14px / $ref-rem;
   $body-line-height: 24px / 14px;
   .text {
     font: {
       family: 'Montserrat', sans-serif;
-      weight: normal;
       size: $body-font-size;
+      weight: normal;
     }
-    line-height: $body-line-height;
     color: $dark-75;
+    line-height: $body-line-height;
   }
   @include text_level;
 }

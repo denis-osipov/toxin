@@ -4,4 +4,5 @@
     padding-right: calc(100% - 403px);
   }
   @include font-sample__item;
+  @include font-sample__label;
 }

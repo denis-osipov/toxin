@@ -8,7 +8,7 @@ mixin pagination(pages, caption)
   //-   previous: if evaluates to true, it's a link to the previous page, icon well be used
   //- }
   .pagination&attributes(attributes)
-    .pagination__pages.text_level_sample-h3
+    .pagination__pages
       each page in pages
         if typeof page === 'string' || typeof page === 'number'
           +link(page)(class='pagination__page')
