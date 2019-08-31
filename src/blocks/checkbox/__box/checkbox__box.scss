@@ -1,8 +1,6 @@
 @mixin checkbox__box {
-  $dark-25: rgba(0, 0, 0, 0.25) !default;
-  $primary-color: purple !default;
   .checkbox__box {
-    background: #fff;
+    background: $light;
     border: 1px solid $dark-25;
     border-radius: 4px;
     box-sizing: border-box;
@@ -17,19 +15,11 @@
 
     .checkbox_type_toggle & {
       border-radius: 10px;
-      height: 20px;
       width: 40px;
     }
 
     .checkbox_type_radio & {
-      background: #fff;
-      border: 1px solid $dark-25;
       border-radius: 50%;
-      box-sizing: border-box;
-      flex-shrink: 0;
-      height: 20px;
-      position: relative;
-      width: 20px;
     }
   
     .checkbox_type_radio .checkbox__input:checked ~ & {
@@ -37,13 +27,13 @@
 
       &::after {
         background: $primary-gradient;
-        border-radius: 50%;
+        border-radius: inherit;
         content: '';
         height: 12px;
         left: 50%;
         position: absolute;
         top: 50%;
-        transform: translate(-50%, -50%) rotate(45deg);
+        transform: translate(-50%, -50%);
         width: 12px;
       }
     }

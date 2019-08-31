@@ -1,4 +1,10 @@
 mixin checkbox(name, label, description, type)
+  //- name - name attribute value of input element
+  //- label - label for input element
+  //- description - additional text placed in label
+  //- type - one of `checkbox`, 'toggle', 'rich' or 'radio'. The first three is for checkbox type of input element,
+  //- the last one is for radio type.
+  //- Additional attributes will be send to input block.
   -
     attributes.class = attributes.class ? attributes.class + `checkbox_type_${type}` : `checkbox_type_${type}`;
 

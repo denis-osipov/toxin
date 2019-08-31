@@ -1,16 +1,15 @@
 @mixin checkbox {
   .checkbox {
-    column-gap: 10px;
+    column-gap: 10px / $ref-rem;
     display: flex;
-    line-height: 20px;
 
     &_type_rich {
       flex-wrap: wrap;
     }
   }
   @include checkbox__box;
-  @include checkbox__marker;
+  @include checkbox__description;
   @include checkbox__input;
   @include checkbox__label;
-  @include checkbox__description;
+  @include checkbox__marker;
 }
