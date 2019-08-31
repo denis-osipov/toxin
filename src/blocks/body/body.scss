@@ -1,6 +1,4 @@
 @mixin body {
-  $max-width: null !default;
-  $min-width: null !default;
   .body {
     max-width: $max-width;
     min-width: $min-width;
