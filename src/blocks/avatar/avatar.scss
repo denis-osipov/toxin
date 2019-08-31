@@ -1,11 +1,10 @@
 @mixin avatar {
   .avatar {
-    display: block;
     border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    border: 2px solid #fff;
-    box-sizing: border-box;
+    border: 2px solid $light;
     box-shadow: 0px 10px 20px $dark-10;
+    box-sizing: border-box;
+    height: 48px / $ref-rem;
+    width: 48px / $ref-rem;
   }
 }
