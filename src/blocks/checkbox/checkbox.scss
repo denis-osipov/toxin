@@ -1,4 +1,6 @@
 @mixin checkbox {
+  @include input;
+
   .checkbox {
     column-gap: 10px / $ref-rem;
     display: flex;
@@ -7,6 +9,7 @@
       flex-wrap: wrap;
     }
   }
+
   @include checkbox__box;
   @include checkbox__description;
   @include checkbox__input;

@@ -1,6 +1,4 @@
 @mixin button__icon {
-  @include icon;
-
   .button__icon {
     font-size: $normal-icon-font-size;
     position: absolute;

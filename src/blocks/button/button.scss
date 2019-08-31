@@ -1,4 +1,6 @@
 @mixin button {
+  @include icon;
+
   .button {
     border: none;
     border-radius: 22px / $ref-rem;
