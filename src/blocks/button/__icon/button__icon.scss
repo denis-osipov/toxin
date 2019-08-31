@@ -1,10 +1,11 @@
 @mixin button__icon {
+  @include icon;
+
   .button__icon {
-    font-size: 24px;
+    font-size: $normal-icon-font-size;
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
   }
-  @include icon;
 }

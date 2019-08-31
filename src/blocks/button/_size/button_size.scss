@@ -1,12 +1,13 @@
 @mixin button_size {
   .button_size {
     &_normal {
-      height: 44px;
-      width: 99px;
+      height: 44px / $ref-rem;
+      width: 99px / $ref-rem;
     }
 
     &_big {
-      height: 44px;
+      height: 44px / $ref-rem;
+      min-width: 180px / $ref-rem;
       width: 100%;
     }
 

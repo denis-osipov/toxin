@@ -2,7 +2,7 @@
   .button_type {
     &_fill {
       background: $primary-gradient;
-      color: #fff;
+      color: $light;
 
       &.button_focused,
       &:hover,
@@ -15,7 +15,7 @@
       background: $primary-gradient;
       color: $primary-color;
       &::after {
-        background-color: #fff;
+        background-color: $light;
         border-radius: inherit;
         bottom: 2px;
         content: '';
