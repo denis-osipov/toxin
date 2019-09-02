@@ -1,6 +1,4 @@
 @mixin input {
-  $dark-25: rgba(0, 0, 0, 0.25) !default;
-  $dark-25: rgba(0, 0, 0, 0.5) !default;
   .input {
     color: inherit;
     font: inherit;
