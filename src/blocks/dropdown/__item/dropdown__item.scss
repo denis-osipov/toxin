@@ -1,11 +1,11 @@
 @mixin dropdown__item {
   .dropdown__item {
+    align-items: center;
     display: grid;
     grid-template-columns: 1fr 92px;
-    line-height: 30px;
-    padding-top: 4px;
+    padding-bottom: 3px;
     padding-left: 14px;
     padding-right: 6px;
-    padding-bottom: 3px;
+    padding-top: 4px;
   }
 }

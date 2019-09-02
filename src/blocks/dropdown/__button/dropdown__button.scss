@@ -1,8 +1,11 @@
 @mixin dropdown__button {
+  @include button;
+
   .dropdown__button {
     background: $light;
-    border: 1px solid $dark-25;
     border-radius: 50%;
+    border: 1px solid $dark-25;
+    box-sizing: border-box;
     color: $dark-50;
     font-size: 18px;
     height: 30px;

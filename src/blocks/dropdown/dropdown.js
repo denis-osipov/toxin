@@ -14,8 +14,8 @@
 // };
 
 
-import './_type/dropdown_type_guests';
 import './_type/dropdown_type_conveniences';
+import './_type/dropdown_type_guests';
 
 (function( $ ) {
   // Main method creating dropdown
@@ -49,7 +49,7 @@ import './_type/dropdown_type_conveniences';
         setValues: function() {
           dropdown.values = [];
           dropdown.items.find('.dropdown__item-value').each(function(index, element) {
-            dropdown.values.push(parseInt($( element ).text()));
+            dropdown.values.push(parseInt($( element ).val()));
           });
         }
       }
@@ -62,16 +62,17 @@ import './_type/dropdown_type_conveniences';
       if (dropdown.clear) {
         dropdown.clear.on('click', function() {
           dropdown.items.each(function(index, element) {
-            $( element ).find('.dropdown__item-value').text(0);
+            $( element ).find('.dropdown__item-value').val(0);
             $( element ).find('.dropdown__button_type_decrement').prop('disabled', true);
           });
           dropdown.update();
         })
       }
 
-      if (dropdown.apply) {
-        dropdown.apply.on('click', dropdown.expand);
-      }
+      // Action on Apply button clicking
+      // if (dropdown.apply) {
+      //   dropdown.apply.on('click', dropdown.expand);
+      // }
 
       $.data(this, 'dropdown', dropdown);
 
@@ -81,6 +82,8 @@ import './_type/dropdown_type_conveniences';
   // Update dropdown's total line
   $.fn.dropdown.update = function () {
     this.setValues();
+    
+    // Change decrement button status depending on the item value.
     this.values.forEach((value, index) => {
       if (value < 1) {
         $( this.items[index] ).find('.dropdown__button_type_decrement').prop('disabled', true);
@@ -89,20 +92,26 @@ import './_type/dropdown_type_conveniences';
         $( this.items[index] ).find('.dropdown__button_type_decrement').prop('disabled', false);
       }
     });
+
+    // Show or hide Clear button
     const sum = this.values.reduce((prev, current) => {
       return prev + current;
     });
     if (this.dropdown.find('.dropdown__controls').length) {
       if (sum === 0) {
-        this.clear.addClass('dropdown__control_hidden');
+        this.clear.prop('disabled', true);
       }
       else {
-        this.clear.removeClass('dropdown__control_hidden');
+        this.clear.prop('disabled', false);
       }
     }
+
+    // Construct total input value
+    // One total value
     if (this.settings.total && !this.settings.special.length) {
       this.input.val(this.settings.wording(sum));
     }
+    // Total value and special cases
     else if (this.settings.total && this.settings.special.length) {
       let values = this.values.slice();
       let totals = [];
@@ -120,6 +129,7 @@ import './_type/dropdown_type_conveniences';
       totals.splice(0, 0, this.settings.wording(generalSum));
       this.input.val(totals.join(this.settings.sep));
     }
+    // All values are separate
     else {
       let totals = [];
       this.settings.wording.forEach((fun, index) => {
@@ -139,21 +149,23 @@ import './_type/dropdown_type_conveniences';
     const button = $( event.target );
     const item = $( event.delegateTarget );
     const valueField = item.find('.dropdown__item-value');
-    let value = parseInt(valueField.text());
+    let value = parseInt(valueField.val());
     if (button.hasClass('dropdown__button_type_decrement')) {
       value -= 1;
     }
     else {
       value += 1;
     }
-    valueField.text(value);
+    valueField.val(value);
 
     this.update();
   };
 
+  // Set values for items
+  // values must be an array of values to set
   $.fn.dropdown.set = function(values) {
     values.forEach((value, index) => {
-      this.items.find('.dropdown__item-value').eq(index).text(value);
+      this.items.find('.dropdown__item-value').eq(index).val(value);
     });
     this.update();
   }

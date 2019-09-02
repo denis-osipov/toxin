@@ -1,13 +1,13 @@
 @mixin dropdown {
-  @include dropdown__container;
   @include dropdown__button;
-  @include dropdown__total;
-  @include dropdown__list;
-  @include dropdown__item;
-  @include dropdown__item-control;
-  @include dropdown__item-value;
-  @include dropdown__item-name;
-  @include dropdown__controls;
+  @include dropdown__container;
   @include dropdown__control;
+  @include dropdown__controls;
+  @include dropdown__item-control;
+  @include dropdown__item-name;
+  @include dropdown__item-value;
+  @include dropdown__item;
+  @include dropdown__list;
+  @include dropdown__total;
   @include dropdown_expanded;
 }

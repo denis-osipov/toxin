@@ -1,3 +1,7 @@
 @mixin dropdown__control {
-  @include dropdown__control_hidden;
+  .dropdown__control {
+    &:disabled {
+      visibility: hidden;
+    }
+  }
 }
