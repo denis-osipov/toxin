@@ -7,10 +7,10 @@
     border: 1px solid $dark-25;
     box-sizing: border-box;
     color: $dark-50;
-    font-size: 18px;
-    height: 30px;
-    line-height: 22px;
-    width: 30px;
+    font-size: 18px / $ref-rem;
+    height: 30px / $ref-rem;
+    line-height: #{(22px / 18px)};
+    width: 30px / $ref-rem;
 
     &:disabled {
       opacity: 0.5;
