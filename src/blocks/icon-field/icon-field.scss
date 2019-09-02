@@ -5,8 +5,8 @@
     border: 1px solid $dark-25;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 1fr 44px;
-    height: 44px;
+    grid-template-columns: 1fr 44px / $ref-rem;
+    height: 44px / $ref-rem;
 
     &:hover,
     &:focus {
