@@ -1,6 +1,6 @@
 @mixin like_liked {
   .like_liked {
-    color: $primary-color;
     background: $primary-gradient;
+    color: $primary-color;
   }
 }

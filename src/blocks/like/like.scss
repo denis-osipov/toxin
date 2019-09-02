@@ -2,8 +2,8 @@
   .like {
     align-items: center;
     background-color: $dark-25;
-    border: none;
     border-radius: 10px;
+    border: none;
     box-sizing: border-box;
     color: $dark-25;
     display: grid;
@@ -28,6 +28,7 @@
       z-index: -1;
     }
   }
+
   @include like__icon;
   @include like_liked;
 }
