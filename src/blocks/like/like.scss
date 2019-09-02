@@ -1,4 +1,7 @@
 @mixin like {
+  @include icon;
+  @include input;
+
   .like {
     align-items: center;
     background-color: $dark-25;

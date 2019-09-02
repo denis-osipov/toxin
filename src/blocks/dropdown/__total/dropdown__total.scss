@@ -1,5 +1,6 @@
 @mixin dropdown__total {
   @include icon-field;
+
   .dropdown__total {
     column-gap: calc(100% - 220px);
 

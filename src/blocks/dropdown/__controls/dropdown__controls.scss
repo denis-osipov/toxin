@@ -1,4 +1,6 @@
 @mixin dropdown__controls {
+  @include button;
+
   .dropdown__controls {
     display: flex;
     justify-content: space-between;

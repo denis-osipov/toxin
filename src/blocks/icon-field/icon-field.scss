@@ -1,4 +1,7 @@
 @mixin icon-field {
+  @include icon;
+  @include input;
+
   .icon-field {
     align-items: center;
     border-radius: 4px;
