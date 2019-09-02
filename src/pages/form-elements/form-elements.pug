@@ -90,25 +90,25 @@ html
       .form-elements__cell7
         +sample-form
           +exp-list('Expandable checkbox list', [
-            'Завтрак',
-            'Письменный стол',
-            'Стул для кормления',
-            'Кроватка',
-            'Телевизор',
-            'Шампунь',
-            'Телевизор',
-            'Шампунь'
+            {name: 'breakfast', label: 'Завтрак'},
+            {name: 'table', label: 'Письменный стол'},
+            {name: 'feeding-chair', label: 'Стул для кормления'},
+            {name: 'crib', label: 'Кроватка'},
+            {name: 'tv-1', label: 'Телевизор'},
+            {name: 'shampoo-1', label: 'Шампунь'},
+            {name: 'tv-2', label: 'Телевизор'},
+            {name: 'shampoo-2', label: 'Шампунь'}
           ])
         +sample-form
           +exp-list('Expandable checkbox list', [
-            'Завтрак',
-            'Письменный стол',
-            'Стул для кормления',
-            'Кроватка',
-            'Телевизор',
-            'Шампунь',
-            'Телевизор',
-            'Шампунь'
+            {name: 'breakfast', label: 'Завтрак'},
+            {name: 'table', label: 'Письменный стол', checked: ''},
+            {name: 'feeding-chair', label: 'Стул для кормления', checked: ''},
+            {name: 'crib', label: 'Кроватка', checked: ''},
+            {name: 'tv-1', label: 'Телевизор'},
+            {name: 'shampoo-1', label: 'Шампунь'},
+            {name: 'tv-2', label: 'Телевизор'},
+            {name: 'shampoo-2', label: 'Шампунь'}
           ])
       .form-elements__cell8
         +sample-form('Rich checkbox buttons')
