@@ -1,8 +1,11 @@
 @mixin rating {
+  @include button;
+  @include icon;
+
   .rating {
     background: $light;
     border: none;
-    font-size: 24px;
+    font-size: $normal-icon-font-size;
     padding: 0;
   }
 }
