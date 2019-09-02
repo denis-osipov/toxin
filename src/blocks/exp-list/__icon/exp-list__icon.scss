@@ -1,8 +1,8 @@
 @mixin exp-list__icon {
   .exp-list__icon {
-    font-size: 24px;
+    font-size: 24px / $ref-rem;
     text-align: center;
-    color: $dark-50;
+
     .exp-list_expanded & {
       transform: rotate(-180deg);
     }
