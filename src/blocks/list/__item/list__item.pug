@@ -1,9 +1,9 @@
 mixin list__item(item, type, radioName)
   li.list__item(class=`list__item_type_${type}`)&attributes(attributes)
     case type
-      when 'list': +list__item_type_list(item)
       when 'icon': +list__item_type_icon(item)
+      when 'list': +list__item_type_list(item)
       when 'checkbox'
       when 'radio'
-      when 'toggle'
-      when 'rich':  +list__item_type_checkbox(item, type)
+      when 'rich'
+      when 'toggle':  +list__item_type_checkbox(item, type)
