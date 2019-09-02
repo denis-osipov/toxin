@@ -1,7 +1,6 @@
 @mixin pagination__pages {
   .pagination__pages {
     display: flex;
-    font-size: 12px;
-    line-height: 15px;
+    font-weight: normal;
   }
 }

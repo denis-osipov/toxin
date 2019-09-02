@@ -1,5 +1,5 @@
 @mixin pagination__icon {
   .pagination__icon {
-    font-size: 24px;
+    font-size: $normal-icon-font-size;
   }
 }

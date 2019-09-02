@@ -2,11 +2,11 @@
   .pagination__page {
     border-radius: 50%;
     color: $dark-50;
-    height: 40px;
-    line-height: 40px;
+    height: 40px / $ref-rem;
+    line-height: 40px / $ref-rem;
     text-align: center;
     text-decoration: none;
-    width: 40px;
+    width: 40px / $ref-rem;
 
     &:first-child {
       background: $primary-gradient;
@@ -17,7 +17,6 @@
     &:last-child {
       background: $secondary-gradient;
       color: $light;
-      font-weight: bold;
     }
   }
 }
