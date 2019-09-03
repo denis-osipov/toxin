@@ -5,9 +5,8 @@ mixin checkbox(name, label, description, type)
   //- type - one of `checkbox`, 'toggle', 'rich' or 'radio'. The first three is for checkbox type of input element,
   //- the last one is for radio type.
   //- Additional attributes will be send to input block.
-  -
-    attributes.class = attributes.class ? attributes.class + `checkbox_type_${type}` : `checkbox_type_${type}`;
 
+  -
     if (!attributes.type) {
       if (type === 'checkbox' || type === 'toggle' || type === 'rich') {
         attributes.type = 'checkbox';
@@ -18,17 +17,17 @@ mixin checkbox(name, label, description, type)
     }
 
     let classes;
-    if (attributes && attributes.class) {
-      classes = attributes.class;
+    if (attributes.class) {
+      classes = attributes.class + ` checkbox_type_${type}`;
       delete attributes.class;
     }
     else {
-      classes = [];
+      classes = `checkbox_type_${type}`;
     }
 
   label.checkbox(class=classes)
     +input(false, 'invisible')(class='checkbox__input', name=name)&attributes(attributes)
-    +checkbox__box
+    .checkbox__box(class=`checkbox__box_type_${type}`)
     span.checkbox__label= label
     if description
       span.checkbox__description= description

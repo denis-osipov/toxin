@@ -2,40 +2,15 @@
   .checkbox__box {
     background: $light;
     border: 1px solid $dark-25;
-    border-radius: 4px;
     box-sizing: border-box;
     flex-shrink: 0;
     height: 20px;
     position: relative;
-    width: 20px;
 
     .checkbox__input:checked ~ & {
       border-color: $primary-color;
     }
-
-    .checkbox_type_toggle & {
-      border-radius: 10px;
-      width: 40px;
-    }
-
-    .checkbox_type_radio & {
-      border-radius: 50%;
-    }
-  
-    .checkbox_type_radio .checkbox__input:checked ~ & {
-      border-color: $primary-color;
-
-      &::after {
-        background: $primary-gradient;
-        border-radius: inherit;
-        content: '';
-        height: 12px;
-        left: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 12px;
-      }
-    }
   }
+
+  @include checkbox__box_type;
 }
