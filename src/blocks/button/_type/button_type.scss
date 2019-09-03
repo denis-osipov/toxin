@@ -14,7 +14,7 @@
     &_border {
       background: $primary-gradient;
       color: $primary-color;
-      &::after {
+      &::before {
         background-color: $light;
         border-radius: inherit;
         bottom: 2px;
