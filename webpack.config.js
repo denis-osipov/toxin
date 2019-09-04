@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const AssetsGenerationPlugin = require('./generator/AssetsGenerationPlugin');
+const HtmlWebpackGenerationPlugin = require('./generator/HtmlWebpackGenerationPlugin');
 
 module.exports = {
   mode: 'development',
@@ -15,10 +16,10 @@ module.exports = {
     colorsAndType: [
       './pages/colors-and-type/colors-and-type.scss'
     ],
-    formElements: [
-      './pages/form-elements/form-elements.scss',
-      './pages/form-elements/form-elements.js'
-    ]
+    // formElements: [
+    //   './pages/form-elements/form-elements.scss',
+    //   './pages/form-elements/form-elements.js'
+    // ]
   },
   output: {
     filename: '[name].js',
@@ -74,7 +75,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new AssetsGenerationPlugin(),
+    // new AssetsGenerationPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
@@ -85,11 +86,12 @@ module.exports = {
       filename: 'colors-and-type.html',
       chunks: ['colorsAndType']
     }),
-    new HtmlWebpackPlugin({
-      template: './pages/form-elements/form-elements.pug',
-      filename: 'form-elements.html',
-      chunks: ['formElements']
-    })
+    // new HtmlWebpackPlugin({
+    //   template: './pages/form-elements/form-elements.pug',
+    //   filename: 'form-elements.html',
+    //   chunks: ['formElements']
+    // }),
+    new HtmlWebpackGenerationPlugin()
   ],
   resolve: {
     alias: {
