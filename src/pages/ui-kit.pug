@@ -1,0 +1,14 @@
+include /mixins.pug
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title
+      block title
+        ='UI-kit'
+  +body()(class='text')
+    +header()(class='ui-kit__header')
+      +logo-sign()(class='ui-kit__logo')
+    +main()(class='ui-kit__grid-container')
+      block content

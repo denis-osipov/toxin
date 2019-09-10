@@ -2,6 +2,10 @@
 
 const path = require('path');
 const fs = require('fs');
+const lex = require('pug-lexer');
+const parse = require('pug-parser');
+const load = require('pug-load');
+const walk = require('pug-walk');
 
 /*
 Global rules for file types:
@@ -15,22 +19,28 @@ const rules = {
   js: {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
     prepend: [],
-    append: [`import './page-script.js';\n`],
+    append: ['./page-script.js'],
     use: function(entityFile, entryFile) {
       return `import '${path.relative(path.dirname(entryFile), entityFile).replace(/\\/g, '/')}';\n`;
+    },
+    add: function(item) {
+      return `import '${item}';\n`;
     }
   },
   scss: {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
     prepend: [
-      `@import 'variables';\n`,
-      `@import 'fonts/fonts';\n`,
-      `@import 'mixins';\n`
+      'variables',
+      'fonts/fonts',
+      'mixins'
     ],
-    append: [`@import './page-style';\n`],
+    append: ['./page-style'],
     use: function(entityFile) {
       const entity = path.basename(entityFile, '.scss');
       return `@include ${entity};\n`;
+    },
+    add: function(item) {
+      return `@import '${item}';\n`;
     }
   },
   pug: {
@@ -48,8 +58,15 @@ function generateEntries(context, entry) {
 
     // Get list of used bem entities
     const templateFile = entryFiles[0].replace(/\.(js|scss)$/, '.pug');
-    const templateContent = fs.readFileSync(templateFile, 'utf-8');
-    const usedBems = getBemList(templateContent);
+    // const templateContent = fs.readFileSync(templateFile, 'utf-8');
+
+    const ast = load.file(templateFile, {
+      lex: lex,
+      parse: parse,
+      basedir: path.join(context, 'blocks')
+    });
+
+    const blocks = getBemList(ast, 'ast');
 
     // Write files
     entryFiles.forEach(function(file) {
@@ -57,21 +74,28 @@ function generateEntries(context, entry) {
       fs.writeFileSync(file, rules[type].message); // warning about autogeneration
 
       // Mandatory initial imports
-      rules[type].prepend.forEach(function(row) {
-        fs.appendFileSync(file, row, 'utf-8');
+      rules[type].prepend.forEach(function(item) {
+        fs.appendFileSync(file, rules[type].add(item), 'utf-8');
       });
 
       // Add used bem entities
-      usedBems.forEach(function(entity) {
+      blocks.bems.forEach(function(entity) {
         const entityFile = path.join(blocksPath, entity, entity + `.${type}`);
         if (fs.existsSync(entityFile)) {
           fs.appendFileSync(file, rules[type].use(entityFile, file), 'utf-8');
         }
       });
 
+      // Add assets for extended template
+      const assetName = blocks.extends.replace(/\.pug$/, `.${type}`);
+      const assetPath = path.join(path.dirname(file), assetName).replace(/\\/g, '/');
+      if (fs.existsSync(assetPath)) {
+        fs.appendFileSync(file, rules[type].add(assetName), 'utf-8');
+      }
+
       // Mandatory imports at the end
-      rules[type].append.forEach(function(row) {
-        fs.appendFileSync(file, row, 'utf-8');
+      rules[type].append.forEach(function(item) {
+        fs.appendFileSync(file, rules[type].add(item), 'utf-8');
       });
     });
   }
@@ -95,20 +119,46 @@ function getFileList(entryPoint, context) {
   return entryFiles;
 }
 
-// Get BEM list from pug template. 
-// BEM entities added with +bem('name') or as classes.
-function getBemList(data) {
+// Get BEM list from pug template or AST.
+// BEM entities in pug template should be added with +entity or as classes.
+// BEM entities in AST should be added as mixins or as block classes.
+function getBemList(data, type) {
   let bems = new Set();
-  const re = /\+([^(\s]+)(?:\(.*?\))?(?:\(class='(.*?)'\))?/g;
-  let match;
-  while (match = re.exec(data)) {
-    match.slice(1).forEach(block => {
-      if (block) {
-        bems.add(block);
-      }
-    });
+  let exts;
+  if (type === 'pug') {
+    const re = /\+([^(\s]+)(?:\(.*?\))?(?:\(class='(.*?)'\))?/g;
+    let match;
+    while (match = re.exec(data)) {
+      match.slice(1).forEach(block => {
+        if (block) {
+          bems.add(block);
+        }
+      });
+    }
   }
-  return Array.from(bems);
+  else if (type === 'ast') {
+    walk(data, function before(node, replace) {
+      if (node.type === 'Include') {
+        return false;
+      }
+      if (node.type === 'Mixin' && !node.name.includes('_')) {
+        bems.add(node.name);
+      }
+      if (node.type === 'Extends') {
+        exts = node.file.path;
+      }
+      if (node.attrs) {
+        node.attrs.forEach(attr => {
+          if (attr.name === 'class' && !attr.val.includes('_')) {
+            bems.add(attr.val.slice(1, -1));
+          }
+        });
+      }
+    }, {
+      includeDependencies: true
+    })
+  }
+  return { bems: Array.from(bems), extends: exts };
 }
 
 // Aggregate mixins of all bem entities in one file

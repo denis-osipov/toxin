@@ -48,12 +48,13 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true, // must be set for resolve-url-loader working
-              outFile: 'style.css', // node-sass docs says outFile is required for sourceMap
-              // Where looking for files to import with absolute paths
-              includePaths: [
-                path.resolve(__dirname, 'src/blocks'),
-                path.resolve(__dirname, 'src')
-              ]
+              sassOptions: {
+                // Where looking for files to import with absolute paths
+                includePaths: [
+                  path.resolve(__dirname, 'src/blocks'),
+                  path.resolve(__dirname, 'src')
+                ]
+              }
             }
           }
         ]
