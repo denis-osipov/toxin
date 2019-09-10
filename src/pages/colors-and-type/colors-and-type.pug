@@ -1,13 +1,8 @@
-include /mixins
+extends ../ui-kit.pug
 
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    title Colors & Type
-  +body()(class='text')
-    +header()(class='ui-kit__header')
-      +logo-sign()(class='ui-kit__logo')
-    +main()(class='ui-kit__grid-container')
-      +palette()(class='ui-kit__grid-item')
-      +font-sample()(class='ui-kit__grid-item')
+block title 
+  ='Colors & Type'
+
+block content
+  +palette()(class='ui-kit__grid-item')
+  +font-sample()(class='ui-kit__grid-item')

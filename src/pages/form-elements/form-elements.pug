@@ -1,136 +1,131 @@
-include /mixins
+extends ../ui-kit.pug
 
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    title Form Elements
-  +body()(class='text')
-    +header()(class='ui-kit__header')
-      +logo-sign()(class='ui-kit__logo')
-    +main()(class='ui-kit__grid-container')
-      .form-elements__cell1
-        +sample-form('Text field', 'Default')
-          +input()(type='email', placeholder='Email')
-        +sample-form('Text field', 'Hover / Focus')
-          +input()(class='input_active', value='This is pretty awesome')
-        +sample-form('Dropdown', 'Default')
-          +dropdown('guests')
-        +sample-form('Masked text field', 'Default')
-          +input('date')
-        .double-date-picker
-          +sample-form('Date dropdown')
-            +date-picker('double')
-          +sample-form('Date dropdown')
-            +date-picker('double')
-        +sample-form('Filter date dropdown')
-          +date-picker
-        +sample-form('Subscription text field')
-          +subscription
-      .form-elements__cell2
-        +sample-form('Checkbox buttons')
-          +list([
-            ['smoke', 'Можно курить'],
-            {name: 'pets', label: 'Можно с питомцами', checked: ''},
-            {name: 'guests', label: 'Можно пригласить гостей (до 10 человек)', checked: ''}
-          ], 'checkbox')
-        +sample-form('Radio buttons')
-          +list([
-            {name: 'sex', label: 'Мужчина', checked: ''},
-            ['sex', 'Женщина']
-          ], 'radio')
-        +sample-form('Toggle')
-          +list([
-            {name: 'offer', label: 'Получать спецпредложения', checked: ''},
-            ['offer', 'Получать спецпредложения']
-          ], 'toggle')
-        +sample-form('Like button')
-          .likes
-            +like(false, 2)
-            +like(true, 12)
-        +sample-form('Rate button')
-          .rates
-            +rating(4)
-            +rating(5)
-      .form-elements__cell3
-        form
-          +slider('Range slider')
-        +sample-form('Buttons')
-          .buttons
-            +button({text: 'Click me'})
-            +button({text: 'Click me'})(class='button_focused')
-            +button({text: 'Click me'}, 'border')
-            +button({text: 'Click me'}, 'border')(class='button_focused')
-          .buttons
-            +button({text: 'Click me'}, 'text', 'min')
-            +button({text: 'Click me'}, 'text', 'min')(class='button_focused')
-          +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
-        +sample-form('Pagination')
-          -
-            const pages = [
-              {value: 1, href: '#'},
-              {value: 2, href: '#'},
-              {value: 3, href: '#'},
-              { value: '...', placeholder: true },
-              {value: 15, href: '#'},
-              { next: true }
-              ];
-          +pagination(pages, '1 – 12 из 100+ вариантов аренды')
-      .form-elements__cell4
-        +sample-form('Dropdown', 'Default')
-          +dropdown('conveniences', [], false)
-        +sample-form('Dropdown', 'Expanded')
-          +dropdown('conveniences', [], false)
-      .form-elements__cell5
-        +sample-form('Dropdown')
-          +dropdown('guests')
-      .form-elements__cell6
-        +sample-form('Dropdown')
-          +dropdown('guests')
-      .form-elements__cell7
-        +sample-form
-          +exp-list('Expandable checkbox list', [
-            {name: 'breakfast', label: 'Завтрак'},
-            {name: 'table', label: 'Письменный стол'},
-            {name: 'feeding-chair', label: 'Стул для кормления'},
-            {name: 'crib', label: 'Кроватка'},
-            {name: 'tv-1', label: 'Телевизор'},
-            {name: 'shampoo-1', label: 'Шампунь'},
-            {name: 'tv-2', label: 'Телевизор'},
-            {name: 'shampoo-2', label: 'Шампунь'}
-          ])
-        +sample-form
-          +exp-list('Expandable checkbox list', [
-            {name: 'breakfast', label: 'Завтрак'},
-            {name: 'table', label: 'Письменный стол', checked: ''},
-            {name: 'feeding-chair', label: 'Стул для кормления', checked: ''},
-            {name: 'crib', label: 'Кроватка', checked: ''},
-            {name: 'tv-1', label: 'Телевизор'},
-            {name: 'shampoo-1', label: 'Шампунь'},
-            {name: 'tv-2', label: 'Телевизор'},
-            {name: 'shampoo-2', label: 'Шампунь'}
-          ])
-      .form-elements__cell8
-        +sample-form('Rich checkbox buttons')
-          +list([
-            ['wide', 'Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
-            ['assistant', 'Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
-          ], 'rich')
-      .form-elements__cell9
-        +sample-form('Bullet list')
-          +list([
-            'Нельзя с питомцами',
-            'Без вечеринок и мероприятий',
-            'Время прибытия — после 13:00, а выезд до 12:00'
-          ])
-      .form-elements__cell10
-        +list([
-          ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
-          ['location_city', 'Удобство', 'Окно в каждой из спален']
-        ], 'icon')
-      .form-elements__cell11
-        +comment(
-          'Мурад Сарафанов',
-          '5 дней назад',
-          'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
-          [true, 12])
+block title
+  ='Form Elements'
+
+block content
+  .form-elements__cell1
+    +sample-form('Text field', 'Default')
+      +input()(type='email', placeholder='Email')
+    +sample-form('Text field', 'Hover / Focus')
+      +input()(class='input_active', value='This is pretty awesome')
+    +sample-form('Dropdown', 'Default')
+      +dropdown('guests')
+    +sample-form('Masked text field', 'Default')
+      +input('date')
+    .double-date-picker
+      +sample-form('Date dropdown')
+        +date-picker('double')
+      +sample-form('Date dropdown')
+        +date-picker('double')
+    +sample-form('Filter date dropdown')
+      +date-picker
+    +sample-form('Subscription text field')
+      +subscription
+  .form-elements__cell2
+    +sample-form('Checkbox buttons')
+      +list([
+        ['smoke', 'Можно курить'],
+        {name: 'pets', label: 'Можно с питомцами', checked: ''},
+        {name: 'guests', label: 'Можно пригласить гостей (до 10 человек)', checked: ''}
+      ], 'checkbox')
+    +sample-form('Radio buttons')
+      +list([
+        {name: 'sex', label: 'Мужчина', checked: ''},
+        ['sex', 'Женщина']
+      ], 'radio')
+    +sample-form('Toggle')
+      +list([
+        {name: 'offer', label: 'Получать спецпредложения', checked: ''},
+        ['offer', 'Получать спецпредложения']
+      ], 'toggle')
+    +sample-form('Like button')
+      .likes
+        +like(false, 2)
+        +like(true, 12)
+    +sample-form('Rate button')
+      .rates
+        +rating(4)
+        +rating(5)
+  .form-elements__cell3
+    form
+      +slider('Range slider')
+    +sample-form('Buttons')
+      .buttons
+        +button({text: 'Click me'})
+        +button({text: 'Click me'})(class='button_focused')
+        +button({text: 'Click me'}, 'border')
+        +button({text: 'Click me'}, 'border')(class='button_focused')
+      .buttons
+        +button({text: 'Click me'}, 'text', 'min')
+        +button({text: 'Click me'}, 'text', 'min')(class='button_focused')
+      +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
+    +sample-form('Pagination')
+      -
+        const pages = [
+          {value: 1, href: '#'},
+          {value: 2, href: '#'},
+          {value: 3, href: '#'},
+          { value: '...', placeholder: true },
+          {value: 15, href: '#'},
+          { next: true }
+          ];
+      +pagination(pages, '1 – 12 из 100+ вариантов аренды')
+  .form-elements__cell4
+    +sample-form('Dropdown', 'Default')
+      +dropdown('conveniences', [], false)
+    +sample-form('Dropdown', 'Expanded')
+      +dropdown('conveniences', [], false)
+  .form-elements__cell5
+    +sample-form('Dropdown')
+      +dropdown('guests')
+  .form-elements__cell6
+    +sample-form('Dropdown')
+      +dropdown('guests')
+  .form-elements__cell7
+    +sample-form
+      +exp-list('Expandable checkbox list', [
+        {name: 'breakfast', label: 'Завтрак'},
+        {name: 'table', label: 'Письменный стол'},
+        {name: 'feeding-chair', label: 'Стул для кормления'},
+        {name: 'crib', label: 'Кроватка'},
+        {name: 'tv-1', label: 'Телевизор'},
+        {name: 'shampoo-1', label: 'Шампунь'},
+        {name: 'tv-2', label: 'Телевизор'},
+        {name: 'shampoo-2', label: 'Шампунь'}
+      ])
+    +sample-form
+      +exp-list('Expandable checkbox list', [
+        {name: 'breakfast', label: 'Завтрак'},
+        {name: 'table', label: 'Письменный стол', checked: ''},
+        {name: 'feeding-chair', label: 'Стул для кормления', checked: ''},
+        {name: 'crib', label: 'Кроватка', checked: ''},
+        {name: 'tv-1', label: 'Телевизор'},
+        {name: 'shampoo-1', label: 'Шампунь'},
+        {name: 'tv-2', label: 'Телевизор'},
+        {name: 'shampoo-2', label: 'Шампунь'}
+      ])
+  .form-elements__cell8
+    +sample-form('Rich checkbox buttons')
+      +list([
+        ['wide', 'Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
+        ['assistant', 'Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
+      ], 'rich')
+  .form-elements__cell9
+    +sample-form('Bullet list')
+      +list([
+        'Нельзя с питомцами',
+        'Без вечеринок и мероприятий',
+        'Время прибытия — после 13:00, а выезд до 12:00'
+      ])
+  .form-elements__cell10
+    +list([
+      ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
+      ['location_city', 'Удобство', 'Окно в каждой из спален']
+    ], 'icon')
+  .form-elements__cell11
+    +comment(
+      'Мурад Сарафанов',
+      '5 дней назад',
+      'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
+      [true, 12])
