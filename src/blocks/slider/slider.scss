@@ -4,6 +4,7 @@
   .slider {
     @import '../../../node_modules/ion-rangeslider/css/ion.rangeSlider.min.css';
     @import './toxin.scss';
+    @include toxin;
   }
   @include slider__header;
   @include slider__output;
