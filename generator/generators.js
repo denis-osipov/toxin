@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const pug = require('pug');
 const lex = require('pug-lexer');
 const parse = require('pug-parser');
 const load = require('pug-load');
@@ -58,15 +59,7 @@ function generateEntries(context, entry) {
 
     // Get list of used bem entities
     const templateFile = entryFiles[0].replace(/\.(js|scss)$/, '.pug');
-    // const templateContent = fs.readFileSync(templateFile, 'utf-8');
-
-    const ast = load.file(templateFile, {
-      lex: lex,
-      parse: parse,
-      basedir: path.join(context, 'blocks')
-    });
-
-    const blocks = getBemList(ast, 'ast');
+    const blocks = getBemList(context, templateFile, 'ast');
 
     // Write files
     entryFiles.forEach(function(file) {
@@ -87,10 +80,12 @@ function generateEntries(context, entry) {
       });
 
       // Add assets for extended template
-      const assetName = blocks.extends.replace(/\.pug$/, `.${type}`);
-      const assetPath = path.join(path.dirname(file), assetName).replace(/\\/g, '/');
-      if (fs.existsSync(assetPath)) {
-        fs.appendFileSync(file, rules[type].add(assetName), 'utf-8');
+      if (blocks.extends) {
+        const assetName = blocks.extends.replace(/\.pug$/, `.${type}`);
+        const assetPath = path.join(path.dirname(file), assetName).replace(/\\/g, '/');
+        if (fs.existsSync(assetPath)) {
+          fs.appendFileSync(file, rules[type].add(assetName), 'utf-8');
+        }
       }
 
       // Mandatory imports at the end
@@ -122,7 +117,8 @@ function getFileList(entryPoint, context) {
 // Get BEM list from pug template or AST.
 // BEM entities in pug template should be added with +entity or as classes.
 // BEM entities in AST should be added as mixins or as block classes.
-function getBemList(data, type) {
+function getBemList(context, file, type) {
+  const data = getData(context, file, type);
   let bems = new Set();
   let exts;
   if (type === 'pug') {
@@ -157,6 +153,20 @@ function getBemList(data, type) {
     }, {
       includeDependencies: true
     })
+  }
+  else if (type === 'html') {
+    const re = /class=['"](.*?)['"]/g;
+    let match;
+    while (match = re.exec(data)) {
+      const classes = match[1].split(' ');
+      console.log(classes);
+      classes.forEach(class_ => {
+        if (!class_.includes('_')) {
+          bems.add(class_);
+          console.log(class_);
+        }
+      });
+    }
   }
   return { bems: Array.from(bems), extends: exts };
 }
@@ -214,6 +224,24 @@ function fillBemFilesList(root, lists) {
       fillBemFilesList(entityPath, lists);
     }
   });
+}
+
+function getData(context, file, type) {
+  switch (type) {
+    case 'pug':
+      return fs.readFileSync(file, 'utf-8');
+    case 'ast':
+      return load.file(file, {
+        lex: lex,
+        parse: parse,
+        basedir: path.join(context, 'blocks')
+      });
+    case 'html':
+      return pug.renderFile(file, {
+        basedir: path.join(context, 'blocks'),
+        require: path => path
+      });
+  }
 }
 
 module.exports = { aggregateMixins, generateEntries, getFileList }
