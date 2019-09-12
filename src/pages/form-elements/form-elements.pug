@@ -4,7 +4,7 @@ block title
   ='Form Elements'
 
 block content
-  .form-elements__cell1
+  .ui-kit__grid-item-1
     +sample-form('Text field', 'Default')
       +input()(type='email', placeholder='Email')
     +sample-form('Text field', 'Hover / Focus')
@@ -22,7 +22,7 @@ block content
       +date-picker
     +sample-form('Subscription text field')
       +subscription
-  .form-elements__cell2
+  .ui-kit__grid-item-2
     +sample-form('Checkbox buttons')
       +list([
         ['smoke', 'Можно курить'],
@@ -47,7 +47,7 @@ block content
       .rates
         +rating(4)
         +rating(5)
-  .form-elements__cell3
+  .ui-kit__grid-item-3
     form
       +slider('Range slider')
     +sample-form('Buttons')
@@ -71,18 +71,18 @@ block content
           { next: true }
           ];
       +pagination(pages, '1 – 12 из 100+ вариантов аренды')
-  .form-elements__cell4
+  .ui-kit__grid-item-4
     +sample-form('Dropdown', 'Default')
       +dropdown('conveniences', [], false)
     +sample-form('Dropdown', 'Expanded')
       +dropdown('conveniences', [], false)
-  .form-elements__cell5
+  .ui-kit__grid-item-5
     +sample-form('Dropdown')
       +dropdown('guests')
-  .form-elements__cell6
+  .ui-kit__grid-item-6
     +sample-form('Dropdown')
       +dropdown('guests')
-  .form-elements__cell7
+  .ui-kit__grid-item-7
     +sample-form
       +exp-list('Expandable checkbox list', [
         {name: 'breakfast', label: 'Завтрак'},
@@ -105,25 +105,25 @@ block content
         {name: 'tv-2', label: 'Телевизор'},
         {name: 'shampoo-2', label: 'Шампунь'}
       ])
-  .form-elements__cell8
+  .ui-kit__grid-item-8
     +sample-form('Rich checkbox buttons')
       +list([
         ['wide', 'Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
         ['assistant', 'Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
       ], 'rich')
-  .form-elements__cell9
+  .ui-kit__grid-item-9
     +sample-form('Bullet list')
       +list([
         'Нельзя с питомцами',
         'Без вечеринок и мероприятий',
         'Время прибытия — после 13:00, а выезд до 12:00'
       ])
-  .form-elements__cell10
+  .ui-kit__grid-item-10
     +list([
       ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
       ['location_city', 'Удобство', 'Окно в каждой из спален']
     ], 'icon')
-  .form-elements__cell11
+  .ui-kit__grid-item-11
     +comment(
       'Мурад Сарафанов',
       '5 дней назад',
