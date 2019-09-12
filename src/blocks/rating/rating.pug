@@ -1,0 +1,10 @@
+mixin rating(stars)
+  +button({}, 'text', 'min')(class='rating')
+    - let filled = 0;
+    while filled < stars
+      +icon('star', 'primary-gradient')
+      - filled++;
+    - let empty = 5 - stars;
+    while empty > 0
+      +icon('star_border', 'primary-gradient')
+      - empty--;

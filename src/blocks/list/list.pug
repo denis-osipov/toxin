@@ -1,0 +1,18 @@
+mixin list(items, type='list')
+  //- type - one of 'list', 'checkbox', 'radio', 'toggle', 'icon'
+  //- items - an array consisting of strings, arrays or objects.
+  //-
+  //- If type is 'list' items should be an array of strings or arrays of one element.
+  //-
+  //- If type is 'checkbox', 'toggle' or 'radio' items should be an array of strings, arrays or objects.
+  //- String, the first element of array or 'name' property of object will be an input element's name property.
+  //- The second element of array or 'label' property of object will be an input label.
+  //- The third element of array or 'description' property of object will be an item description.
+  //- Other properties of object will be sent to input element as attributes.
+  //-
+  //- If type is 'icon' items should be an array of two or three elements.
+  //- The first one will be an icon name, the secon one - an item name,
+  //- the third one (optional) - an item description.
+  ul.list(class=`list_type_${type}`)&attributes(attributes)
+    each item in items
+      +list__item(item, type)

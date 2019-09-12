@@ -1,0 +1,6 @@
+@mixin dropdown__item-control {
+  .dropdown__item-control {
+    display: flex;
+    justify-content: space-between;
+  }
+}

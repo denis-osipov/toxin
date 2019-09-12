@@ -1,0 +1,3 @@
+mixin subscription
+  - attributes.class = attributes.class ? attributes.class + ' subscription' : 'subscription';
+  +icon-field('arrow_forward', 'primary-gradient', false, {type: 'email', placeholder: 'Email'})&attributes(attributes)

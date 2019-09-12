@@ -1,0 +1,13 @@
+@mixin like__icon {
+  .like__icon {
+    justify-self: end;
+
+    .like_liked &::after {
+      content: 'favorite';
+    }
+
+    &::after {
+      content: 'favorite_border';
+    }
+  }
+}

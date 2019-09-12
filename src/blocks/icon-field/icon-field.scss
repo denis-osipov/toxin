@@ -1,0 +1,21 @@
+@mixin icon-field {
+  @include icon;
+  @include input;
+
+  .icon-field {
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid $dark-25;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 44px / $ref-rem;
+    height: 44px / $ref-rem;
+
+    &:hover,
+    &:focus {
+      border-color: $dark-50;
+    }
+  }
+
+  @include icon-field__icon;
+}

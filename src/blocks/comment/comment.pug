@@ -1,0 +1,9 @@
+mixin comment(userName, date, message, like)
+  article.comment
+    +avatar(userName)
+    .comment__header
+      .comment__user= userName
+      .comment__date= date
+    - const [liked, number] = like;
+    +like(liked, number)(class='comment__like')
+    p.comment__text= message

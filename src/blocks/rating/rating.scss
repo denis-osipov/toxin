@@ -1,0 +1,12 @@
+@mixin rating {
+  @include button;
+  @include icon;
+
+  .rating {
+    background: $light;
+    border: none;
+    font-size: $normal-icon-font-size;
+    min-width: 120px / $ref-rem;
+    padding: 0;
+  }
+}

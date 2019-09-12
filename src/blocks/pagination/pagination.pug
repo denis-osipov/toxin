@@ -1,0 +1,25 @@
+mixin pagination(pages, caption)
+  //- pages is array, consisting of strings, numbers or objects
+  //- object = {
+  //-   value: string or number suggested; value placing in a element,
+  //-   href: value of href attribure for the link,
+  //-   placeholder: if evaluates to true, don't create link,
+  //-   next: if evaluates to true, it's a link to the next page, icon will be used
+  //-   previous: if evaluates to true, it's a link to the previous page, icon well be used
+  //- }
+  .pagination&attributes(attributes)
+    .pagination__pages.text_level_h3
+      each page in pages
+        if typeof page === 'string' || typeof page === 'number'
+          +link(page)(class='pagination__page')
+        else if page.placeholder
+          span.pagination__page= page.value
+        else if page.next || page.previous
+          - const arrow = page.next ? 'arrow_forward' : 'arrow_backward';
+          - const icon = page.value || arrow;
+          +link()(class='pagination__page pagination__icon')
+            +icon(icon)
+        else
+          +link(page.value)(class='pagination__page', href=page.href)
+
+    p.pagination__caption= caption

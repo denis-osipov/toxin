@@ -1,0 +1,7 @@
+-
+  const avatars = {
+    'Мурад Сарафанов': require('images/avatars/murad_sarafanov.jpg')
+  }
+
+mixin avatar(name)
+  img.avatar(src=avatars[name], alt=name)&attributes(attributes)

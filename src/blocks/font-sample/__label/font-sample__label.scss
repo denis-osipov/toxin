@@ -1,0 +1,10 @@
+@mixin font-sample__label {
+  .font-sample__label {
+    color: $dark-25;
+    font: {
+      family: $text-font-family;
+      weight: normal;
+    }
+    text-align: right;
+  }
+}

@@ -1,4 +1,4 @@
 mixin palette__label(name, code)
-  .palette__label(class=[attributes.mix])
-    .text_level_h2= name
-    .text_level_color-code= code
+  .palette__label&attributes(attributes)
+    .palette__color-name.text_level_h2= name
+    .palette__color-code= code

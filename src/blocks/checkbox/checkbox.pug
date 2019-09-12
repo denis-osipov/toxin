@@ -1,0 +1,33 @@
+mixin checkbox(name, label, description, type)
+  //- name - name attribute value of input element
+  //- label - label for input element
+  //- description - additional text placed in label
+  //- type - one of `checkbox`, 'toggle', 'rich' or 'radio'. The first three is for checkbox type of input element,
+  //- the last one is for radio type.
+  //- Additional attributes will be send to input block.
+
+  -
+    if (!attributes.type) {
+      if (type === 'checkbox' || type === 'toggle' || type === 'rich') {
+        attributes.type = 'checkbox';
+      }
+      else if (type === 'radio') {
+        attributes.type = 'radio';
+      }
+    }
+
+    let classes;
+    if (attributes.class) {
+      classes = attributes.class + ` checkbox_type_${type}`;
+      delete attributes.class;
+    }
+    else {
+      classes = `checkbox_type_${type}`;
+    }
+
+  label.checkbox(class=classes)
+    +input(false, 'invisible')(class='checkbox__input', name=name)&attributes(attributes)
+    .checkbox__box(class=`checkbox__box_type_${type}`)
+    span.checkbox__label= label
+    if description
+      span.checkbox__description= description

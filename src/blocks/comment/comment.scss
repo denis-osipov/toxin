@@ -1,0 +1,16 @@
+@mixin comment {
+  @include avatar;
+  @include like;
+
+  .comment {
+    column-gap: 10px;
+    display: grid;
+    grid-template-columns: minmax(40px, 48fr) 653fr;
+    padding-top: 12px;
+    row-gap: 10px;
+  }
+
+  @include comment__like;
+  @include comment__text;
+  @include comment__user;
+}

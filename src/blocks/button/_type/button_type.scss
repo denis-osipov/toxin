@@ -1,0 +1,47 @@
+@mixin button_type {
+  .button_type {
+    &_fill {
+      background: $primary-gradient;
+      color: $light;
+
+      &.button_focused,
+      &:hover,
+      &:focus {
+        background: $primary-gradient-50;
+      }
+    }
+
+    &_border {
+      background: $primary-gradient;
+      color: $primary-color;
+      &::before {
+        background-color: $light;
+        border-radius: inherit;
+        bottom: 2px;
+        content: '';
+        left: 2px;
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        z-index: -1;
+      }
+
+      &.button_focused,
+      &:hover,
+      &:focus {
+        background: $primary-gradient-50;
+      }
+    }
+
+    &_text {
+      background: none;
+      color: $primary-color;
+      
+      &.button_focused,
+      &:hover,
+      &:focus {
+        color: $dark-50;
+      }
+    }
+  }
+}

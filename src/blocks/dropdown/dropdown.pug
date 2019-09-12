@@ -1,0 +1,28 @@
+mixin dropdown(type='', items, controls=true)
+  //- type should be one of:
+  //-   guests
+  //-   conveniences
+  -
+    const typeItems = {
+      'guests': [
+        'Взрослые',
+        'Дети',
+        'Младенцы'
+      ],
+      'conveniences': [
+        'Спальни',
+        'Кровати',
+        'Ванные комнаты'
+      ]
+    };
+    // Use given array of items or defaults
+    const listItems = (items && items.length) ? items :
+                      typeItems[type] ? typeItems[type] : [];
+    const typeClass = type ? `dropdown_type_${type}` : '';
+
+  .dropdown(class=typeClass)&attributes(attributes)
+    +dropdown__total
+    .dropdown__container
+      +dropdown__list(listItems)
+      if controls
+        +dropdown__controls

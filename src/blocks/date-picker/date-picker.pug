@@ -1,0 +1,6 @@
+mixin date-picker(type='single')
+  - const doubleClass = type === 'single' ? '' : 'date-picker_double';
+  .date-picker(class=doubleClass)&attributes(attributes)
+    //- data-pickers for double inputs are coupled:
+    //- for each two sequent the first is for begin date, the second is for end date
+    +date-picker__field(type)

@@ -1,0 +1,10 @@
+@mixin palette__color-code {
+  .palette__color-code {
+    color: $dark;
+    font: {
+      family: $header-font-family;
+      size: 19px / $ref-rem;
+    }
+    line-height: #{(34px/19px)};
+  }
+}

@@ -1,11 +1,10 @@
-$ref-rem: 1 !default;
-
 @mixin palette__item {
+  $ref-rem: 1 !default;
   .palette__item {
     align-items: center;
+    column-gap: 40px / $ref-rem;
     display: grid;
-    grid-column-gap: 40px / $ref-rem;
     grid-template-columns: #{70px / $ref-rem} 1fr;
-    margin-bottom: 20px / $ref-rem;
+    padding-bottom: 20px / $ref-rem;
   }
 }

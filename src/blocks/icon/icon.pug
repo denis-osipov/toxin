@@ -1,0 +1,3 @@
+mixin icon(name, color=false)
+  - const colorClass = color ? `icon_color_${color}` : '';
+  i.icon(class=colorClass)&attributes(attributes)= name
