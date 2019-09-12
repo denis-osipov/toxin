@@ -1,7 +1,16 @@
 .ui-kit {
-  $container-padding: 37px !default;
-  $ref-width: 1440px !default;
-  $side-padding: 150px !default;
+
+  @media (max-width: 819px) {
+    & {
+      font-size: 12px;
+    }
+  }
+  @media (min-width: 820px) {
+    & {
+      font-size: 16px;
+    }
+  }
+
   &__header {
     margin: 0;
     padding: 30px;
@@ -9,17 +18,7 @@
   &__logo {
     display: block;
   }
-  &__grid-container {
+  &__main {
     display: grid;
-    grid-column-gap: calc(100% - #{$side-padding * 2 + 586px});
-    grid-row-gap: 50px;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    padding: $container-padding;
-    padding-left: percentage($side-padding / $ref-width);
-    padding-right: percentage($side-padding / $ref-width);
-  }
-  &__grid-item {
-    margin: 0;
-    padding-left: 0;
   }
 }

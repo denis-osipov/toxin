@@ -7,19 +7,11 @@
 }
 
 .ui-kit {
-  &__header {
-    margin: 0;
-    padding: 30px;
-  }
-  &__logo {
-    display: block;
-  }
-  &__grid-container {
-    display: grid;
-    // grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-template-columns: 320px 1fr 320px;
+  &__main {
     grid-column-gap: 72px;
     grid-row-gap: 20px;
+    // grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 320px 1fr 320px;
     padding-left: 141px;
     padding-right: 141px;
     padding-top: 23px;
