@@ -13,13 +13,20 @@
     row-gap: 40px;
     padding-left: 140px;
     padding-right: 140px;
+    padding-top: 42px;
   }
 
   &__flex-item {
     column-gap: 40px;
     display: flex;
-    flex: 1;
     flex-wrap: wrap;
     row-gap: 40px;
+    &:nth-child(1),
+    &:nth-child(2) {
+      flex-basis: 380px;
+    }
+    &:nth-child(3) {
+      flex-basis: 320px;
+    }
   }
 }
