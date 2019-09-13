@@ -1,7 +1,10 @@
 mixin search
-  .search&attributes(attributes)
+  form.search&attributes(attributes)
     h1.search__header Найдём номера под ваши пожелания
+    span Прибытие
     +date-picker('double')
+    span Выезд
     +date-picker('double')
+    span Гости
     +dropdown('guests')
-    +button({text: 'Подобрать номер'}, 'fill', 'big')
+    +button({text: 'Подобрать номер', icon: 'arrow_forward'}, 'fill', 'big')
