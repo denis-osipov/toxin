@@ -1,0 +1,25 @@
+.ui-kit {
+  &__body {
+    background-color: #f4f4f6;
+    margin: 0;
+    padding: 0;
+    width: 1440px;
+  }
+
+  &__main {
+    column-gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 40px;
+    padding-left: 140px;
+    padding-right: 140px;
+  }
+
+  &__flex-item {
+    column-gap: 40px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
+}
