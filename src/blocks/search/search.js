@@ -1,2 +1,2 @@
-import 'blocksPath/date-picker/date-picker';
-import 'blocksPath/dropdown/dropdown';
+import 'blocksPath/double-date-picker/double-date-picker';
+import 'blocksPath/guests/guests';
