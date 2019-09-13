@@ -1,0 +1,7 @@
+mixin search
+  .search&attributes(attributes)
+    h1.search__header Найдём номера под ваши пожелания
+    +date-picker('double')
+    +date-picker('double')
+    +dropdown('guests')
+    +button({text: 'Подобрать номер'}, 'fill', 'big')
