@@ -1,0 +1,18 @@
+mixin registration
+  form.registration&attributes(attributes)
+    h1.register__header Регистрация аккаунта
+    +input()(placeholder='Имя')
+    +input()(placeholder='Фамилия')
+    +list([
+      {name: 'sex', label: 'Мужчина', checked: ''},
+      ['sex', 'Женщина']
+    ], 'radio')
+    span Дата рождения
+    +input(true)
+    span Данные для входа в сервис
+    +input()(type='email', placeholder='Email')
+    +input()(type='password', placeholder='Пароль')
+    +checkbox('offer', 'Получать спецпредложения', '', 'toggle')
+    +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
+    span Уже есть аккаунт на Toxin
+    +button({text: 'Войти'}, 'border')
