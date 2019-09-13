@@ -1,0 +1,5 @@
+@mixin search {
+  @include button;
+  @include date-picker;
+  @include dropdown;
+}
