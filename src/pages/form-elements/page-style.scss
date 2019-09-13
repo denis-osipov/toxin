@@ -5,6 +5,10 @@
   $padding-frac: ($ref-padding - $min-padding) / ($ref-width - $min-width);
   $padding-comp: $min-width * $padding-frac - $min-padding;
 
+  &__body {
+    background-color: #fff;
+  }
+
   &__main {
     column-gap: $column-gap;
     grid-template-columns: repeat(auto-fit, minmax($min-width - $min-padding * 2, 1fr));
