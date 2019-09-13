@@ -1,0 +1,26 @@
+mixin reservation
+  form.reservation&attributes(attributes)
+    .reservation__header
+      span.reservation__number № 888
+      span.reservation__type Люкс
+      span.reservation__cost 9 990₽ в сутки
+    span Прибытие
+    +date-picker('double')
+    span Выезд
+    +date-picker('double')
+    span Гости
+    +dropdown('guests')
+    ul.reservation__calculation
+      li
+        span 9 990₽ х 4 суток
+        span 39 960₽
+      li
+        span Сбор за услуги: скидка 2 179₽
+        span 0₽
+      li
+        span Сбор за дополнительные услуги
+        span 300₽
+      li
+        span Итого
+        span 38 081₽
+    +button({text: 'Забронировать', icon: 'arrow_forward'}, 'fill', 'big')
