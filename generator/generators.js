@@ -145,8 +145,13 @@ function getBemList(context, file, type) {
       }
       if (node.attrs) {
         node.attrs.forEach(attr => {
-          if (attr.name === 'class' && !attr.val.includes('_')) {
-            bems.add(attr.val.slice(1, -1));
+          if (attr.name === 'class') {
+            const classes = attr.val.split(' ');
+            classes.forEach(class_ => {
+              if (!class_.includes('_')) {
+                bems.add(class_.replace(/['"]/g, ''));
+              }
+            });
           }
         });
       }
