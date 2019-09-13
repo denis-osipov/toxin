@@ -1,0 +1,10 @@
+@mixin double-date-picker {
+  @include date-picker;
+
+  .double-date-picker {
+    column-gap: 20px;
+    display: flex;
+  }
+
+  @include double-date-picker__header;
+}
