@@ -1,14 +1,14 @@
 mixin room-plate(room)
   -
     const rooms = {
-      888: {type: 'Люкс', cost: 9990, rating: 5, comments: 145},
-      888: {type: 'Люкс', cost: 9990, rating: 5, comments: 145}
+      888: {type: 'Люкс', cost: '9 990₽ в сутки', rating: 5, comments: '145 Отзывов'},
+      840: {type: '', cost: '9 900₽ в сутки', rating: 4, comments: '65 Отзывов'}
     };
   article.room-plate&attributes(attributes)
     img
     .room-plate__header
-      span.room-plate__number № 888
-      span.room-plate__type Люкс
-      span.room-plate__cost 9 990₽ в сутки
-    +rating(5)
-    span 145 Отзывов
+      span.room-plate__number № #{room}
+      span.room-plate__type= rooms[room].type
+      span.room-plate__cost= rooms[room].cost
+    +rating(rooms[room].rating)
+    span #{rooms[room].comments}
