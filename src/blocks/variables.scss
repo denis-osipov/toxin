@@ -25,7 +25,7 @@ $primary-gradient-50: linear-gradient(180deg, $primary-color-50 0%, $primary-col
 $secondary-gradient: linear-gradient(180deg, $secondary-color 0%, $secondary-color-for-gradient 100%);
 
 // Fonts
-$header-font-family: 'Quicksand', sans-serif;
+$header-font-family: 'Quicksand', 'Montserrat', sans-serif;
 $text-font-family: 'Montserrat', sans-serif;
 
 $body-font-size: 14px / $ref-rem;
