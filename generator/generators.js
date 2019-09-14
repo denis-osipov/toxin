@@ -249,4 +249,39 @@ function getData(context, file, type) {
   }
 }
 
-module.exports = { aggregateMixins, generateEntries, getFileList }
+function getBlocks(path) {
+  const blocks = {};
+  scanFolder(path, blocks);
+  return blocks;
+}
+
+function scanFolder(root, blocks) {
+  const entities = fs.readdirSync(root, { encoding: 'utf-8', withFileTypes: true });
+  entities.forEach(function(entity) {
+    const entityPath = path.join(root, entity.name);
+    if (entity.isDirectory()) {
+      const name = constructName(entityPath, entity.name);
+      blocks[name] = {};
+      scanFolder(entityPath, blocks);
+    }
+    else if (entity.isFile()) {
+      const fileType = path.extname(entity.name);
+      const name = path.basename(entity.name, fileType);
+      blocks[name][fileType] = entityPath;
+    }
+  });
+}
+
+function constructName(folder, name) {
+  if (name.startsWith('_')) {
+    const parent = path.basename(path.dirname(folder));
+    const newFolder = path.dirname(folder);
+    const newName = parent + name;
+    return constructName(newFolder, newName);
+  }
+  else {
+    return name;
+  }
+}
+
+module.exports = { aggregateMixins, generateEntries, getFileList };
