@@ -16,38 +16,61 @@ prepend - array of strings to place at the beginning of file, before main conten
 append - array of strings to place at the end of file, after main content
 use - function generating strings for file
 */
+// const rules = {
+//   js: {
+//     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
+//     prepend: [],
+//     append: ['./page-script.js'],
+//     use: function(entityFile, entryFile) {
+//       return `import '${path.relative(path.dirname(entryFile), entityFile).replace(/\\/g, '/')}';\n`;
+//     },
+//     add: function(item) {
+//       return `import '${item}';\n`;
+//     }
+//   },
+//   scss: {
+//     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
+//     prepend: [
+//       'variables',
+//       'fonts/fonts',
+//       'mixins'
+//     ],
+//     append: ['./page-style'],
+//     use: function(entityFile) {
+//       const entity = path.basename(entityFile, '.scss');
+//       return `@include ${entity};\n`;
+//     },
+//     add: function(item) {
+//       return `@import '${item}';\n`;
+//     }
+//   },
+//   pug: {
+//     message: '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n'
+//   }
+// };
+
+
 const rules = {
-  js: {
+  '.js': {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
-    prepend: [],
-    append: ['./page-script.js'],
-    use: function(entityFile, entryFile) {
-      return `import '${path.relative(path.dirname(entryFile), entityFile).replace(/\\/g, '/')}';\n`;
-    },
-    add: function(item) {
-      return `import '${item}';\n`;
+    add: function(depFile, blockFile) {
+      return `import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
     }
   },
-  scss: {
+  '.scss': {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
-    prepend: [
-      'variables',
-      'fonts/fonts',
-      'mixins'
-    ],
-    append: ['./page-style'],
-    use: function(entityFile) {
-      const entity = path.basename(entityFile, '.scss');
-      return `@include ${entity};\n`;
-    },
-    add: function(item) {
-      return `@import '${item}';\n`;
+    add: function(depFile, blockFile) {
+      return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
     }
   },
-  pug: {
-    message: '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n'
+  '.pug': {
+    message: '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n',
+    add: function(depFile, blockFile) {
+      return `include '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
+    }
   }
 };
+
 
 // Generate entries files
 function generateEntries(context, entry) {
@@ -282,6 +305,69 @@ function constructName(folder, name) {
   else {
     return name;
   }
+}
+
+function addBlocksDependencies(blocks) {
+  for (block of Object.entries(blocks)){
+    const [blockName, blockFiles] = block;
+    const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
+    if (files['.pug']) {
+      const ast = getAst(files['.pug']);
+      const bems = getBems(ast);
+      bems.forEach(bem => {
+        if (blocks[bem]) {
+          for (file of Object.entries(blocks[bem])) {
+            const [ext, filePath] = file;
+            dependencyFiles[ext].push(filePath);
+          }
+        }
+      });
+    }
+
+    for (blockFile of Object.entries(blockFiles)) {
+      const [ext, filePath] = blockFile;
+      if (dependencyFiles[ext] && dependencyFiles[ext].length) {
+        const dependencyPath = path.join(path.dirname(filePath), 'dependencies' + ext);
+        let content = rules[ext].message;
+        dependencyFiles[ext].forEach(depFile => {
+          content += rules[ext].add(depFile, filePath);
+        });
+        fs.writeFileSync(dependencyPath, content);
+      }
+    }
+  }
+}
+
+function getBems(ast) {
+  let bems = new Set();
+  walk(ast, function before(node, replace) {
+    if (node.type === 'Mixin') {
+      if (node.call) {
+        bems.add(node.name);
+      }
+      if (node.attrs) {
+        node.attrs.forEach(attr => {
+          if (attr.name === 'class') {
+            const classes = attr.val.split(' ');
+            classes.forEach(class_ => {
+              const bemClass = class_.replace(/['"]/g, '');
+              if (bemClass !== node.name) {
+                bems.add(bemClass);
+              }
+            });
+          }
+        });
+      }
+    }
+  });
+
+  return Array.from(bems);
+}
+
+function getAst(file) {
+  const fileContent = fs.readFileSync(file, 'utf-8');
+  const tokens = lex(fileContent);
+  return parse(tokens);
 }
 
 module.exports = { aggregateMixins, generateEntries, getFileList };
