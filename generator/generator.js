@@ -16,20 +16,29 @@ add - function generating strings for file
 const rules = {
   '.js': {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
-    add: function(depFile, blockFile) {
+    addBem: function(depFile, blockFile) {
       return `import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
+    },
+    addExtends: function(extends_) {
+      return `import '${extends_.replace(/$pug/, 'js')}';\n`;
     }
   },
   '.scss': {
     message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
-    add: function(depFile, blockFile) {
+    addBem: function(depFile, blockFile) {
       return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
+    },
+    addExtends: function(extends_) {
+      return `@import '${extends_.replace(/$pug/, 'scss')}';\n`;
     }
   },
   '.pug': {
     message: '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n',
-    add: function(depFile, blockFile) {
+    addBem: function(depFile, blockFile) {
       return `include '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
+    },
+    addExtends: function(extends_) {
+      return '';
     }
   }
 };
@@ -70,14 +79,15 @@ function constructName(folder, name) {
   }
 }
 
-function addBlocksDependencies(blocks) {
-  for (block of Object.entries(blocks)){
+function addBlocksDependencies(blocks, pages) {
+  const items = pages || blocks;
+  for (block of Object.entries(items)){
     const [blockName, blockFiles] = block;
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
-    if (files['.pug']) {
-      const ast = getAst(files['.pug']);
+    if (blockFiles['.pug']) {
+      const ast = getAst(blockFiles['.pug']);
       const bems = getBems(ast);
-      bems.forEach(bem => {
+      bems.bems.forEach(bem => {
         if (blocks[bem]) {
           for (file of Object.entries(blocks[bem])) {
             const [ext, filePath] = file;
@@ -86,19 +96,22 @@ function addBlocksDependencies(blocks) {
         }
       });
     }
-    writeDependencyFiles(blockFiles, dependencyFiles);
+    writeDependencyFiles(blockFiles, dependencyFiles, bems.extends_);
   }
 }
 
-function writeDependencyFiles(blockFiles, dependencyFiles) {
+function writeDependencyFiles(blockFiles, dependencyFiles, extends_) {
   for (blockFile of Object.entries(blockFiles)) {
     const [ext, filePath] = blockFile;
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
       const dependencyPath = path.join(path.dirname(filePath), 'dependencies' + ext);
       let content = rules[ext].message;
       dependencyFiles[ext].forEach(depFile => {
-        content += rules[ext].add(depFile, filePath);
+        content += rules[ext].addBem(depFile, filePath);
       });
+      if (extends_) {
+        content += rules[ext].addExtends(extends_);
+      }
       fs.writeFileSync(dependencyPath, content);
     }
   }
@@ -108,6 +121,7 @@ function writeDependencyFiles(blockFiles, dependencyFiles) {
 // BEM entities should be added as mixins or as block classes.
 function getBems(ast) {
   let bems = new Set();
+  let extends_;
   walk(ast, function before(node, replace) {
     if (node.type === 'Include') {
       return false;
@@ -130,11 +144,14 @@ function getBems(ast) {
         });
       }
     }
+    else if (node.type === 'Extends') {
+      extends_ = node.file.path;
+    }
   }, {
     includeDependencies: true
   });
 
-  return Array.from(bems);
+  return { bems: Array.from(bems), extends_: extends_ };
 }
 
 function getAst(file) {
@@ -145,9 +162,14 @@ function getAst(file) {
 }
 
 // Generate dependency files
-function generate(path) {
-  const blocks = getBlocks(path);
-  addBlocksDependencies(blocks);
+function generate(blocksFolder, pagesFolders) {
+  const blocks = getBlocks(blocksFolder);
+  addBlocksDependencies(blocksFolder);
+
+  pagesFolders.forEach(folder => {
+    const pages = getBlocks(blockPaths);
+    addBlocksDependencies(blocks, pages);
+  });
 }
 
 module.exports = generate;
