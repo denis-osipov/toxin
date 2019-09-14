@@ -10,7 +10,8 @@
     "hot": "webpack-dev-server --hot",
     "dev": "webpack",
     "dev-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
-    "server-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "server-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "rm-deps": "find src -name dependencies.\\* -type f -delete"
   },
   "repository": {
     "type": "git",
