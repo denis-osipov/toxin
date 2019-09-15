@@ -7,4 +7,4 @@ import '../../blocks/date-picker/date-picker.js';
 import '../../blocks/like/like.js';
 import '../../blocks/slider/slider.js';
 import '../../blocks/exp-list/exp-list.js';
-import '../ui-kit/ui-kit.pug';
+import '../ui-kit/ui-kit';

@@ -19,7 +19,7 @@ const rules = {
       return `import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
     },
     addExtends: function(extends_) {
-      return `import '${extends_.replace(/$pug/, 'js')}';\n`;
+      return `import '${extends_.replace(/.pug$/, '')}';\n`;
     }
   },
   '.scss': {
@@ -28,7 +28,9 @@ const rules = {
       return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
     },
     addExtends: function(extends_) {
-      return `@import '${extends_.replace(/$pug/, 'scss')}';\n`;
+      console.log(extends_);
+      console.log(extends_.replace(/.pug$/, ''));
+      return `@import '${extends_.replace(/.pug$/, '')}';\n`;
     }
   },
   '.pug': {
