@@ -91,12 +91,14 @@ function addBlocksDependencies(blocks, pages) {
         if (blocks[bem]) {
           for (file of Object.entries(blocks[bem])) {
             const [ext, filePath] = file;
-            dependencyFiles[ext].push(filePath);
+            if (ext in dependencyFiles) {
+              dependencyFiles[ext].push(filePath);
+            }
           }
         }
       });
+      writeDependencyFiles(blockFiles, dependencyFiles, bems.extends_);
     }
-    writeDependencyFiles(blockFiles, dependencyFiles, bems.extends_);
   }
 }
 
@@ -164,12 +166,14 @@ function getAst(file) {
 // Generate dependency files
 function generate(blocksFolder, pagesFolders) {
   const blocks = getBlocks(blocksFolder);
-  addBlocksDependencies(blocksFolder);
+  addBlocksDependencies(blocks);
 
-  pagesFolders.forEach(folder => {
-    const pages = getBlocks(blockPaths);
-    addBlocksDependencies(blocks, pages);
-  });
+  if (pagesFolders) {
+    pagesFolders.forEach(folder => {
+      const pages = getBlocks(folder);
+      addBlocksDependencies(blocks, pages);
+    });
+  }
 }
 
 module.exports = generate;
