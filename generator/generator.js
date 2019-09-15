@@ -34,7 +34,7 @@ const rules = {
   '.pug': {
     message: '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n',
     addBem: function(depFile, blockFile) {
-      return `include '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
+      return `include ${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}\n`;
     },
     addExtends: function(extends_) {
       return '';
