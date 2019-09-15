@@ -3,7 +3,7 @@
 const path = require('path');
 const generator = require('./generator');
 
-class AssetsGenerationPlugin {
+class DependencyGenerationPlugin {
   constructor(options) {
     this.options = Object.assign({
     }, options);
@@ -13,7 +13,7 @@ class AssetsGenerationPlugin {
 
     // Generate at startup
     compiler.hooks.entryOption.tap(
-      'AssetsGenerationPlugin',
+      'DependencyGenerationPlugin',
       (context, entry) => {
         if (!this.options.blocksFolder) {
           this.options.blocksFolder = path.resolve(context, 'blocks');
@@ -30,14 +30,17 @@ class AssetsGenerationPlugin {
 
     // Regenerate in watching mode
     compiler.hooks.invalid.tap(
-      'AssetsGenerationPlugin',
+      'DependencyGenerationPlugin',
       (fileName, changeTime) => {
 
-        // Don't respond to changes of generated files
-        if (fileName.includes('dependency.')) {
-          return;
-        }
-        generator(this.options.blocksFolder, this.options.pagesFolders);
+        // // Don't respond to changes of generated files
+        // if (fileName.includes('dependency.')) {
+        //   return;
+        // }
+
+        // // Use cache: timestamps or hash? What about fs.watch/fs.watchFile
+        // // or webpack watch?
+        // generator(this.options.blocksFolder, this.options.pagesFolders);
       }
     );
   }
@@ -69,4 +72,4 @@ function getFolders(context, entry) {
   return Array.from(entryDirs);
 }
 
-module.exports = AssetsGenerationPlugin;
+module.exports = DependencyGenerationPlugin;

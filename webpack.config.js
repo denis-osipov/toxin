@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const AssetsGenerationPlugin = require('./generator/AssetsGenerationPlugin');
+const DependencyGenerationPlugin = require('./generator/DependencyGenerationPlugin');
 
 module.exports = {
   mode: 'development',
@@ -12,13 +12,13 @@ module.exports = {
   },
   context: path.resolve(__dirname, 'src'),
   entry: {
-    // colorsAndType: [
-    //   './pages/colors-and-type/colors-and-type.scss'
-    // ],
-    // formElements: [
-    //   './pages/form-elements/form-elements.scss',
-    //   './pages/form-elements/form-elements.js'
-    // ],
+    colorsAndType: [
+      './pages/colors-and-type/colors-and-type.scss'
+    ],
+    formElements: [
+      './pages/form-elements/form-elements.scss',
+      './pages/form-elements/form-elements.js'
+    ],
     cards: [
       './pages/cards/cards.scss',
       './pages/cards/cards.js'
@@ -78,22 +78,25 @@ module.exports = {
     ]
   },
   plugins: [
-    new AssetsGenerationPlugin(),
+    new DependencyGenerationPlugin({
+      blocksFolder: path.resolve(__dirname, 'src/blocks'),
+      pagesFolders: path.resolve(__dirname, 'src/pages'),
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
     }),
     new CleanWebpackPlugin(),
-    // new HtmlWebpackPlugin({
-    //   template: './pages/colors-and-type/colors-and-type.pug',
-    //   filename: 'colors-and-type.html',
-    //   chunks: ['colorsAndType']
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: './pages/form-elements/form-elements.pug',
-    //   filename: 'form-elements.html',
-    //   chunks: ['formElements']
-    // }),
+    new HtmlWebpackPlugin({
+      template: './pages/colors-and-type/colors-and-type.pug',
+      filename: 'colors-and-type.html',
+      chunks: ['colorsAndType']
+    }),
+    new HtmlWebpackPlugin({
+      template: './pages/form-elements/form-elements.pug',
+      filename: 'form-elements.html',
+      chunks: ['formElements']
+    }),
     new HtmlWebpackPlugin({
       template: './pages/cards/cards.pug',
       filename: 'cards.html',
