@@ -4,7 +4,6 @@ const path = require('path');
 const fs = require('fs');
 const lex = require('pug-lexer');
 const parse = require('pug-parser');
-const load = require('pug-load');
 const walk = require('pug-walk');
 
 /*
@@ -159,10 +158,9 @@ function getBems(ast) {
 }
 
 function getAst(file) {
-  return load.file(file, {
-    lex: lex,
-    parse: parse
-  });
+  const str = fs.readFileSync(file, {encoding: 'utf-8'});
+  const tokens = lex(str);
+  return parse(tokens);
 }
 
 // Generate dependency files
