@@ -1,0 +1,172 @@
+.ui-kit {
+  $column-gap: 20px;
+  $ref-padding: 141px;
+  $min-padding: 20px;
+  $padding-frac: ($ref-padding - $min-padding) / ($ref-width - $min-width);
+  $padding-comp: $min-width * $padding-frac - $min-padding;
+
+  &__body {
+    background-color: #fff;
+  }
+
+  &__main {
+    column-gap: $column-gap;
+    grid-template-columns: repeat(auto-fit, minmax($min-width - $min-padding * 2, 1fr));
+    padding-left: calc(#{percentage($padding-frac)} - #{$padding-comp});
+    padding-right: calc(#{percentage($padding-frac)} - #{$padding-comp});
+    padding-top: 23px;
+    row-gap: 20px;
+  }
+
+  &__grid-item {
+    $ref-col-width: ($ref-width - $column-gap * 2 - $ref-padding * 2) / 3;
+    &-1 {
+      padding-bottom: 60px;
+      padding-right: percentage(53px / $ref-col-width);
+
+      & .sample-form:nth-child(2) {
+        & .input {
+          letter-spacing: -0.2px;
+        }
+      }
+
+      .double-date-picker {
+        column-gap: 19px;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 21px;
+      }
+
+      & .sample-form:nth-child(3) {
+        margin-bottom: 3px;
+      }
+      & .sample-form:nth-child(4) {
+        margin-bottom: 20px;
+      }
+      & .sample-form:nth-child(6) {
+        padding-right: percentage(62px / $ref-col-width);
+        margin-bottom: 21px;
+      }
+      & .sample-form:nth-child(7) {
+        padding-right: percentage(62px / $ref-col-width);
+      }
+    }
+
+    &-2,
+    &-3,
+    &-5,
+    &-6,
+    &-8,
+    &-9 {
+      padding-left: percentage(53px / $ref-col-width);;
+    }
+
+    &-2 {
+      .sample-form:nth-child(1) {
+        margin-bottom: 10px;
+
+        .list_type_checkbox {
+          padding-right: percentage(90px / $ref-col-width);;
+        }
+      }
+    
+      .sample-form:nth-child(2) {
+        margin-bottom: 11px;
+      }
+    
+      .sample-form:nth-child(3) {
+        margin-bottom: 12px;
+      }
+    
+      .sample-form:nth-child(4) {
+        margin-bottom: 20px;
+        .likes {
+          column-gap: 10px;
+          display: flex;
+          padding-top: 11px;
+        }
+      }
+    
+      .sample-form:nth-child(5) {
+        .rates {
+          column-gap: 20px;
+          display: flex;
+          padding-top: 8px;
+        }
+      }
+    }
+
+    &-3 {
+      form:nth-child(1) {
+        margin-bottom: 14px;
+        padding-right: percentage(63px / $ref-col-width);
+      }
+
+      .buttons {
+        column-gap: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 31px;
+        margin-top: 11px;
+        row-gap: 30px;
+        width: 230px;
+        & .button_type_text {
+          padding-right: 1px;
+        }
+      }
+
+      .button_size_big {
+        margin-top: -1px;
+      }
+
+      .sample-form:nth-child(2) {
+        margin-bottom: 20px;
+      }
+
+      .sample-form:nth-child(3) {
+        padding-left: 1px;
+      }
+    }
+
+    &-4 {
+      margin-left: -1px;
+      padding-right: percentage(108px / $ref-col-width);
+      margin-bottom: 14px;
+    }
+
+    &-7 {
+      padding-top: 5px;
+      padding-right: percentage(108px / $ref-col-width);
+
+      .sample-form:nth-child(1) {
+        margin-bottom: 26px;
+      }
+
+      .sample-form:nth-child(2) {
+        margin-left: -1px;
+      }
+    }
+
+    &-8 {
+      padding-right: percentage(63px / $ref-col-width);
+      .list__item:first-child .checkbox__description {
+        padding-right: percentage(37px / $ref-col-width);
+      }
+    }
+
+    &-9 {
+      padding-right: percentage(63px / $ref-col-width);
+    }
+
+    &-10 {
+      margin-left: -1px;
+    }
+
+    &-11 {
+      padding-left: percentage(53px / ($ref-col-width * 2 + $column-gap));
+      @media (min-width: 703px) {
+        grid-column-end: span 2;
+      }
+    }
+  }
+}
