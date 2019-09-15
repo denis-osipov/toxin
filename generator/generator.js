@@ -62,7 +62,9 @@ function scanFolder(root, blocks) {
     else if (entity.isFile()) {
       const fileType = path.extname(entity.name);
       const name = path.basename(entity.name, fileType);
-      blocks[name][fileType] = entityPath;
+      if (name !== 'dependencies') {
+        blocks[name][fileType] = entityPath;
+      }
     }
   });
 }
