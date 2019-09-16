@@ -1,11 +1,12 @@
 // Plugin for generation of entry points and aggregation of mixins
 
 const path = require('path');
-const generator = require('./generator');
+const { generate, inject } = require('./generator');
 
 class DependencyGenerationPlugin {
   constructor(options) {
     this.options = Object.assign({
+      inject: true
     }, options);
   }
 
@@ -24,7 +25,11 @@ class DependencyGenerationPlugin {
         else if (typeof this.options.pagesFolders === 'string') {
           this.options.pagesFolders = [this.options.pagesFolders];
         }
-        generator(this.options.blocksFolder, this.options.pagesFolders);
+        this.blocks = generate(this.options.blocksFolder, this.options.pagesFolders);
+
+        if (this.options.inject) {
+          inject(this.blocks.depFiles);
+        }
       }
     );
 

@@ -28,8 +28,6 @@ const rules = {
       return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
     },
     addExtends: function(extends_) {
-      console.log(extends_);
-      console.log(extends_.replace(/.pug$/, ''));
       return `@import '${extends_.replace(/.pug$/, '')}';\n`;
     }
   },
@@ -64,7 +62,7 @@ function scanFolder(root, blocks) {
       const fileType = path.extname(entity.name);
       const name = path.basename(entity.name, fileType);
       if (name !== 'dependencies') {
-        blocks[name][fileType] = entityPath;
+        blocks[name][fileType] = {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs};
       }
     }
   });
@@ -83,43 +81,52 @@ function constructName(folder, name) {
 }
 
 function addBlocksDependencies(blocks, pages) {
+  const depFiles = {};
   const items = pages || blocks;
   for (block of Object.entries(items)){
     const [blockName, blockFiles] = block;
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
     if (blockFiles['.pug']) {
-      const ast = getAst(blockFiles['.pug']);
+      const ast = getAst(blockFiles['.pug'].path);
       const bems = getBems(ast);
       bems.bems.forEach(bem => {
         if (blocks[bem]) {
           for (file of Object.entries(blocks[bem])) {
-            const [ext, filePath] = file;
+            const [ext, fileInfo] = file;
             if (ext in dependencyFiles) {
-              dependencyFiles[ext].push(filePath);
+              dependencyFiles[ext].push(fileInfo.path);
             }
           }
         }
       });
-      writeDependencyFiles(blockFiles, dependencyFiles, bems.extends_);
+      Object.assign(depFiles, writeDependencyFiles(blockFiles, dependencyFiles, bems.extends_));
     }
   }
+  return depFiles;
 }
 
 function writeDependencyFiles(blockFiles, dependencyFiles, extends_) {
+  const depFiles = {};
   for (blockFile of Object.entries(blockFiles)) {
-    const [ext, filePath] = blockFile;
+    const [ext, fileInfo] = blockFile;
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
-      const dependencyPath = path.join(path.dirname(filePath), 'dependencies' + ext);
+      const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
       let content = rules[ext].message;
       dependencyFiles[ext].forEach(depFile => {
-        content += rules[ext].addBem(depFile, filePath);
+        content += rules[ext].addBem(depFile, fileInfo.path);
       });
       if (extends_) {
         content += rules[ext].addExtends(extends_);
       }
       fs.writeFileSync(dependencyPath, content);
+      depFiles[fileInfo.path] = dependencyPath;
     }
   }
+  return depFiles;
+}
+
+function inject(depFiles) {
+  console.log(depFiles);
 }
 
 // Get BEM list from pug file.
@@ -168,14 +175,22 @@ function getAst(file) {
 // Generate dependency files
 function generate(blocksFolder, pagesFolders) {
   const blocks = getBlocks(blocksFolder);
-  addBlocksDependencies(blocks);
+  const depFiles = addBlocksDependencies(blocks);
 
+  const pageBlocks = {};
   if (pagesFolders) {
     pagesFolders.forEach(folder => {
       const pages = getBlocks(folder);
-      addBlocksDependencies(blocks, pages);
+      pageBlocks[folder] = pages;
+      Object.assign(depFiles, addBlocksDependencies(blocks, pages));
     });
   }
+
+  return {
+    blocks: blocks,
+    pages: pageBlocks,
+    depFiles: depFiles
+  };
 }
 
-module.exports = generate;
+module.exports = { generate, inject };
