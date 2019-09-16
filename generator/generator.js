@@ -126,7 +126,22 @@ function writeDependencyFiles(blockFiles, dependencyFiles, extends_) {
 }
 
 function inject(depFiles) {
-  console.log(depFiles);
+  for (files of Object.entries(depFiles)) {
+    const [blockFile, depFile] = files;
+    const blockContent = fs.readFileSync(blockFile, {encoding: 'utf-8'});
+    const ext = path.extname(blockFile);
+    const importString = rules[ext].addBem(depFile, blockFile);
+    if (!blockContent.includes(importString)) {
+      let newContent;
+      if (ext === '.pug' && blockContent.includes('extends')) {
+        newContent = importString + blockContent;
+      }
+      else {
+        newContent = importString + blockContent;
+      }
+      fs.writeFileSync(blockFile, newContent);
+    }
+  }
 }
 
 // Get BEM list from pug file.
