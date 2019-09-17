@@ -1,0 +1,7 @@
+@import '../text_level';
+
+.text_level_h1 {
+  @extend %text_header;
+  font-size: $h1-font-size;
+  line-height: $h1-line-height;
+}
