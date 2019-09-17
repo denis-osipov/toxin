@@ -120,12 +120,12 @@ function writeDependencyFiles(blockFiles, dependencyFiles, extends_) {
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
       let content = warningMessage.join(rules[ext].commentStart);
-      dependencyFiles[ext].forEach(depFile => {
-        content += rules[ext].addBem(depFile, fileInfo.path);
-      });
       if (extends_) {
         content += rules[ext].addExtends(extends_);
       }
+      dependencyFiles[ext].forEach(depFile => {
+        content += rules[ext].addBem(depFile, fileInfo.path);
+      });
       fs.writeFileSync(dependencyPath, content);
       depFiles[fileInfo.path] = dependencyPath;
     }
