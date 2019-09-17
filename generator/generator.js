@@ -141,17 +141,12 @@ function inject(depFiles) {
     const importString = rules[ext].addBem(depFile, blockFile);
     if (!blockContent.includes(importString)) {
       let newContent;
-      if (ext === '.pug') {
-        const extendMatch = blockContent.match(/^extends .+\s+/m);
-        if (extendMatch) {
-          const splittedContent = blockContent.split(extendMatch[0]);
-          splittedContent.splice(1, 0, extendMatch[0], importString);
+      if (ext === '.pug' && blockContent.match(/^extends .+\s+/m)) {
+          const firstBlock = blockContent.match(/^block .+(\s+)/m);
+          const splittedContent = blockContent.split(firstBlock[0]);
+          splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
           newContent = splittedContent.join('');
         }
-        else {
-          newContent = importString + blockContent;
-        }
-      }
       else {
         newContent = importString + blockContent;
       }
