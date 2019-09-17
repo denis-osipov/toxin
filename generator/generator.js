@@ -139,7 +139,7 @@ function inject(depFiles) {
     const blockContent = fs.readFileSync(blockFile, {encoding: 'utf-8'});
     const ext = path.extname(blockFile);
     const importString = rules[ext].addBem(depFile, blockFile);
-    if (!blockContent.includes(importString)) {
+    if (!blockContent.includes(importString.trim())) {
       let newContent;
       if (ext === '.pug' && blockContent.match(/^extends .+\s+/m)) {
           const firstBlock = blockContent.match(/^block .+(\s+)/m);
