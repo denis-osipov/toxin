@@ -9,32 +9,40 @@ const walk = require('pug-walk');
 /*
 Global rules for file types:
 
-message - string of warning message about file generation
-add - function generating strings for file
+warningMessage - array of strings for warning message about file generation
+addBem - function generating import strings for regular blocks
+addExtends - function generating import strings for pug extends
 */
+const eol = require('os').EOL;
+const warningMessage = [
+  '',
+  `File generated automatically.${eol}`,
+  `Any changes will be discarded during next compilation.${eol}${eol}`
+];
+
 const rules = {
   '.js': {
-    message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
+    commentStart: '// ',
     addBem: function(depFile, blockFile) {
-      return `import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
+      return `import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';${eol}`;
     },
     addExtends: function(extends_) {
-      return `import '${extends_.replace(/.pug$/, '')}';\n`;
+      return `import '${extends_.replace(/.pug$/, '')}';${eol}`;
     }
   },
   '.scss': {
-    message: '// File generated automatically.\n// Any changes will be discarded during next compilation.\n\n',
+    commentStart: '// ',
     addBem: function(depFile, blockFile) {
-      return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';\n`;
+      return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';${eol}`;
     },
     addExtends: function(extends_) {
-      return `@import '${extends_.replace(/.pug$/, '')}';\n`;
+      return `@import '${extends_.replace(/.pug$/, '')}';${eol}`;
     }
   },
   '.pug': {
-    message: '//- File generated automatically.\n//- Any changes will be discarded during next compilation.\n\n',
+    commentStart: '//- ',
     addBem: function(depFile, blockFile) {
-      return `include ${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}\n`;
+      return `include ${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}${eol}`;
     },
     addExtends: function(extends_) {
       return '';
@@ -111,7 +119,7 @@ function writeDependencyFiles(blockFiles, dependencyFiles, extends_) {
     const [ext, fileInfo] = blockFile;
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
-      let content = rules[ext].message;
+      let content = warningMessage.join(rules[ext].commentStart);
       dependencyFiles[ext].forEach(depFile => {
         content += rules[ext].addBem(depFile, fileInfo.path);
       });
