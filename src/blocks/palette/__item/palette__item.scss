@@ -1,3 +1,4 @@
+@import 'dependencies.scss';
 @mixin palette__item {
   $ref-rem: 1 !default;
   .palette__item {

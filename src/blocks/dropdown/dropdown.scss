@@ -1,3 +1,4 @@
+@import 'dependencies.scss';
 @mixin dropdown {
   @include dropdown__button;
   @include dropdown__container;

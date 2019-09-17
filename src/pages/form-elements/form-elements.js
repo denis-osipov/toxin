@@ -1,3 +1,4 @@
+import 'dependencies.js';
 $( document ).ready(function(jQery) {
   const secondDatepicker = $( '.date-picker' ).eq(1).find('.input').data('datepicker');
   secondDatepicker.selectDate(new Date(2019, 7, 19));

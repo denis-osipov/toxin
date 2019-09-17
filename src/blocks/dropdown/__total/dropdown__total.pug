@@ -1,3 +1,4 @@
+include dependencies.pug
 mixin dropdown__total
   - attributes.class = attributes.class ? attributes.class + ' dropdown__total' : 'dropdown__total';
   +icon-field('expand_more', 'dark-50', false, {readonly: true})&attributes(attributes)
