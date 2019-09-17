@@ -96,7 +96,7 @@ function addBlocksDependencies(blocks, pages) {
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
     if (blockFiles['.pug']) {
       const ast = getAst(blockFiles['.pug'].path);
-      const bems = getBems(ast);
+      const bems = getBems(ast, path.basename(blockFiles['.pug'].path, '.pug'));
       bems.bems.forEach(bem => {
         if (blocks[bem]) {
           for (file of Object.entries(blocks[bem])) {
@@ -157,36 +157,33 @@ function inject(depFiles) {
 
 // Get BEM list from pug file.
 // BEM entities should be added as mixins or as block classes.
-function getBems(ast) {
+function getBems(ast, blockName) {
   let bems = new Set();
   let extends_;
   walk(ast, function before(node, replace) {
     if (node.type === 'Include') {
       return false;
     }
-    else if (node.type === 'Mixin') {
-      if (node.call) {
-        bems.add(node.name);
-      }
-      if (node.attrs) {
-        node.attrs.forEach(attr => {
-          if (attr.name === 'class') {
-            const classes = attr.val.split(' ');
-            classes.forEach(class_ => {
-              const bemClass = class_.replace(/['"]/g, '');
-              if (bemClass !== node.name) {
-                bems.add(bemClass);
-              }
-            });
-          }
-        });
-      }
+    else if (node.type === 'Mixin' && node.call) {
+      bems.add(node.name);
     }
     else if (node.type === 'Extends') {
       extends_ = node.file.path;
     }
-  }, {
-    includeDependencies: true
+
+    if (node.attrs) {
+      node.attrs.forEach(attr => {
+        if (attr.name === 'class') {
+          const classes = attr.val.split(' ');
+          classes.forEach(class_ => {
+            const bemClass = class_.replace(/['"]/g, '');
+            if (bemClass !== blockName) {
+              bems.add(bemClass);
+            }
+          });
+        }
+      });
+    }
   });
 
   return { bems: Array.from(bems), extends_: extends_ };
