@@ -133,8 +133,16 @@ function inject(depFiles) {
     const importString = rules[ext].addBem(depFile, blockFile);
     if (!blockContent.includes(importString)) {
       let newContent;
-      if (ext === '.pug' && blockContent.includes('extends')) {
-        newContent = importString + blockContent;
+      if (ext === '.pug') {
+        const extendMatch = blockContent.match(/^extends .+\s+/m);
+        if (extendMatch) {
+          const splittedContent = blockContent.split(extendMatch[0]);
+          splittedContent.splice(1, 0, extendMatch[0], importString);
+          newContent = splittedContent.join('');
+        }
+        else {
+          newContent = importString + blockContent;
+        }
       }
       else {
         newContent = importString + blockContent;
