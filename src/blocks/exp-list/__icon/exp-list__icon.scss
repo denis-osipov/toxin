@@ -1,10 +1,8 @@
-@mixin exp-list__icon {
-  .exp-list__icon {
-    font-size: 24px / $ref-rem;
-    text-align: center;
+.exp-list__icon {
+  font-size: 24px / $ref-rem;
+  text-align: center;
 
-    .exp-list_expanded & {
-      transform: rotate(-180deg);
-    }
+  .exp-list_expanded & {
+    transform: rotate(-180deg);
   }
 }

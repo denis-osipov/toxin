@@ -1,9 +1,6 @@
 @import 'dependencies.scss';
-@mixin font-sample {
-  .font-sample {
-    list-style: none;
-    padding-right: calc(100% - 403px);
-  }
-  @include font-sample__item;
-  @include font-sample__label;
+
+.font-sample {
+  list-style: none;
+  padding-right: calc(100% - 403px);
 }

@@ -1,10 +1,5 @@
 @import 'dependencies.scss';
-@mixin palette {
-  .palette {
-    list-style: none;
-  }
-  @include palette__item;
-  @include palette__plate;
-  @include palette__label;
-  @include palette__color-code;
+
+.palette {
+  list-style: none;
 }

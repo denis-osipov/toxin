@@ -1,10 +1,7 @@
 @import 'dependencies.scss';
-@mixin exp-list__header {
-  @include icon;
 
-  .exp-list__header {
-    align-items: center;
-    display: grid;
-    grid-template-columns: 1fr 44px / $ref-rem;
-  }
+.exp-list__header {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 44px / $ref-rem;
 }

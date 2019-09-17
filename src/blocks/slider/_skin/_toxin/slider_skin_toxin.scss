@@ -1,31 +1,28 @@
-@mixin toxin {
+.irs--toxin {
+  height: 42px;
 
-  .irs--toxin {
-    height: 42px;
+  .irs-bar {
+    background: $secondary-gradient;
+    border-radius: 3px;
+    height: 6px;
+    top: 18px;
+  }
 
-    .irs-bar {
-      background: $secondary-gradient;
-      border-radius: 3px;
-      height: 6px;
-      top: 18px;
-    }
+  .irs-handle {
+    background: $secondary-gradient;
+    border-radius: 50%;
+    border: 2px solid $light;
+    height: 16px;
+    top: 13px;
+    width: 16px;
+  }
 
-    .irs-handle {
-      background: $secondary-gradient;
-      border-radius: 50%;
-      border: 2px solid $light;
-      height: 16px;
-      top: 13px;
-      width: 16px;
-    }
-
-    .irs-line {
-      background: $light;
-      border-radius: 3px;
-      border: 1px solid $dark-25;
-      box-sizing: border-box;
-      height: 6px;
-      top: 18px;
-    }
+  .irs-line {
+    background: $light;
+    border-radius: 3px;
+    border: 1px solid $dark-25;
+    box-sizing: border-box;
+    height: 6px;
+    top: 18px;
   }
 }

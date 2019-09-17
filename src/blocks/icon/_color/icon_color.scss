@@ -1,13 +1,11 @@
-@mixin icon_color {
-  .icon_color {
-    &_dark-50 {
-      color: $dark-50;
-    }
-    &_primary-gradient {
-      background: $primary-gradient;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.icon_color {
+  &_dark-50 {
+    color: $dark-50;
+  }
+  &_primary-gradient {
+    background: $primary-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

@@ -1,18 +1,16 @@
-@mixin button_size {
-  .button_size {
-    &_normal {
-      height: 44px / $ref-rem;
-      width: 99px / $ref-rem;
-    }
+.button_size {
+  &_normal {
+    height: 44px / $ref-rem;
+    width: 99px / $ref-rem;
+  }
 
-    &_big {
-      height: 44px / $ref-rem;
-      min-width: 180px / $ref-rem;
-      width: 100%;
-    }
+  &_big {
+    height: 44px / $ref-rem;
+    min-width: 180px / $ref-rem;
+    width: 100%;
+  }
 
-    &_min {
-      padding: 0;
-    }
+  &_min {
+    padding: 0;
   }
 }

@@ -1,8 +1,6 @@
-@mixin slider__header {
-  .slider__header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 5px;
-    padding-top: 12px;
-  }
+.slider__header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  padding-top: 12px;
 }

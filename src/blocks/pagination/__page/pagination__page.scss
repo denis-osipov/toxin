@@ -1,22 +1,20 @@
-@mixin pagination__page {
-  .pagination__page {
-    border-radius: 50%;
-    color: $dark-50;
-    height: 40px / $ref-rem;
-    line-height: 40px / $ref-rem;
-    text-align: center;
-    text-decoration: none;
-    width: 40px / $ref-rem;
+.pagination__page {
+  border-radius: 50%;
+  color: $dark-50;
+  height: 40px / $ref-rem;
+  line-height: 40px / $ref-rem;
+  text-align: center;
+  text-decoration: none;
+  width: 40px / $ref-rem;
 
-    &:first-child {
-      background: $primary-gradient;
-      color: $light;
-      font-weight: bold;
-    }
+  &:first-child {
+    background: $primary-gradient;
+    color: $light;
+    font-weight: bold;
+  }
 
-    &:last-child {
-      background: $secondary-gradient;
-      color: $light;
-    }
+  &:last-child {
+    background: $secondary-gradient;
+    color: $light;
   }
 }

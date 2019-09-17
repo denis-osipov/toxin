@@ -1,5 +1,1 @@
 @import 'dependencies.scss';
-@mixin guests {
-  @include dropdown;
-  @include guests__header;
-}

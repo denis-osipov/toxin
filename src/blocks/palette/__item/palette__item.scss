@@ -1,11 +1,9 @@
 @import 'dependencies.scss';
-@mixin palette__item {
-  $ref-rem: 1 !default;
-  .palette__item {
-    align-items: center;
-    column-gap: 40px / $ref-rem;
-    display: grid;
-    grid-template-columns: #{70px / $ref-rem} 1fr;
-    padding-bottom: 20px / $ref-rem;
-  }
+
+.palette__item {
+  align-items: center;
+  column-gap: 40px / $ref-rem;
+  display: grid;
+  grid-template-columns: #{70px / $ref-rem} 1fr;
+  padding-bottom: 20px / $ref-rem;
 }

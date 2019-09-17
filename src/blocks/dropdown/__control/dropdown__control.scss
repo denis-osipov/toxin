@@ -1,7 +1,5 @@
-@mixin dropdown__control {
-  .dropdown__control {
-    &:disabled {
-      visibility: hidden;
-    }
+.dropdown__control {
+  &:disabled {
+    visibility: hidden;
   }
 }

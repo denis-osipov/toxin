@@ -1,30 +1,25 @@
-@mixin list__item_type {
-  @include checkbox;
-  @include icon;
-
-  .list__item_type {
-    &_icon {
-      border-bottom: 1px solid $dark-10;
-      column-gap: 10px;
-      display: flex;
-      margin-bottom: 20px / $ref-rem;
-      padding-bottom: 20px / $ref-rem;
+.list__item_type {
+  &_icon {
+    border-bottom: 1px solid $dark-10;
+    column-gap: 10px;
+    display: flex;
+    margin-bottom: 20px / $ref-rem;
+    padding-bottom: 20px / $ref-rem;
+  }
+  &_list {
+    column-gap: 10px;
+    display: flex;
+    &::before {
+      background-color: $dark-25;
+      border-radius: 50%;
+      content: '';
+      flex-shrink: 0;
+      height: 10px;
+      margin-top: 7px;
+      width: 10px;
     }
-    &_list {
-      column-gap: 10px;
-      display: flex;
-      &::before {
-        background-color: $dark-25;
-        border-radius: 50%;
-        content: '';
-        flex-shrink: 0;
-        height: 10px;
-        margin-top: 7px;
-        width: 10px;
-      }
-    }
-    &_toggle {
-      margin-bottom: 13px;
-    }
+  }
+  &_toggle {
+    margin-bottom: 13px;
   }
 }

@@ -1,14 +1,8 @@
 @import 'dependencies.scss';
-@mixin list {
-  .list {
-    list-style: none;
-    margin: 0;
-    padding-left: 0;
-    padding-top: 11px;
-  }
 
-  @include list__item-icon;
-  @include list__item-label;
-  @include list__item;
-  @include list_type;
+.list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  padding-top: 11px;
 }
