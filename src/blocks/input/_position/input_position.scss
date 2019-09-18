@@ -1,17 +1,3 @@
-.input_position {
-  &_external {
-    border: 1px solid $dark-25;
-    height: 44px / $ref-rem;
-  }
-  &_internal {
-    border: none;
-    height: 41px / $ref-rem;
-  }
-  &_invisible {
-    height: 0;
-    opacity: 0;
-    position: absolute;
-    width: 0;
-    z-index: -9999;
-  }
-}
+@import '_external/input_position_external.scss';
+@import '_internal/input_position_internal.scss';
+@import '_invisible/input_position_invisible.scss';
