@@ -72,20 +72,26 @@ function getBlocks(path) {
   return blocks;
 }
 
-function scanFolder(root, blocks) {
+function scanFolder(root, blocks, parent) {
   const entities = fs.readdirSync(root, { encoding: 'utf-8', withFileTypes: true });
   entities.forEach(function(entity) {
     const entityPath = path.join(root, entity.name);
     if (entity.isDirectory()) {
       const name = constructName(entityPath, entity.name);
-      blocks[name] = {};
-      scanFolder(entityPath, blocks);
+      blocks[name] = {
+        files: {},
+        internalDependencies: []
+      };
+      if (parent) {
+        blocks[parent].internalDependencies.push(name);
+      }
+      scanFolder(entityPath, blocks, name);
     }
     else if (entity.isFile()) {
       const fileType = path.extname(entity.name);
       const name = path.basename(entity.name, fileType);
       if (name !== 'dependencies') {
-        blocks[name][fileType] = {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs};
+        blocks[name].files[fileType] = {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs};
       }
     }
   });
@@ -107,14 +113,17 @@ function addBlocksDependencies(blocks, pages) {
   const depFiles = {};
   const items = pages || blocks;
   for (block of Object.entries(items)){
-    const [blockName, blockFiles] = block;
+    const [blockName, blockInfo] = block;
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
-    if (blockFiles['.pug']) {
-      const ast = getAst(blockFiles['.pug'].path);
-      const bems = getBems(ast, path.basename(blockFiles['.pug'].path, '.pug'));
+    if (blockInfo.files['.pug']) {
+      const ast = getAst(blockInfo.files['.pug'].path);
+      const bems = getBems(ast, path.basename(blockInfo.files['.pug'].path, '.pug'));
+      blockInfo.internalDependencies.forEach(childBlock => {
+        bems.bems.add(childBlock);
+      });
       bems.bems.forEach(bem => {
         if (blocks[bem]) {
-          for (file of Object.entries(blocks[bem])) {
+          for (file of Object.entries(blocks[bem].files)) {
             const [ext, fileInfo] = file;
             if (ext in dependencyFiles) {
               dependencyFiles[ext].push(fileInfo.path);
@@ -122,15 +131,32 @@ function addBlocksDependencies(blocks, pages) {
           }
         }
       });
-      Object.assign(depFiles, writeDependencyFiles(blockFiles, dependencyFiles, bems.extends_));
+      Object.assign(depFiles, writeDependencyFiles(blockInfo, dependencyFiles, bems.extends_));
     }
   }
   return depFiles;
 }
 
-function writeDependencyFiles(blockFiles, dependencyFiles, extends_) {
+function getDependenciesFromPug(filePath, blocks) {
+  const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
+  const ast = getAst(filePath);
+  const bems = getBems(ast, path.basename(filePath, '.pug'));
+  bems.bems.forEach(bem => {
+    if (blocks[bem]) {
+      for (file of Object.entries(blocks[bem].files)) {
+        const [ext, fileInfo] = file;
+        if (ext in dependencyFiles) {
+          dependencyFiles[ext].push(fileInfo.path);
+        }
+      }
+    }
+  });
+  return {dependencies: dependencyFiles, extends_: bems.extends_};
+}
+
+function writeDependencyFiles(blockInfo, dependencyFiles, extends_) {
   const depFiles = {};
-  for (blockFile of Object.entries(blockFiles)) {
+  for (blockFile of Object.entries(blockInfo.files)) {
     const [ext, fileInfo] = blockFile;
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
@@ -201,7 +227,7 @@ function getBems(ast, blockName) {
     }
   });
 
-  return { bems: Array.from(bems), extends_: extends_ };
+  return { bems: bems, extends_: extends_ };
 }
 
 function getAst(file) {
