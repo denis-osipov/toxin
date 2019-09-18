@@ -1,3 +1,4 @@
+import './dependencies.js';
 // Dropdown with counting
 // Should be setted on inputs: $(selector).dropdown(settings)
 //
@@ -13,9 +14,6 @@
 //                                 // function get integer and must return formatted string
 // };
 
-
-import './_type/_conveniences/dropdown_type_conveniences';
-import './_type/_guests/dropdown_type_guests';
 
 (function( $ ) {
   // Main method creating dropdown

@@ -1,7 +1,5 @@
 import './dependencies.js';
 import 'air-datepicker';
-import './_double/date-picker_double';
-import './__field/date-picker__field';
 
 function setDatepicker( jQuery ) {
   // Use lower case for monthShort

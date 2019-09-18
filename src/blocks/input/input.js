@@ -1,1 +1,1 @@
-import './_masked_date/input_masked_date'
+import './dependencies.js';
