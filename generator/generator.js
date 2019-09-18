@@ -24,10 +24,21 @@ const rules = {
   '.js': {
     commentStart: '// ',
     addBem: function(depFile, blockFile) {
-      return `import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';${eol}`;
+      let importPath = path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/');
+      if (!importPath.match(/^\.{0,2}\//)) {
+        importPath = './' + importPath;
+      }
+      return `import '${importPath}';${eol}`;
     },
-    addExtends: function(extends_) {
-      return `import '${extends_.replace(/.pug$/, '')}';${eol}`;
+    addExtends: function(extends_, pageFile) {
+      const otherFile = extends_.replace(/.pug$/, '.js');
+      if (fs.existsSync(path.resolve(path.dirname(pageFile), otherFile))) {
+        if (!otherFile.match(/^\.{0,2}\//)) {
+          otherFile = './' + otherFile;
+        }
+        return `import '${otherFile}';${eol}`;
+      }
+      return '';
     }
   },
   '.scss': {
@@ -35,8 +46,12 @@ const rules = {
     addBem: function(depFile, blockFile) {
       return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';${eol}`;
     },
-    addExtends: function(extends_) {
-      return `@import '${extends_.replace(/.pug$/, '')}';${eol}`;
+    addExtends: function(extends_, pageFile) {
+      const otherFile = extends_.replace(/.pug$/, '.scss');
+      if (fs.existsSync(path.resolve(path.dirname(pageFile), otherFile))) {
+        return `@import '${otherFile}';${eol}`;
+      }
+      return '';
     }
   },
   '.pug': {
@@ -121,7 +136,7 @@ function writeDependencyFiles(blockFiles, dependencyFiles, extends_) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
       let content = warningMessage.join(rules[ext].commentStart);
       if (extends_) {
-        content += rules[ext].addExtends(extends_);
+        content += rules[ext].addExtends(extends_, fileInfo.path);
       }
       dependencyFiles[ext].forEach(depFile => {
         content += rules[ext].addBem(depFile, fileInfo.path);

@@ -1,2 +1,2 @@
-import 'dependencies.js';
+import './dependencies.js';
 import 'blocksPath/date-picker/date-picker';

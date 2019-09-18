@@ -1,6 +1,6 @@
-import 'dependencies.js';
+import './dependencies.js';
 import 'air-datepicker';
-import './_double/date-picker__double';
+import './_double/date-picker_double';
 import './__field/date-picker__field';
 
 function setDatepicker( jQuery ) {

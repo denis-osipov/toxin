@@ -14,8 +14,8 @@
 // };
 
 
-import './_type/dropdown_type_conveniences';
-import './_type/dropdown_type_guests';
+import './_type/_conveniences/dropdown_type_conveniences';
+import './_type/_guests/dropdown_type_guests';
 
 (function( $ ) {
   // Main method creating dropdown

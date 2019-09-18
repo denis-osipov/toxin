@@ -1,4 +1,4 @@
-import 'dependencies.js';
+import './dependencies.js';
 function setLike( jQuery ) {
   $( '.like' ).each(function(index, element) {
     $( element ).find('.like__input').on('click', function(event) {

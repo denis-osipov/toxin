@@ -1,7 +1,6 @@
 // File generated automatically.
 // Any changes will be discarded during next compilation.
 
-import '../ui-kit/ui-kit';
 import '../../blocks/input/input.js';
 import '../../blocks/dropdown/dropdown.js';
 import '../../blocks/double-date-picker/double-date-picker.js';
