@@ -1,0 +1,5 @@
+@import '../input_type.scss';
+
+.input_type_text {
+  @extend %text;
+}

@@ -1,0 +1,10 @@
+.button_type_text {
+  background: none;
+  color: $primary-color;
+  
+  &.button_focused,
+  &:hover,
+  &:focus {
+    color: $dark-50;
+  }
+}

@@ -1,0 +1,16 @@
+.checkbox__box_type_radio {
+  border-radius: 50%;
+  width: 20px;
+
+  .checkbox__input:checked ~ & {
+    &::before {
+      background: $primary-gradient;
+      border-radius: 50%;
+      content: '';
+      height: 12px;
+      position: absolute;
+      transform: translate(3px, 3px);
+      width: 12px;
+    }
+  }
+}
