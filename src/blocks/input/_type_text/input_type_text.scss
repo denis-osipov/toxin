@@ -1,4 +1,6 @@
-%text {
+@import '../input_type.scss';
+
+.input_type_text {
   background: $light;
   border-radius: 4px;
   box-sizing: border-box;
@@ -14,15 +16,5 @@
   &:focus,
   &.input_active {
     border-color: $dark-50;
-  }
-}
-
-.input_type {
-  &_text {
-    @extend %text;
-  }
-
-  &_email {
-    @extend %text;
   }
 }

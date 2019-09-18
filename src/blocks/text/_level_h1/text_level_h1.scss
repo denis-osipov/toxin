@@ -1,0 +1,11 @@
+@import '../text_level';
+
+.text_level_h1 {
+  color: $dark;
+  font: {
+    family: $header-font-family;
+    size: $h1-font-size;
+    weight: bold;
+  }
+  line-height: $h1-line-height;
+}

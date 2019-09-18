@@ -1,1 +1,1 @@
-import './_masked/_date/input_masked_date'
+import './_masked_date/input_masked_date'
