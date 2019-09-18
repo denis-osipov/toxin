@@ -115,43 +115,29 @@ function addBlocksDependencies(blocks, pages) {
   for (block of Object.entries(items)){
     const [blockName, blockInfo] = block;
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
+    const depBlocks = new Set(blockInfo.internalDependencies);
+    let extends_;
     if (blockInfo.files['.pug']) {
       const ast = getAst(blockInfo.files['.pug'].path);
       const bems = getBems(ast, path.basename(blockInfo.files['.pug'].path, '.pug'));
-      blockInfo.internalDependencies.forEach(childBlock => {
-        bems.bems.add(childBlock);
-      });
       bems.bems.forEach(bem => {
-        if (blocks[bem]) {
-          for (file of Object.entries(blocks[bem].files)) {
-            const [ext, fileInfo] = file;
-            if (ext in dependencyFiles) {
-              dependencyFiles[ext].push(fileInfo.path);
-            }
+        depBlocks.add(bem);
+      })
+      extends_ = bems.extends_;
+    }
+    depBlocks.forEach(depBlock => {
+      if (blocks[depBlock]) {
+        for (file of Object.entries(blocks[depBlock].files)) {
+          const [ext, fileInfo] = file;
+          if (ext in dependencyFiles) {
+            dependencyFiles[ext].push(fileInfo.path);
           }
         }
-      });
-      Object.assign(depFiles, writeDependencyFiles(blockInfo, dependencyFiles, bems.extends_));
-    }
+      }
+    });
+    Object.assign(depFiles, writeDependencyFiles(blockInfo, dependencyFiles, extends_));
   }
   return depFiles;
-}
-
-function getDependenciesFromPug(filePath, blocks) {
-  const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
-  const ast = getAst(filePath);
-  const bems = getBems(ast, path.basename(filePath, '.pug'));
-  bems.bems.forEach(bem => {
-    if (blocks[bem]) {
-      for (file of Object.entries(blocks[bem].files)) {
-        const [ext, fileInfo] = file;
-        if (ext in dependencyFiles) {
-          dependencyFiles[ext].push(fileInfo.path);
-        }
-      }
-    }
-  });
-  return {dependencies: dependencyFiles, extends_: bems.extends_};
 }
 
 function writeDependencyFiles(blockInfo, dependencyFiles, extends_) {
