@@ -1,4 +1,7 @@
-// Plugin for generation of entry points and aggregation of mixins
+// Plugin for generation of dependency files for BEM-entities.
+// Each entity should have js, pug and scss files.
+// At least it should have fiele of corresponding type if it uses other
+// entity which has such file. Otherway dependencies of this type won't be create.
 
 const path = require('path');
 const { generate, inject } = require('./generator');
