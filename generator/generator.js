@@ -66,7 +66,7 @@ const rules = {
 };
 
 
-function getBlocks(path) {
+function getBemFiles(path) {
   const blocks = {};
   scanFolder(path, blocks);
   return blocks;
@@ -223,23 +223,23 @@ function getAst(file) {
 }
 
 // Generate dependency files
-function generate(blocksFolder, pagesFolders) {
-  const blocks = getBlocks(blocksFolder);
-  const depFiles = addBlocksDependencies(blocks);
+function generate(bemsFolder, pagesFolders) {
+  const bemsFiles = getBemFiles(bemsFolder);
+  const depsFiles = addBlocksDependencies(bemsFiles);
 
-  const pageBlocks = {};
+  const pagesFiles = {};
   if (pagesFolders) {
     pagesFolders.forEach(folder => {
-      const pages = getBlocks(folder);
-      pageBlocks[folder] = pages;
-      Object.assign(depFiles, addBlocksDependencies(blocks, pages));
+      const pageFiles = getBemFiles(folder);
+      Object.assign(pagesFiles, pageFiles);
+      Object.assign(depsFiles, addBlocksDependencies(bemsFiles, pageFiles));
     });
   }
 
   return {
-    blocks: blocks,
-    pages: pageBlocks,
-    depFiles: depFiles
+    bemsFiles: bemsFiles,
+    pagesFiles: pagesFiles,
+    depsFiles: depsFiles
   };
 }
 

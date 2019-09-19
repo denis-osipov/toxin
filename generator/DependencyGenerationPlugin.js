@@ -14,7 +14,6 @@ class DependencyGenerationPlugin {
   }
 
   apply(compiler) {
-
     // Generate at startup
     compiler.hooks.entryOption.tap(
       'DependencyGenerationPlugin',
@@ -28,11 +27,8 @@ class DependencyGenerationPlugin {
         else if (typeof this.options.pagesFolders === 'string') {
           this.options.pagesFolders = [this.options.pagesFolders];
         }
-        this.blocks = generate(this.options.blocksFolder, this.options.pagesFolders);
 
-        if (this.options.inject) {
-          inject(this.blocks.depFiles);
-        }
+        this.generate();
       }
     );
 
@@ -41,16 +37,22 @@ class DependencyGenerationPlugin {
       'DependencyGenerationPlugin',
       (fileName, changeTime) => {
 
-        // // Don't respond to changes of generated files
-        // if (fileName.includes('dependency.')) {
-        //   return;
-        // }
+        // Don't respond to changes of generated files (use watchOptions instead?)
+        if (Object.values(this.files.depsFiles).includes(fileName)) {
+          return;
+        }
 
-        // // Use cache: timestamps or hash? What about fs.watch/fs.watchFile
-        // // or webpack watch?
-        // generator(this.options.blocksFolder, this.options.pagesFolders);
+        // To simplify adding new files we need regenerate dependencies for each invalidation.
+        this.generate();
       }
     );
+  }
+
+  generate() {
+    this.files = generate(this.options.blocksFolder, this.options.pagesFolders);
+    if (this.options.inject) {
+      inject(this.files.depsFiles);
+    }
   }
 }
 
