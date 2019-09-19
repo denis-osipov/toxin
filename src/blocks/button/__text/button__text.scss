@@ -1,0 +1,19 @@
+.button__text {
+  .button_type_border & {
+    color: $primary-color;
+  }
+
+  .button_type_fill & {
+    color: $light;
+  }
+
+  .button_type_text & {
+    color: $primary-color;
+  }
+
+  .button_type_text.button_focused &,
+  .button_type_text:hover &,
+  .button_type_text:focus & {
+    color: $dark-50;
+  }
+}

@@ -1,4 +1,5 @@
 @import 'dependencies.scss';
+
 .ui-kit {
   $column-gap: 20px;
   $ref-padding: 141px;
@@ -67,16 +68,25 @@
         margin-bottom: 10px;
 
         .list_type_checkbox {
+          padding-top: 12px;
           padding-right: percentage(90px / $ref-col-width);;
         }
       }
     
       .sample-form:nth-child(2) {
         margin-bottom: 11px;
+
+        .list_type_radio {
+          padding-top: 11px;
+        }
       }
     
       .sample-form:nth-child(3) {
         margin-bottom: 12px;
+
+        .list_type_toggle {
+          padding-top: 11px;
+        }
       }
     
       .sample-form:nth-child(4) {
@@ -150,17 +160,30 @@
 
     &-8 {
       padding-right: percentage(63px / $ref-col-width);
+
       .list__item:first-child .checkbox__description {
         padding-right: percentage(37px / $ref-col-width);
+      }
+
+      .list_type_rich {
+        padding-top: 11px;
       }
     }
 
     &-9 {
       padding-right: percentage(63px / $ref-col-width);
+
+      .list_type_list {
+        padding-top: 8px;
+      }
     }
 
     &-10 {
       margin-left: -1px;
+
+      .list_type_icon {
+        padding-top: 2px;
+      }
     }
 
     &-11 {
