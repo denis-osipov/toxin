@@ -109,7 +109,7 @@ function constructName(folder, name) {
   }
 }
 
-function addBlocksDependencies(blocks, pages) {
+function addBlocksDependencies(blocks, pages, prevFiles) {
   const depFiles = {};
   const items = pages || blocks;
   for (block of Object.entries(items)){
@@ -223,22 +223,22 @@ function getAst(file) {
 }
 
 // Generate dependency files
-function generate(bemsFolder, pagesFolders) {
+function generate(bemsFolder, pagesFolders, prevEntities, prevDeps) {
   const bemsFiles = getBemFiles(bemsFolder);
-  const depsFiles = addBlocksDependencies(bemsFiles);
+  const depsFiles = prevDeps || {};
+  Object.assign(depsFiles, addBlocksDependencies(bemsFiles, null, prevEntities));
 
   const pagesFiles = {};
   if (pagesFolders) {
     pagesFolders.forEach(folder => {
       const pageFiles = getBemFiles(folder);
       Object.assign(pagesFiles, pageFiles);
-      Object.assign(depsFiles, addBlocksDependencies(bemsFiles, pageFiles));
+      Object.assign(depsFiles, addBlocksDependencies(bemsFiles, pageFiles, prevEntities));
     });
   }
 
   return {
-    bemsFiles: bemsFiles,
-    pagesFiles: pagesFiles,
+    entitiesFiles: Object.assign(bemsFiles, pagesFiles),
     depsFiles: depsFiles
   };
 }
