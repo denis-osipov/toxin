@@ -93,6 +93,12 @@ function scanFolder(root, blocks, parent) {
       if (name !== 'dependencies') {
         blocks[name].files[fileType] = {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs};
       }
+      else {
+        blocks[parent].files[fileType] = Object.assign(
+          blocks[parent].files[fileType] || {},
+          {depFile: entityPath}
+        )
+      }
     }
   });
 }
