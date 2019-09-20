@@ -1,10 +1,11 @@
-// Generators for AssetsGenerationPlugin
+// Functions for dependencies generation
 
 const path = require('path');
 const fs = require('fs');
 const lex = require('pug-lexer');
 const parse = require('pug-parser');
 const walk = require('pug-walk');
+const _ = require('lodash');
 
 /*
 Global rules for file types:
@@ -116,7 +117,8 @@ function constructName(folder, name) {
 }
 
 function addBlocksDependencies(blocks, pages, prevFiles) {
-  const depFiles = {};
+  const depsEntityList = {};
+  const depsFileList = {};
   const items = pages || blocks;
   for (block of Object.entries(items)){
     const [blockName, blockInfo] = block;
@@ -141,13 +143,13 @@ function addBlocksDependencies(blocks, pages, prevFiles) {
         }
       }
     });
-    Object.assign(depFiles, writeDependencyFiles(blockInfo, dependencyFiles, extends_));
+    Object.assign(depsFileList, writeDependencyFiles(blockInfo, dependencyFiles, extends_));
   }
-  return depFiles;
+  return { depsEntityList: depsEntityList, depsFileList: depsFileList };
 }
 
 function writeDependencyFiles(blockInfo, dependencyFiles, extends_) {
-  const depFiles = {};
+  const depsFileList = {};
   for (blockFile of Object.entries(blockInfo.files)) {
     const [ext, fileInfo] = blockFile;
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
@@ -160,10 +162,10 @@ function writeDependencyFiles(blockInfo, dependencyFiles, extends_) {
         content += rules[ext].addBem(depFile, fileInfo.path);
       });
       fs.writeFileSync(dependencyPath, content);
-      depFiles[fileInfo.path] = dependencyPath;
+      depsFileList[fileInfo.path] = dependencyPath;
     }
   }
-  return depFiles;
+  return depsFileList;
 }
 
 function inject(depFiles) {
@@ -230,22 +232,40 @@ function getAst(file) {
 
 // Generate dependency files
 function generate(bemsFolder, pagesFolders, prevEntities, prevDeps) {
+  const depsFiles = {};
+  const depsBems = {};
   const bemsFiles = getBemFiles(bemsFolder);
-  const depsFiles = prevDeps || {};
-  Object.assign(depsFiles, addBlocksDependencies(bemsFiles, null, prevEntities));
+  // Don't regenerate if entire folder didn't change
+  if (!(prevEntities && _.isEqual(bemsFiles, prevEntities.bemsFiles))) {
+    const { depsEntityList, depsFileList } = addBlocksDependencies(
+      bemsFiles,
+      null,
+      prevEntities ? prevEntities.bemsFiles : null);
+    Object.assign(depsBems, depsEntityList);
+    Object.assign(depsFiles, depsFileList);
+  }
 
   const pagesFiles = {};
   if (pagesFolders) {
     pagesFolders.forEach(folder => {
       const pageFiles = getBemFiles(folder);
-      Object.assign(pagesFiles, pageFiles);
-      Object.assign(depsFiles, addBlocksDependencies(bemsFiles, pageFiles, prevEntities));
+      pagesFiles[folder] = pageFiles;
+      // Don't regenerate if entire folder didn't change
+      if (!(prevEntities && _.isEqual(pageFiles, prevEntities.pagesFiles[folder]) && _.isEqual(bemsFiles, prevEntities.bemsFiles))) {
+        const { depsEntityList, depsFileList } = addBlocksDependencies(
+          bemsFiles,
+          pageFiles,
+          prevEntities ? prevEntities.pageFiles[folder] : null);
+        Object.assign(depsBems, depsEntityList);
+        Object.assign(depsFiles, depsFileList);
+      }
     });
   }
 
   return {
-    entitiesFiles: Object.assign(bemsFiles, pagesFiles),
-    depsFiles: depsFiles
+    entitiesFiles: { bemsFiles: bemsFiles, pagesFiles: pagesFiles },
+    depsFiles: depsFiles,
+    depsBems: depsBems
   };
 }
 

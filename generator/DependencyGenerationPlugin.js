@@ -50,12 +50,12 @@ class DependencyGenerationPlugin {
 
   generate() {
     const prevEntities = this.files ? this.files.entitiesFiles : null;
-    const prevDeps = this.files ? this.files.depsFiles : null;
+    const prevDeps = this.files ? this.files.depsBems : null;
     this.files = generate(
       this.options.blocksFolder,
       this.options.pagesFolders,
       prevEntities,
-      // prevDeps
+      prevDeps
       );
     if (this.options.inject) {
       inject(this.files.depsFiles);
