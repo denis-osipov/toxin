@@ -7,14 +7,15 @@ const parse = require('pug-parser');
 const walk = require('pug-walk');
 const _ = require('lodash');
 
+const eol = require('os').EOL;
+
 /*
 Global rules for file types:
 
 warningMessage - array of strings for warning message about file generation
-addBem - function generating import strings for regular blocks
+addBem - function generating import strings for regular BEM entities
 addExtends - function generating import strings for pug extends
 */
-const eol = require('os').EOL;
 const warningMessage = [
   '',
   `File generated automatically.${eol}`,
@@ -24,8 +25,8 @@ const warningMessage = [
 const rules = {
   '.js': {
     commentStart: '// ',
-    addBem: function(depFile, blockFile) {
-      let importPath = path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/');
+    addBem: function(depFile, entityFile) {
+      let importPath = path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/');
       if (!importPath.match(/^\.{0,2}\//)) {
         importPath = './' + importPath;
       }
@@ -44,8 +45,8 @@ const rules = {
   },
   '.scss': {
     commentStart: '// ',
-    addBem: function(depFile, blockFile) {
-      return `@import '${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}';${eol}`;
+    addBem: function(depFile, entityFile) {
+      return `@import '${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}';${eol}`;
     },
     addExtends: function(extends_, pageFile) {
       const otherFile = extends_.replace(/.pug$/, '.scss');
@@ -57,8 +58,8 @@ const rules = {
   },
   '.pug': {
     commentStart: '//- ',
-    addBem: function(depFile, blockFile) {
-      return `include ${path.relative(path.dirname(blockFile), depFile).replace(/\\/g, '/')}${eol}`;
+    addBem: function(depFile, entityFile) {
+      return `include ${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}${eol}`;
     },
     addExtends: function(extends_) {
       return '';
@@ -68,38 +69,39 @@ const rules = {
 
 
 function getBemFiles(path) {
-  const blocks = {};
-  scanFolder(path, blocks);
-  return blocks;
+  const bems = {};
+  scanFolder(path, bems);
+  return bems;
 }
 
-function scanFolder(root, blocks, parent) {
+function scanFolder(root, bems, parent) {
   const entities = fs.readdirSync(root, { encoding: 'utf-8', withFileTypes: true });
   entities.forEach(function(entity) {
     const entityPath = path.join(root, entity.name);
     if (entity.isDirectory()) {
+      // Directory name is BEM entity name
       const name = constructName(entityPath, entity.name);
-      blocks[name] = {
+      bems[name] = {
         files: {},
         internalDependencies: []
       };
       // If current directory isn't one of top-level, it is element or modifier directory.
       // Fdd it to parent dependencies.
       if (parent) {
-        blocks[parent].internalDependencies.push(name);
+        bems[parent].internalDependencies.push(name);
       }
-      scanFolder(entityPath, blocks, name);
+      scanFolder(entityPath, bems, name);
     }
     else if (entity.isFile()) {
       // If it's a file, add it to info for corresponding BEM entity
       const fileType = path.extname(entity.name);
       const name = path.basename(entity.name, fileType);
       if (name !== 'dependencies') {
-        blocks[name].files[fileType] = {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs};
+        bems[name].files[fileType] = {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs};
       }
       else {
-        blocks[parent].files[fileType] = Object.assign(
-          blocks[parent].files[fileType] || {},
+        bems[parent].files[fileType] = Object.assign(
+          bems[parent].files[fileType] || {},
           {depFile: entityPath}
         )
       }
@@ -119,22 +121,29 @@ function constructName(folder, name) {
   }
 }
 
-function addBlocksDependencies(blocks, pages, prevFiles) {
+function addDependencies(bems, pages, prevFiles) {
   const depsEntityList = {};
   const depsFileList = {};
-  const items = pages || blocks;
-  for (block of Object.entries(items)){
-    const [blockName, blockInfo] = block;
+  const items = pages || bems;
+  for (item of Object.entries(items)){
+    const [itemName, itemInfo] = item;
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
-    const depBlocks = new Set(blockInfo.internalDependencies);
+    const depItems = new Set(itemInfo.internalDependencies);
     let extends_;
     // If BEM entity is implemented in pug, parse pug file
+    if (itemInfo.files['.pug']) {
+      const ast = getAst(itemInfo.files['.pug'].path);
+      const bems = getBems(ast, path.basename(itemInfo.files['.pug'].path, '.pug'));
       bems.bems.forEach(bem => {
-        depBlocks.add(bem);
+        depItems.add(bem);
       })
       extends_ = bems.extends_;
     }
     // Add internal and external dependencies to object
+    depItems.forEach(depItem => {
+      if (bems[depItem]) {
+        // Add only existing files
+        for (file of Object.entries(bems[depItem].files)) {
           const [ext, fileInfo] = file;
           if (ext in dependencyFiles) {
             dependencyFiles[ext].push(fileInfo.path);
@@ -142,15 +151,15 @@ function addBlocksDependencies(blocks, pages, prevFiles) {
         }
       }
     });
-    Object.assign(depsFileList, writeDependencyFiles(blockInfo, dependencyFiles, extends_));
+    Object.assign(depsFileList, writeDependencyFiles(itemInfo, dependencyFiles, extends_));
   }
   return { depsEntityList: depsEntityList, depsFileList: depsFileList };
 }
 
-function writeDependencyFiles(blockInfo, dependencyFiles, extends_) {
+function writeDependencyFiles(itemInfo, dependencyFiles, extends_) {
   const depsFileList = {};
-  for (blockFile of Object.entries(blockInfo.files)) {
-    const [ext, fileInfo] = blockFile;
+  for (itemFile of Object.entries(itemInfo.files)) {
+    const [ext, fileInfo] = itemFile;
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
       let content = warningMessage.join(rules[ext].commentStart);
@@ -169,21 +178,24 @@ function writeDependencyFiles(blockInfo, dependencyFiles, extends_) {
 
 function inject(depFiles) {
   for (files of Object.entries(depFiles)) {
-    const [blockFile, depFile] = files;
-    const blockContent = fs.readFileSync(blockFile, {encoding: 'utf-8'});
-    const ext = path.extname(blockFile);
-    const importString = rules[ext].addBem(depFile, blockFile);
-    if (!blockContent.includes(importString.trim())) {
+    const [itemFile, depFile] = files;
+    const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
+    const ext = path.extname(itemFile);
+    const importString = rules[ext].addBem(depFile, itemFile);
+    if (!itemFileContent.includes(importString.trim())) {
       let newContent;
       // Special case for pug extends. Include can't be injected elsewhere except block
       // (or mixin)
+      if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
+          const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
+          const splittedContent = itemFileContent.split(firstBlock[0]);
           splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
           newContent = splittedContent.join('');
         }
       else {
         newContent = importString + blockContent;
       }
-      fs.writeFileSync(blockFile, newContent);
+      fs.writeFileSync(itemFile, newContent);
     }
   }
 }
@@ -242,8 +254,8 @@ function generate(bemsFolder, pagesFolders, prevEntities, prevDeps) {
   const depsBems = {};
   const bemsFiles = getBemFiles(bemsFolder);
   // Don't regenerate if entire folder didn't change
-  if (!(prevEntities && _.isEqual(bemsFiles, prevEntities.bemsFiles))) {
-    const { depsEntityList, depsFileList } = addBlocksDependencies(
+  if (isEntireChanged(prevEntities, bemsFiles)) {
+    const { depsEntityList, depsFileList } = addDependencies(
       bemsFiles,
       null,
       prevEntities ? prevEntities.bemsFiles : null);
@@ -257,8 +269,8 @@ function generate(bemsFolder, pagesFolders, prevEntities, prevDeps) {
       const pageFiles = getBemFiles(folder);
       pagesFiles[folder] = pageFiles;
       // Don't regenerate if entire folder didn't change
-      if (!(prevEntities && _.isEqual(pageFiles, prevEntities.pagesFiles[folder]) && _.isEqual(bemsFiles, prevEntities.bemsFiles))) {
-        const { depsEntityList, depsFileList } = addBlocksDependencies(
+      if (isEntireChanged(prevEntities, bemsFiles, pageFiles, folder)) {
+        const { depsEntityList, depsFileList } = addDependencies(
           bemsFiles,
           pageFiles,
           prevEntities ? prevEntities.pageFiles[folder] : null);
