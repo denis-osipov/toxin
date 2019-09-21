@@ -83,12 +83,15 @@ function scanFolder(root, blocks, parent) {
         files: {},
         internalDependencies: []
       };
+      // If current directory isn't one of top-level, it is element or modifier directory.
+      // Fdd it to parent dependencies.
       if (parent) {
         blocks[parent].internalDependencies.push(name);
       }
       scanFolder(entityPath, blocks, name);
     }
     else if (entity.isFile()) {
+      // If it's a file, add it to info for corresponding BEM entity
       const fileType = path.extname(entity.name);
       const name = path.basename(entity.name, fileType);
       if (name !== 'dependencies') {
@@ -125,17 +128,13 @@ function addBlocksDependencies(blocks, pages, prevFiles) {
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
     const depBlocks = new Set(blockInfo.internalDependencies);
     let extends_;
-    if (blockInfo.files['.pug']) {
-      const ast = getAst(blockInfo.files['.pug'].path);
-      const bems = getBems(ast, path.basename(blockInfo.files['.pug'].path, '.pug'));
+    // If BEM entity is implemented in pug, parse pug file
       bems.bems.forEach(bem => {
         depBlocks.add(bem);
       })
       extends_ = bems.extends_;
     }
-    depBlocks.forEach(depBlock => {
-      if (blocks[depBlock]) {
-        for (file of Object.entries(blocks[depBlock].files)) {
+    // Add internal and external dependencies to object
           const [ext, fileInfo] = file;
           if (ext in dependencyFiles) {
             dependencyFiles[ext].push(fileInfo.path);
@@ -176,9 +175,8 @@ function inject(depFiles) {
     const importString = rules[ext].addBem(depFile, blockFile);
     if (!blockContent.includes(importString.trim())) {
       let newContent;
-      if (ext === '.pug' && blockContent.match(/^extends .+\s+/m)) {
-          const firstBlock = blockContent.match(/^block .+(\s+)/m);
-          const splittedContent = blockContent.split(firstBlock[0]);
+      // Special case for pug extends. Include can't be injected elsewhere except block
+      // (or mixin)
           splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
           newContent = splittedContent.join('');
         }
@@ -191,7 +189,7 @@ function inject(depFiles) {
 }
 
 // Get BEM list from pug file.
-// BEM entities should be added as mixins or as block classes.
+// BEM entities should be added as mixins or as classes.
 function getBems(ast, blockName) {
   let bems = new Set();
   let extends_;

@@ -18,6 +18,7 @@ class DependencyGenerationPlugin {
     compiler.hooks.entryOption.tap(
       'DependencyGenerationPlugin',
       (context, entry) => {
+        // Get paths
         if (!this.options.blocksFolder) {
           this.options.blocksFolder = path.resolve(context, 'blocks');
         }
@@ -64,6 +65,7 @@ class DependencyGenerationPlugin {
 }
 
 function getFolders(context, entry) {
+  // Get unique paths from entries
   const entryDirs = new Set();
   if (typeof entry === "string") {
     entryDirs.add(path.resolve(context, path.dirname(entry)));
