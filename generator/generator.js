@@ -230,6 +230,14 @@ function getAst(file) {
   return parse(tokens);
 }
 
+function isEntireChanged(prevEntities, currentBems, currentPages, currentPageDir) {
+  return !(
+    prevEntities &&
+    _.isEqual(currentBems, prevEntities.bemsFiles) &&
+    currentPages ? _.isEqual(currentPages, prevEntities.pagesFiles[currentPageDir]) : true
+    );
+}
+
 // Generate dependency files
 function generate(bemsFolder, pagesFolders, prevEntities, prevDeps) {
   const depsFiles = {};
