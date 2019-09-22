@@ -121,12 +121,26 @@ function constructName(folder, name) {
   }
 }
 
-function addDependencies(bems, pages, prevFiles) {
+function addDependencies(files, prevFiles, prevDeps) {
   const depsEntityList = {};
   const depsFileList = {};
-  const items = pages || bems;
-  for (item of Object.entries(items)){
+  for (item of Object.entries(files)){
     const [itemName, itemInfo] = item;
+
+    // if (_.isEqual(itemInfo, prevFiles[itemName])) {
+    //   // If entity wasn't changed, check if dependencies were changed
+    //   let changedFiles = new Set();
+    //   prevDeps[itemName].forEach(depName => {
+    //     changedFiles.add(symmetricDifference(
+    //       Object.keys(bemsFiles[depName].files),
+    //       Object.keys(previousBemsFiles[depName].files)
+    //     ));
+    //   });
+    //   changedFiles.forEach(ext => {
+    //     // Regenerate dependencies for each extension
+    //   })
+    // }
+
     const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
     const depItems = new Set(itemInfo.internalDependencies);
     let extends_;
@@ -240,50 +254,31 @@ function getAst(file) {
   return parse(tokens);
 }
 
-function isEntireChanged(prevEntities, currentBems, currentPages, currentPageDir) {
-  return !(
-    prevEntities &&
-    _.isEqual(currentBems, prevEntities.bemsFiles) &&
-    currentPages ? _.isEqual(currentPages, prevEntities.pagesFiles[currentPageDir]) : true
-    );
-}
-
 // Generate dependency files
-function generate(bemsFolder, pagesFolders, prevEntities, prevDeps) {
-  const depsFiles = {};
-  const depsBems = {};
-  const bemsFiles = getBemFiles(bemsFolder);
-  // Don't regenerate if entire folder didn't change
-  if (isEntireChanged(prevEntities, bemsFiles)) {
-    const { depsEntityList, depsFileList } = addDependencies(
-      bemsFiles,
-      null,
-      prevEntities ? prevEntities.bemsFiles : null);
-    Object.assign(depsBems, depsEntityList);
-    Object.assign(depsFiles, depsFileList);
-  }
+function generate(folders, prevFiles, prevDeps) {
+  const files = {};
+  folders.forEach(folder => {
+    Object.assign(files, getBemFiles(folder));
+  });
 
-  const pagesFiles = {};
-  if (pagesFolders) {
-    pagesFolders.forEach(folder => {
-      const pageFiles = getBemFiles(folder);
-      pagesFiles[folder] = pageFiles;
-      // Don't regenerate if entire folder didn't change
-      if (isEntireChanged(prevEntities, bemsFiles, pageFiles, folder)) {
-        const { depsEntityList, depsFileList } = addDependencies(
-          bemsFiles,
-          pageFiles,
-          prevEntities ? prevEntities.pageFiles[folder] : null);
-        Object.assign(depsBems, depsEntityList);
-        Object.assign(depsFiles, depsFileList);
-      }
-    });
+  // Don't regenerate if files weren't changed
+  if (!(prevFiles && _.isEqual(files, prevFiles))) {
+    const { depsBems, depsFiles } = addDependencies(
+      files,
+      prevFiles || {},
+      prevDeps || {}
+      );
+    return {
+      files: files,
+      depsFiles: depsFiles,
+      depsBems: depsBems
+    };
   }
 
   return {
-    entitiesFiles: { bemsFiles: bemsFiles, pagesFiles: pagesFiles },
-    depsFiles: depsFiles,
-    depsBems: depsBems
+    files: prevFiles,
+    depsFiles: {},
+    depsBems: prevDeps
   };
 }
 

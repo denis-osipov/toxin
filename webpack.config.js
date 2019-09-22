@@ -79,8 +79,10 @@ module.exports = {
   },
   plugins: [
     new DependencyGenerationPlugin({
-      blocksFolder: path.resolve(__dirname, 'src/blocks'),
-      pagesFolders: path.resolve(__dirname, 'src/pages'),
+      folders: [
+        path.resolve(__dirname, 'src/blocks'),
+        path.resolve(__dirname, 'src/pages')
+      ]
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',

@@ -19,14 +19,9 @@ class DependencyGenerationPlugin {
       'DependencyGenerationPlugin',
       (context, entry) => {
         // Get paths
-        if (!this.options.blocksFolder) {
-          this.options.blocksFolder = path.resolve(context, 'blocks');
-        }
-        if (!this.options.pagesFolders) {
-          this.options.pagesFolders = getFolders(context, entry);
-        }
-        else if (typeof this.options.pagesFolders === 'string') {
-          this.options.pagesFolders = [this.options.pagesFolders];
+        if (!this.options.folders) {
+          this.options.folders = [path.resolve(context, 'blocks')];
+          this.options.folders = this.options.folders.concat(getFolders(context, entry));
         }
 
         this.generate();
@@ -39,7 +34,7 @@ class DependencyGenerationPlugin {
       (fileName, changeTime) => {
 
         // Don't respond to changes of generated files (use watchOptions instead?)
-        if (Object.values(this.files.depsFiles).includes(fileName)) {
+        if (Object.values(this.depsFiles).includes(fileName)) {
           return;
         }
 
@@ -50,16 +45,9 @@ class DependencyGenerationPlugin {
   }
 
   generate() {
-    const prevEntities = this.files ? this.files.entitiesFiles : null;
-    const prevDeps = this.files ? this.files.depsBems : null;
-    this.files = generate(
-      this.options.blocksFolder,
-      this.options.pagesFolders,
-      prevEntities,
-      prevDeps
-      );
+    Object.assign(this, generate(this.options.folders, this.files, this.depsBems));
     if (this.options.inject) {
-      inject(this.files.depsFiles);
+      inject(this.depsFiles);
     }
   }
 }
