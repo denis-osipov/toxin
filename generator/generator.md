@@ -20,7 +20,10 @@
 
 // dependencies
 {
-  block: new Set(dependencies);
+  block: {
+    folder: internalDependencies,
+    content: externalDependencies
+  }
 }
 ```
 
