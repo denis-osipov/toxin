@@ -14,7 +14,7 @@
         depFile: 'path'
       }
     },
-    internalDependencies: [element, modifier]
+    folderDependencies: [element, modifier]
   }
 }
 
