@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 const getBems = require('./pug-helpers');
-const { difference, symmetricDifference, union } = require('./utils');
+const { difference, symmetricDifference, union, intersection } = require('./utils');
 const { warningMessage, rules } = require('./rules');
 
 const eol = require('os').EOL;
@@ -64,15 +64,16 @@ function constructName(folder, name) {
 }
 
 function checkDependencies(files, prevFiles, depItems) {
-  let changedFiles = new Set();
+  let changedExts = new Set();
   depItems.forEach(depName => {
     // Check if dependencies files list was changed
-    changedFiles.add(symmetricDifference(
+    changedExts.add(symmetricDifference(
       Object.keys(files[depName].files),
       Object.keys(prevFiles[depName].files)
     ));
   });
-  return changedFiles;
+  // return { addedFiles: addedFiles, removedFiles: removedFiles };
+  return changedExts;
 }
 
 function getDependencyFiles(depItems, files, extensions) {
@@ -94,11 +95,23 @@ function getDependencyFiles(depItems, files, extensions) {
   return dependencyFiles;
 }
 
-function createDependencies(itemInfo, files, prevFiles, depItems, extends_) {
-  const changedFiles = prevFiles ? checkDependencies(files, prevFiles, depItems) : Object.keys(rules);
-  const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
+function createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_) {
+  const deps = {};
+  let changedExts = Object.keys(rules);
+  if (prevFiles) {
+    if (!(_.isEqual(depItems, prevDeps[itemName]))) {
+      const allPrevDeps = union(prevDeps[itemName].folder, prevDeps[itemName].content);
+      deps.changedDeps = symmetricDifference(depItems, allPrevDeps);
+      deps.unchangedDeps = intersection(depItems, allPrevDeps);
+    }
+    changedExts = checkDependencies(files, prevFiles, deps.unchangedDeps);
+    deps.changedDeps.forEach(depName => {
+      changedExts = union(changedExts, Object.keys(files[depName].files));
+    });
+  }
+  const dependencyFiles = getDependencyFiles(depItems, files, changedExts);
   const extendsFile = extends_ ? files[extends_].files : null;
-  return writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFile);
+  return writeDependencyFiles(files[itemName].files, dependencyFiles, extendsFile);
 }
 
 function addDependencies(files, prevFiles, prevDeps) {
@@ -113,7 +126,7 @@ function addDependencies(files, prevFiles, prevDeps) {
       // If entity wasn't changed, use previous dependencies
       depItems = union(prevDeps.folder, prevDeps.content);
       const extends_ = prevDeps[itemName].extends_;
-      Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
+      Object.assign(depsFiles, createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_));
     }
     else {
       // Block was changed
@@ -138,7 +151,7 @@ function addDependencies(files, prevFiles, prevDeps) {
       }
 
       const extends_ = depsBems[itemName].extends_;
-      Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
+      Object.assign(depsFiles, createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_));
     }
   }
   return { depsBems: depsBems, depsFiles: depsFiles };
