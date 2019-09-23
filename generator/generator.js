@@ -84,7 +84,7 @@ function scanFolder(root, files, parent) {
       }
       else {
         files[parent].files[fileType] = Object.assign(
-          bfilesems[parent].files[fileType] || {},
+          files[parent].files[fileType] || {},
           {depFile: entityPath}
         )
       }
