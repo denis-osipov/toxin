@@ -153,28 +153,28 @@ function addDependencies(files, prevFiles, prevDeps) {
     }
     else {
       // Block was changed
-      depsBems[itemName].internals = itemInfo.internalDependencies;
+      depsBems[itemName].folder = itemInfo.folderDependencies;
       if (!(prevFiles && _.isEqual(itemInfo.files['.pug'], prevFiles[itemName].files['.pug']))) {
         // First generation or template was changed, so parse pug
         if (itemInfo.files['.pug']) {
           const content = getBems(itemInfo.files['.pug'].path, path.basename(itemInfo.files['.pug'].path, '.pug'));
           depsBems[itemName].content = content.bems;
-          depItems = union(itemInfo.internalDependencies, content.bems);
+          depItems = union(itemInfo.folderDependencies, content.bems);
           depsBems[itemName].extends_ = content.extends_;
         }
         else {
-          depItems = itemInfo.internalDependencies;
+          depItems = itemInfo.folderDependencies;
         }
       }
       else {
         depsBems[itemName].content = prevDeps[itemName].content;
-        depItems = union(itemInfo.internalDependencies, prevDeps[itemName].content);
+        depItems = union(itemInfo.folderDependencies, prevDeps[itemName].content);
         depsBems[itemName].extends_ = prevDeps[itemName].extends_;
       }
 
       if (
         prevDeps &&
-        _.isEqual(depItems, union(prevDeps[itemName].internals, prevDeps[itemName].content)) &&
+        _.isEqual(depItems, union(prevDeps[itemName].folder, prevDeps[itemName].content)) &&
         depsBems[itemName].extends_ === prevDeps[itemName].extends_
        ) {
         // Check if dependencies file list were changed and regenerate for some extensions
