@@ -39,5 +39,17 @@ function union(setA, setB) {
   return union;
 }
 
+function intersection(setA, setB) {
+  let intersection = new Set();
+  if (!setB) {
+    return intersection;
+  }
+  setB.forEach(elem => {
+    if (setA.has(elem)) {
+      intersection.add(elem)
+    }
+  });
+  return intersection;
+}
 
-module.exports = { difference, symmetricDifference, union };
+module.exports = { difference, symmetricDifference, union, intersection };
