@@ -7,7 +7,7 @@ function symmetricDifference(setA, setB) {
     return difference;
   }
   setB.forEach(elem => {
-    if (_difference.has(elem)) {
+    if (difference.has(elem)) {
       difference.delete(elem);
     }
     else {

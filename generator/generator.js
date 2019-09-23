@@ -231,7 +231,7 @@ function inject(depFiles) {
           newContent = splittedContent.join('');
         }
       else {
-        newContent = importString + blockContent;
+        newContent = importString + itemFileContent;
       }
       fs.writeFileSync(itemFile, newContent);
     }
