@@ -22,7 +22,8 @@
 {
   block: {
     folder: internalDependencies,
-    content: externalDependencies
+    content: externalDependencies,
+    extends_: extends_
   }
 }
 ```

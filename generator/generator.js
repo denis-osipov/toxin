@@ -204,7 +204,7 @@ function writeDependencyFiles(itemFiles, dependencyFiles, extends_) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
       let content = warningMessage.join(rules[ext].commentStart);
       if (extends_) {
-        content += rules[ext].addExtends(extends_, fileInfo.path);
+        content += rules[ext].addBem(extends_, true);
       }
       dependencyFiles[ext].forEach(depFile => {
         content += rules[ext].addBem(depFile, fileInfo.path);

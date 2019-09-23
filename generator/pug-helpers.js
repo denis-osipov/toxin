@@ -1,5 +1,6 @@
 // Helpers for getting data from pug-files
 const fs = require('fs');
+const path = require('path');
 const lex = require('pug-lexer');
 const parse = require('pug-parser');
 const walk = require('pug-walk');
@@ -18,7 +19,8 @@ function getBems(filePath, blockName) {
       bems.add(node.name);
     }
     else if (node.type === 'Extends') {
-      extends_ = node.file.path;
+      const ext = path.extname(node.file.path);
+      extends_ = path.basename(node.file.path, ext);
     }
 
     if (node.attrs) {
