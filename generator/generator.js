@@ -148,7 +148,8 @@ function addDependencies(files, prevFiles, prevDeps) {
       depItems = union(prevDeps.folder, prevDeps.content);
       const changedFiles = checkDependencies(files, prevFiles, depItems);
       const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
-      Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, prevDeps[itemName].extends_));
+      const extendsFiles = prevDeps[itemName].extends_ ? files[prevDeps[itemName].extends_].files : null;
+      Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFiles));
     }
     else {
       // Block was changed
@@ -179,28 +180,29 @@ function addDependencies(files, prevFiles, prevDeps) {
         // Check if dependencies file list were changed and regenerate for some extensions
         const changedFiles = checkDependencies(files, prevFiles, depItems);
         const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
-        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files[ext], dependencyFiles, depsBems[itemName].extends_));
+        const extendsFiles = depsBems[itemName].extends_ ? files[depsBems[itemName].extends_].files : null;
+        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFiles));
       }
       else {
         // Regenerate dependencies
-        // Add internal and external dependencies to object
         const dependencyFiles = getDependencyFiles(depItems, files, Object.keys(rules));
-        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, depsBems[itemName].extends_));
+        const extendsFiles = depsBems[itemName].extends_ ? files[depsBems[itemName].extends_].files : null;
+        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFiles));
       }
     }
   }
   return { depsBems: depsBems, depsFiles: depsFiles };
 }
 
-function writeDependencyFiles(itemFiles, dependencyFiles, extends_) {
+function writeDependencyFiles(itemFiles, dependencyFiles, extendsFiles) {
   const depsFileList = {};
   for (itemFile of Object.entries(itemFiles)) {
     const [ext, fileInfo] = itemFile;
     if (dependencyFiles[ext] && dependencyFiles[ext].length) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
       let content = warningMessage.join(rules[ext].commentStart);
-      if (extends_) {
-        content += rules[ext].addBem(extends_, true);
+      if (extendsFiles && extendsFiles[ext]) {
+        content += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
       }
       dependencyFiles[ext].forEach(depFile => {
         content += rules[ext].addBem(depFile, fileInfo.path);
