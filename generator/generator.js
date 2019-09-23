@@ -135,6 +135,13 @@ function getDependencyFiles(depItems, files, extensions) {
   return dependencyFiles;
 }
 
+function createDependencies(itemInfo, files, prevFiles, depItems, extends_) {
+  const changedFiles = prevFiles ? checkDependencies(files, prevFiles, depItems) : Object.keys(rules);
+  const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
+  const extendsFile = extends_ ? files[extends_].files : null;
+  return writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFile);
+}
+
 function addDependencies(files, prevFiles, prevDeps) {
   const depsBems = {};
   const depsFiles = {};
@@ -146,10 +153,8 @@ function addDependencies(files, prevFiles, prevDeps) {
     if (prevFiles && _.isEqual(itemInfo, prevFiles[itemName])) {
       // If entity wasn't changed, check if its dependencies were changed
       depItems = union(prevDeps.folder, prevDeps.content);
-      const changedFiles = checkDependencies(files, prevFiles, depItems);
-      const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
-      const extendsFiles = prevDeps[itemName].extends_ ? files[prevDeps[itemName].extends_].files : null;
-      Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFiles));
+      const extends_ = prevDeps[itemName].extends_;
+      Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
     }
     else {
       // Block was changed
@@ -178,16 +183,13 @@ function addDependencies(files, prevFiles, prevDeps) {
         depsBems[itemName].extends_ === prevDeps[itemName].extends_
        ) {
         // Check if dependencies file list were changed and regenerate for some extensions
-        const changedFiles = checkDependencies(files, prevFiles, depItems);
-        const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
-        const extendsFiles = depsBems[itemName].extends_ ? files[depsBems[itemName].extends_].files : null;
-        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFiles));
+        const extends_ = depsBems[itemName].extends_;
+        Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
       }
       else {
         // Regenerate dependencies
-        const dependencyFiles = getDependencyFiles(depItems, files, Object.keys(rules));
-        const extendsFiles = depsBems[itemName].extends_ ? files[depsBems[itemName].extends_].files : null;
-        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, extendsFiles));
+        const extends_ = depsBems[itemName].extends_;
+        Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
       }
     }
   }
