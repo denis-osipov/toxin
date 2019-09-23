@@ -104,10 +104,9 @@ function constructName(folder, name) {
   }
 }
 
-function checkDependencies(itemName, files, prevFiles, prevDeps) {
+function checkDependencies(files, prevFiles, depItems) {
   let changedFiles = new Set();
-  const allPrevDeps = union(prevDeps[itemName].internals, prevDeps[itemName].content);
-  allPrevDeps.forEach(depName => {
+  depItems.forEach(depName => {
     // Check if dependencies files list was changed
     changedFiles.add(symmetricDifference(
       Object.keys(files[depName].files),
@@ -117,22 +116,39 @@ function checkDependencies(itemName, files, prevFiles, prevDeps) {
   return changedFiles;
 }
 
+function getDependencyFiles(depItems, files, extensions) {
+  const dependencyFiles = {};
+  extensions.forEach(ext => {
+    dependencyFiles[ext] = [];
+  });
+  depItems.forEach(depItem => {
+    if (files[depItem]) {
+      // Add only existing files
+      for (file of Object.entries(files[depItem].files)) {
+        const [ext, fileInfo] = file;
+        if (ext in dependencyFiles) {
+          dependencyFiles[ext].push(fileInfo.path);
+        }
+      }
+    }
+  });
+  return dependencyFiles;
+}
+
 function addDependencies(files, prevFiles, prevDeps) {
   const depsBems = {};
   const depsFiles = {};
   for (item of Object.entries(files)){
     const [itemName, itemInfo] = item;
     depsBems[itemName] = {};
-    const dependencyFiles = {'.pug': [], '.scss': [], '.js': []};
     let depItems;
 
     if (prevFiles && _.isEqual(itemInfo, prevFiles[itemName])) {
       // If entity wasn't changed, check if its dependencies were changed
-      const changedFiles = checkDependencies(itemName, files, prevFiles, prevDeps);
-      changedFiles.forEach(ext => {
-        // Regenerate dependencies for each added or removed extension
-        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files[ext], dependencyFiles, prevDeps[itemName].extends_));
-      })
+      depItems = union(prevDeps.folder, prevDeps.content);
+      const changedFiles = checkDependencies(files, prevFiles, depItems);
+      const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
+      Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, prevDeps[itemName].extends_));
     }
     else {
       // Block was changed
@@ -161,34 +177,14 @@ function addDependencies(files, prevFiles, prevDeps) {
         depsBems[itemName].extends_ === prevDeps[itemName].extends_
        ) {
         // Check if dependencies file list were changed and regenerate for some extensions
-        let changedFiles = new Set();
-        const allPrevDeps = union(prevDeps[itemName].internals, prevDeps[itemName].content).add(prevDeps[itemName].extends_);
-        allPrevDeps.forEach(depName => {
-          // Check if dependencies files list was changed
-          changedFiles.add(symmetricDifference(
-            Object.keys(files[depName].files),
-            Object.keys(prevFiles[depName].files)
-          ));
-        });
-        changedFiles.forEach(ext => {
-          // Regenerate dependencies for each added or removed extension
-          Object.assign(depsFiles, writeDependencyFiles(itemInfo.files[ext], dependencyFiles, depsBems[itemName].extends_));
-        })
+        const changedFiles = checkDependencies(files, prevFiles, depItems);
+        const dependencyFiles = getDependencyFiles(depItems, files, changedFiles);
+        Object.assign(depsFiles, writeDependencyFiles(itemInfo.files[ext], dependencyFiles, depsBems[itemName].extends_));
       }
       else {
         // Regenerate dependencies
         // Add internal and external dependencies to object
-        depItems.forEach(depItem => {
-          if (files[depItem]) {
-            // Add only existing files
-            for (file of Object.entries(files[depItem].files)) {
-              const [ext, fileInfo] = file;
-              if (ext in dependencyFiles) {
-                dependencyFiles[ext].push(fileInfo.path);
-              }
-            }
-          }
-        });
+        const dependencyFiles = getDependencyFiles(depItems, files, Object.keys(rules));
         Object.assign(depsFiles, writeDependencyFiles(itemInfo.files, dependencyFiles, depsBems[itemName].extends_));
       }
     }
@@ -221,7 +217,7 @@ function inject(depFiles) {
     const [itemFile, depFile] = files;
     const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
     const ext = path.extname(itemFile);
-    const importString = rules[ext].addBem(depFile, itemFile);
+    const importString = rules[ext].addBem(depFile, itemFile) + eol;
     if (!itemFileContent.includes(importString.trim())) {
       let newContent;
       // Special case for pug extends. Include can't be injected elsewhere except block
