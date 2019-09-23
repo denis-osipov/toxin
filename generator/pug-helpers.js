@@ -29,7 +29,7 @@ function getBems(filePath, blockName) {
           const classes = attr.val.split(' ');
           classes.forEach(class_ => {
             const bemClass = class_.replace(/['"]/g, '');
-            if (bemClass !== blockName) {
+            if (!(bemClass === blockName || bemClass.match(/[^A-Za-z0-9_\-]/))) {
               bems.add(bemClass);
             }
           });
