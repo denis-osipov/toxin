@@ -3,6 +3,9 @@
 
 function symmetricDifference(setA, setB) {
   const difference = new Set(setA);
+  if (!setB) {
+    return difference;
+  }
   setB.forEach(elem => {
     if (_difference.has(elem)) {
       difference.delete(elem);
@@ -16,6 +19,9 @@ function symmetricDifference(setA, setB) {
 
 function difference(setA, setB) {
   const difference = new Set(setA);
+  if (!setB) {
+    return difference;
+  }
   setB.forEach(elem => {
     difference.delete(elem);
   });
@@ -24,6 +30,9 @@ function difference(setA, setB) {
 
 function union(setA, setB) {
   const union = new Set(setA);
+  if (!setB) {
+    return union;
+  }
   setB.forEach(elem => {
     union.add(elem);
   });
