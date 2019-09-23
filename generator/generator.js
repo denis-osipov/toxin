@@ -5,50 +5,9 @@ const fs = require('fs');
 const _ = require('lodash');
 const getBems = require('./pug-helpers');
 const { difference, symmetricDifference, union } = require('./utils');
+const { warningMessage, rules } = require('./rules');
 
 const eol = require('os').EOL;
-
-/*
-Global rules for file types:
-
-warningMessage - array of strings for warning message about file generation
-addBem - function generating import strings for regular BEM entities
-addExtends - function generating import strings for pug extends
-*/
-const warningMessage = [
-  '',
-  `File generated automatically.${eol}`,
-  `Any changes will be discarded during next compilation.${eol}${eol}`
-];
-
-const rules = {
-  '.js': {
-    commentStart: '// ',
-    addBem: function(depFile, entityFile) {
-      let importPath = path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/');
-      if (!importPath.match(/^\.{0,2}\//)) {
-        importPath = './' + importPath;
-      }
-      return `import '${importPath}';${eol}`;
-    }
-  },
-  '.scss': {
-    commentStart: '// ',
-    addBem: function(depFile, entityFile) {
-      return `@import '${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}';${eol}`;
-    }
-  },
-  '.pug': {
-    commentStart: '//- ',
-    addBem: function(depFile, entityFile, isExtends) {
-      if (isExtends) {
-        // Extended file is already included
-        return '';
-      }
-      return `include ${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}${eol}`;
-    }
-  }
-};
 
 
 function getBemFiles(path) {
@@ -151,7 +110,7 @@ function addDependencies(files, prevFiles, prevDeps) {
     let depItems;
 
     if (prevFiles && _.isEqual(itemInfo, prevFiles[itemName])) {
-      // If entity wasn't changed, check if its dependencies were changed
+      // If entity wasn't changed, use previous dependencies
       depItems = union(prevDeps.folder, prevDeps.content);
       const extends_ = prevDeps[itemName].extends_;
       Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
@@ -172,25 +131,14 @@ function addDependencies(files, prevFiles, prevDeps) {
         }
       }
       else {
+        // If pug file wasn't changed, use previous content and extends dependencies
         depsBems[itemName].content = prevDeps[itemName].content;
         depItems = union(itemInfo.folderDependencies, prevDeps[itemName].content);
         depsBems[itemName].extends_ = prevDeps[itemName].extends_;
       }
 
-      if (
-        prevDeps &&
-        _.isEqual(depItems, union(prevDeps[itemName].folder, prevDeps[itemName].content)) &&
-        depsBems[itemName].extends_ === prevDeps[itemName].extends_
-       ) {
-        // Check if dependencies file list were changed and regenerate for some extensions
-        const extends_ = depsBems[itemName].extends_;
-        Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
-      }
-      else {
-        // Regenerate dependencies
-        const extends_ = depsBems[itemName].extends_;
-        Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
-      }
+      const extends_ = depsBems[itemName].extends_;
+      Object.assign(depsFiles, createDependencies(itemInfo, files, prevFiles, depItems, extends_));
     }
   }
   return { depsBems: depsBems, depsFiles: depsFiles };
