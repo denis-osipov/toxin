@@ -135,8 +135,8 @@ function addDependencies(files, prevFiles, prevDeps) {
         // First generation or template was changed, so parse pug
         if (itemInfo.files['.pug']) {
           const content = getBems(itemInfo.files['.pug'].path, path.basename(itemInfo.files['.pug'].path, '.pug'));
-          depsBems[itemName].content = content.bems;
-          depItems = union(itemInfo.folderDependencies, content.bems);
+          depsBems[itemName].content = [...content.bems].filter(bem => bem in files);
+          depItems = union(itemInfo.folderDependencies, depsBems[itemName].content);
           depsBems[itemName].extends_ = content.extends_;
         }
         else {
