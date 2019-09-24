@@ -172,6 +172,7 @@ function writeDependencyFiles(itemFiles, dependencyFiles, extendsFiles) {
       });
       fs.writeFileSync(dependencyPath, content);
       depsFileList[fileInfo.path] = dependencyPath;
+      fileInfo.depFile = dependencyPath;
     }
   }
   return depsFileList;
