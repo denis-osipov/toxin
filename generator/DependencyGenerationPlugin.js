@@ -34,7 +34,7 @@ class DependencyGenerationPlugin {
       (fileName, changeTime) => {
 
         // Don't respond to changes of generated files (use watchOptions instead?)
-        if (Object.values(this.depsFiles).includes(fileName)) {
+        if (this.depsFiles && Object.values(this.depsFiles).includes(fileName)) {
           return;
         }
 
@@ -46,7 +46,7 @@ class DependencyGenerationPlugin {
 
   generate() {
     Object.assign(this, generate(this.options.folders, this.files, this.depsBems));
-    if (this.options.inject) {
+    if (this.options.inject && this.depsFiles) {
       inject(this.depsFiles);
     }
   }

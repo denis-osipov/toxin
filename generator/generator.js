@@ -116,7 +116,7 @@ function createDependencies(itemName, files, prevFiles, depItems, prevDeps, exte
 
 function addDependencies(files, prevFiles, prevDeps) {
   const depsBems = {};
-  const depsFiles = {};
+  const depsFiles = { toAdd: {}, toRemove: {} };
   for (item of Object.entries(files)){
     const [itemName, itemInfo] = item;
     depsBems[itemName] = {};
@@ -154,39 +154,51 @@ function addDependencies(files, prevFiles, prevDeps) {
       }
 
       const extends_ = depsBems[itemName].extends_;
-      Object.assign(depsFiles, createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_));
+      const deps = createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_);
+      Object.assign(depsFiles.toAdd, deps.toAdd);
+      Object.assign(depsFiles.toRemove, deps.toRemove);
     }
   }
   return { depsBems: depsBems, depsFiles: depsFiles };
 }
 
 function writeDependencyFiles(itemFiles, dependencyFiles, extendsFiles) {
-  const depsFileList = {};
+  const depsFileList = { toAdd: {}, toRemove: {} };
   for (itemFile of Object.entries(itemFiles)) {
     const [ext, fileInfo] = itemFile;
-    if (dependencyFiles[ext] && dependencyFiles[ext].length) {
+    if (dependencyFiles[ext]) {
       const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
-      let content = warningMessage.join(rules[ext].commentStart);
+      const message = warningMessage.join(rules[ext].commentStart);
+      let imports = '';
       if (extendsFiles && extendsFiles[ext]) {
-        content += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
+        imports += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
       }
       dependencyFiles[ext].forEach(depFile => {
-        content += rules[ext].addBem(depFile, fileInfo.path);
+        imports += rules[ext].addBem(depFile, fileInfo.path);
       });
-      fs.writeFileSync(dependencyPath, content);
-      depsFileList[fileInfo.path] = dependencyPath;
-      fileInfo.depFile = dependencyPath;
+      if (imports) {
+        fs.writeFileSync(dependencyPath, message + imports);
+        depsFileList.toAdd[fileInfo.path] = dependencyPath;
+        fileInfo.depFile = dependencyPath;
+      }
+      else {
+        depsFileList.toRemove[fileInfo.path] = dependencyPath;
+        if (fileInfo.depFile) {
+          fs.unlinkSync(dependencyPath);
+          delete fileInfo.depFile;
+        }
+      }
     }
   }
   return depsFileList;
 }
 
 function inject(depFiles) {
-  for (files of Object.entries(depFiles)) {
+  for (files of Object.entries(depFiles.toAdd)) {
     const [itemFile, depFile] = files;
     const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
     const ext = path.extname(itemFile);
-    const importString = rules[ext].addBem(depFile, itemFile) + eol;
+    const importString = rules[ext].addBem(depFile, itemFile);
     if (!itemFileContent.includes(importString.trim())) {
       let newContent;
       // Special case for pug extends. Include can't be injected elsewhere except block
@@ -200,6 +212,16 @@ function inject(depFiles) {
       else {
         newContent = importString + itemFileContent;
       }
+      fs.writeFileSync(itemFile, newContent);
+    }
+  }
+  for (files of Object.entries(depFiles.toRemove)) {
+    const [itemFile, depFile] = files;
+    const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
+    const ext = path.extname(itemFile);
+    const importString = rules[ext].addBem(depFile, itemFile);
+    if (itemFileContent.includes(importString.trim())) {
+      const newContent = itemFileContent.replace(importString, '');
       fs.writeFileSync(itemFile, newContent);
     }
   }
@@ -224,7 +246,7 @@ function generate(folders, prevFiles, prevDeps) {
 
   return {
     files: prevFiles,
-    depsFiles: {},
+    depsFiles: null,
     depsBems: prevDeps
   };
 }
