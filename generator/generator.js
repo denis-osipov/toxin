@@ -67,12 +67,11 @@ function checkDependencies(files, prevFiles, depItems) {
   let changedExts = new Set();
   depItems.forEach(depName => {
     // Check if dependencies files list was changed
-    changedExts.add(symmetricDifference(
+    changedExts = union(changedExts, (symmetricDifference(
       Object.keys(files[depName].files),
       Object.keys(prevFiles[depName].files)
-    ));
+    )));
   });
-  // return { addedFiles: addedFiles, removedFiles: removedFiles };
   return changedExts;
 }
 
@@ -99,14 +98,12 @@ function createDependencies(itemName, files, prevFiles, depItems, prevDeps, exte
   const deps = {};
   let changedExts = Object.keys(rules);
   if (prevFiles) {
-    if (!(_.isEqual(depItems, prevDeps[itemName]))) {
-      const allPrevDeps = union(prevDeps[itemName].folder, prevDeps[itemName].content);
-      deps.changedDeps = symmetricDifference(depItems, allPrevDeps);
-      deps.unchangedDeps = intersection(depItems, allPrevDeps);
-    }
+    const allPrevDeps = union(prevDeps[itemName].folder, prevDeps[itemName].content);
+    deps.changedDeps = symmetricDifference(depItems, allPrevDeps);
+    deps.unchangedDeps = intersection(depItems, allPrevDeps);
     changedExts = checkDependencies(files, prevFiles, deps.unchangedDeps);
     deps.changedDeps.forEach(depName => {
-      changedExts = union(changedExts, Object.keys(files[depName].files));
+      changedExts = Array.from(union(changedExts, Object.keys(files[depName].files)));
     });
   }
   const dependencyFiles = getDependencyFiles(depItems, files, changedExts);
