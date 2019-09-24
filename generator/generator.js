@@ -124,9 +124,12 @@ function addDependencies(files, prevFiles, prevDeps) {
 
     if (prevFiles && _.isEqual(itemInfo, prevFiles[itemName])) {
       // If entity wasn't changed, use previous dependencies
-      depItems = union(prevDeps.folder, prevDeps.content);
+      depsBems[itemName] = prevDeps[itemName];
+      depItems = union(prevDeps[itemName].folder, prevDeps[itemName].content);
       const extends_ = prevDeps[itemName].extends_;
-      Object.assign(depsFiles, createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_));
+      const deps = createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_);
+      Object.assign(depsFiles.toAdd, deps.toAdd);
+      Object.assign(depsFiles.toRemove, deps.toRemove);
     }
     else {
       // Block was changed
