@@ -39,13 +39,16 @@ function scanFolder(root, files, parent) {
       const fileType = path.extname(entity.name);
       const name = path.basename(entity.name, fileType);
       if (name !== 'dependencies') {
-        files[name].files[fileType] = {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs};
+        files[name].files[fileType] = Object.assign(
+          files[parent].files[fileType] || {},
+          {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs}
+        );
       }
       else {
         files[parent].files[fileType] = Object.assign(
           files[parent].files[fileType] || {},
           {depFile: entityPath}
-        )
+        );
       }
     }
   });
