@@ -19,10 +19,10 @@ module.exports = {
       './pages/form-elements/form-elements.scss',
       './pages/form-elements/form-elements.js'
     ],
-    // cards: [
-    //   './pages/cards/cards.scss',
-    //   './pages/cards/cards.js'
-    // ]
+    cards: [
+      './pages/cards/cards.scss',
+      './pages/cards/cards.js'
+    ]
   },
   output: {
     filename: '[name].js',
@@ -99,11 +99,11 @@ module.exports = {
       filename: 'form-elements.html',
       chunks: ['formElements']
     }),
-    // new HtmlWebpackPlugin({
-    //   template: './pages/cards/cards.pug',
-    //   filename: 'cards.html',
-    //   chunks: ['cards']
-    // })
+    new HtmlWebpackPlugin({
+      template: './pages/cards/cards.pug',
+      filename: 'cards.html',
+      chunks: ['cards']
+    })
   ],
   resolve: {
     alias: {
