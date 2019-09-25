@@ -44,7 +44,8 @@ function intersection(setA, setB) {
   if (!setB) {
     return [];
   }
-  let intersection = new Set();
+  const intersection = new Set();
+  setA = new Set(setA);
   setB.forEach(elem => {
     if (setA.has(elem)) {
       intersection.add(elem)

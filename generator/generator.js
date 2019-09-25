@@ -133,7 +133,7 @@ class Generator {
       );
       deps.changedDeps = symmetricDifference(depItems, allPrevExistingDeps);
       deps.unchangedDeps = intersection(depItems, allPrevExistingDeps);
-      changedExts = checkDependencies(deps.unchangedDeps);
+      changedExts = this.checkDependencies(deps.unchangedDeps);
       deps.changedDeps.forEach(depName => {
         changedExts = union(
           changedExts,
@@ -144,7 +144,7 @@ class Generator {
     else {
       changedExts = Object.keys(rules);
     }
-    const dependencyFiles = getDependencyFiles(depItems, changedExts);
+    const dependencyFiles = this.getDependencyFiles(depItems, changedExts);
     this.writeDependencyFiles(itemName, dependencyFiles);
   }
 
@@ -168,12 +168,12 @@ class Generator {
     depItems.forEach(depItem => {
       if (this.files[depItem]) {
         // Add only existing files
-        for (file of Object.entries(this.files[depItem].files)) {
+        Object.entries(this.files[depItem].files).forEach(file => {
           const [ext, fileInfo] = file;
           if (ext in dependencyFiles) {
             dependencyFiles[ext].push(fileInfo.path);
           }
-        }
+        });
       }
     });
     return dependencyFiles;
@@ -181,9 +181,9 @@ class Generator {
 
   writeDependencyFiles(itemName, dependencyFiles) {
     const extendsFiles = this.deps[itemName].extends_ ?
-      this.files[extends_].files :
+      this.files[this.deps[itemName].extends_].files :
       null;
-    for (itemFile of Object.entries(this.files[itemName].files)) {
+    Object.entries(this.files[itemName].files).forEach(itemFile => {
       const [ext, fileInfo] = itemFile;
       if (dependencyFiles[ext]) {
         const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
@@ -208,44 +208,40 @@ class Generator {
           }
         }
       }
-    }
+    });
   }
 
   injectImports() {
-    Object.entries(this.depFiles.toAdd || {}).forEach(files => {
-      for (files of Object.entries(this.depFiles.toAdd)) {
-        const [itemFile, depFile] = files;
-        const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
-        const ext = path.extname(itemFile);
-        const importString = rules[ext].addBem(depFile, itemFile);
-        if (!itemFileContent.includes(importString.trim())) {
-          let newContent;
-          // Special case for pug extends. Include can't be injected elsewhere except block
-          // (or mixin)
-          if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
-              const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
-              const splittedContent = itemFileContent.split(firstBlock[0]);
-              splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
-              newContent = splittedContent.join('');
-            }
-          else {
-            newContent = importString + itemFileContent;
+    Object.entries(this.depFiles ? this.depFiles.toAdd :{}).forEach(files => {
+      const [itemFile, depFile] = files;
+      const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
+      const ext = path.extname(itemFile);
+      const importString = rules[ext].addBem(depFile, itemFile);
+      if (!itemFileContent.includes(importString.trim())) {
+        let newContent;
+        // Special case for pug extends. Include can't be injected elsewhere except block
+        // (or mixin)
+        if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
+            const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
+            const splittedContent = itemFileContent.split(firstBlock[0]);
+            splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
+            newContent = splittedContent.join('');
           }
-          fs.writeFileSync(itemFile, newContent);
+        else {
+          newContent = importString + itemFileContent;
         }
+        fs.writeFileSync(itemFile, newContent);
       }
     });
 
-    Object.entries(this.depFiles.toRemove || {}).forEach(files => {
-      for (files of Object.entries(this.depFiles.toRemove)) {
-        const [itemFile, depFile] = files;
-        const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
-        const ext = path.extname(itemFile);
-        const importString = rules[ext].addBem(depFile, itemFile);
-        if (itemFileContent.includes(importString.trim())) {
-          const newContent = itemFileContent.replace(importString, '');
-          fs.writeFileSync(itemFile, newContent);
-        }
+    Object.entries(this.depFiles ? this.depFiles.toRemove : {}).forEach(files => {
+      const [itemFile, depFile] = files;
+      const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
+      const ext = path.extname(itemFile);
+      const importString = rules[ext].addBem(depFile, itemFile);
+      if (itemFileContent.includes(importString.trim())) {
+        const newContent = itemFileContent.replace(importString, '');
+        fs.writeFileSync(itemFile, newContent);
       }
     });
   }
