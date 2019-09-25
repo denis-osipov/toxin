@@ -4,7 +4,7 @@
 // entity which has such file. Otherway dependencies of this type won't be create.
 
 const path = require('path');
-const { generate, inject } = require('./generator');
+const Generator = require('./generator');
 
 class DependencyGenerationPlugin {
   constructor(options) {
@@ -23,8 +23,10 @@ class DependencyGenerationPlugin {
           this.options.folders = [path.resolve(context, 'blocks')];
           this.options.folders = this.options.folders.concat(getFolders(context, entry));
         }
+        console.log('Entry was just readed.');
 
-        this.generate();
+        this.generator = new Generator(this.options.folders, this.options.inject);
+        this.generator.generate();
       }
     );
 
@@ -34,21 +36,12 @@ class DependencyGenerationPlugin {
       (fileName, changeTime) => {
 
         // Don't respond to changes of generated files (use watchOptions instead?)
-        if (this.depsFiles && Object.values(this.depsFiles).includes(fileName)) {
-          return;
-        }
-
         // To simplify adding new files we need regenerate dependencies for each invalidation.
-        this.generate();
+        if (!fileName.includes('dependencies')) {
+          this.generator.generate();
+        }
       }
     );
-  }
-
-  generate() {
-    Object.assign(this, generate(this.options.folders, this.files, this.depsBems));
-    if (this.options.inject && this.depsFiles) {
-      inject(this.depsFiles);
-    }
   }
 }
 
