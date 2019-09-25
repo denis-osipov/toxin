@@ -212,7 +212,7 @@ class Generator {
   }
 
   injectImports() {
-    Object.entries(this.depFiles ? this.depFiles.toAdd :{}).forEach(files => {
+    Object.entries(this.depsFiles ? this.depsFiles.toAdd :{}).forEach(files => {
       const [itemFile, depFile] = files;
       const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
       const ext = path.extname(itemFile);
@@ -234,7 +234,7 @@ class Generator {
       }
     });
 
-    Object.entries(this.depFiles ? this.depFiles.toRemove : {}).forEach(files => {
+    Object.entries(this.depsFiles ? this.depsFiles.toRemove : {}).forEach(files => {
       const [itemFile, depFile] = files;
       const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
       const ext = path.extname(itemFile);
