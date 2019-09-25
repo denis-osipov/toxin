@@ -1,7 +1,4 @@
 // Plugin for generation of dependency files for BEM-entities.
-// Each entity should have js, pug and scss files.
-// At least it should have fiele of corresponding type if it uses other
-// entity which has such file. Otherway dependencies of this type won't be create.
 
 const path = require('path');
 const Generator = require('./generator');
@@ -9,7 +6,8 @@ const Generator = require('./generator');
 class DependencyGenerationPlugin {
   constructor(options) {
     this.options = Object.assign({
-      inject: true
+      inject: true,
+      create: true
     }, options);
   }
 
@@ -24,7 +22,10 @@ class DependencyGenerationPlugin {
           this.options.folders = this.options.folders.concat(getFolders(context, entry));
         }
 
-        this.generator = new Generator(this.options.folders, this.options.inject);
+        this.generator = new Generator(
+          this.options.folders,
+          this.options.inject,
+          this.options.create);
         this.generator.generate();
       }
     );

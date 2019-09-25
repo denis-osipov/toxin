@@ -8,9 +8,10 @@ const { symmetricDifference, union, intersection } = require('./utils');
 const { warningMessage, rules } = require('./rules');
 
 class Generator {
-  constructor(folders, inject) {
+  constructor(folders, inject, create) {
     this.folders = folders;
     this.inject = inject;
+    this.create = create;
   }
 
   // Generate dependency files
@@ -144,6 +145,7 @@ class Generator {
       var changedExts = Object.keys(rules);
     }
     const dependencyFiles = this.getDependencyFiles(depItems, changedExts);
+    this.createMissingFiles(itemName, dependencyFiles);
     this.writeDependencyFiles(itemName, dependencyFiles);
   }
 
@@ -206,6 +208,18 @@ class Generator {
             delete fileInfo.depFile;
           }
         }
+      }
+    });
+  }
+
+  createMissingFiles(itemName, dependencyFiles) {
+    Object.entries(dependencyFiles).forEach(depsType => {
+      const [ext, paths] = depsType;
+      if (paths.length && !this.files[itemName].files[ext] && this.create) {
+        const existingFile = Object.values(this.files[itemName].files)[0].path;
+        const newFile = path.join(path.dirname(existingFile), itemName + ext);
+        fs.writeFileSync(newFile, '');
+        this.files[itemName].files[ext] = {path: newFile, mtime: fs.statSync(newFile).mtimeMs };
       }
     });
   }
