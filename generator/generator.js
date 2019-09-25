@@ -121,7 +121,6 @@ class Generator {
       this.deps[itemName].content.filter(bem => bem in this.files) :
       [];
     const depItems = union(this.deps[itemName].folder, existingDeps);
-    let changedExts;
     if (this.prevFiles) {
       const deps = {};
       const prevExistingDeps = this.prevDeps[itemName].content ?
@@ -133,7 +132,7 @@ class Generator {
       );
       deps.changedDeps = symmetricDifference(depItems, allPrevExistingDeps);
       deps.unchangedDeps = intersection(depItems, allPrevExistingDeps);
-      changedExts = this.checkDependencies(deps.unchangedDeps);
+      var changedExts = this.checkDependencies(deps.unchangedDeps);
       deps.changedDeps.forEach(depName => {
         changedExts = union(
           changedExts,
@@ -142,7 +141,7 @@ class Generator {
       });
     }
     else {
-      changedExts = Object.keys(rules);
+      var changedExts = Object.keys(rules);
     }
     const dependencyFiles = this.getDependencyFiles(depItems, changedExts);
     this.writeDependencyFiles(itemName, dependencyFiles);
@@ -218,17 +217,16 @@ class Generator {
       const ext = path.extname(itemFile);
       const importString = rules[ext].addBem(depFile, itemFile);
       if (!itemFileContent.includes(importString.trim())) {
-        let newContent;
         // Special case for pug extends. Include can't be injected elsewhere except block
         // (or mixin)
         if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
             const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
             const splittedContent = itemFileContent.split(firstBlock[0]);
             splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
-            newContent = splittedContent.join('');
+            var newContent = splittedContent.join('');
           }
         else {
-          newContent = importString + itemFileContent;
+          var newContent = importString + itemFileContent;
         }
         fs.writeFileSync(itemFile, newContent);
       }

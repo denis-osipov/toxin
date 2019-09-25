@@ -15,7 +15,7 @@ function setDoubleDatepicker( jQuery ) {
     });
 
     $( this ).find('.date-picker__field').on('click', function(event) {
-      let datepicker = $( event.currentTarget ).find('.input').data('datepicker');
+      const datepicker = $( event.currentTarget ).find('.input').data('datepicker');
       if (!datepicker.visible) {
         datepicker.show.bind(datepicker)();
       }
@@ -39,7 +39,7 @@ function setDoubleDatepicker( jQuery ) {
       const otherIndex = index % 2 === 0 ? index + 1 : index - 1;
       inst.$el.val(formattedDate.split(inst.opts.multipleDatesSeparator)[index % 2]);
       const otherField = $( '.date-picker_double' ).eq(otherIndex).find('.input');
-      let otherPicker = otherField.data('datepicker');
+      const otherPicker = otherField.data('datepicker');
       otherPicker.selectDate(date);
       otherPicker.$el.val(formattedDate.split(inst.opts.multipleDatesSeparator)[(index + 1) % 2]);
     }

@@ -2,7 +2,7 @@ include dependencies.pug
 mixin like(liked, number)
   -
     const likeClass = liked ? 'like like_liked' : 'like';
-    let inputAttrs = {
+    const inputAttrs = {
       type:'checkbox',
       class: 'like__input',
       name: 'like'

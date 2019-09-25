@@ -17,13 +17,12 @@ mixin checkbox(name, label, description, type)
       }
     }
 
-    let classes;
     if (attributes.class) {
-      classes = attributes.class + ` checkbox_type_${type}`;
+      var classes = attributes.class + ` checkbox_type_${type}`;
       delete attributes.class;
     }
     else {
-      classes = `checkbox_type_${type}`;
+      var classes = `checkbox_type_${type}`;
     }
 
   label.checkbox(class=classes)

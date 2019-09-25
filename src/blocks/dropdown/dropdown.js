@@ -23,7 +23,7 @@ import './dependencies.js';
 
     return this.each(function() {
 
-      let dropdown = {
+      const dropdown = {
         dropdown: $( this ),
         init: function() {
           dropdown.settings = settings;
@@ -111,7 +111,7 @@ import './dependencies.js';
     }
     // Total value and special cases
     else if (this.settings.total && this.settings.special.length) {
-      let values = this.values.slice();
+      const values = this.values.slice();
       let totals = [];
       this.settings.special.forEach((specialCase) => {
         let sum = 0;

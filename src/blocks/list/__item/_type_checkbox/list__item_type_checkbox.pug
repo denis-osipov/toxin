@@ -1,15 +1,14 @@
 include dependencies.pug
 mixin list__item_type_checkbox(item, type)
   -
-    let name, label, description;
     if (typeof item === 'string') {
-      label = item;
+      var label = item;
     }
     else if (Array.isArray(item)) {
-      [name, label, description] = item;
+      var [name, label, description] = item;
     }
     else {
-      [name, label, description] = [item.name, item.label, item.description];
+      var [name, label, description] = [item.name, item.label, item.description];
       delete item.name, item.label, item.description;
       Object.assign(attributes, item);
     }
