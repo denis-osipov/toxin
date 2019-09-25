@@ -16,6 +16,7 @@ class Generator {
 
   // Generate dependency files
   generate() {
+    this.repeat = false;
     this.prevFiles = this.files;
     this.prevDeps = this.deps;
     this.files = {};
@@ -32,6 +33,10 @@ class Generator {
 
     if (this.inject) {
       this.injectImports();
+    }
+
+    if (this.repeat) {
+      this.generate();
     }
   }
 
@@ -219,7 +224,8 @@ class Generator {
         const existingFile = Object.values(this.files[itemName].files)[0].path;
         const newFile = path.join(path.dirname(existingFile), itemName + ext);
         fs.writeFileSync(newFile, '');
-        this.files[itemName].files[ext] = {path: newFile, mtime: fs.statSync(newFile).mtimeMs };
+        // this.files[itemName].files[ext] = {path: newFile, mtime: fs.statSync(newFile).mtimeMs };
+        this.repeat = true;
       }
     });
   }
