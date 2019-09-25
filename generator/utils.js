@@ -1,5 +1,6 @@
 // Helper functions
-// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#Implementing_basic_set_operations
+// Tuned functions from
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#Implementing_basic_set_operations
 
 function symmetricDifference(setA, setB) {
   if (!setB) {
