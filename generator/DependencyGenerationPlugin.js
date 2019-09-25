@@ -23,7 +23,6 @@ class DependencyGenerationPlugin {
           this.options.folders = [path.resolve(context, 'blocks')];
           this.options.folders = this.options.folders.concat(getFolders(context, entry));
         }
-        console.log('Entry was just readed.');
 
         this.generator = new Generator(this.options.folders, this.options.inject);
         this.generator.generate();
