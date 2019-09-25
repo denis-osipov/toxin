@@ -24,7 +24,7 @@ class Generator {
 
     // Don't regenerate if files weren't changed
     if (!(this.prevFiles && _.isEqual(this.files, this.prevFiles))) {
-      this.addDependencies(this.files, this.prevFiles, this.prevDeps);
+      this.addDependencies();
     }
     else {
       this.depsFiles = null;
