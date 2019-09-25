@@ -9,63 +9,6 @@ const { warningMessage, rules } = require('./rules');
 
 const eol = require('os').EOL;
 
-
-function getBemFiles(path) {
-  const files = {};
-  scanFolder(path, files);
-  return files;
-}
-
-function scanFolder(root, files, parent) {
-  const entities = fs.readdirSync(root, { encoding: 'utf-8', withFileTypes: true });
-  entities.forEach(function(entity) {
-    const entityPath = path.join(root, entity.name);
-    if (entity.isDirectory()) {
-      // Directory name is BEM entity name
-      const name = constructName(entityPath, entity.name);
-      files[name] = {
-        files: {},
-        folderDependencies: []
-      };
-      // If current directory isn't one of top-level, it is element or modifier directory.
-      // Fdd it to parent dependencies.
-      if (parent) {
-        files[parent].folderDependencies.push(name);
-      }
-      scanFolder(entityPath, files, name);
-    }
-    else if (entity.isFile()) {
-      // If it's a file, add it to info for corresponding BEM entity
-      const fileType = path.extname(entity.name);
-      const name = path.basename(entity.name, fileType);
-      if (name !== 'dependencies') {
-        files[name].files[fileType] = Object.assign(
-          files[parent].files[fileType] || {},
-          {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs}
-        );
-      }
-      else {
-        files[parent].files[fileType] = Object.assign(
-          files[parent].files[fileType] || {},
-          {depFile: entityPath}
-        );
-      }
-    }
-  });
-}
-
-function constructName(folder, name) {
-  if (name.startsWith('_')) {
-    const parent = path.basename(path.dirname(folder));
-    const newFolder = path.dirname(folder);
-    const newName = parent + name;
-    return constructName(newFolder, newName);
-  }
-  else {
-    return name;
-  }
-}
-
 function checkDependencies(files, prevFiles, depItems) {
   let changedExts = new Set();
   depItems.forEach(depName => {
@@ -112,54 +55,6 @@ function createDependencies(itemName, files, prevFiles, depItems, prevDeps, exte
   const dependencyFiles = getDependencyFiles(depItems, files, changedExts);
   const extendsFile = extends_ ? files[extends_].files : null;
   return writeDependencyFiles(files[itemName].files, dependencyFiles, extendsFile);
-}
-
-function addDependencies(files, prevFiles, prevDeps) {
-  const depsBems = {};
-  const depsFiles = { toAdd: {}, toRemove: {} };
-  for (item of Object.entries(files)){
-    const [itemName, itemInfo] = item;
-    depsBems[itemName] = {};
-    let depItems;
-
-    if (prevFiles && _.isEqual(itemInfo, prevFiles[itemName])) {
-      // If entity wasn't changed, use previous dependencies
-      depsBems[itemName] = prevDeps[itemName];
-      depItems = union(prevDeps[itemName].folder, prevDeps[itemName].content);
-      const extends_ = prevDeps[itemName].extends_;
-      const deps = createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_);
-      Object.assign(depsFiles.toAdd, deps.toAdd);
-      Object.assign(depsFiles.toRemove, deps.toRemove);
-    }
-    else {
-      // Block was changed
-      depsBems[itemName].folder = itemInfo.folderDependencies;
-      if (!(prevFiles && _.isEqual(itemInfo.files['.pug'], prevFiles[itemName].files['.pug']))) {
-        // First generation or template was changed, so parse pug
-        if (itemInfo.files['.pug']) {
-          const content = getBems(itemInfo.files['.pug'].path, path.basename(itemInfo.files['.pug'].path, '.pug'));
-          depsBems[itemName].content = [...content.bems].filter(bem => bem in files);
-          depItems = union(itemInfo.folderDependencies, depsBems[itemName].content);
-          depsBems[itemName].extends_ = content.extends_;
-        }
-        else {
-          depItems = itemInfo.folderDependencies;
-        }
-      }
-      else {
-        // If pug file wasn't changed, use previous content and extends dependencies
-        depsBems[itemName].content = prevDeps[itemName].content;
-        depItems = union(itemInfo.folderDependencies, prevDeps[itemName].content);
-        depsBems[itemName].extends_ = prevDeps[itemName].extends_;
-      }
-
-      const extends_ = depsBems[itemName].extends_;
-      const deps = createDependencies(itemName, files, prevFiles, depItems, prevDeps, extends_);
-      Object.assign(depsFiles.toAdd, deps.toAdd);
-      Object.assign(depsFiles.toRemove, deps.toRemove);
-    }
-  }
-  return { depsBems: depsBems, depsFiles: depsFiles };
 }
 
 function writeDependencyFiles(itemFiles, dependencyFiles, extendsFiles) {
@@ -227,28 +122,125 @@ function inject(depFiles) {
   }
 }
 
-// Generate dependency files
-function generate(folders, prevFiles, prevDeps) {
-  const files = {};
-  folders.forEach(folder => {
-    Object.assign(files, getBemFiles(folder));
-  });
-
-  // Don't regenerate if files weren't changed
-  if (!(prevFiles && _.isEqual(files, prevFiles))) {
-    const { depsBems, depsFiles } = addDependencies(files, prevFiles, prevDeps);
-    return {
-      files: files,
-      depsFiles: depsFiles,
-      depsBems: depsBems
-    };
+class Generator {
+  constructor(folders, inject) {
+    this.folders = folders;
+    this.inject = inject;
   }
 
-  return {
-    files: prevFiles,
-    depsFiles: null,
-    depsBems: prevDeps
-  };
+  // Generate dependency files
+  generate() {
+    this.prevFiles = this.files;
+    this.prevDeps = this.deps;
+    this.files = {};
+
+    this.folders.forEach(folder => scanFolder(folder));
+
+    // Don't regenerate if files weren't changed
+    if (!(this.prevFiles && _.isEqual(this.files, this.prevFiles))) {
+      addDependencies(this.files, this.prevFiles, this.prevDeps);
+    }
+    else {
+      this.depsFiles = null;
+    }
+  }
+
+  scanFolder(root, parent) {
+    const entities = fs.readdirSync(root, { encoding: 'utf-8', withFileTypes: true });
+    entities.forEach(entity => {
+      const entityPath = path.join(root, entity.name);
+      if (entity.isDirectory()) {
+        // Directory name is BEM entity name
+        const name = constructName(entityPath, entity.name);
+        this.files[name] = {
+          files: {},
+          folderDependencies: []
+        };
+        // If current directory isn't one of top-level, it is element or modifier directory.
+        // Fdd it to parent dependencies.
+        if (parent) {
+          this.files[parent].folderDependencies.push(name);
+        }
+        scanFolder(entityPath, name);
+      }
+      else if (entity.isFile()) {
+        // If it's a file, add it to info for corresponding BEM entity
+        const fileType = path.extname(entity.name);
+        const name = path.basename(entity.name, fileType);
+        if (name !== 'dependencies') {
+          this.files[name].files[fileType] = Object.assign(
+            this.files[parent].files[fileType] || {},
+            {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs}
+          );
+        }
+        else {
+          this.files[parent].files[fileType] = Object.assign(
+            this.files[parent].files[fileType] || {},
+            {depFile: entityPath}
+          );
+        }
+      }
+    });
+  }
+
+  addDependencies() {
+    this.deps = {};
+    this.depsFiles = { toAdd: {}, toRemove: {} };
+    Object.entries(this.files).forEach(item => {
+      const [itemName, itemInfo] = item;
+      this.deps[itemName] = {};
+      let depItems;
+  
+      if (this.prevFiles && _.isEqual(itemInfo, this.prevFiles[itemName])) {
+        // If entity wasn't changed, use previous dependencies
+        this.deps[itemName] = this.prevDeps[itemName];
+        depItems = union(this.deps[itemName].folder, this.deps[itemName].content.filter(bem => bem in this.files));
+        const extends_ = this.deps[itemName].extends_;
+        const deps = createDependencies(itemName, this.files, this.prevFiles, depItems, this.prevDeps, extends_);
+        Object.assign(this.depsFiles.toAdd, deps.toAdd);
+        Object.assign(this.depsFiles.toRemove, deps.toRemove);
+      }
+      else {
+        // Block was changed
+        this.deps[itemName].folder = itemInfo.folderDependencies;
+        if (!(this.prevFiles && _.isEqual(itemInfo.files['.pug'], this.prevFiles[itemName].files['.pug']))) {
+          // First generation or template was changed, so parse pug
+          if (itemInfo.files['.pug']) {
+            const content = getBems(itemInfo.files['.pug'].path, path.basename(itemInfo.files['.pug'].path, '.pug'));
+            this.deps[itemName].content = [...content.bems];
+            depItems = union(itemInfo.folderDependencies, this.deps[itemName].content.filter(bem => bem in this.files));
+            this.deps[itemName].extends_ = content.extends_;
+          }
+          else {
+            depItems = itemInfo.folderDependencies;
+          }
+        }
+        else {
+          // If pug file wasn't changed, use previous content and extends dependencies
+          this.deps[itemName].content = this.prevDeps[itemName].content;
+          depItems = union(itemInfo.folderDependencies, this.prevDeps[itemName].content.filter(bem => bem in this.files));
+          this.deps[itemName].extends_ = this.prevDeps[itemName].extends_;
+        }
+  
+        const extends_ = this.deps[itemName].extends_;
+        const deps = createDependencies(itemName, this.files, this.prevFiles, depItems, this.prevDeps, extends_);
+        Object.assign(this.depsFiles.toAdd, deps.toAdd);
+        Object.assign(this.depsFiles.toRemove, deps.toRemove);
+      }
+    });
+  }
 }
 
-module.exports = { generate, inject };
+function constructName(folder, name) {
+  if (name.startsWith('_')) {
+    const parent = path.basename(path.dirname(folder));
+    const newFolder = path.dirname(folder);
+    const newName = parent + name;
+    return constructName(newFolder, newName);
+  }
+  else {
+    return name;
+  }
+}
+
+module.exports = Generator;
