@@ -1,0 +1,9 @@
+.text_level_h3 {
+  color: $dark;
+  font: {
+    size: $h3-font-size;
+    weight: bold;
+  }
+  line-height: $h3-line-height;
+  text-transform: uppercase;
+}

@@ -1,1 +1,1 @@
-import 'blocksPath/input/input';
+import './dependencies.js';

@@ -1,3 +1,4 @@
+import './dependencies.js';
 // Dropdown with counting
 // Should be setted on inputs: $(selector).dropdown(settings)
 //
@@ -14,9 +15,6 @@
 // };
 
 
-import './_type/dropdown_type_conveniences';
-import './_type/dropdown_type_guests';
-
 (function( $ ) {
   // Main method creating dropdown
   $.fn.dropdown = function( options ) {
@@ -25,7 +23,7 @@ import './_type/dropdown_type_guests';
 
     return this.each(function() {
 
-      let dropdown = {
+      const dropdown = {
         dropdown: $( this ),
         init: function() {
           dropdown.settings = settings;
@@ -113,7 +111,7 @@ import './_type/dropdown_type_guests';
     }
     // Total value and special cases
     else if (this.settings.total && this.settings.special.length) {
-      let values = this.values.slice();
+      const values = this.values.slice();
       let totals = [];
       this.settings.special.forEach((specialCase) => {
         let sum = 0;

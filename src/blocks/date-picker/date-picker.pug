@@ -1,3 +1,4 @@
+include dependencies.pug
 mixin date-picker(type='single')
   - const doubleClass = type === 'single' ? '' : 'date-picker_double';
   .date-picker(class=doubleClass)&attributes(attributes)

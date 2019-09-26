@@ -1,8 +1,8 @@
-@mixin sample-form__header {
-  .sample-form__header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 5px;
-    padding-top: 12px;
-  }
+@import 'dependencies.scss';
+.sample-form__header {
+  display: flex;
+  height: 15px / $ref-rem;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  padding-top: 12px;
 }

@@ -1,17 +1,8 @@
-@mixin search {
-  @include button;
-  @include double-date-picker;
-  @include guests;
-
-  .search {
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-  }
-
-  @include search__dates;
-  @include search__guests;
-  @include search__header;
+@import 'dependencies.scss';
+.search {
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+  padding: 30px;
 }

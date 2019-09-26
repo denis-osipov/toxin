@@ -1,14 +1,7 @@
-@mixin button {
-  @include icon;
-
-  .button {
-    border: none;
-    border-radius: 22px / $ref-rem;
-    position: relative;
-    z-index: 0;
-  }
-
-  @include button_size;
-  @include button_type;
-  @include button__icon;
+@import 'dependencies.scss';
+.button {
+  border: none;
+  border-radius: 22px / $ref-rem;
+  position: relative;
+  z-index: 0;
 }

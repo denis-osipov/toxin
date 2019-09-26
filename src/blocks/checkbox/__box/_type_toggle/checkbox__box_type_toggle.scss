@@ -1,0 +1,19 @@
+.checkbox__box_type_toggle {
+  border-radius: 10px;
+  width: 40px;
+
+  &::before {
+    background: $dark-25;
+    border-radius: 50%;
+    content: '';
+    height: 12px;
+    position: absolute;
+    transform: translate(3px, 3px);
+    width: 12px;
+
+    .checkbox__input:checked ~ & {
+      background: $primary-gradient;
+      transform: translate(23px, 3px);
+    }
+  }
+}

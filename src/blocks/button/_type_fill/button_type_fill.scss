@@ -1,0 +1,9 @@
+.button_type_fill {
+  background: $primary-gradient;
+
+  &.button_focused,
+  &:hover,
+  &:focus {
+    background: $primary-gradient-50;
+  }
+}

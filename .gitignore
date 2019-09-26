@@ -65,10 +65,3 @@ typings/
 
 # webpack output
 dist/
-
-# Generated files
-src/blocks/mixins.*
-src/pages/*/*.scss
-!src/pages/*/page-style.scss
-src/pages/*/*.js
-!src/pages/*/page-script.js

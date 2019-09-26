@@ -1,1 +1,1 @@
-import 'blocksPath/icon-field/icon-field';
+import './dependencies.js';

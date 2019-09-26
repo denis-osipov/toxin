@@ -1,1 +1,1 @@
-import 'blocksPath/dropdown/dropdown';
+import './dependencies.js';

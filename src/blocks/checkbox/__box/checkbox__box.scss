@@ -1,16 +1,13 @@
-@mixin checkbox__box {
-  .checkbox__box {
-    background: $light;
-    border: 1px solid $dark-25;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    height: 20px;
-    position: relative;
+@import 'dependencies.scss';
+.checkbox__box {
+  background: $light;
+  border: 1px solid $dark-25;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 20px;
+  position: relative;
 
-    .checkbox__input:checked ~ & {
-      border-color: $primary-color;
-    }
+  .checkbox__input:checked ~ & {
+    border-color: $primary-color;
   }
-
-  @include checkbox__box_type;
 }

@@ -1,8 +1,6 @@
-@mixin body {
-  .body {
-    max-width: $max-width;
-    margin-left: auto;
-    margin-right: auto;
-    min-width: $min-width;
-  }
+.body {
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: $min-width;
 }

@@ -1,8 +1,5 @@
+include dependencies.pug
 mixin double-date-picker
   .double-date-picker&attributes(attributes)
-    .double-date-picker__element
-      h2.double-date-picker__header.text_level_h3 Прибытие
-      +date-picker('double')
-    .double-date-picker__element
-      h2.double-date-picker__header.text_level_h3 Выезд
-      +date-picker('double')
+    +double-date-picker__element('Прибытие')
+    +double-date-picker__element('Выезд')

@@ -1,5 +1,4 @@
-@mixin palette__label {
-  .palette__label {
-    padding-top: 6px;
-  }
+@import 'dependencies.scss';
+.palette__label {
+  padding-top: 6px;
 }

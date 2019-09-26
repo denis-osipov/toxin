@@ -1,4 +1,5 @@
-mixin list__item(item, type, radioName)
+include dependencies.pug
+mixin list__item(item, type)
   li.list__item(class=`list__item_type_${type}`)&attributes(attributes)
     case type
       when 'icon': +list__item_type_icon(item)
@@ -6,4 +7,4 @@ mixin list__item(item, type, radioName)
       when 'checkbox'
       when 'radio'
       when 'rich'
-      when 'toggle':  +list__item_type_checkbox(item, type)
+      when 'toggle': +list__item_type_checkbox(item, type)
