@@ -3,7 +3,6 @@
 
 import '../../blocks/input/input.js';
 import '../../blocks/dropdown/dropdown.js';
-import '../../blocks/double-date-picker/double-date-picker.js';
 import '../../blocks/date-picker/date-picker.js';
 import '../../blocks/subscription/subscription.js';
 import '../../blocks/list/list.js';

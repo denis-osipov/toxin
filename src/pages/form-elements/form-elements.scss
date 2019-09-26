@@ -1,4 +1,10 @@
 @import 'dependencies.scss';
+
+.body {
+  width: 1440px;
+  margin: 0;
+}
+
 .ui-kit {
   $column-gap: 20px;
   $ref-padding: 141px;
@@ -31,7 +37,7 @@
         }
       }
 
-      .double-date-picker {
+      .two-date-pickers {
         column-gap: 19px;
         display: flex;
         justify-content: space-between;
