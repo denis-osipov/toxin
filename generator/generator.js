@@ -150,8 +150,8 @@ class Generator {
       var changedExts = Object.keys(rules);
     }
     const dependencyFiles = this.getDependencyFiles(depItems, changedExts);
-    this.createMissingFiles(itemName, dependencyFiles);
-    this.writeDependencyFiles(itemName, dependencyFiles);
+    const generatedFiles = this.createMissingFiles(itemName, dependencyFiles);
+    this.writeDependencyFiles(itemName, generatedFiles, dependencyFiles);
   }
 
   checkDependencies(deps) {
@@ -185,49 +185,55 @@ class Generator {
     return dependencyFiles;
   }
 
-  writeDependencyFiles(itemName, dependencyFiles) {
+  writeDependencyFiles(itemName, generatedFiles, dependencyFiles) {
     const extendsFiles = this.deps[itemName].extends_ ?
       this.files[this.deps[itemName].extends_].files :
       null;
-    Object.entries(this.files[itemName].files).forEach(itemFile => {
-      const [ext, fileInfo] = itemFile;
-      if (dependencyFiles[ext]) {
-        const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
-        const message = warningMessage.join(rules[ext].commentStart);
-        let imports = '';
-        if (extendsFiles && extendsFiles[ext]) {
-          imports += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
-        }
-        dependencyFiles[ext].forEach(depFile => {
-          imports += rules[ext].addBem(depFile, fileInfo.path);
-        });
-        if (imports) {
-          fs.writeFileSync(dependencyPath, message + imports);
-          this.depsFiles.toAdd[fileInfo.path] = dependencyPath;
-          fileInfo.depFile = dependencyPath;
-        }
-        else {
-          this.depsFiles.toRemove[fileInfo.path] = dependencyPath;
-          if (fileInfo.depFile) {
-            fs.unlinkSync(dependencyPath);
-            delete fileInfo.depFile;
+    const itemFiles = [this.files[itemName].files, generatedFiles];
+    itemFiles.forEach(files => {
+      Object.entries(files).forEach(itemFile => {
+        const [ext, fileInfo] = itemFile;
+        if (dependencyFiles[ext]) {
+          const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
+          const message = warningMessage.join(rules[ext].commentStart);
+          let imports = '';
+          if (extendsFiles && extendsFiles[ext]) {
+            imports += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
+          }
+          dependencyFiles[ext].forEach(depFile => {
+            imports += rules[ext].addBem(depFile, fileInfo.path);
+          });
+          if (imports) {
+            fs.writeFileSync(dependencyPath, message + imports);
+            this.depsFiles.toAdd[fileInfo.path] = dependencyPath;
+            fileInfo.depFile = dependencyPath;
+          }
+          else {
+            this.depsFiles.toRemove[fileInfo.path] = dependencyPath;
+            if (fileInfo.depFile) {
+              fs.unlinkSync(dependencyPath);
+              delete fileInfo.depFile;
+            }
           }
         }
-      }
+      });
     });
   }
 
   createMissingFiles(itemName, dependencyFiles) {
+    const generatedFiles = {};
     Object.entries(dependencyFiles).forEach(depsType => {
       const [ext, paths] = depsType;
       if (paths.length && !this.files[itemName].files[ext] && this.create) {
+        generatedFiles[ext] = {};
         const existingFile = Object.values(this.files[itemName].files)[0].path;
         const newFile = path.join(path.dirname(existingFile), itemName + ext);
         fs.writeFileSync(newFile, '');
-        this.files[itemName].files[ext] = {path: newFile, mtime: fs.statSync(newFile).mtimeMs };
+        generatedFiles[ext].path = newFile;
         this.repeat = true;
       }
     });
+    return generatedFiles;
   }
 
   injectImports() {
