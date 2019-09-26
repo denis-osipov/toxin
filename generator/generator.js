@@ -64,13 +64,13 @@ class Generator {
         if (name !== 'dependencies') {
           this.files[name].files[fileType] = Object.assign(
             this.files[parent].files[fileType] || {},
-            {path: entityPath, mtime: fs.statSync(entityPath).mtimeMs}
+            { path: entityPath, mtime: fs.statSync(entityPath).mtimeMs }
           );
         }
         else {
           this.files[parent].files[fileType] = Object.assign(
             this.files[parent].files[fileType] || {},
-            {depFile: entityPath}
+            { depFile: entityPath }
           );
         }
       }
@@ -83,7 +83,7 @@ class Generator {
     Object.entries(this.files).forEach(item => {
       const [itemName, itemInfo] = item;
       this.deps[itemName] = {};
-  
+
       if (this.prevFiles && _.isEqual(itemInfo, this.prevFiles[itemName])) {
         // If entity wasn't changed, use previous dependencies
         this.deps[itemName] = this.prevDeps[itemName];
@@ -95,13 +95,13 @@ class Generator {
         if (!(
           this.prevFiles &&
           _.isEqual(pugFile, this.prevFiles[itemName].files['.pug'])
-          )) {
+        )) {
           // First generation or template was changed, so parse pug
           if (pugFile) {
             const content = getBems(
               pugFile.path,
               path.basename(pugFile.path, '.pug')
-              );
+            );
             this.deps[itemName].content = [...content.bems];
             this.deps[itemName].extends_ = content.extends_;
           }
@@ -232,25 +232,26 @@ class Generator {
         this.files[itemName].files[ext] = {
           path: newFile,
           mtime: fs.statSync(newFile).mtimeMs,
-          generated: true };
+          generated: true
+        };
         this.repeat = true;
       }
     });
   }
 
-  injectImports(itemFile, depFile, add=true) {
-    const itemFileContent = fs.readFileSync(itemFile, {encoding: 'utf-8'});
+  injectImports(itemFile, depFile, add = true) {
+    const itemFileContent = fs.readFileSync(itemFile, { encoding: 'utf-8' });
     const ext = path.extname(itemFile);
     const importString = rules[ext].addBem(depFile, itemFile);
     if (add && !itemFileContent.includes(importString)) {
       // Special case for pug extends. Include can't be injected elsewhere except block
       // (or mixin)
       if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
-          const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
-          const splittedContent = itemFileContent.split(firstBlock[0]);
-          splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
-          var newContent = splittedContent.join('');
-        }
+        const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
+        const splittedContent = itemFileContent.split(firstBlock[0]);
+        splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
+        var newContent = splittedContent.join('');
+      }
       else {
         var newContent = importString + itemFileContent;
       }
