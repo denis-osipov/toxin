@@ -95,10 +95,11 @@ class Generator {
         this.deps[itemName].folder = itemInfo.folderDependencies;
         const pugFile = itemInfo.files['.pug'];
         if (!(
-          this.prevFiles &&
+          this.prevFiles && // the first generation
+          this.prevFiles[itemName] && // new bem entity
+          //template was changed
           _.isEqual(pugFile, this.prevFiles[itemName].files['.pug'])
         )) {
-          // First generation or template was changed, so parse pug
           if (pugFile) {
             const content = getBems(
               pugFile.path,
@@ -127,9 +128,14 @@ class Generator {
     const depItems = union(this.deps[itemName].folder, existingDeps);
     if (this.prevFiles) {
       const deps = {};
-      const prevExistingDeps = this.prevDeps[itemName].content ?
-        this.prevDeps[itemName].content.filter(bem => bem in this.prevFiles) :
-        [];
+      if (this.prevDeps[itemName] && this.prevDeps[itemName].content) {
+        var prevExistingDeps = this.prevDeps[itemName].content.filter(bem => {
+          bem in this.prevFiles
+        });
+      }
+      else {
+        var prevExistingDeps = [];
+      }
       const allPrevExistingDeps = union(
         this.prevDeps[itemName].folder,
         prevExistingDeps
