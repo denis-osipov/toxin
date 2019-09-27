@@ -1,15 +1,7 @@
 include dependencies.pug
 mixin registration
   form.registration&attributes(attributes)
-    h1.register__header Регистрация аккаунта
-    +input()(placeholder='Имя')
-    +input()(placeholder='Фамилия')
-    +list([
-      {name: 'sex', label: 'Мужчина', checked: ''},
-      ['sex', 'Женщина']
-    ], 'radio')
-    span Дата рождения
-    +input(true)
+    h1.registration__header.text_level_h1 Регистрация аккаунта
     span Данные для входа в сервис
     +input()(type='email', placeholder='Email')
     +input()(type='password', placeholder='Пароль')
