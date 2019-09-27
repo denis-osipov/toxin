@@ -39,8 +39,8 @@
 
       .two-date-pickers {
         column-gap: 19px;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: auto auto;
         padding-bottom: 21px;
       }
 
@@ -98,7 +98,8 @@
         margin-bottom: 20px;
         .likes {
           column-gap: 10px;
-          display: flex;
+          display: grid;
+          grid-template-columns: min-content min-content;
           padding-top: 11px;
         }
       }
@@ -106,7 +107,8 @@
       .sample-form:nth-child(5) {
         .rates {
           column-gap: 20px;
-          display: flex;
+          display: grid;
+          grid-template-columns: min-content min-content;
           padding-top: 8px;
         }
       }
@@ -120,8 +122,8 @@
 
       .buttons {
         column-gap: 20px;
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: max-content max-content;
         margin-bottom: 31px;
         margin-top: 11px;
         row-gap: 30px;

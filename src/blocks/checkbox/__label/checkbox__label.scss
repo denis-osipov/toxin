@@ -1,5 +1,4 @@
 .checkbox__label {
-  line-height: #{(19px / 14px)};
 
   .checkbox_type_radio .checkbox__input:checked ~ & {
     color: $dark-75;

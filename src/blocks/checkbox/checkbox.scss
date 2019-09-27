@@ -1,9 +1,6 @@
 @import 'dependencies.scss';
 .checkbox {
   column-gap: 10px / $ref-rem;
-  display: flex;
-
-  &_type_rich {
-    flex-wrap: wrap;
-  }
+  display: grid;
+  grid-template-columns: min-content 1fr;
 }

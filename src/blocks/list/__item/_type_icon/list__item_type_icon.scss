@@ -2,7 +2,8 @@
 .list__item_type_icon {
   border-bottom: 1px solid $dark-10;
   column-gap: 10px;
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content auto;
   margin-bottom: 20px / $ref-rem;
   padding-bottom: 20px / $ref-rem;
 }
