@@ -28,6 +28,7 @@ mixin checkbox(name, label, description, type)
   label.checkbox(class=classes)
     +input(false, 'invisible')(class='checkbox__input', name=name)&attributes(attributes)
     .checkbox__box(class=`checkbox__box_type_${type}`)
-    span.checkbox__label= label
-    if description
-      span.checkbox__description= description
+    .checkbox__text
+      span.checkbox__label= label
+      if description
+        span.checkbox__description= description

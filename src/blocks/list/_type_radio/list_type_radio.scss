@@ -1,5 +1,6 @@
 .list_type_radio {
   color: $dark-50;
-  column-gap: 10px;
-  display: flex;
+  column-gap: 20px;
+  display: grid;
+  grid-template-columns: min-content auto;
 }
