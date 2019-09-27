@@ -1,0 +1,12 @@
+include dependencies.pug
+mixin card(type)
+  .card
+    case type
+      when 'search'
+        +search
+      when 'registration'
+        +registration
+      when 'reservation'
+        +reservation
+      when 'login'
+        +login
