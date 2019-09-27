@@ -60,18 +60,20 @@ class Generator {
       else if (entity.isFile()) {
         // If it's a file, add it to info for corresponding BEM entity
         const fileType = path.extname(entity.name);
-        const name = path.basename(entity.name, fileType);
-        if (name !== 'dependencies') {
-          this.files[name].files[fileType] = Object.assign(
-            this.files[parent].files[fileType] || {},
-            { path: entityPath, mtime: fs.statSync(entityPath).mtimeMs }
-          );
-        }
-        else {
-          this.files[parent].files[fileType] = Object.assign(
-            this.files[parent].files[fileType] || {},
-            { depFile: entityPath }
-          );
+        if (fileType in rules) {
+          const name = path.basename(entity.name, fileType);
+          if (name !== 'dependencies') {
+            this.files[name].files[fileType] = Object.assign(
+              this.files[parent].files[fileType] || {},
+              { path: entityPath, mtime: fs.statSync(entityPath).mtimeMs }
+            );
+          }
+          else {
+            this.files[parent].files[fileType] = Object.assign(
+              this.files[parent].files[fileType] || {},
+              { depFile: entityPath }
+            );
+          }
         }
       }
     });
