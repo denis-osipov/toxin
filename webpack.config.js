@@ -12,13 +12,13 @@ module.exports = {
   },
   context: path.resolve(__dirname, 'src'),
   entry: {
-    colorsAndType: [
-      './pages/colors-and-type/colors-and-type.scss'
-    ],
-    formElements: [
-      './pages/form-elements/form-elements.scss',
-      './pages/form-elements/form-elements.js'
-    ],
+    // colorsAndType: [
+    //   './pages/colors-and-type/colors-and-type.scss'
+    // ],
+    // formElements: [
+    //   './pages/form-elements/form-elements.scss',
+    //   './pages/form-elements/form-elements.js'
+    // ],
     cards: [
       './pages/cards/cards.scss',
       './pages/cards/cards.js'
@@ -89,16 +89,16 @@ module.exports = {
       jQuery: 'jquery'
     }),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: './pages/colors-and-type/colors-and-type.pug',
-      filename: 'colors-and-type.html',
-      chunks: ['colorsAndType']
-    }),
-    new HtmlWebpackPlugin({
-      template: './pages/form-elements/form-elements.pug',
-      filename: 'form-elements.html',
-      chunks: ['formElements']
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: './pages/colors-and-type/colors-and-type.pug',
+    //   filename: 'colors-and-type.html',
+    //   chunks: ['colorsAndType']
+    // }),
+    // new HtmlWebpackPlugin({
+    //   template: './pages/form-elements/form-elements.pug',
+    //   filename: 'form-elements.html',
+    //   chunks: ['formElements']
+    // }),
     new HtmlWebpackPlugin({
       template: './pages/cards/cards.pug',
       filename: 'cards.html',
