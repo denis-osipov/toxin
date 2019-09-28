@@ -126,9 +126,9 @@ class Generator {
       this.deps[itemName].content.filter(bem => bem in this.files) :
       [];
     const depItems = union(this.deps[itemName].folder, existingDeps);
-    if (this.prevFiles) {
+    if (this.prevFiles && this.prevFiles[itemName]) {
       const deps = {};
-      if (this.prevDeps[itemName] && this.prevDeps[itemName].content) {
+      if (this.prevDeps[itemName].content) {
         var prevExistingDeps = this.prevDeps[itemName].content.filter(bem => {
           bem in this.prevFiles
         });
