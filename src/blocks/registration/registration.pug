@@ -5,10 +5,10 @@ mixin registration
     +input()(placeholder='Имя', class='registration__name')
     +input()(placeholder='Фамилия', class='registration__name')
     .registration__sex
-      +list([
-        {name: 'sex', label: 'Мужчина', checked: ''},
-        ['sex', 'Женщина']
-      ], 'radio')
+    +list([
+      {name: 'sex', label: 'Мужчина', checked: ''},
+      ['sex', 'Женщина']
+    ], 'radio')(class='registration__sex')
     .registration__sub-header.text_level_h3 Дата рождения
     +input('date')
     .registration__sub-header.text_level_h3 Данные для входа в сервис

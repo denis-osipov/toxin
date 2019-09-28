@@ -3,4 +3,5 @@ mixin sample-form(elementName, status)
   form.sample-form&attributes(attributes)
     if elementName || status
       +sample-form__header(elementName, status)
-    block
+    .sample-form__content
+      block
