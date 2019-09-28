@@ -4,7 +4,6 @@ mixin registration
     h1.registration__header.text_level_h1 Регистрация аккаунта
     +input()(placeholder='Имя', class='registration__name')
     +input()(placeholder='Фамилия', class='registration__name')
-    .registration__sex
     +list([
       {name: 'sex', label: 'Мужчина', checked: ''},
       ['sex', 'Женщина']
@@ -12,8 +11,7 @@ mixin registration
     .registration__sub-header.text_level_h3 Дата рождения
     +input('date')(class='registration__date')
     .registration__sub-header.text_level_h3 Данные для входа в сервис
-    +input()(type='email', placeholder='Email')
-    +input()(type='password', placeholder='Пароль')
+    +account
     +checkbox('offer', 'Получать спецпредложения', '', 'toggle')
     +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
     span Уже есть аккаунт на Toxin
