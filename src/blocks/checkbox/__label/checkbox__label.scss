@@ -1,6 +1,6 @@
 .checkbox__label {
 
-  .checkbox_type_radio .checkbox__input:checked ~ & {
+  .checkbox_type_radio .checkbox__input:checked ~ .checkbox__text & {
     color: $dark-75;
   }
 
