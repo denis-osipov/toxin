@@ -1,12 +1,12 @@
 include dependencies.pug
 mixin card(type)
-  .card
+  .card(class=`card_${type}`)
     case type
       when 'search'
-        +search
-      when 'registration'
-        +registration
-      when 'reservation'
-        +reservation
-      when 'login'
-        +login
+        +card__search
+      //- when 'registration'
+      //-   +card__registration
+      //- when 'reservation'
+      //-   +card__reservation
+      //- when 'login'
+      //-   +card__login
