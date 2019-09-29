@@ -4,4 +4,7 @@ mixin card__search
     h1.card__header.text_level_h1 Найдём номера под ваши пожелания
     +double-date-picker()(class='card__dates')
     +guests()(class='card__guests')
-    +button({text: 'Подобрать номер', icon: 'arrow_forward'}, 'fill', 'big')
+    +button(
+      {text: 'Подобрать номер', icon: 'arrow_forward'},
+      'fill',
+      'big')(class='card__button')

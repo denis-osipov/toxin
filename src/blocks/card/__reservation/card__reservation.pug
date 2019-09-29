@@ -1,0 +1,11 @@
+include dependencies.pug
+mixin card__reservation
+  form.card__reservation&attributes(attributes)
+    .card__header.text_level_h1
+      span.card__number № 888
+      span.card__type Люкс
+      span.card__cost 9 990₽ в сутки
+    +double-date-picker()(class='card__dates')
+    +guests()(class='card__guests')
+    +card__calculation
+    +button({text: 'Забронировать', icon: 'arrow_forward'}, 'fill', 'big')

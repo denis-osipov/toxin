@@ -1,0 +1,7 @@
+@import 'dependencies.scss';
+.card__calculation-item {
+  column-gap: 5px;
+  display: grid;
+  grid-template-columns: 214px 20px 1fr;
+  padding-bottom: 10px;
+}

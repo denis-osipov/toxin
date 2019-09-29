@@ -1,0 +1,8 @@
+mixin card__calculation-item(options)
+  li.card__calculation-item
+    div= options.name
+    if options.info
+      .card__info i
+    else
+      div
+    .card__calculation-value= options.value
