@@ -1,0 +1,6 @@
+include dependencies.pug
+mixin have-account(have)
+  .have-account
+    if have
+      .have-account__message Уже есть аккаунт на Toxin
+      +button({text: 'Войти'}, 'border')

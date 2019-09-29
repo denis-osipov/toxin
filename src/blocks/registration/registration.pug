@@ -17,5 +17,4 @@ mixin registration
       {text: 'Перейти к оплате', icon: 'arrow_forward'},
       'fill',
       'big')(class='registration__pay')
-    span Уже есть аккаунт на Toxin
-    +button({text: 'Войти'}, 'border')
+    +have-account(true)
