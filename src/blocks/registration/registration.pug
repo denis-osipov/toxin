@@ -13,6 +13,9 @@ mixin registration
     .registration__sub-header.text_level_h3 Данные для входа в сервис
     +account
     +checkbox('offer', 'Получать спецпредложения', '', 'toggle')
-    +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
+    +button(
+      {text: 'Перейти к оплате', icon: 'arrow_forward'},
+      'fill',
+      'big')(class='registration__pay')
     span Уже есть аккаунт на Toxin
     +button({text: 'Войти'}, 'border')
