@@ -1,6 +1,11 @@
 mixin input(mask=false, position='external')
   -
-    let inputClass = attributes.type ? `input_type_${attributes.type}` : 'input_type_text';
+    if (!attributes.type || ['text', 'email', 'password'].includes(attributes.type)) {
+      var inputClass = 'input_type_text';
+    }
+    else {
+      var inputClass = `input_type_${attributes.type}`;
+    }
     inputClass += ` input_position_${position}`;
     if (mask === 'date') {
       attributes.placeholder = 'ДД.ММ.ГГГГ';
