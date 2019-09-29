@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 const getBems = require('./get-bems');
-const { symmetricDifference, union, intersection } = require('./utils');
+const { symmetricDifference, union, intersection, difference } = require('./utils');
 const { warningMessage, rules } = require('./rules');
 
 class Generator {
@@ -140,10 +140,17 @@ class Generator {
         this.prevDeps[itemName].folder,
         prevExistingDeps
       );
-      deps.changedDeps = symmetricDifference(depItems, allPrevExistingDeps);
+      deps.removedDeps = difference(allPrevExistingDeps, depItems);
+      deps.addedDeps = difference(depItems, allPrevExistingDeps);
       deps.unchangedDeps = intersection(depItems, allPrevExistingDeps);
       var changedExts = this.checkDependencies(deps.unchangedDeps);
-      deps.changedDeps.forEach(depName => {
+      deps.removedDeps.forEach(depName => {
+        changedExts = union(
+          changedExts,
+          Object.keys(this.prevFiles[depName].files)
+        );
+      });
+      deps.addedDeps.forEach(depName => {
         changedExts = union(
           changedExts,
           Object.keys(this.files[depName].files)
