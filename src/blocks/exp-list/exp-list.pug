@@ -1,5 +1,5 @@
 include dependencies.pug
 mixin exp-list(name, items)
-  .exp-list
+  .exp-list&attributes(attributes)
     +exp-list__header(name)
     +list(items, 'checkbox')(class='exp-list__list')

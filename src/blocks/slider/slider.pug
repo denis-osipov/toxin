@@ -1,5 +1,5 @@
 include dependencies.pug
 mixin slider(name)
-  .slider.slider_skin_toxin
+  .slider.slider_skin_toxin&attributes(attributes)
     +slider__header(name)
     +input()(class='slider__input', type="text")&attributes(attributes)

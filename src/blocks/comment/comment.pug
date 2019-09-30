@@ -1,6 +1,6 @@
 include dependencies.pug
 mixin comment(userName, date, message, like)
-  article.comment
+  article.comment&attributes(attributes)
     +avatar(userName)
     .comment__header
       .comment__user= userName

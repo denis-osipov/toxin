@@ -1,6 +1,6 @@
 include dependencies.pug
 mixin rating(stars)
-  +button({}, 'text', 'min')(class='rating')
+  +button({}, 'text', 'min')(class='rating')&attributes(attributes)
     - let filled = 0;
     while filled < stars
       +icon('star', 'primary-gradient')(class='rating__icon')

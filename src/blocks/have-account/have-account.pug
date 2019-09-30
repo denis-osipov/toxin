@@ -1,6 +1,9 @@
 include dependencies.pug
 mixin have-account(have)
-  .have-account
+  .have-account&attributes(attributes)
     if have
       .have-account__message Уже есть аккаунт на Toxin
       +button({text: 'Войти'}, 'border')
+    else
+      .have-account__message Нет аккаунта на Toxin?
+      +button({text: 'Создать'}, 'border')
