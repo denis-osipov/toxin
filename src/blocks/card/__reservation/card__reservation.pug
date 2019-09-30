@@ -2,10 +2,18 @@ include dependencies.pug
 mixin card__reservation
   form.card__reservation&attributes(attributes)
     .card__header.text_level_h1
-      span.card__number № 888
-      span.card__type Люкс
-      span.card__cost 9 990₽ в сутки
+      div
+        span.card__number-sign= '№ '
+        span.card__room-number 888
+        span.text_level_h3
+          span.card__room-type= ' Люкс'
+      span.card__cost.text
+        span.card__cost-value= '9 990₽ '
+        span.card__cost-time в сутки
     +double-date-picker()(class='card__dates')
     +guests()(class='card__guests')
     +card__calculation
-    +button({text: 'Забронировать', icon: 'arrow_forward'}, 'fill', 'big')
+    +button(
+      {text: 'Забронировать', icon: 'arrow_forward'},
+      'fill',
+      'big')(class='card__button')

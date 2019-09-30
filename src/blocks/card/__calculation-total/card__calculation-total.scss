@@ -1,0 +1,8 @@
+@import 'dependencies.scss';
+.card__calculation-total {
+  align-items: end;
+  column-gap: 5px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  padding-top: 15px;
+}
