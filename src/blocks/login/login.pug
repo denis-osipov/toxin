@@ -1,9 +1,0 @@
-include dependencies.pug
-mixin login
-  form.login&attributes(attributes)
-    h1 Войти
-    +input()(type='email', placeholder='Email')
-    +input()(type='password', placeholder='Пароль')
-    +button({text: 'Войти', icon: 'arrow_forward'}, 'fill', 'big')
-    span Нет аккаунта на Toxin?
-    +button({text: 'Создать'}, 'border')
