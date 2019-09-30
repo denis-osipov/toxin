@@ -1,6 +1,6 @@
 include dependencies.pug
 mixin card(type)
-  .card(class=`card_${type}`)
+  .card(class=`card_${type}`)&attributes(attributes)
     case type
       when 'search'
         +card__search
@@ -8,5 +8,5 @@ mixin card(type)
         +card__registration
       when 'reservation'
         +card__reservation
-      //- when 'login'
-      //-   +card__login
+      when 'login'
+        +card__login

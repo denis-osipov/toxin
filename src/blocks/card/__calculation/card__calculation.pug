@@ -1,6 +1,6 @@
 include dependencies.pug
 mixin card__calculation
-  ul.card__calculation
+  ul.card__calculation&attributes(attributes)
     +card__calculation-item({
       name: '9 990₽ х 4 суток',
       value: '39 960₽'
@@ -15,4 +15,4 @@ mixin card__calculation
       value: '300₽',
       info: true
     })
-    +card__calculation-total('Итого', '38 081₽')
+  +card__calculation-total('Итого', '38 081₽')

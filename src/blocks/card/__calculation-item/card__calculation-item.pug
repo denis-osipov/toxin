@@ -1,5 +1,5 @@
 mixin card__calculation-item(options)
-  li.card__calculation-item
+  li.card__calculation-item&attributes(attributes)
     div= options.name
     if options.info
       .card__info i

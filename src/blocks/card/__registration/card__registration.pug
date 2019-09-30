@@ -2,19 +2,24 @@ include dependencies.pug
 mixin card__registration
   form.card__registration&attributes(attributes)
     h1.card__header.text_level_h1 Регистрация аккаунта
-    +input()(placeholder='Имя', class='card__user-info')
-    +input()(placeholder='Фамилия', class='card__user-info')
-    +list([
-      {name: 'sex', label: 'Мужчина', checked: ''},
-      ['sex', 'Женщина']
-    ], 'radio')(class='card__user-info')
+    .card__user-info
+      +input()(placeholder='Имя', class='card__user-info-item')
+      +input()(placeholder='Фамилия', class='card__user-info-item')
+      +list([
+        {name: 'sex', label: 'Мужчина', checked: ''},
+        ['sex', 'Женщина']
+      ], 'radio')(class='card__user-info-item')
     .card__sub-header.text_level_h3 Дата рождения
     +input('date')(class='card__date')
     .card__sub-header.text_level_h3 Данные для входа в сервис
     +account
-    +checkbox('offer', 'Получать спецпредложения', '', 'toggle')
+    +checkbox(
+      'offer',
+      'Получать спецпредложения',
+      '',
+      'toggle')(class='card__offer')
     +button(
       {text: 'Перейти к оплате', icon: 'arrow_forward'},
       'fill',
-      'big')(class='card__pay')
-    +have-account(true)
+      'big')(class='card__button')
+    +have-account(true)(class='card__have-account')
