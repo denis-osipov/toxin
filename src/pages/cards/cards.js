@@ -8,4 +8,7 @@ $( document ).ready(function(jQery) {
 
   const reservationGuests = $( '.card_reservation' ).find('.dropdown_type_guests').data('dropdown');
   reservationGuests.set([2, 1]);
+
+  const calendar = $( '.calendar' ).data('datepicker');
+  calendar.selectDate([new Date(2019, 7, 19), new Date(2019, 7, 23)]);
 });
