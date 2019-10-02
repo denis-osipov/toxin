@@ -26,7 +26,13 @@ mixin dropdown(type='', items, control=true)
     .dropdown__container
       +dropdown__list(listItems)
       if control
-        +control([
-          { text: 'Очистить', color: 'dark-50', action: 'clear' },
-          { text: 'Применить', color: 'primary-color', action: 'apply' }
-        ], 'dropdown')
+        +control(
+          [
+            { text: 'Очистить', color: 'dark-50', action: 'clear' },
+            { text: 'Применить', color: 'primary-color', action: 'apply' }
+          ],
+          {
+            selector: '.dropdown',
+            name: 'dropdown'
+          }
+        )

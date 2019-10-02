@@ -1,10 +1,15 @@
 include dependencies.pug
 mixin control(buttons, target)
+
   //- Create buttons using info in array of objects with properties:
-  //-   text: button text
-  //-   color: button text color
-  //-   action: action after clicking (should correspond to some name in controlled block)
-  .control(data-target=target)&attributes(attributes)
+  //-   text: string with button text
+  //-   color: string with button text color
+  //-   action: string with action after clicking (should correspond to some name in controlled block)
+  //- and target - object with target info:
+  //-   selector - string with jQuery selector for target element in DOM
+  //-   name - data name for target object
+
+  .control(data-selector=target.selector, data-name=target.name)&attributes(attributes)
     each button in buttons
       +button(
         {text: button.text, textColor: button.color},

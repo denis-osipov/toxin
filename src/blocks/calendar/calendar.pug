@@ -2,7 +2,13 @@ include dependencies.pug
 mixin calendar
   .calendar&attributes(attributes)
     .calendar__picker
-    +control([
-      { text: 'Очистить', color: 'dark-50', action: 'clear' },
-      { text: 'Применить', color: 'primary-color', action: 'apply' }
-    ], 'calendar__picker')
+    +control(
+      [
+        { text: 'Очистить', color: 'dark-50', action: 'clear' },
+        { text: 'Применить', color: 'primary-color', action: 'apply' }
+      ],
+      {
+        selector: '.calendar__picker',
+        name: 'datepicker'
+      }
+    )

@@ -73,6 +73,7 @@ import './dependencies.js';
       // }
 
       $.data(this, 'dropdown', dropdown);
+      $( this ).trigger('target:ready');
 
     });
   };

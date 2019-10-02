@@ -20,7 +20,9 @@ function setCalendar( jQuery ) {
       }
     }).data('datepicker');
 
-    calendar.apply = () => {};
+    calendar.apply = () => {console.log('Applyed')};
+
+    $( this ).trigger('target:ready');
   });
 }
 
