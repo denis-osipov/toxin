@@ -8,7 +8,7 @@ $datepickerFontSize: 12px;
 
 $datepickerTextColor: (
   otherMonth: $dark-25,
-  disabled: #aeaeae,
+  disabled: $dark-5,
   currentDate: $light,
   common: $dark-50,
   dayNames: $primary-color
@@ -20,6 +20,17 @@ $datepickerBorderColor: (
 );
 
 $datepickerNavigationHeight: 24px;
+
+%range {
+  background: $primary-gradient-25;
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
 
 @import '../../../node_modules/air-datepicker/src/sass/datepicker-config.scss';
 @import '../../../node_modules/air-datepicker/src/sass/datepicker.scss';
@@ -33,14 +44,6 @@ $datepickerNavigationHeight: 24px;
     border-bottom: none;
   }
 
-  &--buttons {
-    border-top: none;
-  }
-
-  &--button {
-    color: black;
-  }
-
   &--cell {
     border-radius: 50%;
 
@@ -49,29 +52,16 @@ $datepickerNavigationHeight: 24px;
       background: scale-color($primary-color, $lightness: 50%);
       border: none;
       border-radius: 50%;
+      color: $light;
     }
 
     &.-range-from-::after {
-      background: $primary-gradient-25;
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: -1;
+      @extend %range;
       border-radius: 50% 0 0 50%;
     }
 
     &.-range-to-::before {
-      background: $primary-gradient-25;
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: -1;
+      @extend %range;
       border-radius: 0 50% 50% 0;
     }
 
@@ -81,7 +71,7 @@ $datepickerNavigationHeight: 24px;
 
       &.-focus- {
         background: $secondary-color;
-        color: $light;
+        color: map_get($datepickerTextColor, currentDate);;
       }
 
       &.-in-range- {
@@ -90,13 +80,7 @@ $datepickerNavigationHeight: 24px;
         position: relative;
 
         &::after {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: $primary-gradient-25;
-          content: '';
+          @extend %range;
         }
       }
     }
@@ -106,26 +90,9 @@ $datepickerNavigationHeight: 24px;
       border-radius: 50%;
       position: relative;
 
-      &.-range-from-::after {
-        background: $primary-gradient-25;
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        right: 0;
-        z-index: -1;
-      }
-
+      &.-range-from-::after,
       &.-range-to-::before {
-        background: $primary-gradient-25;
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 50%;
-        z-index: -1;
+        @extend %range;
       }
 
       &.-focus- {
