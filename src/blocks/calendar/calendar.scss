@@ -50,8 +50,8 @@ $datepickerNavigationHeight: 24px;
     &.-range-from-,
     &.-range-to- {
       background: scale-color($primary-color, $lightness: 50%);
-      border: none;
       border-radius: 50%;
+      border: none;
       color: $light;
     }
 

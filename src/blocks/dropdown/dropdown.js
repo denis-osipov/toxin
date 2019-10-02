@@ -50,7 +50,7 @@ import './dependencies.js';
             dropdown.values.push(parseInt($( element ).val()));
           });
         }
-      }
+      };
       dropdown.init();
       dropdown.update();
 

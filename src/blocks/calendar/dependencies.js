@@ -1,5 +1,4 @@
 // File generated automatically.
 // Any changes will be discarded during next compilation.
 
-@import '../../button/button.scss';
-@import '../__control/dropdown__control.scss';
+import '../control/control.js';

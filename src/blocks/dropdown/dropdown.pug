@@ -1,5 +1,5 @@
 include dependencies.pug
-mixin dropdown(type='', items, controls=true)
+mixin dropdown(type='', items, control=true)
   //- type should be one of:
   //-   guests
   //-   conveniences
@@ -25,5 +25,8 @@ mixin dropdown(type='', items, controls=true)
     +dropdown__total
     .dropdown__container
       +dropdown__list(listItems)
-      if controls
-        +dropdown__controls
+      if control
+        +control([
+          { text: 'Очистить', color: 'dark-50', action: 'clear' },
+          { text: 'Применить', color: 'primary-color', action: 'apply' }
+        ], 'dropdown')

@@ -1,3 +1,4 @@
+import './dependencies.js';
 import 'air-datepicker';
 
 function setCalendar( jQuery ) {
@@ -5,7 +6,7 @@ function setCalendar( jQuery ) {
     array[index] = value.toLowerCase();
   });
 
-  $( '.calendar' ).each(function() {
+  $( '.calendar__picker' ).each(function() {
     const calendar = $( this ).datepicker({
       toggleSelected: true,
       range: true,

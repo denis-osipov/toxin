@@ -1,0 +1,14 @@
+include dependencies.pug
+mixin control(buttons, target)
+  //- Create buttons using info in array of objects with properties:
+  //-   text: button text
+  //-   color: button text color
+  //-   action: action after clicking (should correspond to some name in controlled block)
+  .control(data-target=target)&attributes(attributes)
+    each button in buttons
+      +button(
+        {text: button.text, textColor: button.color},
+        'text',
+        'min')(
+          class=`control__button control__button_type_${button.action}`,
+          data-action=button.action)
