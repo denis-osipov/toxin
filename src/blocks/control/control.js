@@ -16,6 +16,7 @@
           control.setTarget();
           control.findButtons();
           control.plugInButtons();
+          control.targetElement.off('target:ready');
         },
         setTarget: () => {
           const targetDataName = control.panel.attr('data-name');
@@ -36,6 +37,7 @@
       control.listen();
 
       $.data(this, 'control', control);
+      $( this ).trigger('control:ready');
     });
   };
 })( jQuery );

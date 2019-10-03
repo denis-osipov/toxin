@@ -11,7 +11,8 @@ import './dependencies.js';
 //   zeroSpecial: false,           // should special sums be shown if equal to 0
 //   sep: ', ',                    // separator for items quantities if total is false
 //   wording: $.fn.dropdown.format // if setted must be function (for total: true) or array of functions (for total: false)
-//                                 // function get integer and must return formatted string
+//                                 // function get integer and must return formatted string,
+//   control                       // string containing jQuery selector for control element
 // };
 
 
@@ -31,6 +32,8 @@ import './dependencies.js';
           dropdown.expand = $.fn.dropdown.expand.bind(dropdown.dropdown);
           dropdown.change = $.fn.dropdown.change.bind(this);
           dropdown.set = $.fn.dropdown.set.bind(this);
+          dropdown.apply = $.fn.dropdown.apply;
+          dropdown.triggerControl = $.fn.dropdown.triggerControl.bind(this);
           dropdown.setElements();
           dropdown.setValues();
         },
@@ -73,7 +76,10 @@ import './dependencies.js';
       // }
 
       $.data(this, 'dropdown', dropdown);
-      $( this ).trigger('target:ready');
+
+      if (dropdown.settings.control) {
+        dropdown.triggerControl();
+      }
 
     });
   };
@@ -178,6 +184,22 @@ import './dependencies.js';
       return value + ' items';
     }
   };
+
+  $.fn.dropdown.apply = function() {
+    console.log('Applyed.');
+  };
+
+  $.fn.dropdown.triggerControl = function() {
+    const selector = this.settings.control;
+    this.dropdown.trigger('target:ready');
+    this.controlElement = this.dropdown.siblings(selector).first();
+    if (!this.controlElement.length) {
+      this.controlElement = this.dropdown.find(selector).first();
+    }
+    this.controlElement.on('control:ready', (event) => {
+      this.dropdown.trigger('target:ready');
+    });
+  }
 
   $.fn.dropdown.defaults = {
     total: true,

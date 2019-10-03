@@ -40,7 +40,8 @@ function setGuests( jQuery ) {
           }
         }
       }
-    ]
+    ],
+    control: '.control'
   });
 }
 
