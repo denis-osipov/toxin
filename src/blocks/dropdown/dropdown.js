@@ -1,4 +1,3 @@
-import './dependencies.js';
 // Dropdown with counting
 // Should be setted on inputs: $(selector).dropdown(settings)
 //
@@ -15,6 +14,8 @@ import './dependencies.js';
 //   control                       // string containing jQuery selector for control element
 // };
 
+import './dependencies.js';
+const connect = require('../../../utils/connect');
 
 (function( $ ) {
   // Main method creating dropdown
@@ -33,7 +34,7 @@ import './dependencies.js';
           dropdown.change = $.fn.dropdown.change.bind(this);
           dropdown.set = $.fn.dropdown.set.bind(this);
           dropdown.apply = $.fn.dropdown.apply;
-          dropdown.triggerControl = $.fn.dropdown.triggerControl.bind(this);
+          dropdown.clear = $.fn.dropdown.clear.bind(this);
           dropdown.setElements();
           dropdown.setValues();
         },
@@ -42,10 +43,6 @@ import './dependencies.js';
           dropdown.items = dropdown.dropdown.find('.dropdown__item');
           dropdown.total = dropdown.dropdown.find('.dropdown__total');
           dropdown.list = dropdown.dropdown.find('.dropdown__list');
-          if (dropdown.dropdown.find('.dropdown__controls').length) {
-            dropdown.clear = dropdown.dropdown.find('.dropdown__control_type_clear');
-            dropdown.apply = dropdown.dropdown.find('.dropdown__control_type_apply');
-          }
         },
         setValues: function() {
           dropdown.values = [];
@@ -55,30 +52,14 @@ import './dependencies.js';
         }
       };
       dropdown.init();
-      dropdown.update();
 
       dropdown.total.on('click', dropdown.expand);
       dropdown.items.on('click', '.dropdown__button', dropdown.change);
 
-      if (dropdown.clear) {
-        dropdown.clear.on('click', function() {
-          dropdown.items.each(function(index, element) {
-            $( element ).find('.dropdown__item-value').val(0);
-            $( element ).find('.dropdown__button_type_decrement').prop('disabled', true);
-          });
-          dropdown.update();
-        })
-      }
-
-      // Action on Apply button clicking
-      // if (dropdown.apply) {
-      //   dropdown.apply.on('click', dropdown.expand);
-      // }
-
       $.data(this, 'dropdown', dropdown);
 
       if (dropdown.settings.control) {
-        dropdown.triggerControl();
+        connect(dropdown.dropdown, dropdown.settings.control, dropdown.update.bind(dropdown));
       }
 
     });
@@ -102,13 +83,11 @@ import './dependencies.js';
     const sum = this.values.reduce((prev, current) => {
       return prev + current;
     });
-    if (this.dropdown.find('.dropdown__controls').length) {
-      if (sum === 0) {
-        this.clear.prop('disabled', true);
-      }
-      else {
-        this.clear.prop('disabled', false);
-      }
+    if (sum === 0) {
+      this.dropdown.trigger('target:changeButtonStatus', {action: 'clear', disabled: true});
+    }
+    else {
+      this.dropdown.trigger('target:changeButtonStatus', {action: 'clear', disabled: false});
     }
 
     // Construct total input value
@@ -186,19 +165,15 @@ import './dependencies.js';
   };
 
   $.fn.dropdown.apply = function() {
-    console.log('Applyed.');
+    console.log('Applied.');
   };
 
-  $.fn.dropdown.triggerControl = function() {
-    const selector = this.settings.control;
-    this.dropdown.trigger('target:ready');
-    this.controlElement = this.dropdown.siblings(selector).first();
-    if (!this.controlElement.length) {
-      this.controlElement = this.dropdown.find(selector).first();
-    }
-    this.controlElement.on('control:ready', (event) => {
-      this.dropdown.trigger('target:ready');
+  $.fn.dropdown.clear = function() {
+    this.items.each(function(index, element) {
+      $( element ).find('.dropdown__item-value').val(0);
+      $( element ).find('.dropdown__button_type_decrement').prop('disabled', true);
     });
+    this.update();
   }
 
   $.fn.dropdown.defaults = {

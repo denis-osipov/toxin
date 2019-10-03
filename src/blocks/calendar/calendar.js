@@ -1,5 +1,6 @@
 import './dependencies.js';
 import 'air-datepicker';
+const connect = require('../../../utils/connect');
 
 function setCalendar( jQuery ) {
   $.fn.datepicker.language.ru.monthsShort.forEach(function(value, index, array) {
@@ -20,9 +21,9 @@ function setCalendar( jQuery ) {
       }
     }).data('datepicker');
 
-    calendar.apply = () => {console.log('Applyed')};
+    calendar.apply = () => {console.log('Applied.')};
 
-    $( this ).trigger('target:ready');
+    connect($( this ), '.control');
   });
 }
 
