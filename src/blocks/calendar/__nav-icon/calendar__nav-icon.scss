@@ -1,5 +1,5 @@
 .calendar__nav-icon {
   color: $primary-color;
-  font-size: 24px;
-  line-height: 20px;
+  font-size: 24px / $ref-rem;
+  line-height: #{(20px / 24px)};
 }
