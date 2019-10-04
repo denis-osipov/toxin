@@ -1,13 +1,11 @@
 @import 'dependencies.scss';
 .like {
   align-items: center;
-  background-color: $dark-25;
   background-origin: border-box;
   border-radius: 10px;
   border: solid 1px transparent;
-  box-shadow: 0 20px/$ref-rem $light inset;
+  box-shadow: 0 30px/$ref-rem $light inset;
   box-sizing: border-box;
-  color: $dark-25;
   display: grid;
   font-size: 10px;
   grid-template-columns: 15px 18px;
