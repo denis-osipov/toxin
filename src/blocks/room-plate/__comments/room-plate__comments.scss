@@ -1,7 +1,7 @@
 @import 'dependencies.scss';
 .room-plate__comments {
   color: $dark-50;
-  line-height: 20px;
+  line-height: 20px / $ref-rem;
   padding-bottom: 3px;
   padding-right: 3px;
 }
