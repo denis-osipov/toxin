@@ -1,0 +1,5 @@
+include dependencies.pug
+mixin room-plate__info(room, roomInfo)
+  .room-plate__info
+    +room-header(Object.assign({room: room}, roomInfo))(class='room-plate__header text_level_h2')
+    +room-plate__rating(roomInfo.rating, roomInfo.comments)

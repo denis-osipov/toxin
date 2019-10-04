@@ -1,1 +1,7 @@
 @import 'dependencies.scss';
+
+.room-plate {
+  background-color: $light;
+  border-radius: 4px;
+  box-shadow: 0px 10px 20px $dark-5;
+}

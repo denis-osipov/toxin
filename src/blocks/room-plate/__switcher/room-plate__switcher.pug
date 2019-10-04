@@ -1,0 +1,7 @@
+mixin room-plate__switcher(images)
+  ul.room-plate__switcher
+    li.room-plate__switcher-item.room-plate__switcher-item_active(src=images[0])
+    - let i = 1;
+    while i < images.length
+      li.room-plate__switcher-item(src=images[i])
+      - i++
