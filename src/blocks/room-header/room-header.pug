@@ -1,0 +1,10 @@
+include dependencies.pug
+mixin room-header(room)
+  .room-header&attributes(attributes)
+    div
+      span.room-header__number-sign= '№ '
+      span.room-header__number= room.room
+      if room.type
+        span.text_level_h3
+          span.room-header__type= ` ${room.type}`
+    +room-header__cost(room.cost, 'в сутки')
