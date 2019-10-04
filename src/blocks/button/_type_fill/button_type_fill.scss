@@ -1,5 +1,6 @@
 .button_type_fill {
   background: $primary-gradient;
+  border: none;
 
   &.button_focused,
   &:hover,

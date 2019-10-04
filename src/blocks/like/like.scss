@@ -2,29 +2,15 @@
 .like {
   align-items: center;
   background-color: $dark-25;
+  background-origin: border-box;
   border-radius: 10px;
-  border: none;
+  border: solid 1px transparent;
+  box-shadow: 0 20px/$ref-rem #fff inset;
   box-sizing: border-box;
   color: $dark-25;
   display: grid;
   font-size: 10px;
   grid-template-columns: 15px 18px;
-  height: 20px;
   justify-items: center;
-  padding: 0;
-  position: relative;
-  width: 40px;
-  z-index: 0;
-
-  &::after {
-    background-color: #fff;
-    border-radius: inherit;
-    bottom: 1px;
-    content: '';
-    left: 1px;
-    position: absolute;
-    right: 1px;
-    top: 1px;
-    z-index: -1;
-  }
+  padding-right: 5px;
 }

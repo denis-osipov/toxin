@@ -1,20 +1,12 @@
 .button_type_border {
-  background: $primary-gradient;
-  &::before {
-    background-color: $light;
-    border-radius: inherit;
-    bottom: 2px;
-    content: '';
-    left: 2px;
-    position: absolute;
-    right: 2px;
-    top: 2px;
-    z-index: -1;
-  }
+  background-image: $primary-gradient;
+  background-origin: border-box;
+  border: solid 2px transparent;
+  box-shadow: 0 50px/$ref-rem #fff inset;
 
   &.button_focused,
   &:hover,
   &:focus {
-    background: $primary-gradient-50;
+    background-image: $primary-gradient-50;
   }
 }
