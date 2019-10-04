@@ -2,7 +2,7 @@
   background-image: $primary-gradient;
   background-origin: border-box;
   border: solid 2px transparent;
-  box-shadow: 0 50px/$ref-rem #fff inset;
+  box-shadow: 0 50px/$ref-rem $light inset;
 
   &.button_focused,
   &:hover,
