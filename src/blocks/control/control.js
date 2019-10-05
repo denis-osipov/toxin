@@ -3,7 +3,7 @@
 // In the passed object must be two properties:
 //   action - action, which the button perform (string)
 //   disabled - should the button be disabled (bool)
-// To appropriate connection, use connect module (in utils folder).
+// To appropriate connection, use connect block in target.
 
 (function( $ ) {
   // Main method creating control

@@ -1,6 +1,6 @@
 import './dependencies.js';
 import 'air-datepicker';
-const connect = require('../../../utils/connect');
+const connect = require('blocksPath/connect/connect');
 
 function setCalendar( jQuery ) {
   $.fn.datepicker.language.ru.monthsShort.forEach(function(value, index, array) {
