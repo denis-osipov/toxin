@@ -4,5 +4,10 @@
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+  max-width: 380px;
   padding: 30px 30px 30px 29px;
+  padding-bottom: 30px / $ref-rem;
+  padding-left: percentage(29px / 380px);
+  padding-right: percentage(30px / 380px);
+  padding-top: 30px / $ref-rem;
 }

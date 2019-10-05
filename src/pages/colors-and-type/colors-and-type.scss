@@ -1,6 +1,6 @@
 @import 'dependencies.scss';
 .ui-kit {
-  $top-padding: 37px;
+  $top-padding: 37px / $ref-rem;
   $side-padding: 150px;
 
   &__body {

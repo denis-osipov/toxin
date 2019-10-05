@@ -1,10 +1,5 @@
 @import 'dependencies.scss';
 
-.body {
-  width: 1440px;
-  margin: 0;
-}
-
 .ui-kit {
   $column-gap: 20px;
   $ref-padding: 141px;
@@ -21,7 +16,7 @@
     grid-template-columns: repeat(auto-fit, minmax($min-width - $min-padding * 2, 1fr));
     padding-left: calc(#{percentage($padding-frac)} - #{$padding-comp});
     padding-right: calc(#{percentage($padding-frac)} - #{$padding-comp});
-    padding-top: 23px;
+    padding-top: 23px / $ref-rem;
     row-gap: 20px;
   }
 
