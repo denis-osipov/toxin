@@ -1,4 +1,5 @@
-mixin palette__item(name, code, opacity)
+include dependencies.pug
+mixin palette__item(name, code)
   li.palette__item&attributes(attributes)
     +palette__plate(name)
     +palette__label(name, code)

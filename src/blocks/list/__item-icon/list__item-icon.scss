@@ -1,6 +1,4 @@
-@mixin list__item-icon {
-  .list__item-icon {
-    font-size: 48px / $ref-rem;
-    line-height: 1;
-  }
+.list__item-icon {
+  font-size: 48px / $ref-rem;
+  line-height: 1;
 }

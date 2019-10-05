@@ -1,0 +1,7 @@
+include dependencies.pug
+mixin card__login
+  form.card__login&attributes(attributes)
+  h1.card__header.text_level_h1 Войти
+  +account
+  +button({text: 'Войти', icon: 'arrow_forward'}, 'fill', 'big')(class='card__button')
+  +have-account(false)(class='card__have-account')

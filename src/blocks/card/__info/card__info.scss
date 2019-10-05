@@ -1,0 +1,12 @@
+.card__info {
+  border-radius: 50%;
+  border: 1px solid $dark-25;
+  box-sizing: border-box;
+  color: $dark-25;
+  font-size: 12px / $ref-rem;
+  font-weight: bold;
+  height: 20px;
+  line-height: #{(20px / 12px)};
+  text-align: center;
+  width: 20px;
+}

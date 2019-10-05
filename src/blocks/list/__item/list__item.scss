@@ -1,6 +1,1 @@
-@mixin list__item {
-  .list__item {
-    margin-bottom: 10px;
-  }
-  @include list__item_type;
-}
+@import 'dependencies.scss';

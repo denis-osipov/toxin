@@ -1,13 +1,10 @@
-@mixin checkbox__label {
-  .checkbox__label {
-    line-height: #{(19px / 14px)};
+.checkbox__label {
 
-    .checkbox_type_radio .checkbox__input:checked ~ & {
-      color: $dark-75;
-    }
+  .checkbox_type_radio .checkbox__input:checked ~ .checkbox__text & {
+    color: $dark-75;
+  }
 
-    .checkbox_type_rich & {
-      font-weight: bold;
-    }
+  .checkbox_type_rich & {
+    font-weight: bold;
   }
 }

@@ -10,12 +10,12 @@
 //   zeroSpecial: false,           // should special sums be shown if equal to 0
 //   sep: ', ',                    // separator for items quantities if total is false
 //   wording: $.fn.dropdown.format // if setted must be function (for total: true) or array of functions (for total: false)
-//                                 // function get integer and must return formatted string
+//                                 // function get integer and must return formatted string,
+//   control                       // string containing jQuery selector for control element
 // };
 
-
-import './_type/dropdown_type_conveniences';
-import './_type/dropdown_type_guests';
+import './dependencies.js';
+const connect = require('blocksPath/connect/connect');
 
 (function( $ ) {
   // Main method creating dropdown
@@ -25,7 +25,7 @@ import './_type/dropdown_type_guests';
 
     return this.each(function() {
 
-      let dropdown = {
+      const dropdown = {
         dropdown: $( this ),
         init: function() {
           dropdown.settings = settings;
@@ -33,6 +33,8 @@ import './_type/dropdown_type_guests';
           dropdown.expand = $.fn.dropdown.expand.bind(dropdown.dropdown);
           dropdown.change = $.fn.dropdown.change.bind(this);
           dropdown.set = $.fn.dropdown.set.bind(this);
+          dropdown.apply = $.fn.dropdown.apply;
+          dropdown.clear = $.fn.dropdown.clear.bind(this);
           dropdown.setElements();
           dropdown.setValues();
         },
@@ -41,10 +43,6 @@ import './_type/dropdown_type_guests';
           dropdown.items = dropdown.dropdown.find('.dropdown__item');
           dropdown.total = dropdown.dropdown.find('.dropdown__total');
           dropdown.list = dropdown.dropdown.find('.dropdown__list');
-          if (dropdown.dropdown.find('.dropdown__controls').length) {
-            dropdown.clear = dropdown.dropdown.find('.dropdown__control_type_clear');
-            dropdown.apply = dropdown.dropdown.find('.dropdown__control_type_apply');
-          }
         },
         setValues: function() {
           dropdown.values = [];
@@ -52,29 +50,17 @@ import './_type/dropdown_type_guests';
             dropdown.values.push(parseInt($( element ).val()));
           });
         }
-      }
+      };
       dropdown.init();
-      dropdown.update();
 
       dropdown.total.on('click', dropdown.expand);
       dropdown.items.on('click', '.dropdown__button', dropdown.change);
 
-      if (dropdown.clear) {
-        dropdown.clear.on('click', function() {
-          dropdown.items.each(function(index, element) {
-            $( element ).find('.dropdown__item-value').val(0);
-            $( element ).find('.dropdown__button_type_decrement').prop('disabled', true);
-          });
-          dropdown.update();
-        })
-      }
-
-      // Action on Apply button clicking
-      // if (dropdown.apply) {
-      //   dropdown.apply.on('click', dropdown.expand);
-      // }
-
       $.data(this, 'dropdown', dropdown);
+
+      if (dropdown.settings.control) {
+        connect(dropdown.dropdown, dropdown.settings.control, dropdown.update.bind(dropdown));
+      }
 
     });
   };
@@ -97,13 +83,11 @@ import './_type/dropdown_type_guests';
     const sum = this.values.reduce((prev, current) => {
       return prev + current;
     });
-    if (this.dropdown.find('.dropdown__controls').length) {
-      if (sum === 0) {
-        this.clear.prop('disabled', true);
-      }
-      else {
-        this.clear.prop('disabled', false);
-      }
+    if (sum === 0) {
+      this.dropdown.trigger('target:changeButtonStatus', {action: 'clear', disabled: true});
+    }
+    else {
+      this.dropdown.trigger('target:changeButtonStatus', {action: 'clear', disabled: false});
     }
 
     // Construct total input value
@@ -113,7 +97,7 @@ import './_type/dropdown_type_guests';
     }
     // Total value and special cases
     else if (this.settings.total && this.settings.special.length) {
-      let values = this.values.slice();
+      const values = this.values.slice();
       let totals = [];
       this.settings.special.forEach((specialCase) => {
         let sum = 0;
@@ -179,6 +163,18 @@ import './_type/dropdown_type_guests';
       return value + ' items';
     }
   };
+
+  $.fn.dropdown.apply = function() {
+    console.log('Applied.');
+  };
+
+  $.fn.dropdown.clear = function() {
+    this.items.each(function(index, element) {
+      $( element ).find('.dropdown__item-value').val(0);
+      $( element ).find('.dropdown__button_type_decrement').prop('disabled', true);
+    });
+    this.update();
+  }
 
   $.fn.dropdown.defaults = {
     total: true,

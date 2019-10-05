@@ -1,11 +1,4 @@
-@mixin slider {
-  @include input;
-
-  .slider {
-    @import '../../../node_modules/ion-rangeslider/css/ion.rangeSlider.min.css';
-    @import './toxin.scss';
-    @include toxin;
-  }
-  @include slider__header;
-  @include slider__output;
+@import 'dependencies.scss';
+.slider {
+  @import '../../../node_modules/ion-rangeslider/css/ion.rangeSlider.min.css';
 }

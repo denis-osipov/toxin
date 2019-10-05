@@ -1,10 +1,8 @@
-@mixin input {
-  .input {
-    color: inherit;
-    font: inherit;
-    line-height: inherit;
-    text-overflow: ellipsis;
-  }
-  @include input_position;
-  @include input_type;
+@import 'dependencies.scss';
+.input {
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  outline: none;
+  text-overflow: ellipsis;
 }

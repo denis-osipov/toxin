@@ -1,6 +1,1 @@
-@mixin exp-list {
-  @include list;
-  @include exp-list__header;
-  @include exp-list__icon;
-  @include exp-list__list;
-}
+@import 'dependencies.scss';

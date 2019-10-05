@@ -1,13 +1,10 @@
-@mixin text {
-  .text {
-    font: {
-      family: $text-font-family;
-      size: $body-font-size;
-      weight: normal;
-    }
-    color: $dark-75;
-    line-height: $body-line-height;
+@import 'dependencies.scss';
+.text {
+  font: {
+    family: $text-font-family;
+    size: $body-font-size;
+    weight: normal;
   }
-
-  @include text_level;
+  color: $dark-75;
+  line-height: $body-line-height;
 }

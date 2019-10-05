@@ -1,6 +1,8 @@
-extends ../ui-kit.pug
+extends ../ui-kit/ui-kit.pug
 
 block title
+  include dependencies.pug
+
   ='Form Elements'
 
 block content
@@ -13,7 +15,7 @@ block content
       +dropdown('guests')
     +sample-form('Masked text field', 'Default')
       +input('date')
-    .double-date-picker
+    .two-date-pickers
       +sample-form('Date dropdown')
         +date-picker('double')
       +sample-form('Date dropdown')
@@ -57,8 +59,8 @@ block content
         +button({text: 'Click me'}, 'border')
         +button({text: 'Click me'}, 'border')(class='button_focused')
       .buttons
-        +button({text: 'Click me'}, 'text', 'min')
-        +button({text: 'Click me'}, 'text', 'min')(class='button_focused')
+        +button({text: 'Click me', textColor: 'primary-color'}, 'text', 'min')
+        +button({text: 'Click me', textColor: 'dark-50'}, 'text', 'min')
       +button({text: 'Перейти к оплате', icon: 'arrow_forward'}, 'fill', 'big')
     +sample-form('Pagination')
       -

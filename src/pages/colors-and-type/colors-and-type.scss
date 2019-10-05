@@ -1,0 +1,23 @@
+@import 'dependencies.scss';
+.ui-kit {
+  $top-padding: 37px / $ref-rem;
+  $side-padding: 150px;
+
+  &__body {
+    background-color: #fff;
+  }
+
+  &__main {
+    column-gap: calc(100% - #{$side-padding * 2 + 586px});
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    padding-left: percentage($side-padding / $ref-width);
+    padding-right: percentage($side-padding / $ref-width);
+    padding-top: $top-padding;
+    row-gap: 50px;
+  }
+
+  &__grid-item {
+    margin: 0;
+    padding-left: 0;
+  }
+}

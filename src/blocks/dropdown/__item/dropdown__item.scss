@@ -1,11 +1,10 @@
-@mixin dropdown__item {
-  .dropdown__item {
-    align-items: center;
-    display: grid;
-    grid-template-columns: 1fr 92px / $ref-rem;
-    padding-bottom: 3px;
-    padding-left: 14px;
-    padding-right: 6px;
-    padding-top: 4px;
-  }
+@import 'dependencies.scss';
+.dropdown__item {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 92px / $ref-rem;
+  padding-bottom: 3px;
+  padding-left: 14px;
+  padding-right: 6px;
+  padding-top: 4px;
 }

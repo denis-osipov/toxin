@@ -1,0 +1,5 @@
+include dependencies.pug
+mixin double-date-picker__element(header)
+  .double-date-picker__element&attributes(attributes)
+    h2.double-date-picker__header.text_level_h3= header
+    +date-picker('double')

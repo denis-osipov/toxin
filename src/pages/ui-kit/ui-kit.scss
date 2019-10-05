@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'dependencies.scss';
+@import 'fonts/fonts';
+.ui-kit {
+
+  @media (max-width: 851px) {
+    & {
+      font-size: 12px;
+    }
+  }
+  @media (min-width: 851px) {
+    & {
+      font-size: 16px;
+    }
+  }
+
+  &__header {
+    margin: 0;
+    padding: 30px / $ref-rem;
+  }
+  &__logo {
+    display: block;
+  }
+  &__main {
+    display: grid;
+  }
+}

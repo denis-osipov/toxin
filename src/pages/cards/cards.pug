@@ -1,0 +1,18 @@
+extends ../ui-kit/ui-kit.pug
+
+block title
+  include dependencies.pug
+
+  ='Cards'
+
+block content
+  .ui-kit__flex-item
+    +card('search')
+    +card('registration')
+  .ui-kit__flex-item
+    +card('reservation', 888)
+    +card('login')
+  .ui-kit__flex-item
+    +calendar
+    +room-plate(888)
+    +room-plate(840)

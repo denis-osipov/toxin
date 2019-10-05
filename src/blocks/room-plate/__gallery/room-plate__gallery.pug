@@ -1,0 +1,8 @@
+include dependencies.pug
+mixin room-plate__gallery(room)
+  - const rooms = require('blocksPath/rooms-info/rooms-info');
+
+  .room-plate__gallery
+    img(src=rooms[room].images[0], alt=`Номер ${room}`, class='room-plate__image')
+    +room-plate__arrows
+    +room-plate__switcher(rooms[room].images)

@@ -1,0 +1,12 @@
+include dependencies.pug
+mixin card(type, room)
+  .card(class=`card_${type}`)&attributes(attributes)
+    case type
+      when 'search'
+        +card__search
+      when 'registration'
+        +card__registration
+      when 'reservation'
+        +card__reservation(room)
+      when 'login'
+        +card__login

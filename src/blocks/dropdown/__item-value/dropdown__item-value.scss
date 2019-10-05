@@ -1,9 +1,8 @@
-@mixin dropdown__item-value {
-  .dropdown__item-value {
-    border: none;
-    padding-bottom: 3px;
-    padding-top: 0;
-    text-align: center;
-    width: 30px / $ref-rem;
-  }
+@import 'dependencies.scss';
+.dropdown__item-value {
+  border: none;
+  padding-bottom: 3px;
+  padding-top: 0;
+  text-align: center;
+  width: 30px / $ref-rem;
 }

@@ -1,5 +1,5 @@
+import './dependencies.js';
 import 'air-datepicker';
-import './_double/date-picker__double'
 
 function setDatepicker( jQuery ) {
   // Use lower case for monthShort
@@ -20,7 +20,7 @@ function setDatepicker( jQuery ) {
     });
 
     $( this ).find('.date-picker__field').on('click', function(event) {
-      let datepicker = $( event.currentTarget ).find('.input').data('datepicker');
+      const datepicker = $( event.currentTarget ).find('.input').data('datepicker');
       if (!datepicker.visible) {
         datepicker.show.bind(datepicker)();
       }

@@ -1,12 +1,4 @@
-@mixin pagination {
-  @include icon;
-  // @include link; // uncomment if link will have styles
-
-  .pagination {
-    padding-top: 11px;
-  }
-  @include pagination__caption;
-  @include pagination__icon;
-  @include pagination__page;
-  @include pagination__pages;
+@import 'dependencies.scss';
+.pagination {
+  padding-top: 11px;
 }

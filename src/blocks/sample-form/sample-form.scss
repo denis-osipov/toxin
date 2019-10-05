@@ -1,9 +1,5 @@
-@mixin sample-form {
-  .sample-form {
-    max-width: 320px;
-    padding-bottom: 8px;
-  }
-
-  @include sample-form__header;
-  @include sample-form__status;
+@import 'dependencies.scss';
+.sample-form {
+  max-width: 320px;
+  padding-bottom: 8px;
 }

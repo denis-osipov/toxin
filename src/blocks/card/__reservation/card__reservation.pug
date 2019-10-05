@@ -1,0 +1,13 @@
+include dependencies.pug
+mixin card__reservation(room)
+  - const rooms = require('blocksPath/rooms-info/rooms-info');
+
+  form.card__reservation&attributes(attributes)
+    +room-header(room)(class='card__header text_level_h1')
+    +double-date-picker()(class='card__dates')
+    +guests()(class='card__guests')
+    +card__calculation
+    +button(
+      {text: 'Забронировать', icon: 'arrow_forward'},
+      'fill',
+      'big')(class='card__button')

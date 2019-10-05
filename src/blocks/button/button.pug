@@ -1,6 +1,8 @@
+include dependencies.pug
 mixin button(content, type='fill', size='normal', disabled=false)
   //- content should be an object with properties:
   //-   text - text content for button
+  //-   textColor - color type for text
   //-   icon - icon name for button
   //-   iconColor - color type for icon
   //- Content can be also supplied as block.
@@ -17,7 +19,8 @@ mixin button(content, type='fill', size='normal', disabled=false)
   button.button.text.text_level_h3(type='button', class=`button_type_${type} button_size_${size}`)&attributes(attributes)
     if content
       if content.text
-        span.button__text= content.text
+        span.button__text(class= content.textColor ? `button__text_color_${content.textColor}` : '')
+          =content.text
       if content.icon
         +icon(content.icon, content.iconColor)(class='button__icon')
     block

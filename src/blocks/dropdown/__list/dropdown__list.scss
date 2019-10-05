@@ -1,8 +1,7 @@
-@mixin dropdown__list {
-  .dropdown__list {
-    list-style: none;
-    margin: 0;
-    padding-left: 0;
-    padding-top: 2px;
-  }
+@import 'dependencies.scss';
+.dropdown__list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  padding-top: 2px;
 }

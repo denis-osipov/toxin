@@ -1,0 +1,146 @@
+$datepickerDayCellSize: 40px / $ref-rem;
+$datepickerWidth: 100%;
+$datepickerPadding: 20px;
+
+$datepickerFontFamily: Montserrat;
+$datepickerFontSize: 12px / $ref-rem;
+
+$datepickerTextColor: (
+  otherMonth: $dark-25,
+  disabled: $dark-5,
+  currentDate: $light,
+  common: $dark-50,
+  dayNames: $primary-color
+);
+
+$datepickerBorderColor: (
+  inline: $dark-25,
+  default: $dark-25
+);
+
+$datepickerNavigationHeight: 24px / $ref-rem;
+
+%range {
+  background: $primary-gradient-25;
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+@import '../../../../node_modules/air-datepicker/src/sass/datepicker-config.scss';
+@import '../../../../node_modules/air-datepicker/src/sass/datepicker.scss';
+@import '../../../../node_modules/air-datepicker/src/sass/navigation.scss';
+@import '../../../../node_modules/air-datepicker/src/sass/cell.scss';
+
+.datepicker {
+  border: none;
+  box-sizing: border-box;
+
+  &--nav {
+    border-bottom: none;
+
+    &-action {
+      width: 24px / $ref-rem;
+    }
+  }
+
+  &--days-names {
+    margin-bottom: 12px;
+    margin-top: 2px;
+  }
+
+  &--day-name {
+    font-size: 12px / $ref-rem;
+    line-height: #{(15px / 12px)};
+    font-weight: bold;
+    text-transform: none;
+  }
+
+  &--cell {
+    border-radius: 50%;
+
+    &.-range-from-,
+    &.-range-to- {
+      background: scale-color($primary-color, $lightness: 50%);
+      border-radius: 50%;
+      border: none;
+      color: $light;
+    }
+
+    &.-range-from-::after {
+      @extend %range;
+      border-radius: 50% 0 0 50%;
+    }
+
+    &.-range-to-::before {
+      @extend %range;
+      border-radius: 0 50% 50% 0;
+    }
+
+    &.-current- {
+      background: $secondary-gradient;
+      border-radius: 50%;
+
+      &.-focus- {
+        background: $secondary-color;
+        color: map_get($datepickerTextColor, currentDate);;
+      }
+
+      &.-in-range- {
+        background: $secondary-gradient;
+        color: map_get($datepickerTextColor, currentDate);
+        position: relative;
+
+        &::after {
+          @extend %range;
+        }
+      }
+    }
+
+    &.-selected- {
+      background: $primary-gradient;
+      border-radius: 50%;
+      position: relative;
+
+      &.-range-from-::after,
+      &.-range-to-::before {
+        @extend %range;
+      }
+
+      &.-focus- {
+        background: $primary-color;
+      }
+    }
+
+    &.-in-range- {
+      background: $primary-gradient-25;
+
+      &.-focus- {
+        background: $primary-gradient-50;
+      }
+    }
+  }
+
+  &--cell-day {
+    &.-other-month- {
+      &.-selected- {
+        background: $primary-gradient;
+        &.-focus- {
+          background: $primary-color;
+        }
+      }
+      
+      &.-in-range- {
+        background: $primary-gradient-25;
+
+        &.-focus- {
+          background: $primary-gradient-50;
+        }
+      }
+    }
+  }
+}

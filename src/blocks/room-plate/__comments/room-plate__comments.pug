@@ -1,0 +1,5 @@
+mixin room-plate__comments(comments)
+  span.room-plate__comments
+    - const commentsInfo = comments.split(' ');
+    span.room-plate__comments-amount= `${commentsInfo[0]} `
+    span.room-plate__comments-noun= commentsInfo[1]

@@ -1,0 +1,18 @@
+include dependencies.pug
+mixin card__calculation
+  ul.card__calculation&attributes(attributes)
+    +card__calculation-item({
+      name: '9 990₽ х 4 суток',
+      value: '39 960₽'
+    })
+    +card__calculation-item({
+      name: 'Сбор за услуги: скидка 2 179₽',
+      value: '0₽',
+      info: true
+    })
+    +card__calculation-item({
+      name: 'Сбор за дополнительные услуги',
+      value: '300₽',
+      info: true
+    })
+  +card__calculation-total('Итого', '38 081₽')

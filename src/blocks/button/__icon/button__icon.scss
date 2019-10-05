@@ -1,9 +1,8 @@
-@mixin button__icon {
-  .button__icon {
-    font-size: $normal-icon-font-size;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+.button__icon {
+  color: $light;
+  font-size: $normal-icon-font-size;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }

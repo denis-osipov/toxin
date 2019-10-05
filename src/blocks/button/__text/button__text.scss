@@ -1,0 +1,10 @@
+@import 'dependencies.scss';
+.button__text {
+  .button_type_border & {
+    color: $primary-color;
+  }
+
+  .button_type_fill & {
+    color: $light;
+  }
+}

@@ -1,15 +1,13 @@
-@mixin font-sample__item {
-  $ref-rem: 1 !default;
-  .font-sample__item {
-    column-gap: 29px / $ref-rem;
-    display: grid;
-    grid-template-columns: #{37px / $ref-rem} 1fr;
-    padding-bottom: 50px / $ref-rem;
+@import 'dependencies.scss';
+.font-sample__item {
+  column-gap: 29px / $ref-rem;
+  display: grid;
+  grid-template-columns: #{37px / $ref-rem} 1fr;
+  padding-bottom: 50px / $ref-rem;
 
-    // For perfect pixel perfect
-    &:last-child {
-      margin-top: -3px;
-      padding-right: calc(100% - 373px);
-    }
+  // For perfect pixel perfect
+  &:last-child {
+    margin-top: -3px;
+    padding-right: calc(100% - 373px);
   }
 }
