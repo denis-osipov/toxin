@@ -1,33 +1,5 @@
 include dependencies.pug
 mixin room-plate(room)
-  -
-    const rooms = {
-      888: {
-        type: 'Люкс',
-        cost: '9 990₽',
-        rating: 5,
-        comments: '145 Отзывов',
-        images: [
-          require('images/rooms/888_normal.jpg'),
-          require('images/rooms/888_normal.jpg'),
-          require('images/rooms/888_normal.jpg'),
-          require('images/rooms/888_normal.jpg')
-        ]
-      },
-      840: {
-        type: '',
-        cost: '9 900₽',
-        rating: 4,
-        comments: '65 Отзывов',
-        images: [
-          require('images/rooms/840_normal.jpg'),
-          require('images/rooms/840_normal.jpg'),
-          require('images/rooms/840_normal.jpg'),
-          require('images/rooms/840_normal.jpg')
-        ]
-        }
-    };
-
   article.room-plate&attributes(attributes)
-    +room-plate__gallery(room, rooms[room].images)
-    +room-plate__info(room, rooms[room])
+    +room-plate__gallery(room)
+    +room-plate__info(room)

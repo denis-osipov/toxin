@@ -1,10 +1,11 @@
 include dependencies.pug
 mixin room-header(room)
+  - const rooms = require('blocksPath/rooms-info/rooms-info');
   .room-header&attributes(attributes)
     div
       span.room-header__number-sign= '№ '
-      span.room-header__number= room.room
-      if room.type
+      span.room-header__number= room
+      if rooms[room].type
         span.text_level_h3
-          span.room-header__type= ` ${room.type}`
-    +room-header__cost(room.cost, 'в сутки')
+          span.room-header__type= ` ${rooms[room].type}`
+    +room-header__cost(rooms[room].cost, 'в сутки')

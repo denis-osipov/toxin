@@ -1,5 +1,7 @@
 include dependencies.pug
-mixin room-plate__info(room, roomInfo)
+mixin room-plate__info(room)
+  - const rooms = require('blocksPath/rooms-info/rooms-info');
+
   .room-plate__info
-    +room-header(Object.assign({room: room}, roomInfo))(class='room-plate__header text_level_h2')
-    +room-plate__rating(roomInfo.rating, roomInfo.comments)
+    +room-header(room)(class='room-plate__header text_level_h2')
+    +room-plate__rating(rooms[room].rating, rooms[room].comments)
