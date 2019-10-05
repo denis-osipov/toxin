@@ -105,7 +105,8 @@ class Generator {
               pugFile.path,
               path.basename(pugFile.path, '.pug')
             );
-            this.deps[itemName].content = [...content.bems];
+            // Extends should go first
+            this.deps[itemName].content = [content.extends_].concat([...content.bems]);
             this.deps[itemName].extends_ = content.extends_;
           }
         }
@@ -206,18 +207,20 @@ class Generator {
   writeDependencyFiles(itemName, dependencyFiles) {
     const extendsFiles = this.deps[itemName].extends_ ?
       this.files[this.deps[itemName].extends_].files :
-      null;
+      {};
     Object.entries(this.files[itemName].files).forEach(itemFile => {
       const [ext, fileInfo] = itemFile;
       if (dependencyFiles[ext]) {
         const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
         const message = warningMessage.join(rules[ext].commentStart);
         let imports = '';
-        if (extendsFiles && extendsFiles[ext]) {
-          imports += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
-        }
         dependencyFiles[ext].forEach(depFile => {
-          imports += rules[ext].addBem(depFile, fileInfo.path);
+          if (extendsFiles[ext] && depFile === extendsFiles[ext].path) {
+            imports += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
+          }
+          else {
+            imports += rules[ext].addBem(depFile, fileInfo.path);
+          }
         });
         if (imports) {
           fs.writeFileSync(dependencyPath, message + imports);
