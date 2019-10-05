@@ -1,0 +1,8 @@
+include dependencies.pug
+mixin header__user-info(user)
+  .header__user-info
+    if user
+      .header__user-name= user
+    else
+      +button({text: 'Login'}, type='border')
+      +button({text: 'Register'})
