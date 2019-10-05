@@ -15,13 +15,16 @@ module.exports = {
     // colorsAndType: [
     //   './pages/colors-and-type/colors-and-type.scss'
     // ],
-    formElements: [
-      './pages/form-elements/form-elements.scss',
-      './pages/form-elements/form-elements.js'
-    ],
-    cards: [
-      './pages/cards/cards.scss',
-      './pages/cards/cards.js'
+    // formElements: [
+    //   './pages/form-elements/form-elements.scss',
+    //   './pages/form-elements/form-elements.js'
+    // ],
+    // cards: [
+    //   './pages/cards/cards.scss',
+    //   './pages/cards/cards.js'
+    // ],
+    headersAndFooters: [
+      './pages/headers-and-footers/headers-and-footers.scss'
     ]
   },
   output: {
@@ -94,15 +97,20 @@ module.exports = {
     //   filename: 'colors-and-type.html',
     //   chunks: ['colorsAndType']
     // }),
+    // new HtmlWebpackPlugin({
+    //   template: './pages/form-elements/form-elements.pug',
+    //   filename: 'form-elements.html',
+    //   chunks: ['formElements']
+    // }),
+    // new HtmlWebpackPlugin({
+    //   template: './pages/cards/cards.pug',
+    //   filename: 'cards.html',
+    //   chunks: ['cards']
+    // }),
     new HtmlWebpackPlugin({
-      template: './pages/form-elements/form-elements.pug',
-      filename: 'form-elements.html',
-      chunks: ['formElements']
-    }),
-    new HtmlWebpackPlugin({
-      template: './pages/cards/cards.pug',
-      filename: 'cards.html',
-      chunks: ['cards']
+      template: './pages/headers-and-footers/headers-and-footers.pug',
+      filename: 'headers-and-footers.html',
+      chunks: ['headersAndFooters']
     })
   ],
   resolve: {
