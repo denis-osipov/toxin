@@ -1,1 +1,10 @@
 @import 'dependencies.scss';
+
+.ui-kit {
+  &__body {
+    background-color: $grey;
+    margin: 0;
+    padding: 0;
+    width: 1440px;
+  }
+}
