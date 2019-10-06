@@ -1,2 +1,2 @@
-mixin logo-sign
-  img.logo-sign(src=require('blocksPath/logo-sign/logo-sign.svg'), alt='Фирменный знак Toxin')&attributes(attributes)
+mixin logo-sign(type='main')
+  img.logo-sign(src=require(`blocksPath/logo-sign/logo-sign_${type}.svg`), alt='Фирменный знак Toxin')&attributes(attributes)
