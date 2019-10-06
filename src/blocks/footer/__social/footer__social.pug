@@ -1,0 +1,5 @@
+include dependencies.pug
+mixin footer__social(nets)
+  .footer__social
+    each net in nets
+      +icon(net, 'primary-gradient', 'brands')

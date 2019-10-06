@@ -1,0 +1,6 @@
+include dependencies.pug
+mixin footer__menu(items)
+  ul.footer__menu
+    each item in items
+      li
+        +footer__submenu(item)

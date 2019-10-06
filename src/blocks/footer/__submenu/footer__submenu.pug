@@ -1,0 +1,5 @@
+mixin footer__submenu(item)
+  ul.footer__submenu= item.name
+    if item.children
+      each child in item.children
+        li.footer__submenu-item= child
