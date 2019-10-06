@@ -1,1 +1,8 @@
 @import 'dependencies.scss';
+
+.header {
+  background-color: $light;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 140px 15px 140px;
+}

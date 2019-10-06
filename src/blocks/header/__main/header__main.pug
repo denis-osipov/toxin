@@ -1,0 +1,12 @@
+include dependencies.pug
+mixin header__main
+  .header__main
+    +header__menu([
+      {name: 'Home', active: true},
+      {name: 'About Us'},
+      {name: 'Services', more: true},
+      {name: 'Career'},
+      {name: 'News'},
+      {name: 'Documentation'}
+    ])
+    +header__user-info(user)
