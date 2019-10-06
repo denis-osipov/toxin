@@ -1,4 +1,9 @@
-$fonts: ('Montserrat': regular bold, 'Quicksand': regular bold, 'Material Icons': regular);
+$fonts: (
+  'Montserrat': regular bold,
+  'Quicksand': regular bold,
+  'Material Icons': regular,
+  'Font Awesome 5 Brands': regular  
+  );
 $formats: ('woff': 'woff', 'ttf': 'truetype', 'svg': 'svg');
 
 // Generate src property for given fonts and formats
