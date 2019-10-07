@@ -1,1 +1,8 @@
 @import 'dependencies.scss';
+
+.header__user-info {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 3px;
+  width: 200px;
+}
