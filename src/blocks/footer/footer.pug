@@ -1,22 +1,5 @@
 include dependencies.pug
 mixin footer
-  footer.footer
-    +logo
-    .footer__description
-      ='Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam eget nullam pellentesque aliquam curabitur cociis.'
-    +footer__menu([
-      {
-        name: 'Navigation',
-        children: ['About Us', 'News', 'Support', 'Products']
-      },
-      {
-        name: 'About Us',
-        children: ['Who we are', 'Our team', 'Careers', 'Investors']
-      },
-      {
-        name: 'Support',
-        children: ['Documentation', 'Community', 'Get in Touch']
-      }
-    ])
-    +footer__subscription
+  footer.footer&attributes(attributes)
+    +footer__main
     +footer__copyright

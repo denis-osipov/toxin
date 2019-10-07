@@ -1,0 +1,19 @@
+include dependencies.pug
+mixin footer__main
+  .footer__main
+    +footer__about
+    +footer__menu([
+      {
+        name: 'Navigation',
+        children: ['About Us', 'News', 'Support', 'Products']
+      },
+      {
+        name: 'About Us',
+        children: ['Who we are', 'Our team', 'Careers', 'Investors']
+      },
+      {
+        name: 'Support',
+        children: ['Documentation', 'Community', 'Get in Touch']
+      }
+    ])
+    +footer__subscription
