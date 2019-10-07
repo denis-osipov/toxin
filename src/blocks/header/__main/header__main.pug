@@ -1,11 +1,11 @@
 include dependencies.pug
-mixin header__main
+mixin header__main(user)
   .header__main
     +header__menu([
       {name: 'Home', active: true},
       {name: 'About Us'},
-      {name: 'Services', more: true},
-      {name: 'Career'},
+      {name: 'Services', expandable: true},
+      {name: 'Careers'},
       {name: 'News'},
       {name: 'Documentation'}
     ])

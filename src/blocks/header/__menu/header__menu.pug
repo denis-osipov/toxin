@@ -2,7 +2,10 @@ include dependencies.pug
 mixin header__menu(items)
   ul.header__menu
     each item in items
-      li.header__menu-item(class=item.active ? 'header__menu-item_active' : '')
+      li.header__menu-item(class=[
+        item.active ? 'header__menu-item_active' : '',
+        item.expandable ? 'header__menu-item_expandable' : ''
+      ])
         =item.name
-        if item.more
-          +icon('expand_more')
+        if item.expandable
+          +icon('expand_more')(class='header__menu-icon')
