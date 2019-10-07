@@ -4,8 +4,10 @@
   align-items: flex-start;
   color: $dark-50;
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
+  justify-content: space-between;
   list-style: none;
-  margin-bottom: 5px;
-  margin-top: 8px;
+  margin-bottom: 0;
+  padding-left: 0;
 }

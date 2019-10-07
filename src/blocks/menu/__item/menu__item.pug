@@ -7,9 +7,9 @@ mixin menu__item(item, level)
     if typeof item === 'string'
       =item
     else if item.expandable
-      =item.name
+      span.menu__item-name= item.name
       +icon('expand_more')(class='menu__icon')
     else
-      span.menu__submenu-header= item.name
+      span.menu__submenu-header(class=item.children ? 'text_level_h3' : '')= item.name
       if item.children && item.children.length
-        +menu(item.children, ++level)
+        +menu(item.children, 'row', ++level)

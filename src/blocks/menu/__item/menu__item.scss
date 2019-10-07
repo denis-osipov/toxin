@@ -1,7 +1,9 @@
 @import 'dependencies.scss';
 
 .menu__item {
-  // display: flex;
-  // flex-wrap: wrap;
   padding-right: 30px;
+
+  .menu_type_col & {
+    flex: 1;
+  }
 }
