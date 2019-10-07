@@ -1,0 +1,15 @@
+include dependencies.pug
+mixin menu__item(item, level)
+  li.menu__item(class=[
+    item.expandable ? 'menu__item_expandable' : '',
+    item.active ? 'menu__item_active': ''
+  ])
+    if typeof item === 'string'
+      =item
+    else if item.expandable
+      =item.name
+      +icon('expand_more')(class='menu__icon')
+    else
+      span.menu__submenu-header= item.name
+      if item.children && item.children.length
+        +menu(item.children, ++level)

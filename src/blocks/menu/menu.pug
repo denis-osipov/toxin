@@ -1,2 +1,12 @@
-mixin menu(items)
-  ul.menu&attributes(attributes)
+include dependencies.pug
+mixin menu(items, level=0)
+
+  //- Creates menu from items, which are strings or objects with properties:
+  //-   name - menu item name (string),
+  //-   active - is item active page (bool),
+  //-   expandable - bool, child items will collapsed if true, always visible otherwise,
+  //-   children - an array of nested items (which are objects or strings)
+
+  ul.menu(class=`menu_level_${level}`)&attributes(attributes)
+    each item in items
+      +menu__item(item, level)

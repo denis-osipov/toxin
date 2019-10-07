@@ -1,9 +1,10 @@
 @import 'dependencies.scss';
 
-.header__menu {
+.menu {
   align-items: flex-start;
   color: $dark-50;
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   margin-bottom: 5px;
   margin-top: 8px;
