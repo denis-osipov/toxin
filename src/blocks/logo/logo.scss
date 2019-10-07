@@ -1,0 +1,6 @@
+@import 'dependencies.scss';
+.logo {
+  column-gap: 12px;
+  display: grid;
+  grid-template-columns: 40px 54px;
+}
