@@ -4,5 +4,5 @@ mixin header__user-info(user)
     if user
       .header__user-name= user
     else
-      +button({text: 'Login'}, type='border')
-      +button({text: 'Register'})
+      +button({text: 'Login'}, 'border', 'slim')
+      +button({text: 'Register'}, 'fill', 'slim')
