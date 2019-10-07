@@ -1,8 +1,0 @@
-include dependencies.pug
-mixin footer__menu(items)
-  ul.footer__menu
-    each item in items
-      li.footer__menu-item
-        span.footer__submenu-name.text_level_h3= item.name
-        if item.children
-          +footer__submenu(item.children)

@@ -2,7 +2,7 @@ include dependencies.pug
 mixin footer__main
   .footer__main
     +footer__about
-    +footer__menu([
+    +menu([
       {
         name: 'Navigation',
         children: ['About Us', 'News', 'Support', 'Products']
@@ -15,5 +15,5 @@ mixin footer__main
         name: 'Support',
         children: ['Documentation', 'Community', 'Get in Touch']
       }
-    ])
+    ], 'col')(class='footer__menu')
     +footer__subscription
