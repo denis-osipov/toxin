@@ -1,1 +1,8 @@
 @import 'dependencies.scss';
+
+.header__user-info {
+  @media (max-width: 1120px) {
+    grid-area: user;
+    justify-self: end;
+  }
+}
