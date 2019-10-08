@@ -4,8 +4,7 @@
   width: percentage(260px / $parent-width);
 
   .footer_type_creative & {
-    margin-left: auto;
-    margin-right: auto;
-    width: percentage(560px / $parent-width);
+    @include side-paddings($ref-padding: 400px, $min-padding: 0px);
+    width: 100%;
   }
 }
