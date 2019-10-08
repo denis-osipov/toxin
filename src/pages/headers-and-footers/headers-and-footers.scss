@@ -9,10 +9,10 @@
   }
 
   &__header {
-    margin-bottom: 42px;
+    margin-bottom: 42px / $ref-rem;
   }
 
   &__main-item {
-    margin-bottom: 40px;
+    margin-bottom: 40px / $ref-rem;
   }
 }

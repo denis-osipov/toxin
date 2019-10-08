@@ -1,7 +1,7 @@
 @import 'dependencies.scss';
 
 .footer__social {
-  column-gap: 21px;
+  column-gap: 21px / $ref-rem;
   display: grid;
   flex: auto;
   grid-template-columns: repeat(auto-fit, 24px);

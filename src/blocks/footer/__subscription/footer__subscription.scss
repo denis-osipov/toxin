@@ -2,7 +2,7 @@
 
 .footer__subscription {
   margin-top: 4px;
-  width: 260px;
+  width: percentage(260px / $parent-width);
 
   .footer_type_creative & {
     display: none;

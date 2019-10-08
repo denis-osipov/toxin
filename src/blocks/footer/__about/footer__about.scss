@@ -1,11 +1,11 @@
 @import 'dependencies.scss';
 
 .footer__about {
-  width: 260px;
+  width: percentage(260px / $parent-width);
 
   .footer_type_creative & {
     margin-left: auto;
     margin-right: auto;
-    width: 560px;
+    width: percentage(560px / $parent-width);
   }
 }
