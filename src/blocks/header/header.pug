@@ -1,13 +1,16 @@
 include dependencies.pug
-mixin header(user)
+mixin header(user, menu)
   header.header&attributes(attributes)
     +logo()(class='header__logo')
-    +menu([
-      {name: 'Home', active: true},
-      {name: 'About Us'},
-      {name: 'Services', expandable: true},
-      {name: 'Careers'},
-      {name: 'News'},
-      {name: 'Documentation'}
-    ])(class='header__menu')
+
+    -
+      menu = menu || [
+        {name: 'Home', active: true},
+        {name: 'About Us'},
+        {name: 'Services', expandable: true},
+        {name: 'Careers'},
+        {name: 'News'},
+        {name: 'Documentation'}
+      ]
+    +menu(menu)(class='header__menu')
     +header__user-info(user)
