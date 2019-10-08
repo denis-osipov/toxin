@@ -1,6 +1,6 @@
-@import 'dependencies.scss';
 .logo {
-  column-gap: 12px;
+  align-items: center;
+  column-gap: 12px / $ref-rem;
   display: grid;
-  grid-template-columns: 40px 54px;
+  grid-template-columns: #{40px / $ref-rem} #{54px / $ref-rem};
 }
