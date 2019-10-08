@@ -5,11 +5,13 @@ mixin menu__item(item, level)
     item.active ? 'menu__item_active': ''
   ])
     if typeof item === 'string'
-      =item
+      +link(item)
     else if item.expandable
-      span.menu__item-name= item.name
+      span.menu__item-name
+        +link(item.name, item.href)
       +icon('expand_more')(class='menu__icon')
     else
-      span.menu__submenu-header(class=item.children ? 'text_level_h3' : '')= item.name
+      span.menu__submenu-header(class=item.children ? 'text_level_h3' : '')
+        +link(item.name, item.href)
       if item.children && item.children.length
         +menu(item.children, 'row', ++level)
