@@ -24,7 +24,8 @@ module.exports = {
     //   './pages/cards/cards.js'
     // ],
     headersAndFooters: [
-      './pages/headers-and-footers/headers-and-footers.scss'
+      './pages/headers-and-footers/headers-and-footers.scss',
+      './pages/headers-and-footers/headers-and-footers.js'
     ]
   },
   output: {

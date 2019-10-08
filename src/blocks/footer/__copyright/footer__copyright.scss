@@ -1,5 +1,6 @@
 .footer__copyright {
-  .footer_type_creative & {
+  .footer_type_creative &,
+  .footer_type_creative_always & {
     display: none;
   }
 }

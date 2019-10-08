@@ -3,7 +3,8 @@
   margin-top: 0;
   padding-left: 40px / $ref-rem;
 
-  .footer_type_creative & {
+  .footer_type_creative &,
+  .footer_type_creative_always & {
     display: none;
   }
 }
