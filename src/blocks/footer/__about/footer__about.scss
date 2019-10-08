@@ -2,4 +2,10 @@
 
 .footer__about {
   width: 260px;
+
+  .footer_type_creative & {
+    margin-left: auto;
+    margin-right: auto;
+    width: 560px;
+  }
 }

@@ -1,1 +1,14 @@
 @import 'dependencies.scss';
+
+.footer__social {
+  column-gap: 21px;
+  display: grid;
+  flex: auto;
+  grid-template-columns: repeat(auto-fit, 24px);
+  justify-content: flex-end;
+  padding-top: 6px;
+
+  .footer_type_creative & {
+    justify-content: center;
+  }
+}

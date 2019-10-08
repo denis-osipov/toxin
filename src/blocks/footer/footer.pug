@@ -1,5 +1,5 @@
 include dependencies.pug
-mixin footer
-  footer.footer&attributes(attributes)
+mixin footer(type='regular')
+  footer.footer(class=`footer_type_${type}`)&attributes(attributes)
     +footer__main
-    +footer__copyright
+    +footer__bottom-bar

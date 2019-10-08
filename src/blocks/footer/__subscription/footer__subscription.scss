@@ -3,4 +3,8 @@
 .footer__subscription {
   margin-top: 4px;
   width: 260px;
+
+  .footer_type_creative & {
+    display: none;
+  }
 }

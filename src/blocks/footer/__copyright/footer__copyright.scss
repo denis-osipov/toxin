@@ -1,1 +1,5 @@
-@import 'dependencies.scss';
+.footer__copyright {
+  .footer_type_creative & {
+    display: none;
+  }
+}

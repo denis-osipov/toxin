@@ -1,0 +1,14 @@
+@import 'dependencies.scss';
+
+.footer__bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 9px;
+  padding-left: 140px;
+  padding-right: 138px;
+  padding-top: 9px;
+  
+  .footer_type_creative & {
+    padding-top: 0;
+  }
+}
