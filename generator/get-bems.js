@@ -7,7 +7,7 @@ const walk = require('pug-walk');
 
 // Get BEM list from pug file.
 // BEM entities should be added as mixins or as classes.
-function getBems(filePath, blockName) {
+function getBems(filePath, exclude) {
   const ast = getAst(filePath);
   let bems = new Set();
   let extends_;
@@ -15,7 +15,11 @@ function getBems(filePath, blockName) {
     if (node.type === 'Include') {
       return false;
     }
-    else if (node.type === 'Mixin' && node.call) {
+    else if (
+      node.type === 'Mixin' &&
+      node.call &&
+      !exclude.includes(node.name)
+    ) {
       bems.add(node.name);
     }
     else if (node.type === 'Extends') {
@@ -29,7 +33,9 @@ function getBems(filePath, blockName) {
           const classes = attr.val.split(' ');
           classes.forEach(class_ => {
             const bemClass = class_.replace(/['"]/g, '');
-            if (!(bemClass === blockName || bemClass.match(/[^A-Za-z0-9_\-]/))) {
+            if (!(
+              exclude.includes(bemClass) ||
+              bemClass.match(/[^A-Za-z0-9_\-]/))) {
               bems.add(bemClass);
             }
           });

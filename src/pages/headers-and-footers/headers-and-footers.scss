@@ -1,1 +1,15 @@
 @import 'dependencies.scss';
+
+.ui-kit {
+  &__body {
+    background-color: $grey;
+  }
+
+  &__header {
+    margin-bottom: 42px / $ref-rem;
+  }
+
+  &__main-item {
+    margin-bottom: 40px / $ref-rem;
+  }
+}

@@ -1,8 +1,0 @@
-include dependencies.pug
-mixin header__menu(items)
-  ul.header__menu
-    each item in items
-      li.header__menu-item(class=item.active ? 'header__menu-item_active' : '')
-        =item.name
-        if item.more
-          +icon('expand_more')

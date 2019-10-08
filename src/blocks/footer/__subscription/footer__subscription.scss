@@ -1,0 +1,11 @@
+@import 'dependencies.scss';
+
+.footer__subscription {
+  margin-top: 4px;
+  width: percentage(260px / $parent-width);
+
+  .footer_type_creative &,
+  .footer_type_creative_always & {
+    display: none;
+  }
+}

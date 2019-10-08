@@ -1,23 +1,16 @@
 @import 'dependencies.scss';
 .ui-kit {
-  $ref-padding: 140px;
-  $min-padding: 20px;
-  $padding-frac: ($ref-padding - $min-padding) / ($ref-width - $min-width);
-  $padding-comp: $min-width * $padding-frac - $min-padding;
-
   &__body {
-    background-color: #f4f4f6;
+    background-color: $grey;
   }
 
   &__main {
-    $main-width: 1440px - 140px * 2;
+    @include side-paddings;
     column-gap: 40px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     row-gap: 40px;
-    padding-left: calc(#{percentage($padding-frac)} - #{$padding-comp});
-    padding-right: calc(#{percentage($padding-frac)} - #{$padding-comp});
     padding-top: 42px;
   }
 

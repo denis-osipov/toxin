@@ -1,0 +1,11 @@
+@import 'dependencies.scss';
+
+.menu {
+  align-items: flex-start;
+  color: $dark-50;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}

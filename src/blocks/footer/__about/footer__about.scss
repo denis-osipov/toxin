@@ -1,0 +1,11 @@
+@import 'dependencies.scss';
+
+.footer__about {
+  width: percentage(260px / $parent-width);
+
+  .footer_type_creative &,
+  .footer_type_creative_always & {
+    @include side-paddings($ref-padding: 400px, $min-padding: 0px);
+    width: 100%;
+  }
+}

@@ -14,8 +14,8 @@ function setCalendar( jQuery ) {
       moveToOtherMonthsOnSelect: false,
       moveToOtherYearsOnSelect: false,
       showEvent: null,
-      prevHtml: '<i class="icon calendar__nav-icon">arrow_back</i>',
-      nextHtml: '<i class="icon calendar__nav-icon">arrow_forward</i>',
+      prevHtml: '<i class="icon icon_type_material calendar__nav-icon">arrow_back</i>',
+      nextHtml: '<i class="icon icon_type_material calendar__nav-icon">arrow_forward</i>',
       navTitles: {
         days: '<span class="text_level_h2"><span class="calendar__month-name">MM</span> yyyy</span>'
       }

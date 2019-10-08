@@ -1,0 +1,8 @@
+.footer__text {
+  margin-top: 17px / $ref-rem;
+  
+  .footer_type_creative &,
+  .footer_type_creative_always & {
+    text-align: center;
+  }
+}

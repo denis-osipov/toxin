@@ -1,4 +1,4 @@
 include dependencies.pug
-mixin subscription
+mixin subscription(placeholder='Email')
   - attributes.class = attributes.class ? attributes.class + ' subscription' : 'subscription';
-  +icon-field('arrow_forward', 'primary-gradient', false, {type: 'email', placeholder: 'Email'})&attributes(attributes)
+  +icon-field('arrow_forward', 'primary-gradient', false, {type: 'email', placeholder: placeholder})&attributes(attributes)

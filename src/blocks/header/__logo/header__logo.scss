@@ -1,0 +1,6 @@
+.header__logo {
+  @media (max-width: 1120px) {
+    grid-area: logo;
+    justify-self: start;
+  }
+}

@@ -1,1 +1,19 @@
 @import 'dependencies.scss';
+
+.header {
+  @include side-paddings;
+  align-items: center;
+  background-color: $light;
+  box-shadow: 0px 10px 20px $dark-5;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  justify-items: end;
+  padding-top: 15px / $ref-rem;
+  padding-bottom: 15px / $ref-rem;
+
+  @media (max-width: 1120px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'logo user'
+                         'menu menu';
+  }
+}

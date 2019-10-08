@@ -1,0 +1,15 @@
+include dependencies.pug
+mixin menu(items, type='row', level=0)
+
+  //- Creates menu from items, which are strings or objects with properties:
+  //-   name - menu item name (string),
+  //-   href - value of href attribute of menu item
+  //-   active - is item active page (bool),
+  //-   expandable - bool, child items will collapsed if true, always visible otherwise,
+  //-   children - an array of nested items (which are objects or strings)
+  //- level - nesting level (for styling)
+  //- type - 'row' or 'col'
+
+  ul.menu(class=`menu_level_${level} menu_type_${type}`)&attributes(attributes)
+    each item in items
+      +menu__item(item, level)

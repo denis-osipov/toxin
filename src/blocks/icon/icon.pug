@@ -1,3 +1,9 @@
-mixin icon(name, color=false)
-  - const colorClass = color ? `icon_color_${color}` : '';
-  i.icon(class=colorClass)&attributes(attributes)= name
+mixin icon(name, color=false, type='material')
+  -
+    const colorClass = color ? `icon_color_${color}` : '';
+    const typeClass = `icon_type_${type}`;
+  case type
+    when 'material'
+      i.icon(class=[colorClass, typeClass])&attributes(attributes)= name
+    when 'brands'
+      i.icon(class=[colorClass, typeClass, `fa-${name}`])&attributes(attributes)

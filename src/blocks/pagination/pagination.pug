@@ -21,6 +21,6 @@ mixin pagination(pages, caption)
           +link()(class='pagination__page pagination__icon')
             +icon(icon)
         else
-          +link(page.value)(class='pagination__page', href=page.href)
+          +link(page.value, page.href)(class='pagination__page')
 
     p.pagination__caption= caption

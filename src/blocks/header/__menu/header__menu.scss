@@ -1,1 +1,10 @@
-@import 'dependencies.scss';
+.header__menu {
+  margin-top: 8px;
+  margin-left: 20px;
+
+  @media (max-width: 1120px) {
+    grid-area: menu;
+    justify-content: center;
+    justify-self: center;
+  }
+}

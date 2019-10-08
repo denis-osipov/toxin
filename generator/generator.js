@@ -54,6 +54,7 @@ class Generator {
         // modifier directory. Add it to parent dependencies.
         if (parent) {
           this.files[parent].folderDependencies.push(name);
+          this.files[name].parent = parent;
         }
         this.scanFolder(entityPath, name);
       }
@@ -101,10 +102,8 @@ class Generator {
           _.isEqual(pugFile, this.prevFiles[itemName].files['.pug'])
         )) {
           if (pugFile) {
-            const content = getBems(
-              pugFile.path,
-              path.basename(pugFile.path, '.pug')
-            );
+            const exclude = this.getParents(itemName);
+            const content = getBems(pugFile.path, exclude);
             // Extends should go first
             this.deps[itemName].content = [content.extends_].concat([...content.bems]);
             this.deps[itemName].extends_ = content.extends_;
@@ -120,6 +119,15 @@ class Generator {
 
       this.createDependencies(itemName);
     });
+  }
+
+  getParents(itemName) {
+    if (this.files[itemName].parent) {
+      return [itemName].concat(this.getParents(this.files[itemName].parent));
+    }
+    else {
+      return [itemName];
+    }
   }
 
   createDependencies(itemName) {

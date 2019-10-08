@@ -1,0 +1,14 @@
+@import 'dependencies.scss';
+
+.menu__item {
+  padding-right: 30px / $ref-rem;
+
+  .menu_type_col & {
+    flex: 1;
+  }
+
+  .menu_level_1 & {
+    padding-bottom: 1px;
+    padding-top: 13px;
+  }
+}

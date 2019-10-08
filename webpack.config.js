@@ -23,8 +23,13 @@ module.exports = {
     //   './pages/cards/cards.scss',
     //   './pages/cards/cards.js'
     // ],
-    headersAndFooters: [
-      './pages/headers-and-footers/headers-and-footers.scss'
+    // headersAndFooters: [
+    //   './pages/headers-and-footers/headers-and-footers.scss',
+    //   './pages/headers-and-footers/headers-and-footers.js'
+    // ],
+    landingPage: [
+      './pages/landing-page/landing-page.scss',
+      './pages/landing-page/landing-page.js'
     ]
   },
   output: {
@@ -50,7 +55,12 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'resolve-url-loader', // needed for correct path resolving
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              removeCR: true // to prevent 'no orphan CR found'
+            }
+          }, // needed for correct path resolving
           {
             loader: 'sass-loader',
             options: {
@@ -107,10 +117,15 @@ module.exports = {
     //   filename: 'cards.html',
     //   chunks: ['cards']
     // }),
+    // new HtmlWebpackPlugin({
+    //   template: './pages/headers-and-footers/headers-and-footers.pug',
+    //   filename: 'headers-and-footers.html',
+    //   chunks: ['headersAndFooters']
+    // }),
     new HtmlWebpackPlugin({
-      template: './pages/headers-and-footers/headers-and-footers.pug',
-      filename: 'headers-and-footers.html',
-      chunks: ['headersAndFooters']
+      template: './pages/landing-page/landing-page.pug',
+      filename: 'landing-page.html',
+      chunks: ['landingPage']
     })
   ],
   resolve: {

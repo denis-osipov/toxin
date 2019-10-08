@@ -1,0 +1,18 @@
+@import 'dependencies.scss';
+
+.footer__main {
+  @include side-paddings;
+  box-shadow: 0px 1px 0px $dark-10;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1px;
+  padding-bottom: 96px / $ref-rem;
+  padding-top: 100px / $ref-rem;
+
+  .footer_type_creative &,
+  .footer_type_creative_always & {
+    box-shadow: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}

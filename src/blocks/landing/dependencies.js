@@ -1,4 +1,4 @@
 // File generated automatically.
 // Any changes will be discarded during next compilation.
 
-@import '../../icon/icon.scss';
+import '../card/card.js';

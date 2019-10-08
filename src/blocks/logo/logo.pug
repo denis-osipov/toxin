@@ -1,5 +1,8 @@
 include dependencies.pug
 mixin logo
-  .logo
+  .logo&attributes(attributes)
     +logo-sign
-    img(src=require('blocksPath/logo/__type/logo__type.svg'), alt='Логотип Toxin')
+    img(
+      src=require('blocksPath/logo/__type/logo__type.svg'),
+      alt='Логотип Toxin',
+      class='logo__type')

@@ -1,2 +1,5 @@
-mixin footer
-  footer.footer
+include dependencies.pug
+mixin footer(type='regular')
+  footer.footer(class=`footer_type_${type}`)&attributes(attributes)
+    +footer__main
+    +footer__bottom-bar
