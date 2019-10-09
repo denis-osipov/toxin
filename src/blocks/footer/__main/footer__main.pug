@@ -1,19 +1,27 @@
 include dependencies.pug
-mixin footer__main
+mixin footer__main(options)
+  //- Construct main content for footer. Should be supplyed with options object:
+  //-   message - message for footer__about
+  //-   menu - an array with menu items (see menu block for more info)
+  //-   subscription - an object for subscription section
+  //-                  (see footer__subscription for more info)
+  - options = options || {};
   .footer__main
-    +footer__about
-    +menu([
-      {
-        name: 'Navigation',
-        children: ['About Us', 'News', 'Support', 'Products']
-      },
-      {
-        name: 'About Us',
-        children: ['Who we are', 'Our team', 'Careers', 'Investors']
-      },
-      {
-        name: 'Support',
-        children: ['Documentation', 'Community', 'Get in Touch']
-      }
-    ], 'col')(class='footer__menu')
-    +footer__subscription
+    +footer__about(options.message)
+    -
+      menu = options.menu || [
+        {
+          name: 'Navigation',
+          children: ['About Us', 'News', 'Support', 'Products']
+        },
+        {
+          name: 'About Us',
+          children: ['Who we are', 'Our team', 'Careers', 'Investors']
+        },
+        {
+          name: 'Support',
+          children: ['Documentation', 'Community', 'Get in Touch']
+        }
+      ];
+    +menu(menu, 'col')(class='footer__menu')
+    +footer__subscription(options.subscription)

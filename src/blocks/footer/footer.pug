@@ -1,5 +1,10 @@
 include dependencies.pug
-mixin footer(type='regular')
+mixin footer(options, type='regular')
+  //- Construct footer. Should be supplyed with options object:
+  //-   message - message for footer__about
+  //-   menu - an array with menu items (see menu block for more info)
+  //-   subscription - an object for subscription section
+  //-                  (see footer__subscription for more info)
   footer.footer(class=`footer_type_${type}`)&attributes(attributes)
-    +footer__main
+    +footer__main(options)
     +footer__bottom-bar
