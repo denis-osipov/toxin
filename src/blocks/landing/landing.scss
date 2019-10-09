@@ -1,20 +1,20 @@
 @import 'dependencies.scss';
 
 .landing {
+  animation-duration: 60s;
+  animation-iteration-count: infinite;
   animation-name: change;
-  animation-duration: 5s;
-  animation-direction: alternate;
   animation-timing-function: linear;
 }
 
 @keyframes change {
   0% {
-    background-image: url('../../images/rooms/landing_3.jpg');
+    background-image: url('~images/rooms/landing_3.jpg');
   }
   50% {
-    background-image: url('../../images/rooms/landing_2.jpg');
+    background-image: url('~images/rooms/landing_2.jpg');
   }
   100% {
-    background-image: url('../../images/rooms/landing_1.jpg');
+    background-image: url('~images/rooms/landing_1.jpg');
   }
 }
