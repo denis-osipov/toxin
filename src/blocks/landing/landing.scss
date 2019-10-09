@@ -6,6 +6,8 @@
   // animation-name: change;
   // animation-timing-function: linear;
   background-image: url('~images/rooms/landing_3.jpg');
+  @include side-paddings;
+  padding-top: 70px;
 }
 
 // @keyframes change {
