@@ -7,13 +7,19 @@ html.toxin
       block title
         ='Toxin'
   +body()(class='text toxin__body')
-    +header(null, [
-      {name: 'О нас'},
-      {name: 'Услуги', expandable: true},
-      {name: 'Вакансии'},
-      {name: 'Новости'},
-      {name: 'Соглашения', expandable: true}
-    ])
+    +header({
+      menu: [
+        {name: 'О нас'},
+        {name: 'Услуги', expandable: true},
+        {name: 'Вакансии'},
+        {name: 'Новости'},
+        {name: 'Соглашения', expandable: true}
+      ],
+      buttons: [
+        {content: {text: 'Войти'}, type: 'border'},
+        {content: {text: 'Зарегистрироваться'}, type: 'fill'}
+      ]
+    })
     +main()(class='toxin__main')
       block content
     +footer
