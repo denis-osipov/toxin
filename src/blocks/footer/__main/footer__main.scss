@@ -1,13 +1,14 @@
 @import 'dependencies.scss';
 
 .footer__main {
-  @include calc-air;
+  @include calc-air; // side paddings
   box-shadow: 0px 1px 0px $dark-10;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1px;
   padding-bottom: 96px / $ref-rem;
   padding-top: 100px / $ref-rem;
+  @include calc-air($ref-air: 100px, $min-air: 20px, $sides: 'top');
 
   .footer_type_creative &,
   .footer_type_creative_always & {
