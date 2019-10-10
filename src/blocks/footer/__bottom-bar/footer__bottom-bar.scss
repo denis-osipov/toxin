@@ -1,8 +1,8 @@
 @import 'dependencies.scss';
 
 .footer__bottom-bar {
-  @include side-paddings($ref-padding: 138px, $sides: 'right');
-  @include side-paddings($sides: 'left');
+  @include calc-paddings($ref-padding: 138px, $sides: 'right');
+  @include calc-paddings($sides: 'left');
   display: flex;
   justify-content: space-between;
   padding-bottom: 9px;

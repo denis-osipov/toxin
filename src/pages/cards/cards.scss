@@ -5,7 +5,7 @@
   }
 
   &__main {
-    @include side-paddings;
+    @include calc-paddings;
     column-gap: 40px;
     display: flex;
     flex-wrap: wrap;

@@ -10,7 +10,7 @@
   }
 
   &__main {
-    @include side-paddings($ref-padding: $ref-padding);
+    @include calc-paddings($ref-padding: $ref-padding);
     column-gap: $column-gap;
     grid-template-columns: repeat(auto-fit, minmax($min-width - $min-padding * 2, 1fr));
     padding-top: 23px / $ref-rem;

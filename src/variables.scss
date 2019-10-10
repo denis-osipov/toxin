@@ -4,9 +4,10 @@ $max-width: 1920px;
 $ref-width: 1440px;
 $ref-rem: 16px/rem;
 $ref-padding: 140px;
+$min-padding: 20px;
 $parent-width: $ref-width - 2 * $ref-padding;
 
-@mixin side-paddings($ref-padding: $ref-padding, $min-padding: 20px, $sides: ('left', 'right')) {
+@mixin calc-paddings($ref-padding: $ref-padding, $min-padding: $min-padding, $sides: ('left', 'right')) {
   $padding-frac: ($ref-padding - $min-padding) / ($ref-width - $min-width);
   $padding-comp: $min-width * $padding-frac - $min-padding;
 
