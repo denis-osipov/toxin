@@ -1,13 +1,15 @@
 import './dependencies.js';
-import 'air-datepicker';
+const connect = require('blocksPath/connect/connect');
 
 function setDatepicker( jQuery ) {
 
-  $( '.date-picker:not([class*="date-picker_double"])' ).each(function() {
+  $( '.date-picker' ).each(function() {
 
     $( this ).find('.date-picker__field').on('click', function(event) {
-      // toggle class for visibility
+      $( this ).parent().find('.date-picker__calendar').toggle();
     });
+
+    connect($( this ), '.date-picker__calendar');
   });
 }
 
