@@ -1,7 +1,7 @@
 include dependencies.pug
-mixin calendar
+mixin calendar(options)
   .calendar&attributes(attributes)
-    .calendar__picker
+    .calendar__picker&attributes(options)
     +control(
       [
         { text: 'Очистить', color: 'dark-50', action: 'clear' },

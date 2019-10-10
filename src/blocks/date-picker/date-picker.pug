@@ -5,4 +5,13 @@ mixin date-picker(type='single')
   //- for end date.
   .date-picker(class=`date-picker_type_${type}`)&attributes(attributes)
     +date-picker__field(type)
-    +calendar
+    - const calendarOptions = { 'data-input': '.input' };
+    if type === 'single'
+      -
+        Object.assign(calendarOptions, {
+          'data-multiple-dates-separator': ' - ',
+          'data-date-format': 'dd M'
+        });
+    else if type === 'double'
+      - Object.assign(calendarOptions, { 'data-date-format': 'dd.mm.yyyy' });
+    +calendar(calendarOptions)(class='date-picker__calendar')

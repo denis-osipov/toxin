@@ -2,14 +2,9 @@ include dependencies.pug
 mixin date-picker__field(type)
   -
     attributes.class = attributes.class ? attributes.class + ' date-picker__field' : 'date-picker__field';
+    const inputAttrs = { readonly: true };
   if type === 'single'
-    +icon-field('expand_more', 'dark-50', false, {readonly: true})&attributes(attributes)
+    +icon-field('expand_more', 'dark-50', false, inputAttrs)&attributes(attributes)
   else if type === 'double'
-    -
-      inputAttrs = {
-        readonly: true,
-        'data-inputmask': "'clearMaskOnLostFocus': false",
-        'data-multiple-dates-separator': ' - ',
-        'data-date-format': 'dd M'
-      };
+    - Object.assign(inputAttrs, { 'data-inputmask': "'clearMaskOnLostFocus': false" });
     +icon-field('expand_more', 'dark-50', 'date', inputAttrs)&attributes(attributes)
