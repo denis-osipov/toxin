@@ -5,12 +5,6 @@ function setDoubleDatepicker( jQuery ) {
   $( '.date-picker_double' ).each(function() {
     $( this ).find( '.input' ).datepicker({
       dateFormat: 'dd.mm.yyyy',
-      toggleSelected: true,
-      range: true,
-      moveToOtherMonthsOnSelect: false,
-      moveToOtherYearsOnSelect: false,
-      clearButton: true,
-      showEvent: null,
       onSelect: onSelect.bind(this)
     });
 

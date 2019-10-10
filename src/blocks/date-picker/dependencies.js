@@ -3,3 +3,4 @@
 
 import './_double/date-picker_double.js';
 import './__field/date-picker__field.js';
+import '../calendar/calendar.js';
