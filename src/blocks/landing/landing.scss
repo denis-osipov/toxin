@@ -1,8 +1,9 @@
 @import 'dependencies.scss';
 
 .landing {
-  @include side-paddings($ref-padding: 134px, $sides: 'right');
-  @include side-paddings($ref-padding: 140px, $sides: 'left');
+  @include calc-air($ref-air: 114px, $min-air: 0, $sides: 'right');
+  @include calc-air($ref-air: 140px, $min-air: 0, $sides: 'left');
+  @include calc-air($ref-air: 70px, $min-air: 10px, $sides: 'top');
   // animation-duration: 60s;
   // animation-iteration-count: infinite;
   // animation-name: change;
@@ -10,9 +11,8 @@
   background-image: url('~images/rooms/landing_3.jpg');
   background-position: 0 -70px;
   background-repeat: no-repeat;
-  height: 0;
-  padding-bottom: percentage(760px / $ref-width);
-  padding-top: 70px;
+  display: grid;
+  padding-bottom: 7px;
 }
 
 // @keyframes change {
