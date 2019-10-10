@@ -1,7 +1,7 @@
 @import 'dependencies.scss';
 
 .header {
-  @include calc-air;
+  @include calc-air($min-air: 10px);
   align-items: center;
   background-color: $light;
   box-shadow: 0px 10px 20px $dark-5;
@@ -12,7 +12,8 @@
   padding-bottom: 15px / $ref-rem;
 
   @media (max-width: 1120px) {
-    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    grid-template-columns: auto 1fr;
     grid-template-areas: 'logo user'
                          'menu menu';
   }

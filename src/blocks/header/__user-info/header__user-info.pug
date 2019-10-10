@@ -6,4 +6,4 @@ mixin header__user-info(user, buttons)
       =user
     else
       each button in buttons
-        +button(button.content, button.type, 'slim')
+        +button(button.content, button.type, 'slim')(class='header__button')
