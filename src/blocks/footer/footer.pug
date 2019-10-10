@@ -5,6 +5,7 @@ mixin footer(options, type='regular')
   //-   menu - an array with menu items (see menu block for more info)
   //-   subscription - an object for subscription section
   //-                  (see footer__subscription for more info)
+  //-   copyright - copyright text
   footer.footer(class=`footer_type_${type}`)&attributes(attributes)
     +footer__main(options)
-    +footer__bottom-bar
+    +footer__bottom-bar(options.copyright)
