@@ -7,7 +7,14 @@ $ref-air: 140px;
 $min-air: 20px;
 $parent-width: $ref-width - 2 * $ref-air;
 
-@mixin calc-air($ref-air: $ref-air, $min-air: $min-air, $sides: ('left', 'right'), $type: 'padding') {
+@mixin calc-air(
+  $ref-air: $ref-air,
+  $min-air: $min-air,
+  $ref-width: $ref-width,
+  $min-width: $min-width,
+  $sides: ('left', 'right'),
+  $type: 'padding'
+  ) {
   $air-frac: ($ref-air - $min-air) / ($ref-width - $min-width);
   $air-comp: $min-width * $air-frac - $min-air;
 
