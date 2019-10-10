@@ -269,7 +269,7 @@ class Generator {
     const itemFileContent = fs.readFileSync(itemFile, { encoding: 'utf-8' });
     const ext = path.extname(itemFile);
     const importString = rules[ext].addBem(depFile, itemFile);
-    if (add && !itemFileContent.includes(importString)) {
+    if (add && !itemFileContent.includes(importString.trim())) {
       // Special case for pug extends. Include can't be injected elsewhere except block
       // (or mixin)
       if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
@@ -283,7 +283,7 @@ class Generator {
       }
       fs.writeFileSync(itemFile, newContent);
     }
-    else if (!add && itemFileContent.includes(importString)) {
+    else if (!add && itemFileContent.includes(importString.trim())) {
       const newContent = itemFileContent.replace(importString, '');
       if (!newContent.match(/\S/)) {
         fs.unlinkSync(itemFile);
