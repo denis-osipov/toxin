@@ -13,6 +13,12 @@
   background-repeat: no-repeat;
   display: grid;
   padding-bottom: 7px;
+
+  @media (max-width: 600px) {
+    & {
+      justify-items: center;
+    }
+  }
 }
 
 // @keyframes change {
