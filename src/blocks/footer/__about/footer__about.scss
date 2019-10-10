@@ -5,7 +5,7 @@
 
   .footer_type_creative &,
   .footer_type_creative_always & {
-    @include calc-paddings($ref-padding: 400px, $min-padding: 0px);
+    @include calc-air($ref-air: 400px, $min-air: 0px);
     width: 100%;
   }
 }

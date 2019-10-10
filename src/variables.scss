@@ -3,16 +3,16 @@ $min-width: 320px;
 $max-width: 1920px;
 $ref-width: 1440px;
 $ref-rem: 16px/rem;
-$ref-padding: 140px;
-$min-padding: 20px;
-$parent-width: $ref-width - 2 * $ref-padding;
+$ref-air: 140px;
+$min-air: 20px;
+$parent-width: $ref-width - 2 * $ref-air;
 
-@mixin calc-paddings($ref-padding: $ref-padding, $min-padding: $min-padding, $sides: ('left', 'right')) {
-  $padding-frac: ($ref-padding - $min-padding) / ($ref-width - $min-width);
-  $padding-comp: $min-width * $padding-frac - $min-padding;
+@mixin calc-air($ref-air: $ref-air, $min-air: $min-air, $sides: ('left', 'right'), $type: 'padding') {
+  $air-frac: ($ref-air - $min-air) / ($ref-width - $min-width);
+  $air-comp: $min-width * $air-frac - $min-air;
 
   @each $side in $sides {
-    padding-#{$side}: calc(#{percentage($padding-frac)} - #{$padding-comp});
+    #{$type}-#{$side}: calc(#{percentage($air-frac)} - #{$air-comp});
   }
 }
 

@@ -1,7 +1,7 @@
 @import 'dependencies.scss';
 
 .header {
-  @include calc-paddings;
+  @include calc-air;
   align-items: center;
   background-color: $light;
   box-shadow: 0px 10px 20px $dark-5;

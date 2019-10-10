@@ -2,23 +2,23 @@
 
 .ui-kit {
   $column-gap: 20px;
-  $ref-padding: 141px;
-  $min-padding: 20px;
+  $ref-air: 141px;
+  $min-air: 20px;
 
   &__body {
     background-color: #fff;
   }
 
   &__main {
-    @include calc-paddings($ref-padding: $ref-padding);
+    @include calc-air($ref-air: $ref-air);
     column-gap: $column-gap;
-    grid-template-columns: repeat(auto-fit, minmax($min-width - $min-padding * 2, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax($min-width - $min-air * 2, 1fr));
     padding-top: 23px / $ref-rem;
     row-gap: 20px;
   }
 
   &__grid-item {
-    $ref-col-width: ($ref-width - $column-gap * 2 - $ref-padding * 2) / 3;
+    $ref-col-width: ($ref-width - $column-gap * 2 - $ref-air * 2) / 3;
     &-1 {
       padding-bottom: 60px;
       padding-right: percentage(53px / $ref-col-width);

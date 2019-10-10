@@ -1,7 +1,7 @@
 @import 'dependencies.scss';
 
 .footer__main {
-  @include calc-paddings;
+  @include calc-air;
   box-shadow: 0px 1px 0px $dark-10;
   display: flex;
   justify-content: space-between;
