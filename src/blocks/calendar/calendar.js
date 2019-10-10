@@ -3,6 +3,7 @@ import 'air-datepicker';
 const connect = require('blocksPath/connect/connect');
 
 function setCalendar( jQuery ) {
+  // Use lower case for monthShort
   $.fn.datepicker.language.ru.monthsShort.forEach(function(value, index, array) {
     array[index] = value.toLowerCase();
   });
