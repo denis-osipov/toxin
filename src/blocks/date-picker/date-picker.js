@@ -5,11 +5,13 @@ function setDatepicker( jQuery ) {
 
   $( '.date-picker' ).each(function() {
 
-    $( this ).find('.date-picker__field').on('click', function(event) {
+    const field = $( this ).find('.date-picker__field');
+
+    field.on('click', function(event) {
       $( this ).parent().find('.date-picker__calendar').toggle();
     });
 
-    connect($( this ), '.date-picker__calendar');
+    connect(field, '.date-picker__calendar', field.find('.input'));
   });
 }
 
