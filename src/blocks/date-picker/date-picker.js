@@ -26,16 +26,22 @@ import './dependencies.js';
               $( picker.inputs[index] ).val(date.toLocaleDateString());
             });
           }
+        },
+        init: () => {
+          picker.calendar.hide();
+
+          picker.fields.on('click', function(event) {
+            picker.calendar.toggle();
+          });
+
+          picker.container.on('calendar:date', function(event, ...dates) {
+            picker.setDate(dates);
+          });
         }
-      }
-  
-      picker.fields.on('click', function(event) {
-        picker.calendar.toggle();
-      });
-      
-      picker.container.on('calendar:date', function(event, ...dates) {
-        picker.setDate(dates);
-      });
+      };
+
+      picker.init();
+
     });
   };
 
