@@ -59,7 +59,7 @@ const connect = require('blocksPath/connect/connect').connect;
       $.data(this, 'dropdown', dropdown);
 
       if (dropdown.settings.control) {
-        connect(dropdown.dropdown, dropdown.settings.control, dropdown.update.bind(dropdown));
+        connect(dropdown.dropdown, dropdown.settings.control, null, dropdown.update.bind(dropdown));
       }
 
     });
