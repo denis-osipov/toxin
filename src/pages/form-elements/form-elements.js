@@ -1,11 +1,9 @@
 import './dependencies.js';
 $( document ).ready(function(jQery) {
-  const secondDatepicker = $( '.date-picker' ).eq(1).find('.input').data('datepicker');
-  secondDatepicker.selectDate(new Date(2019, 7, 19));
-  secondDatepicker.selectedDates = [];
+  $( '.date-picker' ).eq(0).find('.input').eq(1).val('19.08.2019');
 
-  const thirdDatepicker = $( '.date-picker' ).eq(2).find('.input').data('datepicker');
-  thirdDatepicker.selectDate([new Date(2019, 7, 19), new Date(2019, 7, 23)]);
+  const secondDatepicker = $( '.date-picker' ).eq(1).find('.calendar__picker').data('datepicker');
+  secondDatepicker.selectDate([new Date(2019, 7, 19), new Date(2019, 7, 23)]);
 
   $( '.dropdown_type_conveniences' ).each((index, element) => {
     $( element ).data('dropdown').set([2, 2]);
