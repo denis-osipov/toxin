@@ -3,15 +3,9 @@ mixin date-picker(type='single')
   //- Datepicker with type single or double. Date-pickers for double inputs are
   //- coupled: for each two sequent the first is for begin date, the second is
   //- for end date.
-  .date-picker(class=`date-picker_type_${type}`)&attributes(attributes)
+  .date-picker(class= type==='double' ? 'date-picker_double' : '')&attributes(attributes)
     +date-picker__field(type)
-    - const calendarOptions = { 'data-date-picker': '.date-picker__field' };
-    if type === 'single'
-      -
-        Object.assign(calendarOptions, {
-          'data-multiple-dates-separator': ' - ',
-          'data-alt-field-date-format': 'dd M'
-        });
-    else if type === 'double'
-      - Object.assign(calendarOptions, { 'data-alt-field-date-format': 'dd.mm.yyyy' });
+    if type === 'double'
+      +date-picker__field(type)
+    - const calendarOptions = { connect: true };
     +calendar(calendarOptions)(class='date-picker__calendar')
