@@ -97,11 +97,7 @@ const pathToEntries = path.join(module.exports.context, 'pages');
 const types = ['.js', '.scss'];
 
 [
-  'colorsAndType',
-  'formElements',
-  'cards',
-  'headersAndFooters',
-  'landingPage'
+  'searchRoom'
 ].forEach(entryName => {
   const entryFiles = [];
   const dashedName = toDashString(entryName);
