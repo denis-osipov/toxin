@@ -88,8 +88,7 @@ module.exports = {
   resolve: {
     alias: {
       blocksPath: path.resolve(__dirname, 'src/blocks'), // for correct paths to required assets in pug mixins
-      images: path.resolve(__dirname, 'src/images'),
-      './dependencyLibs/inputmask.dependencyLib': './dependencyLibs/inputmask.dependencyLib.jquery'
+      images: path.resolve(__dirname, 'src/images')
     }
   }
 }
