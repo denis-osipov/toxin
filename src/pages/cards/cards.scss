@@ -2,35 +2,39 @@
 .ui-kit {
   &__body {
     background-color: $grey;
-    width: 1440px;
-    margin: 0;
   }
 
   &__main {
     @include calc-air;
     column-gap: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    grid-template-columns: repeat(2, minmax(340px / $ref-rem, 380fr)) 320fr;
     row-gap: 40px;
     padding-top: 42px;
+
+    @media (max-width: 1360px) {
+      grid-template-columns: repeat(auto-fit, minmax(340px / $ref-rem, 1fr));
+    }
   }
 
-  &__flex-item {
-    align-content: flex-start;
+  &__grid-item {
+    align-content: start;
+    align-items: start;
     column-gap: 40px;
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px / $ref-rem, 1fr));
+    justify-items: start;
     row-gap: 40px;
-    &:nth-child(1),
-    &:nth-child(2) {
-      flex-basis: 380px;
-      justify-content: center;
+
+    @media (max-width: 1360px) {
+      justify-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(340px / $ref-rem, 1fr));
     }
+
     &:nth-child(3) {
-      flex-basis: 320px;
-      justify-content: start;
+      grid-template-columns: repeat(auto-fit, minmax(320px / $ref-rem, 1fr));
+      @media (max-width: 1360px) and (min-width: 720px) {
+        grid-column-end: span 2;
+      }
     }
   }
 }

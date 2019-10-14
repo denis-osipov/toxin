@@ -7,5 +7,6 @@ mixin footer(options, type='regular')
   //-                  (see footer__subscription for more info)
   //-   copyright - copyright text
   footer.footer(class=`footer_type_${type}`)&attributes(attributes)
+    - options = options || {};
     +footer__main(options)
     +footer__bottom-bar(options.copyright)

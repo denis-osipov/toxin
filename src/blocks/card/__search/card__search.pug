@@ -1,6 +1,6 @@
 include dependencies.pug
 mixin card__search
-  form.search&attributes(attributes)
+  form.card__search&attributes(attributes)
     h1.card__header.text_level_h1 Найдём номера под ваши пожелания
     +date-picker('double', 'Прибытие', 'Выезд')(class='card__dates')
     +guests()(class='card__guests')
