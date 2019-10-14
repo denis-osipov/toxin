@@ -112,7 +112,9 @@ const types = ['.js', '.scss'];
       entryFiles.push(entryFile);
     }
   });
-  module.exports.entry[entryName] = entryFiles;
+  if (entryFiles.length) {
+    module.exports.entry[entryName] = entryFiles;
+  }
   module.exports.plugins.push(
     new HtmlWebpackPlugin({
       template: path.join(pathToEntry, `${dashedName}.pug`),
