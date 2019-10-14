@@ -1,6 +1,6 @@
 import './dependencies.js';
 import 'air-datepicker';
-const connect = require('blocksPath/connect/connect').connect;
+const connect = require('blocksPath/connect/connect');
 
 (function( $ ) {
   $.fn.calendar = function() {

@@ -15,7 +15,7 @@
 // };
 
 import './dependencies.js';
-const connect = require('blocksPath/connect/connect').connect;
+const connect = require('blocksPath/connect/connect');
 
 (function( $ ) {
   // Main method creating dropdown
