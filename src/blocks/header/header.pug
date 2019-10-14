@@ -11,6 +11,7 @@ mixin header(options)
     +logo()(class='header__logo')
 
     -
+      options = options || {};
       menu = options.menu || [
         {name: 'Home', active: true},
         {name: 'About Us'},
@@ -23,5 +24,6 @@ mixin header(options)
         {content: {text: 'Login'}, type: 'border'},
         {content: {text: 'Register'}, type: 'fill'}
       ];
+      user = options.user || null;
     +menu(menu)(class='header__menu')
     +header__user-info(user, buttons)
