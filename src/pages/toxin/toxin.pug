@@ -7,13 +7,41 @@ html.toxin
       block title
         ='Toxin'
   +body()(class='text toxin__body')
-    +header(null, [
-      {name: 'О нас'},
-      {name: 'Услуги', expandable: true},
-      {name: 'Вакансии'},
-      {name: 'Новости'},
-      {name: 'Соглашения', expandable: true}
-    ])
+    +header({
+      menu: [
+        {name: 'О нас'},
+        {name: 'Услуги', expandable: true},
+        {name: 'Вакансии'},
+        {name: 'Новости'},
+        {name: 'Соглашения', expandable: true}
+      ],
+      buttons: [
+        {content: {text: 'Войти'}, type: 'border'},
+        {content: {text: 'Зарегистрироваться'}, type: 'fill'}
+      ]
+    })
     +main()(class='toxin__main')
       block content
-    +footer
+    +footer({
+      message: 'Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»',
+      menu: [
+        {
+          name: 'Навигация',
+          children: ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
+        },
+        {
+          name: 'О нас',
+          children: ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
+        },
+        {
+          name: 'Служба поддержки',
+          children: ['Соглашение', 'Сообщества', 'Связь с нами']
+        }
+      ],
+      subscription: {
+        header: 'Подписка',
+        message: 'Получайте специальные предложения и новости сервиса',
+        placeholder: 'Email'
+      },
+      copyright: 'Copyright © 2018 Toxin отель. Все права зачищены.'
+    })

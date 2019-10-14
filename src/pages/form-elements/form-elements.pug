@@ -15,13 +15,10 @@ block content
       +dropdown('guests')
     +sample-form('Masked text field', 'Default')
       +input('date')
-    .two-date-pickers
-      +sample-form('Date dropdown')
-        +date-picker('double')
-      +sample-form('Date dropdown')
-        +date-picker('double')
-    +sample-form('Filter date dropdown')
-      +date-picker
+    +sample-form
+      +date-picker('double', 'Date dropdown', 'Date dropdown')
+    +sample-form
+      +date-picker('single', 'Filter date dropdown')
     +sample-form('Subscription text field')
       +subscription
   .ui-kit__grid-item-2

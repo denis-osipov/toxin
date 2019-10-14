@@ -1,7 +1,11 @@
 include dependencies.pug
-mixin calendar
+mixin calendar(options)
+  //- Create calendar. options should contain properties according to
+  //- air-datepicker docs. Also connect: true should be set to trigger
+  //- 'calendar:date' event on date selection (selected dates will be supplied).
   .calendar&attributes(attributes)
-    .calendar__picker
+    - const toDataAttrs = require('blocksPath/connect/connect').toDataAttrs;
+    .calendar__picker&attributes(options ? toDataAttrs(options) : {})
     +control(
       [
         { text: 'Очистить', color: 'dark-50', action: 'clear' },

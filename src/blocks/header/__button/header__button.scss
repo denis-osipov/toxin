@@ -1,0 +1,15 @@
+.header__button {
+  margin-right: 18px / $ref-rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @media (max-width: 1120px) {
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

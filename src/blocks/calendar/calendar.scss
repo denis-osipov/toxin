@@ -1,10 +1,10 @@
 @import 'dependencies.scss';
 
 .calendar {
-  width: 320px / $ref-rem;
   background: $light;
   border: 1px solid $dark-25;
   box-sizing: border-box;
   box-shadow: 0px 10px 20px $dark-5;
   border-radius: 4px;
+  width: 320px / $ref-rem;
 }

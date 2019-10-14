@@ -1,15 +1,15 @@
 @import 'dependencies.scss';
 
 .footer__bottom-bar {
-  @include side-paddings($ref-padding: 138px, $sides: 'right');
-  @include side-paddings($sides: 'left');
+  @include calc-air($ref-air: 138px, $sides: 'right');
+  @include calc-air($sides: 'left');
   display: flex;
   justify-content: space-between;
   padding-bottom: 9px;
   padding-top: 9px;
   
   .footer_type_creative,
-  .footer_type_creative_always & & {
+  .footer_type_creative_always & {
     padding-top: 0;
   }
 }

@@ -3,15 +3,30 @@ $min-width: 320px;
 $max-width: 1920px;
 $ref-width: 1440px;
 $ref-rem: 16px/rem;
-$ref-padding: 140px;
-$parent-width: $ref-width - 2 * $ref-padding;
+$ref-air: 140px;
+$min-air: 20px;
+$parent-width: $ref-width - 2 * $ref-air;
 
-@mixin side-paddings($ref-padding: $ref-padding, $min-padding: 20px, $sides: ('left', 'right')) {
-  $padding-frac: ($ref-padding - $min-padding) / ($ref-width - $min-width);
-  $padding-comp: $min-width * $padding-frac - $min-padding;
+// Mixin for setting air using calc css function. Parameters:
+// $ref-air: air size for current width of container
+// $min-air: air size for min width of container
+// $ref-width: current width of container
+// $min-width: min width of container
+// $sides: sides for adding air (string or array)
+// $type: type of added air (padding or margin)
+@mixin calc-air(
+  $ref-air: $ref-air,
+  $min-air: $min-air,
+  $ref-width: $ref-width,
+  $min-width: $min-width,
+  $sides: ('left', 'right'),
+  $type: 'padding'
+  ) {
+  $air-frac: ($ref-air - $min-air) / ($ref-width - $min-width);
+  $air-comp: $min-width * $air-frac - $min-air;
 
   @each $side in $sides {
-    padding-#{$side}: calc(#{percentage($padding-frac)} - #{$padding-comp});
+    #{$type}-#{$side}: calc(#{percentage($air-frac)} - #{$air-comp});
   }
 }
 

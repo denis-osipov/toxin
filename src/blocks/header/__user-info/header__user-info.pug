@@ -1,8 +1,9 @@
 include dependencies.pug
-mixin header__user-info(user)
+mixin header__user-info(user, buttons)
+  - buttons = buttons || []
   .header__user-info(class=user ? 'header__user-name' : 'header__buttons')
     if user
       =user
     else
-      +button({text: 'Login'}, 'border', 'slim')
-      +button({text: 'Register'}, 'fill', 'slim')
+      each button in buttons
+        +button(button.content, button.type, 'slim')(class='header__button')

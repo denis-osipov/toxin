@@ -1,16 +1,29 @@
 include dependencies.pug
-mixin header(user, menu)
+mixin header(options)
+  //- Construct header with optioins, an object with porperties:
+  //-   user - user name if logged in;
+  //-   menu - menu items for nav bar; should be an array with object
+  //-          (see menu block for more info)
+  //-   buttons - array of objects to construct buttons with properties:
+  //-     content - button text content
+  //-     type - button type (see button block for more info)
   header.header&attributes(attributes)
     +logo()(class='header__logo')
 
     -
-      menu = menu || [
+      options = options || {};
+      menu = options.menu || [
         {name: 'Home', active: true},
         {name: 'About Us'},
         {name: 'Services', expandable: true},
         {name: 'Careers'},
         {name: 'News'},
         {name: 'Documentation'}
-      ]
+      ];
+      buttons = options.buttons || [
+        {content: {text: 'Login'}, type: 'border'},
+        {content: {text: 'Register'}, type: 'fill'}
+      ];
+      user = options.user || null;
     +menu(menu)(class='header__menu')
-    +header__user-info(user)
+    +header__user-info(user, buttons)

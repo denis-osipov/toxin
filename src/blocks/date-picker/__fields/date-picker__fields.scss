@@ -1,0 +1,8 @@
+.date-picker__fields {
+  .date-picker_double & {
+    column-gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+}

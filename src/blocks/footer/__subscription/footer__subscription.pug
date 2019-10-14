@@ -1,7 +1,12 @@
 include dependencies.pug
-mixin footer__subscription
+mixin footer__subscription(options)
+  //- Construct subscription section for footer. Options:
+  //-   header
+  //-   message
+  //-   placeholder - placeholder for input
+  - options = options || {};
   .footer__subscription
-    .text_level_h3 Subscribe to our newsletter
+    .text_level_h3= options.header || 'Subscribe to our newsletter'
     p.footer__subscription-message
-      ='Receive our latest news and promotions in your inbox!'
-    +subscription('Your email address')
+      =options.message || 'Receive our latest news and promotions in your inbox!'
+    +subscription(options.placeholder || 'Your email address')

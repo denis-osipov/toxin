@@ -1,6 +1,7 @@
 include dependencies.pug
-mixin footer__about
+mixin footer__about(message)
+  - message = message || 'Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam eget nullam pellentesque aliquam curabitur cociis.'
   .footer__about
     +logo()(class='footer__logo')
     p.footer__text
-      ='Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam eget nullam pellentesque aliquam curabitur cociis.'
+      =message

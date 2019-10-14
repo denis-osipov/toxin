@@ -1,0 +1,7 @@
+.landing__card {
+  $container-width: $ref-width - 140px - 114px;
+  @include calc-air($ref-air: 302px, $min-air: 0, $ref-width: $container-width, $type: 'margin', $sides: 'bottom');
+  min-width: 320px;
+  width: percentage(380px / $container-width);
+  width: 380px / $ref-rem;
+}

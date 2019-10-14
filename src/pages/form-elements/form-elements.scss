@@ -2,23 +2,23 @@
 
 .ui-kit {
   $column-gap: 20px;
-  $ref-padding: 141px;
-  $min-padding: 20px;
+  $ref-air: 141px;
+  $min-air: 20px;
 
   &__body {
     background-color: #fff;
   }
 
   &__main {
-    @include side-paddings($ref-padding: $ref-padding);
+    @include calc-air($ref-air: $ref-air);
     column-gap: $column-gap;
-    grid-template-columns: repeat(auto-fit, minmax($min-width - $min-padding * 2, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax($min-width - $min-air * 2, 1fr));
     padding-top: 23px / $ref-rem;
     row-gap: 20px;
   }
 
   &__grid-item {
-    $ref-col-width: ($ref-width - $column-gap * 2 - $ref-padding * 2) / 3;
+    $ref-col-width: ($ref-width - $column-gap * 2 - $ref-air * 2) / 3;
     &-1 {
       padding-bottom: 60px;
       padding-right: percentage(53px / $ref-col-width);
@@ -29,18 +29,14 @@
         }
       }
 
-      .two-date-pickers {
-        column-gap: 19px;
-        display: grid;
-        grid-template-columns: auto auto;
-        padding-bottom: 21px;
-      }
-
       & .sample-form:nth-child(3) {
         margin-bottom: 3px;
       }
       & .sample-form:nth-child(4) {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+      }
+      & .sample-form:nth-child(5) {
+        margin-bottom: 33px;
       }
       & .sample-form:nth-child(6) {
         padding-right: percentage(62px / $ref-col-width);
@@ -141,7 +137,7 @@
     &-4 {
       margin-left: -1px;
       padding-right: percentage(108px / $ref-col-width);
-      margin-bottom: 14px;
+      margin-bottom: 132px;
     }
 
     &-7 {

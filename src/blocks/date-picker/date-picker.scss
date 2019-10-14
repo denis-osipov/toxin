@@ -1,4 +1,5 @@
 @import 'dependencies.scss';
+
 .date-picker {
-  @import '../../../node_modules/air-datepicker/dist/css/datepicker.min.css';
+  position: relative;
 }
