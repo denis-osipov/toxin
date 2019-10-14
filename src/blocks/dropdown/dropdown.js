@@ -57,20 +57,13 @@ const connect = require('blocksPath/connect/connect');
       dropdown.items.on('click', '.dropdown__button', dropdown.change);
 
       $( document ).on('click', function(event) {
-        if (!(event.target === dropdown.dropdown[0])) {
-          const parents = $( event.target ).parents();
-          if (parents.length) {
-            let hide = true;
-            parents.each(function(index, element) {
-              if (element === dropdown.dropdown[0]) {
-                hide = false;
-                return false;
-              }
-            });
-            if (hide) {
-              dropdown.dropdown.removeClass('dropdown_expanded');
-            }
-          }
+        const target = $( event.target );
+        const parentDropdown = target.closest('.dropdown');
+        if (
+          !(parentDropdown[0] === dropdown.dropdown[0]) &&
+          target.parent().length
+        ) {
+          dropdown.dropdown.removeClass('dropdown_expanded');
         }
       });
 

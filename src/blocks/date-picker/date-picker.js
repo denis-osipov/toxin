@@ -31,20 +31,13 @@ import './dependencies.js';
           picker.calendar.hide();
 
           $( document ).on('click', function(event) {
-            if (!(event.target === picker.container[0])) {
-              const parents = $( event.target ).parents();
-              if (parents.length) {
-                let hide = true;
-                parents.each(function(index, element) {
-                  if (element === picker.container[0]) {
-                    hide = false;
-                    return false;
-                  }
-                });
-                if (hide) {
-                  picker.calendar.hide();
-                }
-              }
+            const target = $( event.target );
+            const parentPicker = target.closest('.date-picker');
+            if (
+              !(parentPicker[0] === picker.container[0]) &&
+              target.parent().length
+            ) {
+              picker.calendar.hide();
             }
           });
 
