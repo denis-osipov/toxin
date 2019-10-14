@@ -4,10 +4,10 @@
   @include calc-air($ref-air: 114px, $min-air: 0, $sides: 'right');
   @include calc-air($ref-air: 140px, $min-air: 0, $sides: 'left');
   @include calc-air($ref-air: 70px, $min-air: 10px, $sides: 'top');
-  // animation-duration: 60s;
-  // animation-iteration-count: infinite;
-  // animation-name: change;
-  // animation-timing-function: linear;
+  animation-duration: 60s;
+  animation-iteration-count: infinite;
+  animation-name: change;
+  animation-timing-function: linear;
   background-image: url('~images/rooms/landing_3.jpg');
   background-position: 50% 99%;
   background-repeat: no-repeat;
@@ -22,14 +22,14 @@
   }
 }
 
-// @keyframes change {
-//   0% {
-//     background-image: url('~images/rooms/landing_3.jpg');
-//   }
-//   50% {
-//     background-image: url('~images/rooms/landing_2.jpg');
-//   }
-//   100% {
-//     background-image: url('~images/rooms/landing_1.jpg');
-//   }
-// }
+@keyframes change {
+  0% {
+    background-image: url('~images/rooms/landing_3.jpg');
+  }
+  50% {
+    background-image: url('~images/rooms/landing_2.jpg');
+  }
+  100% {
+    background-image: url('~images/rooms/landing_1.jpg');
+  }
+}
