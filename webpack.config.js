@@ -1,8 +1,10 @@
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DependencyGenerationPlugin = require('./generator/DependencyGenerationPlugin');
+const toDashString = require('./utils/convert').toDashString;
 
 module.exports = {
   mode: 'development',
@@ -11,27 +13,7 @@ module.exports = {
     writeToDisk: true
   },
   context: path.resolve(__dirname, 'src'),
-  entry: {
-    // colorsAndType: [
-    //   './pages/colors-and-type/colors-and-type.scss'
-    // ],
-    // formElements: [
-    //   './pages/form-elements/form-elements.scss',
-    //   './pages/form-elements/form-elements.js'
-    // ],
-    // cards: [
-    //   './pages/cards/cards.scss',
-    //   './pages/cards/cards.js'
-    // ],
-    // headersAndFooters: [
-    //   './pages/headers-and-footers/headers-and-footers.scss',
-    //   './pages/headers-and-footers/headers-and-footers.js'
-    // ],
-    landingPage: [
-      './pages/landing-page/landing-page.scss',
-      './pages/landing-page/landing-page.js'
-    ]
-  },
+  entry: {},
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
@@ -101,32 +83,7 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery'
     }),
-    new CleanWebpackPlugin(),
-    // new HtmlWebpackPlugin({
-    //   template: './pages/colors-and-type/colors-and-type.pug',
-    //   filename: 'colors-and-type.html',
-    //   chunks: ['colorsAndType']
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: './pages/form-elements/form-elements.pug',
-    //   filename: 'form-elements.html',
-    //   chunks: ['formElements']
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: './pages/cards/cards.pug',
-    //   filename: 'cards.html',
-    //   chunks: ['cards']
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: './pages/headers-and-footers/headers-and-footers.pug',
-    //   filename: 'headers-and-footers.html',
-    //   chunks: ['headersAndFooters']
-    // }),
-    new HtmlWebpackPlugin({
-      template: './pages/landing-page/landing-page.pug',
-      filename: 'landing-page.html',
-      chunks: ['landingPage']
-    })
+    new CleanWebpackPlugin()
   ],
   resolve: {
     alias: {
@@ -136,3 +93,32 @@ module.exports = {
     }
   }
 }
+
+const pathToEntries = path.join(module.exports.context, 'pages');
+const types = ['.js', '.scss'];
+
+[
+  'colorsAndType',
+  'formElements',
+  'cards',
+  'headersAndFooters',
+  'landingPage'
+].forEach(entryName => {
+  const entryFiles = [];
+  const dashedName = toDashString(entryName);
+  const pathToEntry = path.join(pathToEntries, dashedName);
+  types.forEach(type => {
+    const entryFile = path.join(pathToEntry, `${dashedName}${type}`);
+    if (fs.existsSync(entryFile)) {
+      entryFiles.push(entryFile);
+    }
+  });
+  module.exports.entry[entryName] = entryFiles;
+  module.exports.plugins.push(
+    new HtmlWebpackPlugin({
+      template: path.join(pathToEntry, `${dashedName}.pug`),
+      filename: `${dashedName}.html`,
+      chunks: [entryName]
+    }),
+  );
+});
