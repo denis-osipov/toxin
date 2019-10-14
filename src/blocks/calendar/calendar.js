@@ -14,7 +14,6 @@ const connect = require('blocksPath/connect/connect');
           range: true,
           moveToOtherMonthsOnSelect: false,
           moveToOtherYearsOnSelect: false,
-          showEvent: null,
           prevHtml: '<i class="icon icon_type_material calendar__nav-icon">arrow_back</i>',
           nextHtml: '<i class="icon icon_type_material calendar__nav-icon">arrow_forward</i>',
           navTitles: {
