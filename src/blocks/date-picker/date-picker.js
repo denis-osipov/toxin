@@ -30,6 +30,24 @@ import './dependencies.js';
         init: () => {
           picker.calendar.hide();
 
+          $( document ).on('click', function(event) {
+            if (!(event.target === picker.container[0])) {
+              const parents = $( event.target ).parents();
+              if (parents.length) {
+                let hide = true;
+                parents.each(function(index, element) {
+                  if (element === picker.container[0]) {
+                    hide = false;
+                    return false;
+                  }
+                });
+                if (hide) {
+                  picker.calendar.hide();
+                }
+              }
+            }
+          });
+
           picker.fields.on('click', function(event) {
             picker.calendar.toggle();
           });
