@@ -1,0 +1,26 @@
+include dependencies.pug
+mixin filter
+  section.filter
+    +date-picker('single', 'Даты пребывания в отеле')
+    +guests
+    +slider('Диапазон цены')
+    +list([
+      ['smoke', 'Можно курить'],
+      {name: 'pets', label: 'Можно с питомцами', checked: ''},
+      {name: 'guests', label: 'Можно пригласить гостей (до 10 человек)', checked: ''}
+    ], 'checkbox')
+    +list([
+      ['wide', 'Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
+      ['assistant', 'Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
+    ], 'rich')
+    +dropdown('conveniences')
+    +exp-list('Дополнительные удобства', [
+        {name: 'breakfast', label: 'Завтрак'},
+        {name: 'table', label: 'Письменный стол', checked: ''},
+        {name: 'feeding-chair', label: 'Стул для кормления', checked: ''},
+        {name: 'crib', label: 'Кроватка', checked: ''},
+        {name: 'tv-1', label: 'Телевизор'},
+        {name: 'shampoo-1', label: 'Шампунь'},
+        {name: 'tv-2', label: 'Телевизор'},
+        {name: 'shampoo-2', label: 'Шампунь'}
+      ])
