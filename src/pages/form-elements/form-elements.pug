@@ -22,19 +22,19 @@ block content
     +sample-form('Subscription text field')
       +subscription
   .ui-kit__grid-item-2
-    +sample-form('Checkbox buttons')
-      +list([
+    +sample-form
+      +list('Checkbox buttons', [
         ['smoke', 'Можно курить'],
         {name: 'pets', label: 'Можно с питомцами', checked: ''},
         {name: 'guests', label: 'Можно пригласить гостей (до 10 человек)', checked: ''}
       ], 'checkbox')
-    +sample-form('Radio buttons')
-      +list([
+    +sample-form
+      +list('Radio buttons', [
         {name: 'sex', label: 'Мужчина', checked: ''},
         ['sex', 'Женщина']
       ], 'radio')
-    +sample-form('Toggle')
-      +list([
+    +sample-form
+      +list('Toggle', [
         {name: 'offer', label: 'Получать спецпредложения', checked: ''},
         ['offer', 'Получать спецпредложения']
       ], 'toggle')
@@ -105,20 +105,20 @@ block content
         {name: 'shampoo-2', label: 'Шампунь'}
       ])
   .ui-kit__grid-item-8
-    +sample-form('Rich checkbox buttons')
-      +list([
+    +sample-form
+      +list('Rich checkbox buttons', [
         ['wide', 'Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
         ['assistant', 'Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
       ], 'rich')
   .ui-kit__grid-item-9
-    +sample-form('Bullet list')
-      +list([
+    +sample-form
+      +list('Bullet list', [
         'Нельзя с питомцами',
         'Без вечеринок и мероприятий',
         'Время прибытия — после 13:00, а выезд до 12:00'
       ])
   .ui-kit__grid-item-10
-    +list([
+    +list('', [
       ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
       ['location_city', 'Удобство', 'Окно в каждой из спален']
     ], 'icon')

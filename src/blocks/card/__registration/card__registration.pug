@@ -5,7 +5,7 @@ mixin card__registration
     .card__user-info
       +input()(placeholder='Имя', class='card__user-info-item')
       +input()(placeholder='Фамилия', class='card__user-info-item')
-      +list([
+      +list('', [
         {name: 'sex', label: 'Мужчина', checked: ''},
         ['sex', 'Женщина']
       ], 'radio')(class='card__user-info-item')
