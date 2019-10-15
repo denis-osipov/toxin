@@ -32,14 +32,14 @@ const rooms = {
   982: {
     type: '',
     cost: '5 800₽',
-    rating: 6,
+    rating: 3,
     comments: '56 Отзывов'
   },
   678: {
     type: '',
     cost: '5 500₽',
     rating: 5,
-    comments: '25 Отзывов'
+    comments: '45 Отзывов'
   },
   450: {
     type: '',
