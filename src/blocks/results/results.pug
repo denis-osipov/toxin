@@ -1,0 +1,7 @@
+include dependencies.pug
+mixin results
+  - const roomsList = [ 888, 840 ];
+  section.results
+    .rooms
+      each room in roomsList
+        +room-plate(room)
