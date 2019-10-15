@@ -1,5 +1,5 @@
 include dependencies.pug
-mixin dropdown(type='', items, control=true)
+mixin dropdown(name, type='', items, control=true)
   //- type should be one of:
   //-   guests
   //-   conveniences
@@ -22,6 +22,8 @@ mixin dropdown(type='', items, control=true)
     const typeClass = type ? `dropdown_type_${type}` : '';
 
   .dropdown(class=typeClass)&attributes(attributes)
+    if name
+      h3.dropdown__header.text_level_h3= name
     +dropdown__total
     .dropdown__container
       +dropdown__list(listItems)

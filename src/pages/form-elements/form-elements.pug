@@ -12,7 +12,7 @@ block content
     +sample-form('Text field', 'Hover / Focus')
       +input()(class='input_active', value='This is pretty awesome')
     +sample-form('Dropdown', 'Default')
-      +dropdown('guests')
+      +dropdown('', 'guests')
     +sample-form('Masked text field', 'Default')
       +input('date')
     +sample-form
@@ -72,15 +72,15 @@ block content
       +pagination(pages, '1 – 12 из 100+ вариантов аренды')
   .ui-kit__grid-item-4
     +sample-form('Dropdown', 'Default')
-      +dropdown('conveniences', [], false)
+      +dropdown('', 'conveniences', [], false)
     +sample-form('Dropdown', 'Expanded')
-      +dropdown('conveniences', [], false)
+      +dropdown('', 'conveniences', [], false)
   .ui-kit__grid-item-5
-    +sample-form('Dropdown')
-      +dropdown('guests')
+    +sample-form
+      +dropdown('Dropdown', 'guests')
   .ui-kit__grid-item-6
-    +sample-form('Dropdown')
-      +dropdown('guests')
+    +sample-form
+      +dropdown('Dropdown', 'guests')
   .ui-kit__grid-item-7
     +sample-form
       +exp-list('Expandable checkbox list', [
