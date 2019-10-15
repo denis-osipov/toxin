@@ -1,1 +1,7 @@
 @import 'dependencies.scss';
+
+.filter {
+  align-content: start;
+  display: grid;
+  row-gap: 10px;
+}

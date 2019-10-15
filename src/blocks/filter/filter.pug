@@ -1,6 +1,6 @@
 include dependencies.pug
 mixin filter
-  form.filter
+  form.filter&attributes(attributes)
     +date-picker('single', 'Даты пребывания в отеле')
     +guests()(class='filter__guests')
     +slider('Диапазон цены', 'Стоимость за сутки пребывания в номере')
