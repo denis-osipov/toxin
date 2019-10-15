@@ -3,7 +3,7 @@ mixin card__reservation(room)
   form.card__reservation&attributes(attributes)
     +room-header(room)(class='card__header text_level_h1')
     +date-picker('double', 'Прибытие', 'Выезд')(class='card__dates')
-    +guests()(class='card__guests')
+    +dropdown('Гости', 'guests')(class='card__guests')
     +card__calculation
     +button(
       {text: 'Забронировать', icon: 'arrow_forward'},

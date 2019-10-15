@@ -2,4 +2,4 @@
 // Any changes will be discarded during next compilation.
 
 import '../../date-picker/date-picker.js';
-import '../../guests/guests.js';
+import '../../dropdown/dropdown.js';
