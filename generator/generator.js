@@ -7,14 +7,15 @@ const getBems = require('./get-bems');
 const { symmetricDifference, union, intersection, difference } = require('./utils');
 const { warningMessage, rules } = require('./rules');
 
+// Class for adding imports. Can be used by webpack plugin or in scripts.
 class Generator {
   constructor(folders, inject, create) {
-    this.folders = folders;
-    this.inject = inject;
-    this.create = create;
+    this.folders = folders; // folders to scan
+    this.inject = inject; // should be always true in the new version
+    this.create = create; // boolean, true if creation of missing files is desired
   }
 
-  // Generate dependency files
+  // Main method to generate imports
   generate() {
     this.repeat = false;
     this.prevFiles = this.files;
@@ -31,11 +32,14 @@ class Generator {
       this.depsFiles = null;
     }
 
+    // Regenerate if new files were added (if this.create is true)
     if (this.repeat) {
       this.generate();
     }
   }
 
+  // Scan folder and get files list, including internal dependencies
+  // (elements and modifiers in block folder)
   scanFolder(root, parent) {
     const entities = fs.readdirSync(root, {
       encoding: 'utf-8',
@@ -80,6 +84,7 @@ class Generator {
     });
   }
 
+  // Add dependencies to this.deps for file and call createDependencies
   addDependencies() {
     this.deps = {};
     this.depsFiles = { toAdd: {}, toRemove: {} };
@@ -121,6 +126,7 @@ class Generator {
     });
   }
 
+  // Get parents to exclude from dependencies list while getting it from pug file
   getParents(itemName) {
     if (this.files[itemName].parent) {
       return [itemName].concat(this.getParents(this.files[itemName].parent));
@@ -130,6 +136,7 @@ class Generator {
     }
   }
 
+  // Get file's dependencies for which update is needed and call writeDependencyFiles
   createDependencies(itemName) {
     const existingDeps = this.deps[itemName].content ?
       this.deps[itemName].content.filter(bem => bem in this.files) :
@@ -174,6 +181,7 @@ class Generator {
     this.writeDependencyFiles(itemName, dependencyFiles);
   }
 
+  // Check if dependencies files list was changed
   checkDependencies(deps) {
     let changedExts = [];
     deps.forEach(depName => {
@@ -184,7 +192,7 @@ class Generator {
           delete fileInfo.generated;
         }
       });
-      // Check if dependencies files list was changed
+
       changedExts = union(changedExts, (symmetricDifference(
         Object.keys(this.files[depName].files),
         Object.keys(this.prevFiles[depName].files)
@@ -193,6 +201,7 @@ class Generator {
     return changedExts;
   }
 
+  // Get file list for dependencies
   getDependencyFiles(depItems, extensions) {
     const dependencyFiles = {};
     extensions.forEach(ext => {
@@ -212,6 +221,7 @@ class Generator {
     return dependencyFiles;
   }
 
+  // Write dependencies.* files
   writeDependencyFiles(itemName, dependencyFiles) {
     const extendsFiles = this.deps[itemName].extends_ ?
       this.files[this.deps[itemName].extends_].files :
@@ -248,6 +258,8 @@ class Generator {
     });
   }
 
+  // Create missing files (if entity depends on other entity which has files with
+  // extension not presented in files of that entity)
   createMissingFiles(itemName, dependencyFiles) {
     Object.entries(dependencyFiles).forEach(depsType => {
       const [ext, paths] = depsType;
@@ -265,6 +277,7 @@ class Generator {
     });
   }
 
+  // Injecti import into entity file
   injectImports(itemFile, depFile, add = true) {
     const itemFileContent = fs.readFileSync(itemFile, { encoding: 'utf-8' });
     const ext = path.extname(itemFile);
