@@ -77,7 +77,8 @@ module.exports = {
       folders: [
         path.resolve(__dirname, 'src/blocks'),
         path.resolve(__dirname, 'src/pages')
-      ]
+      ],
+      clear: true
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
