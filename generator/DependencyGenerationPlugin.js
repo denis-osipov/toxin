@@ -6,7 +6,7 @@ const Generator = require('./generator');
 class DependencyGenerationPlugin {
   constructor(options) {
     this.options = Object.assign({
-      inject: true,
+      clear: false,
       create: true
     }, options);
   }
@@ -25,7 +25,7 @@ class DependencyGenerationPlugin {
 
         this.generator = new Generator(
           this.options.folders,
-          this.options.inject,
+          this.options.clear,
           this.options.create);
         this.generator.generate();
         const finish = new Date();
