@@ -5,13 +5,14 @@ const fs = require('fs');
 const _ = require('lodash');
 const getBems = require('./get-bems');
 const { symmetricDifference, union, intersection, difference } = require('./utils');
-const { startMessage, endMessage, rules } = require('./rules');
+const rules = require('./rules');
+const eol = require('os').EOL;
 
 // Class for adding imports. Can be used by webpack plugin or in scripts.
 class Generator {
-  constructor(folders, inject, create) {
+  constructor(folders, clear, create) {
     this.folders = folders; // folders to scan
-    this.inject = inject; // should be always true in the new version
+    this.clear = clear; // should be always true in the new version
     this.create = create; // boolean, true if creation of missing files is desired
   }
 
@@ -235,10 +236,13 @@ class Generator {
         let neededImports = [];
         dependencyFiles[ext].forEach(depFile => {
           if (extendsFiles[ext] && depFile === extendsFiles[ext].path) {
-            neededImports.push(rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true));
+            var importString = rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
           }
           else {
-            neededImports.push(rules[ext].addBem(depFile, fileInfo.path));
+            var importString = rules[ext].addBem(depFile, fileInfo.path);
+          }
+          if (importString) {
+            neededImports.push(importString);
           }
         });
         
@@ -266,32 +270,64 @@ class Generator {
     });
   }
 
-  // Injecti import into entity file
-  injectImports(itemFile, depFile, add = true) {
-    const itemFileContent = fs.readFileSync(itemFile, { encoding: 'utf-8' });
+  // Inject import into special block of entity file. If particular import occurs
+  // elsewhere outside special block it won't be duplicated.
+  injectImports(itemFile, neededImports) {
     const ext = path.extname(itemFile);
-    const importString = rules[ext].addBem(depFile, itemFile);
-    if (add && !itemFileContent.includes(importString.trim())) {
-      // Special case for pug extends. Include can't be injected elsewhere except block
-      // (or mixin)
-      if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
-        const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
-        const splittedContent = itemFileContent.split(firstBlock[0]);
-        splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
-        var newContent = splittedContent.join('');
+    const itemFileContent = fs.readFileSync(itemFile, { encoding: 'utf-8' });
+    const blockContent = itemFileContent.match(rules[ext].blockRe);
+    const mainContent = itemFileContent.replace(rules[ext].blockRe, '');
+    if (!neededImports.length) {
+      // There is no need to import
+      if (mainContent.match(/\S/)) {
+        // File has some content beside import block
+        fs.writeFileSync(itemFile, mainContent);
       }
-      else {
-        var newContent = importString + itemFileContent;
-      }
-      fs.writeFileSync(itemFile, newContent);
-    }
-    else if (!add && itemFileContent.includes(importString.trim())) {
-      const newContent = itemFileContent.replace(importString, '');
-      if (!newContent.match(/\S/)) {
+      else if (this.clear && blockContent) {
+        // File is empty
         fs.unlinkSync(itemFile);
         this.repeat = true;
       }
       else {
+        fs.writeFileSync(itemFile, mainContent);
+      }
+    }
+    else {
+      // Need to import some files
+      const mainImports = mainContent.match(rules[ext].importsRe);
+      const blockImports = blockContent ? blockContent[0].match(rules[ext].importsRe) : [];
+      const importsToAdd = difference(neededImports, mainImports);
+      if (!_.isEqual(importsToAdd, blockImports)) {
+        // Need to change block imports
+        if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
+          // Special case for pug with extends. Include can't be injected elsewhere
+          // except block (or mixin)
+          const firstBlock = itemFileContent.match(rules[ext].firstBlockRe);
+          const splittedContent = itemFileContent.split(firstBlock[1]);
+          const indentation = firstBlock[2];
+          const newBlock = arrayToString(
+            rules[ext].startMessage.concat(importsToAdd).concat(rules[ext].endMessage),
+            indentation,
+            eol
+          );
+          splittedContent.splice(1, 0, firstBlock[1], newBlock);
+          var newContent = splittedContent.join('');
+        }
+        else {
+          const newBlock = arrayToString(
+            rules[ext].startMessage.concat(importsToAdd).concat(rules[ext].endMessage),
+            '',
+            eol
+          );
+          if (blockContent) {
+            // Already has import block, just update
+            var newContent = itemFileContent.replace(blockContent[0], newBlock);
+          }
+          else {
+            // Doesn't have import block, prepend file content
+            var newContent = newBlock + mainContent;
+          }
+        }
         fs.writeFileSync(itemFile, newContent);
       }
     }
@@ -308,6 +344,16 @@ function constructName(folder, name) {
   else {
     return name;
   }
+}
+
+function arrayToString(array, prepend='', append='') {
+  const newArray = [];
+  array.forEach(value => {
+    if (value) {
+      newArray.push(prepend + value + append);
+    }
+  });
+  return newArray.join('');
 }
 
 module.exports = Generator;
