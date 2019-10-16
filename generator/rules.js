@@ -7,10 +7,15 @@ warningMessage - array of strings for warning message about file generation
 addBem - function generating import strings for regular BEM entities
 addExtends - function generating import strings for pug extends
 */
-const warningMessage = [
+const startMessage = [
   '',
-  `File generated automatically.${eol}`,
-  `Any changes will be discarded during next compilation.${eol}${eol}`
+  `Automatically generated imports.${eol}`,
+  `Any changes in this block will be discarded during next compilation.${eol}`
+];
+
+const endMessage = [
+  '',
+  `End of block with automatically generated imports.${eol}${eol}`
 ];
 
 const rules = {
@@ -21,13 +26,13 @@ const rules = {
       if (!importPath.match(/^\.{0,2}\//)) {
         importPath = './' + importPath;
       }
-      return `import '${importPath}';${eol}`;
+      return `import '${importPath}';`;
     }
   },
   '.scss': {
     commentStart: '// ',
     addBem: function(depFile, entityFile) {
-      return `@import '${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}';${eol}`;
+      return `@import '${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}';`;
     }
   },
   '.pug': {
@@ -37,9 +42,9 @@ const rules = {
         // Extended file is already included
         return '';
       }
-      return `include ${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}${eol}`;
+      return `include ${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}`;
     }
   }
 };
 
-module.exports = { warningMessage, rules };
+module.exports = { startMessage, endMessage, rules };

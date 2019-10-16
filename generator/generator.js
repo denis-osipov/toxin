@@ -5,7 +5,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const getBems = require('./get-bems');
 const { symmetricDifference, union, intersection, difference } = require('./utils');
-const { warningMessage, rules } = require('./rules');
+const { startMessage, endMessage, rules } = require('./rules');
 
 // Class for adding imports. Can be used by webpack plugin or in scripts.
 class Generator {
