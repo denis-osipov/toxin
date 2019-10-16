@@ -232,31 +232,17 @@ class Generator {
     Object.entries(this.files[itemName].files).forEach(itemFile => {
       const [ext, fileInfo] = itemFile;
       if (dependencyFiles[ext]) {
-        const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
-        const message = warningMessage.join(rules[ext].commentStart);
-        let imports = '';
+        let neededImports = [];
         dependencyFiles[ext].forEach(depFile => {
           if (extendsFiles[ext] && depFile === extendsFiles[ext].path) {
-            imports += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
+            neededImports.push(rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true));
           }
           else {
-            imports += rules[ext].addBem(depFile, fileInfo.path);
+            neededImports.push(rules[ext].addBem(depFile, fileInfo.path));
           }
         });
-        if (imports) {
-          fs.writeFileSync(dependencyPath, message + imports);
-          this.depsFiles.toAdd[fileInfo.path] = dependencyPath;
-          fileInfo.depFile = dependencyPath;
-          this.injectImports(fileInfo.path, dependencyPath);
-        }
-        else {
-          this.depsFiles.toRemove[fileInfo.path] = dependencyPath;
-          if (fileInfo.depFile) {
-            fs.unlinkSync(dependencyPath);
-            delete fileInfo.depFile;
-          }
-          this.injectImports(fileInfo.path, dependencyPath, false);
-        }
+        
+        this.injectImports(fileInfo.path, neededImports);
       }
     });
   }
