@@ -1,4 +1,10 @@
 .list__header {
-  margin-bottom: 17px;
-  margin-top: 5px;
+  margin-bottom: 13px;
+
+  .list_type_checkbox &,
+  .list_type_radio &,
+  .list_type_toggle &,
+  .list_type_rich & {
+    margin-bottom: 17px;
+  }
 }

@@ -1,5 +1,20 @@
 .list__list {
   list-style: none;
-  margin-top: 12px;
+  margin-top: 10px;
   padding-left: 0;
+
+  .list_type_radio & {
+    color: $dark-50;
+    column-gap: 20px;
+    display: grid;
+    grid-template-columns: min-content auto;
+  }
+
+  .list_type_checkbox & {
+    color: $dark-50;
+  }
+
+  .list_type_icon & {
+    margin-top: 2px;
+  }
 }
