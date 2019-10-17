@@ -77,7 +77,8 @@ module.exports = {
       folders: [
         path.resolve(__dirname, 'src/blocks'),
         path.resolve(__dirname, 'src/pages')
-      ]
+      ],
+      clear: true
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -97,11 +98,11 @@ const pathToEntries = path.join(module.exports.context, 'pages');
 const types = ['.js', '.scss'];
 
 [
-  // 'colorsAndType',
-  // 'formElements',
-  // 'cards',
-  // 'headersAndFooters',
-  // 'landingPage',
+  'colorsAndType',
+  'formElements',
+  'cards',
+  'headersAndFooters',
+  'landingPage',
   'searchRoom'
 ].forEach(entryName => {
   const entryFiles = [];

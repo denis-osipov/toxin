@@ -1,5 +1,9 @@
-@import 'dependencies.scss';
-
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../../logo/logo.scss';
+@import '../__logo/footer__logo.scss';
+@import '../__text/footer__text.scss';
+// End of block with automatically generated imports.
 .footer__about {
   width: percentage(260px / $parent-width);
 

@@ -1,5 +1,13 @@
-@import 'dependencies.scss';
-
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '__extra/filter__extra.scss';
+@import '__guests/filter__guests.scss';
+@import '../date-picker/date-picker.scss';
+@import '../dropdown/dropdown.scss';
+@import '../slider/slider.scss';
+@import '../list/list.scss';
+@import '../exp-list/exp-list.scss';
+// End of block with automatically generated imports.
 .filter {
   align-content: start;
   display: grid;

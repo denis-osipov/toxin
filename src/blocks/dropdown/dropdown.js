@@ -1,3 +1,10 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+import './_type_conveniences/dropdown_type_conveniences.js';
+import './_type_guests/dropdown_type_guests.js';
+import './__total/dropdown__total.js';
+import '../control/control.js';
+// End of block with automatically generated imports.
 // Dropdown with counting
 // Should be setted on inputs: $(selector).dropdown(settings)
 //
@@ -14,7 +21,6 @@
 //   control                       // string containing jQuery selector for control element
 // };
 
-import './dependencies.js';
 const connect = require('blocksPath/connect/connect');
 
 (function( $ ) {

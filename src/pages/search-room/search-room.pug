@@ -1,8 +1,11 @@
 extends ../toxin/toxin
 
 block title
-  include dependencies.pug
-
+  //- Automatically generated imports.
+  //- Any changes in this block will be discarded during next compilation.
+  include ../../blocks/filter/filter.pug
+  include ../../blocks/results/results.pug
+  //- End of block with automatically generated imports.
   ='Search room'
 
 block content

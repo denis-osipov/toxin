@@ -1,4 +1,10 @@
-@import 'dependencies.scss';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '_type_checkbox/checkbox__box_type_checkbox.scss';
+@import '_type_radio/checkbox__box_type_radio.scss';
+@import '_type_rich/checkbox__box_type_rich.scss';
+@import '_type_toggle/checkbox__box_type_toggle.scss';
+// End of block with automatically generated imports.
 .checkbox__box {
   background: $light;
   border: 1px solid $dark-25;

@@ -1,4 +1,11 @@
-@import 'dependencies.scss';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '__box/checkbox__box.scss';
+@import '__description/checkbox__description.scss';
+@import '__label/checkbox__label.scss';
+@import '__text/checkbox__text.scss';
+@import '../input/input.scss';
+// End of block with automatically generated imports.
 .checkbox {
   column-gap: 10px / $ref-rem;
   display: grid;
