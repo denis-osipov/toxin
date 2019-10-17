@@ -150,7 +150,7 @@ class Generator {
       const deps = {};
       if (this.prevDeps[itemName].content) {
         var prevExistingDeps = this.prevDeps[itemName].content.filter(bem => {
-          bem in this.prevFiles
+          return bem in this.prevFiles
         });
       }
       else {
