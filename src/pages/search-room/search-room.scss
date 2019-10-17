@@ -20,5 +20,19 @@
 
   &__filter {
     padding-top: 28px;
+
+    .list_type_checkbox .list__list {
+      padding-right: 20px;
+    }
+
+    .list_type_rich .list__item {
+      &:first-child {
+        padding-right: 30px;
+      }
+
+      &:last-child {
+        padding-right: 5px;
+      }
+    }
   }
 }
