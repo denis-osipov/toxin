@@ -1,9 +1,17 @@
 // Automatically generated imports.
 // Any changes in this block will be discarded during next compilation.
 @import '../toxin/toxin.scss';
+@import '../../blocks/photo/photo.scss';
 @import '../../blocks/list/list.scss';
 @import '../../blocks/pie-chart/pie-chart.scss';
 @import '../../blocks/comments/comments.scss';
 @import '../../blocks/text-block/text-block.scss';
 @import '../../blocks/card/card.scss';
 // End of block with automatically generated imports.
+
+.toxin {
+  &__body {
+    margin: 0;
+    width: 1440px;
+  }
+}
