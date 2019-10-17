@@ -3,4 +3,5 @@
 import '../toxin/toxin.js';
 import '../../blocks/list/list.js';
 import '../../blocks/comments/comments.js';
+import '../../blocks/card/card.js';
 // End of block with automatically generated imports.

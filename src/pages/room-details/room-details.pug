@@ -7,6 +7,8 @@ block content
   include ../../blocks/list/list.pug
   include ../../blocks/pie-chart/pie-chart.pug
   include ../../blocks/comments/comments.pug
+  include ../../blocks/text-block/text-block.pug
+  include ../../blocks/card/card.pug
   //- End of block with automatically generated imports.
   +photo(888)
   +list('Сведения о номере', [
@@ -33,4 +35,11 @@ block content
       message: 'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент',
       like: [false, 2]
     }
-  ], 'Впечатления от номера')
+  ], 'Отзывы посетителей номера')
+  +list('Правила', [
+        'Нельзя с питомцами',
+        'Без вечеринок и мероприятий',
+        'Время прибытия — после 13:00, а выезд до 12:00'
+    ])
+  +text-block('Отмена', 'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.')
+  +card('reservation', 888)
