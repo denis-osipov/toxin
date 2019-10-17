@@ -16,4 +16,4 @@ mixin comment(options)
       .comment__date= options.date
     - const [liked, number] = options.like;
     +like(liked, number)(class='comment__like')
-    p.comment__text= message
+    p.comment__text= options.message
