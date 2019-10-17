@@ -15,4 +15,11 @@
   position: absolute;
   right: 0;
   top: calc(50% - #{24px / $ref-rem / 2});
+  visibility: hidden;
+
+  .room-plate:hover &,
+  .room-plate:focus &,
+  .room-plate_active & {
+    visibility: visible;
+  }
 }

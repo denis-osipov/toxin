@@ -15,6 +15,4 @@ $( document ).ready(function(jQery) {
   calendar.date = new Date(2019, 7, 8);
   calendar.selectDate([new Date(2019, 7, 19), new Date(2019, 7, 23)]);
   calendar.$el.find('[data-date="8"]').addClass('-current-');
-
-  $( '.room-plate__arrows' ).eq(1).hide();
 });
