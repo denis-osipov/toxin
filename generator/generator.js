@@ -279,17 +279,14 @@ class Generator {
     const mainContent = itemFileContent.replace(rules[ext].blockRe, '');
     if (!neededImports.length) {
       // There is no need to import
-      if (mainContent.match(/\S/)) {
-        // File has some content beside import block
+      if (mainContent.match(/\S/) || !(this.clear && blockContent)) {
+        // File has some content beside import block or generator is setted to
+        // not clear files or file wasn't created by generator (no block content).
         fs.writeFileSync(itemFile, mainContent);
-      }
-      else if (this.clear && blockContent) {
-        // File is empty
-        fs.unlinkSync(itemFile);
-        this.repeat = true;
       }
       else {
-        fs.writeFileSync(itemFile, mainContent);
+        fs.unlinkSync(itemFile);
+        this.repeat = true;
       }
     }
     else {
@@ -300,18 +297,9 @@ class Generator {
       if (!_.isEqual(importsToAdd, blockImports)) {
         // Need to change block imports
         if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
-          // Special case for pug with extends. Include can't be injected elsewhere
-          // except block (or mixin)
-          const firstBlock = itemFileContent.match(rules[ext].firstBlockRe);
-          const splittedContent = itemFileContent.split(firstBlock[1]);
-          const indentation = firstBlock[2];
-          const newBlock = arrayToString(
-            rules[ext].startMessage.concat(importsToAdd).concat(rules[ext].endMessage),
-            indentation,
-            eol
-          );
-          splittedContent.splice(1, 0, firstBlock[1], newBlock);
-          var newContent = splittedContent.join('');
+          // Special case for pug with extends.
+          const newBlock = rules[ext].startMessage.concat(importsToAdd).concat(rules[ext].endMessage);
+          var newContent = injectWithExtends(itemFileContent, newBlock);
         }
         else {
           const newBlock = arrayToString(
@@ -354,6 +342,20 @@ function arrayToString(array, prepend='', append='') {
     }
   });
   return newArray.join('');
+}
+
+// Function to handle special case for pug with extends: includes can't be
+// injected elsewhere except block (or mixin)
+//   fileContent - string with file content
+//   toInject - array of strings to form injected block
+function injectWithExtends(fileContent, toInject) {
+  const blockRegExp = new RegExp(`(^block .+(?:${eol})*)([ \\t]+)`, 'm');
+  const firstBlock = fileContent.match(blockRegExp);
+  const splittedContent = fileContent.split(firstBlock[1]);
+  const indentation = firstBlock[2];
+  const newBlock = arrayToString(toInject, indentation, eol);
+  splittedContent.splice(1, 0, firstBlock[1], newBlock);
+  return splittedContent.join('');
 }
 
 module.exports = Generator;

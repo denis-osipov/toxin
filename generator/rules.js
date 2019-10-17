@@ -42,8 +42,7 @@ const rules = {
       }
       return `include ${path.relative(path.dirname(entityFile), depFile).replace(/\\/g, '/')}`;
     },
-    importsRe: /include .+/g,
-    firstBlockRe: new RegExp(`(^block .+(?:${eol})*)([ \\t]+)`, 'm')
+    importsRe: /include .+/g
   }
 };
 
