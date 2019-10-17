@@ -5,6 +5,10 @@
 @import '../../blocks/results/results.scss';
 // End of block with automatically generated imports.
 .toxin {
+  &__body {
+    width: 1440px;
+    margin: 0;
+  }
   &__main {
     @include calc-air($min-width: 700px);
     border-bottom: 2px solid $dark-25;
@@ -20,6 +24,10 @@
 
   &__filter {
     padding-top: 28px / $ref-rem;
+
+    .list {
+      padding-top: 5px;
+    }
 
     .list_type_checkbox .list__list {
       padding-right: 20px / $ref-rem;
