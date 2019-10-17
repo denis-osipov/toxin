@@ -30,9 +30,6 @@ class Generator {
     if (!(this.prevFiles && _.isEqual(this.files, this.prevFiles))) {
       this.addDependencies();
     }
-    else {
-      this.depsFiles = null;
-    }
 
     // Regenerate if new files were added (if this.create is true)
     if (this.repeat) {
@@ -91,7 +88,6 @@ class Generator {
   // Add dependencies to this.deps for file and call createDependencies
   addDependencies() {
     this.deps = {};
-    this.depsFiles = { toAdd: {}, toRemove: {} };
     Object.entries(this.files).forEach(item => {
       const [itemName, itemInfo] = item;
       this.deps[itemName] = {};
