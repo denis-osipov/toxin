@@ -1,3 +1,9 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include _type_checkbox/list__item_type_checkbox.pug
+include _type_icon/list__item_type_icon.pug
+include _type_list/list__item_type_list.pug
+//- End of block with automatically generated imports.
 mixin list__item(item, type)
   li.list__item(class=`list__item_type_${type}`)&attributes(attributes)
     case type

@@ -1,3 +1,18 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '_size_big/button_size_big.scss';
+@import '_size_min/button_size_min.scss';
+@import '_size_normal/button_size_normal.scss';
+@import '_size_slim/button_size_slim.scss';
+@import '_type_border/button_type_border.scss';
+@import '_type_fill/button_type_fill.scss';
+@import '_type_text/button_type_text.scss';
+@import '__icon/button__icon.scss';
+@import '__text/button__text.scss';
+@import '../text/text.scss';
+@import '../text/_level_h3/text_level_h3.scss';
+@import '../icon/icon.scss';
+// End of block with automatically generated imports.
 .button {
   border-radius: 22px / $ref-rem;
   outline: none;

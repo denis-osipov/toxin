@@ -1,3 +1,10 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../__about/footer__about.scss';
+@import '../../menu/menu.scss';
+@import '../__menu/footer__menu.scss';
+@import '../__subscription/footer__subscription.scss';
+// End of block with automatically generated imports.
 .footer__main {
   @include calc-air; // side paddings
   box-shadow: 0px 1px 0px $dark-10;

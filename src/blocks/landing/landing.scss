@@ -1,3 +1,9 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '__card/landing__card.scss';
+@import '__message/landing__message.scss';
+@import '../card/card.scss';
+// End of block with automatically generated imports.
 .landing {
   @include calc-air($ref-air: 114px, $min-air: 0, $sides: 'right');
   @include calc-air($ref-air: 140px, $min-air: 0, $sides: 'left');

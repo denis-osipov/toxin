@@ -1,3 +1,7 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+import '../control/control.js';
+// End of block with automatically generated imports.
 import 'air-datepicker';
 const connect = require('blocksPath/connect/connect');
 
