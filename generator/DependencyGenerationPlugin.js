@@ -39,11 +39,8 @@ class DependencyGenerationPlugin {
       (fileName, changeTime) => {
         const start = new Date();
 
-        // Don't respond to changes of generated files (use watchOptions instead?)
         // To simplify adding new files we need regenerate dependencies for each invalidation.
-        if (!fileName.includes('dependencies')) {
-          this.generator.generate();
-        }
+        this.generator.generate();
         const finish = new Date();
         console.log(`Plugin worked ${(finish - start) / 1000} s.`);
       }
