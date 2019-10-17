@@ -1,5 +1,3 @@
-@import 'dependencies.scss';
-
 .landing {
   @include calc-air($ref-air: 114px, $min-air: 0, $sides: 'right');
   @include calc-air($ref-air: 140px, $min-air: 0, $sides: 'left');

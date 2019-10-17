@@ -1,5 +1,3 @@
-@import 'dependencies.scss';
-
 .footer__bottom-bar {
   @include calc-air($ref-air: 138px, $sides: 'right');
   @include calc-air($sides: 'left');

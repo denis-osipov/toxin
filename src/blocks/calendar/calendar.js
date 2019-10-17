@@ -1,4 +1,3 @@
-import './dependencies.js';
 import 'air-datepicker';
 const connect = require('blocksPath/connect/connect');
 

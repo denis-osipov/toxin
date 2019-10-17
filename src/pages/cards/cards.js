@@ -1,4 +1,3 @@
-import './dependencies.js';
 $( document ).ready(function(jQery) {
 
   const reservationDates = $( '.card_reservation' ).find('.calendar__picker').data('datepicker');

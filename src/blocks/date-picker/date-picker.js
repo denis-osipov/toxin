@@ -1,5 +1,3 @@
-import './dependencies.js';
-
 (function( $ ) {
   $.fn.toxinDatePicker = function() {
     return this.each(function() {

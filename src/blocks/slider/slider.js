@@ -1,4 +1,3 @@
-import './dependencies.js';
 import 'ion-rangeslider';
 
 function setSlider( jQuery ) {

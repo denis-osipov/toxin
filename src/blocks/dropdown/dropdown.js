@@ -14,7 +14,6 @@
 //   control                       // string containing jQuery selector for control element
 // };
 
-import './dependencies.js';
 const connect = require('blocksPath/connect/connect');
 
 (function( $ ) {

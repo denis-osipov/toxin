@@ -1,4 +1,3 @@
-import './dependencies.js';
 $( document ).ready(function(jQery) {
   $( '.date-picker' ).eq(0).find('.input').eq(1).val('19.08.2019');
 

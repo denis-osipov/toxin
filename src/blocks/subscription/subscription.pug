@@ -1,4 +1,3 @@
-include dependencies.pug
 mixin subscription(placeholder='Email')
   - attributes.class = attributes.class ? attributes.class + ' subscription' : 'subscription';
   +icon-field('arrow_forward', 'primary-gradient', false, {type: 'email', placeholder: placeholder})&attributes(attributes)

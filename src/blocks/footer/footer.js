@@ -1,5 +1,3 @@
-import './dependencies.js';
-
 $( document ).ready(function(jQery) {
 
   const footers = $( '.footer' );
