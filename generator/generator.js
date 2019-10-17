@@ -299,7 +299,7 @@ class Generator {
         if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
           // Special case for pug with extends.
           const newBlock = rules[ext].startMessage.concat(importsToAdd).concat(rules[ext].endMessage);
-          var newContent = injectWithExtends(itemFileContent, newBlock);
+          var newContent = injectWithExtends(mainContent, newBlock);
         }
         else {
           const newBlock = arrayToString(
