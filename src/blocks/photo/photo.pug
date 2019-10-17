@@ -1,7 +1,7 @@
 mixin photo(room)
-  - const images = require('blocksPath/rooms-images/rooms-images');
+  - const images = require('blocksPath/rooms-images/rooms-images')[room];
   .photo
-    each image in images[room].large
+    each image in images.large
       img(src=image)
-    each image in images[room].normal
+    each image in images.normal
       img(src=image)
