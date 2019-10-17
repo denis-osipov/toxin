@@ -19,6 +19,7 @@ import '../control/control.js';
 //   wording: $.fn.dropdown.format // if setted must be function (for total: true) or array of functions (for total: false)
 //                                 // function get integer and must return formatted string,
 //   control                       // string containing jQuery selector for control element
+//   maxGroups                      // should be integer to denote maximum number of showed groups
 // };
 
 const connect = require('blocksPath/connect/connect');
@@ -128,7 +129,11 @@ const connect = require('blocksPath/connect/connect');
       });
       const generalSum = values.reduce((prev, current) => prev + current);
       totals.splice(0, 0, this.settings.wording(generalSum));
-      this.input.val(totals.join(this.settings.sep));
+      let value = totals.slice(0, this.settings.maxGroups).join(this.settings.sep);
+      if (this.settings.maxGroups < totals.length) {
+        value += '...';
+      }
+      this.input.val(value);
     }
     // All values are separate
     else {
@@ -136,7 +141,11 @@ const connect = require('blocksPath/connect/connect');
       this.settings.wording.forEach((fun, index) => {
         totals.push(fun(this.values[index]));
       });
-      this.input.val(totals.join(this.settings.sep));
+      let value = totals.slice(0, this.settings.maxGroups).join(this.settings.sep);
+      if (this.settings.maxGroups < totals.length) {
+        value += '...';
+      }
+      this.input.val(value);
     }
   };
 
