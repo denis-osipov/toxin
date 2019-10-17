@@ -103,7 +103,8 @@ const types = ['.js', '.scss'];
   'cards',
   'headersAndFooters',
   'landingPage',
-  'searchRoom'
+  'searchRoom',
+  'roomDetails'
 ].forEach(entryName => {
   const entryFiles = [];
   const dashedName = toDashString(entryName);
