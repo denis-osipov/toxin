@@ -1,0 +1,7 @@
+mixin photo(room)
+  - const images = require('blocksPath/rooms-images/rooms-images');
+  .photo
+    each image in images[room].large
+      img(src=image)
+    each image in images[room].normal
+      img(src=image)
