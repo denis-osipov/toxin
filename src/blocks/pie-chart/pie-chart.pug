@@ -1,4 +1,5 @@
-mixin pie-chart(items)
+mixin pie-chart(items, name='')
   .pie-chart
+    h2.text_level_h2= name
     each item in items
       p= `${item.name}: ${item.amount}`

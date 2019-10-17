@@ -2,7 +2,8 @@
 //- Any changes in this block will be discarded during next compilation.
 include ../comment/comment.pug
 //- End of block with automatically generated imports.
-mixin comments(items)
+mixin comments(items, name)
   section.comments
+    h2.text_level_h2= name
     each item in items
       +comment(item)
