@@ -12,4 +12,8 @@
   align-content: start;
   display: grid;
   row-gap: 10px;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 }
