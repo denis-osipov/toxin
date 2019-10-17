@@ -6,7 +6,7 @@ const Generator = require('./generator');
 class DependencyGenerationPlugin {
   constructor(options) {
     this.options = Object.assign({
-      inject: true,
+      clear: false,
       create: true
     }, options);
   }
@@ -24,7 +24,7 @@ class DependencyGenerationPlugin {
 
         this.generator = new Generator(
           this.options.folders,
-          this.options.inject,
+          this.options.clear,
           this.options.create);
         this.generator.generate();
       }
@@ -34,12 +34,8 @@ class DependencyGenerationPlugin {
     compiler.hooks.invalid.tap(
       'DependencyGenerationPlugin',
       (fileName, changeTime) => {
-
-        // Don't respond to changes of generated files (use watchOptions instead?)
         // To simplify adding new files we need regenerate dependencies for each invalidation.
-        if (!fileName.includes('dependencies')) {
-          this.generator.generate();
-        }
+        this.generator.generate();
       }
     );
   }

@@ -1,0 +1,33 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../date-picker/date-picker.pug
+include ../dropdown/dropdown.pug
+include ../slider/slider.pug
+include ../list/list.pug
+include ../exp-list/exp-list.pug
+//- End of block with automatically generated imports.
+mixin filter
+  form.filter&attributes(attributes)
+    +date-picker('single', 'Даты пребывания в отеле')
+    +dropdown('Гости', 'guests')(class='filter__guests')
+    +slider('Диапазон цены', 'Стоимость за сутки пребывания в номере')
+    +list('Checkbox Buttons', [
+      ['smoke', 'Можно курить'],
+      {name: 'pets', label: 'Можно с питомцами', checked: ''},
+      {name: 'guests', label: 'Можно пригласить гостей (до 10 человек)', checked: ''}
+    ], 'checkbox')
+    +list('Доступность', [
+      ['wide', 'Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
+      ['assistant', 'Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
+    ], 'rich')
+    +dropdown('Удобства номера', 'conveniences', [], false)
+    +exp-list('Дополнительные удобства', [
+        {name: 'breakfast', label: 'Завтрак'},
+        {name: 'table', label: 'Письменный стол', checked: ''},
+        {name: 'feeding-chair', label: 'Стул для кормления', checked: ''},
+        {name: 'crib', label: 'Кроватка', checked: ''},
+        {name: 'tv-1', label: 'Телевизор'},
+        {name: 'shampoo-1', label: 'Шампунь'},
+        {name: 'tv-2', label: 'Телевизор'},
+        {name: 'shampoo-2', label: 'Шампунь'}
+      ])(class='filter__extra')

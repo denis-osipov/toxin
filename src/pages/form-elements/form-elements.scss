@@ -1,5 +1,20 @@
-@import 'dependencies.scss';
-
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../ui-kit/ui-kit.scss';
+@import '../../blocks/sample-form/sample-form.scss';
+@import '../../blocks/input/input.scss';
+@import '../../blocks/dropdown/dropdown.scss';
+@import '../../blocks/date-picker/date-picker.scss';
+@import '../../blocks/subscription/subscription.scss';
+@import '../../blocks/list/list.scss';
+@import '../../blocks/like/like.scss';
+@import '../../blocks/rating/rating.scss';
+@import '../../blocks/slider/slider.scss';
+@import '../../blocks/button/button.scss';
+@import '../../blocks/pagination/pagination.scss';
+@import '../../blocks/exp-list/exp-list.scss';
+@import '../../blocks/comment/comment.scss';
+// End of block with automatically generated imports.
 .ui-kit {
   $column-gap: 20px;
   $ref-air: 141px;
@@ -7,6 +22,8 @@
 
   &__body {
     background-color: #fff;
+    width: 1440px;
+    margin: 0;
   }
 
   &__main {
@@ -104,7 +121,7 @@
 
     &-3 {
       form:nth-child(1) {
-        margin-bottom: 14px;
+        margin-bottom: 21px;
         padding-right: percentage(63px / $ref-col-width);
       }
 
@@ -131,6 +148,7 @@
 
       .sample-form:nth-child(3) {
         padding-left: 1px;
+        padding-right: 80px;
       }
     }
 
@@ -138,6 +156,11 @@
       margin-left: -1px;
       padding-right: percentage(108px / $ref-col-width);
       margin-bottom: 132px;
+    }
+
+    &-5,
+    &-6 {
+      padding-top: 7px;
     }
 
     &-7 {
@@ -167,19 +190,11 @@
 
     &-9 {
       padding-right: percentage(63px / $ref-col-width);
-
-      .list_type_list {
-        padding-top: 8px;
-      }
+      padding-top: 12px;
     }
 
     &-10 {
       margin-left: -1px;
-
-      .list_type_icon {
-        margin: 0;
-        padding-top: 2px;
-      }
     }
 
     &-11 {

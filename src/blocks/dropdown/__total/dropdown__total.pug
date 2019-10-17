@@ -1,4 +1,7 @@
-include dependencies.pug
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../../icon-field/icon-field.pug
+//- End of block with automatically generated imports.
 mixin dropdown__total
   - attributes.class = attributes.class ? attributes.class + ' dropdown__total' : 'dropdown__total';
   +icon-field('expand_more', 'dark-50', false, {readonly: true})&attributes(attributes)

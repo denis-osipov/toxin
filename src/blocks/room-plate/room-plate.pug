@@ -1,5 +1,13 @@
-include dependencies.pug
-mixin room-plate(room)
-  article.room-plate&attributes(attributes)
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include __arrows/room-plate__arrows.pug
+include __comments/room-plate__comments.pug
+include __gallery/room-plate__gallery.pug
+include __info/room-plate__info.pug
+include __rating/room-plate__rating.pug
+include __switcher/room-plate__switcher.pug
+//- End of block with automatically generated imports.
+mixin room-plate(room, active=false)
+  article.room-plate(class=active ? 'room-plate_active' : '')&attributes(attributes)
     +room-plate__gallery(room)
     +room-plate__info(room)

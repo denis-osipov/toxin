@@ -1,5 +1,8 @@
-include dependencies.pug
-mixin list(items, type='list')
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include __item/list__item.pug
+//- End of block with automatically generated imports.
+mixin list(name, items, type='list')
   //- type - one of 'list', 'checkbox', 'radio', 'toggle', 'icon'
   //- items - an array consisting of strings, arrays or objects.
   //-
@@ -14,6 +17,9 @@ mixin list(items, type='list')
   //- If type is 'icon' items should be an array of two or three elements.
   //- The first one will be an icon name, the secon one - an item name,
   //- the third one (optional) - an item description.
-  ul.list(class=`list_type_${type}`)&attributes(attributes)
-    each item in items
-      +list__item(item, type)
+  .list(class=`list_type_${type}`)&attributes(attributes)
+    if name
+      h3.list__header.text_level_h3= name
+    ul.list__list
+      each item in items
+        +list__item(item, type)

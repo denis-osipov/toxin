@@ -1,0 +1,13 @@
+.results__rooms {
+  @include calc-air(
+    $ref-air: 32px,
+    $min-air: 0,
+    $ref-width: $parent-width - 266px - 60px,
+    $sides: 'bottom'
+  );
+  column-gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 270px);
+  justify-content: space-around;
+  row-gap: 24px / $ref-rem;
+}

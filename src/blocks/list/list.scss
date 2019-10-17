@@ -1,5 +1,9 @@
-@import 'dependencies.scss';
-.list {
-  list-style: none;
-  padding-left: 0;
-}
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '__header/list__header.scss';
+@import '__item/list__item.scss';
+@import '__item-icon/list__item-icon.scss';
+@import '__item-label/list__item-label.scss';
+@import '__list/list__list.scss';
+@import '../text/_level_h3/text_level_h3.scss';
+// End of block with automatically generated imports.

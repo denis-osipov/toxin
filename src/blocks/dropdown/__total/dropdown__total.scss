@@ -1,7 +1,8 @@
-@import 'dependencies.scss';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../../icon-field/icon-field.scss';
+// End of block with automatically generated imports.
 .dropdown__total {
-  column-gap: calc(100% - 220px);
-
   .dropdown_expanded & {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;

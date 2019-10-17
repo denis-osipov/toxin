@@ -1,6 +1,9 @@
-import './dependencies.js';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+import '../control/control.js';
+// End of block with automatically generated imports.
 import 'air-datepicker';
-const connect = require('blocksPath/connect/connect').connect;
+const connect = require('blocksPath/connect/connect');
 
 (function( $ ) {
   $.fn.calendar = function() {
@@ -14,7 +17,6 @@ const connect = require('blocksPath/connect/connect').connect;
           range: true,
           moveToOtherMonthsOnSelect: false,
           moveToOtherYearsOnSelect: false,
-          showEvent: null,
           prevHtml: '<i class="icon icon_type_material calendar__nav-icon">arrow_back</i>',
           nextHtml: '<i class="icon icon_type_material calendar__nav-icon">arrow_forward</i>',
           navTitles: {

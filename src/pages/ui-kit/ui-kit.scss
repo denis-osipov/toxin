@@ -1,6 +1,10 @@
 @import 'variables';
-@import 'dependencies.scss';
 @import 'fonts/fonts';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../../blocks/body/body.scss';
+@import '../../blocks/text/text.scss';
+// End of block with automatically generated imports.
 .ui-kit {
 
   @media (max-width: 851px) {

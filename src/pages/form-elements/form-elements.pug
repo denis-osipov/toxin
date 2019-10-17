@@ -1,8 +1,22 @@
 extends ../ui-kit/ui-kit.pug
 
 block title
-  include dependencies.pug
-
+  //- Automatically generated imports.
+  //- Any changes in this block will be discarded during next compilation.
+  include ../../blocks/sample-form/sample-form.pug
+  include ../../blocks/input/input.pug
+  include ../../blocks/dropdown/dropdown.pug
+  include ../../blocks/date-picker/date-picker.pug
+  include ../../blocks/subscription/subscription.pug
+  include ../../blocks/list/list.pug
+  include ../../blocks/like/like.pug
+  include ../../blocks/rating/rating.pug
+  include ../../blocks/slider/slider.pug
+  include ../../blocks/button/button.pug
+  include ../../blocks/pagination/pagination.pug
+  include ../../blocks/exp-list/exp-list.pug
+  include ../../blocks/comment/comment.pug
+  //- End of block with automatically generated imports.
   ='Form Elements'
 
 block content
@@ -12,7 +26,7 @@ block content
     +sample-form('Text field', 'Hover / Focus')
       +input()(class='input_active', value='This is pretty awesome')
     +sample-form('Dropdown', 'Default')
-      +dropdown('guests')
+      +dropdown('', 'guests')
     +sample-form('Masked text field', 'Default')
       +input('date')
     +sample-form
@@ -22,19 +36,19 @@ block content
     +sample-form('Subscription text field')
       +subscription
   .ui-kit__grid-item-2
-    +sample-form('Checkbox buttons')
-      +list([
+    +sample-form
+      +list('Checkbox buttons', [
         ['smoke', 'Можно курить'],
         {name: 'pets', label: 'Можно с питомцами', checked: ''},
         {name: 'guests', label: 'Можно пригласить гостей (до 10 человек)', checked: ''}
       ], 'checkbox')
-    +sample-form('Radio buttons')
-      +list([
+    +sample-form
+      +list('Radio buttons', [
         {name: 'sex', label: 'Мужчина', checked: ''},
         ['sex', 'Женщина']
       ], 'radio')
-    +sample-form('Toggle')
-      +list([
+    +sample-form
+      +list('Toggle', [
         {name: 'offer', label: 'Получать спецпредложения', checked: ''},
         ['offer', 'Получать спецпредложения']
       ], 'toggle')
@@ -72,15 +86,15 @@ block content
       +pagination(pages, '1 – 12 из 100+ вариантов аренды')
   .ui-kit__grid-item-4
     +sample-form('Dropdown', 'Default')
-      +dropdown('conveniences', [], false)
+      +dropdown('', 'conveniences', [], false)
     +sample-form('Dropdown', 'Expanded')
-      +dropdown('conveniences', [], false)
+      +dropdown('', 'conveniences', [], false)
   .ui-kit__grid-item-5
-    +sample-form('Dropdown')
-      +dropdown('guests')
+    +sample-form
+      +dropdown('Dropdown', 'guests')
   .ui-kit__grid-item-6
-    +sample-form('Dropdown')
-      +dropdown('guests')
+    +sample-form
+      +dropdown('Dropdown', 'guests')
   .ui-kit__grid-item-7
     +sample-form
       +exp-list('Expandable checkbox list', [
@@ -105,20 +119,20 @@ block content
         {name: 'shampoo-2', label: 'Шампунь'}
       ])
   .ui-kit__grid-item-8
-    +sample-form('Rich checkbox buttons')
-      +list([
+    +sample-form
+      +list('Rich checkbox buttons', [
         ['wide', 'Широкий коридор', 'Ширина коридоров в номере не менее 91 см.'],
         ['assistant', 'Помощник для инвалидов', 'На 1 этаже вас встретит специалист и проводит до номера.']
       ], 'rich')
   .ui-kit__grid-item-9
-    +sample-form('Bullet list')
-      +list([
+    +sample-form
+      +list('Bullet list', [
         'Нельзя с питомцами',
         'Без вечеринок и мероприятий',
         'Время прибытия — после 13:00, а выезд до 12:00'
       ])
   .ui-kit__grid-item-10
-    +list([
+    +list('', [
       ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
       ['location_city', 'Удобство', 'Окно в каждой из спален']
     ], 'icon')

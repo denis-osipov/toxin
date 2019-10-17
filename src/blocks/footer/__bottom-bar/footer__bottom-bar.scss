@@ -1,5 +1,8 @@
-@import 'dependencies.scss';
-
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../__copyright/footer__copyright.scss';
+@import '../__social/footer__social.scss';
+// End of block with automatically generated imports.
 .footer__bottom-bar {
   @include calc-air($ref-air: 138px, $sides: 'right');
   @include calc-air($sides: 'left');

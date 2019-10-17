@@ -1,0 +1,46 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../toxin/toxin.scss';
+@import '../../blocks/filter/filter.scss';
+@import '../../blocks/results/results.scss';
+// End of block with automatically generated imports.
+.toxin {
+  &__body {
+    width: 1440px;
+    margin: 0;
+  }
+  &__main {
+    @include calc-air($min-width: 700px);
+    border-bottom: 2px solid $dark-25;
+    column-gap: percentage(60px / $parent-width);
+    display: grid;
+    grid-template-columns: 266px / $ref-rem 1fr;
+
+    @media (max-width: 660px) {
+      grid-template-columns: 1fr;
+      justify-content: center;
+    }
+  }
+
+  &__filter {
+    padding-top: 28px / $ref-rem;
+
+    .list {
+      padding-top: 5px;
+    }
+
+    .list_type_checkbox .list__list {
+      padding-right: 20px / $ref-rem;
+    }
+
+    .list_type_rich .list__item {
+      &:first-child {
+        padding-right: 30px / $ref-rem;
+      }
+
+      &:last-child {
+        padding-right: 5px;
+      }
+    }
+  }
+}

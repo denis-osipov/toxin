@@ -1,0 +1,23 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '__header/results__header.scss';
+@import '__pagination/results__pagination.scss';
+@import '__rooms/results__rooms.scss';
+@import '../text/_level_h1/text_level_h1.scss';
+@import '../room-plate/room-plate.scss';
+@import '../pagination/pagination.scss';
+// End of block with automatically generated imports.
+.results {
+  @include calc-air(
+    $ref-air: 71px,
+    $min-air: 0,
+    $ref-width: $parent-width - 266px - 60px,
+    $sides: 'bottom'
+  );
+  padding-top: 10px;
+
+  @media (max-width: 660px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

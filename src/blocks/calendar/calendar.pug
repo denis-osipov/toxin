@@ -1,10 +1,13 @@
-include dependencies.pug
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../control/control.pug
+//- End of block with automatically generated imports.
 mixin calendar(options)
   //- Create calendar. options should contain properties according to
   //- air-datepicker docs. Also connect: true should be set to trigger
   //- 'calendar:date' event on date selection (selected dates will be supplied).
   .calendar&attributes(attributes)
-    - const toDataAttrs = require('blocksPath/connect/connect').toDataAttrs;
+    - const toDataAttrs = require('../../../utils/convert').toDataAttrs;
     .calendar__picker&attributes(options ? toDataAttrs(options) : {})
     +control(
       [

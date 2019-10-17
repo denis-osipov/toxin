@@ -1,4 +1,7 @@
-import './dependencies.js';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+import '../input/input.js';
+// End of block with automatically generated imports.
 function setLike( jQuery ) {
   $( '.like' ).each(function(index, element) {
     $( element ).find('.like__input').on('click', function(event) {

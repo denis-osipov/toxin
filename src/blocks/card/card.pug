@@ -1,4 +1,13 @@
-include dependencies.pug
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include __calculation/card__calculation.pug
+include __calculation-item/card__calculation-item.pug
+include __calculation-total/card__calculation-total.pug
+include __login/card__login.pug
+include __registration/card__registration.pug
+include __reservation/card__reservation.pug
+include __search/card__search.pug
+//- End of block with automatically generated imports.
 mixin card(type, room)
   .card(class=`card_${type}`)&attributes(attributes)
     case type

@@ -1,6 +1,6 @@
 .logo {
   align-items: center;
-  column-gap: 12px / $ref-rem;
+  column-gap: 12px;
   display: grid;
   grid-template-columns: #{40px / $ref-rem} #{54px / $ref-rem};
 }

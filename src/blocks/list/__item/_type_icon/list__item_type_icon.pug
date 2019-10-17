@@ -1,4 +1,7 @@
-include dependencies.pug
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../../../icon/icon.pug
+//- End of block with automatically generated imports.
 mixin list__item_type_icon(item)
   - const [iconName, itemName, description] = item
   +icon(iconName, 'primary-gradient')(class='list__item-icon')

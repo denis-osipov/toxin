@@ -11,7 +11,8 @@
     "dev": "webpack",
     "dev-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
     "server-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "rm-deps": "find src -name dependencies.\\* -type f -delete"
+    "rm-deps": "find src -name dependencies.\\* -type f -delete",
+    "rm-empty": "find src -empty -type f -delete"
   },
   "repository": {
     "type": "git",

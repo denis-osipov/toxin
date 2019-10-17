@@ -5,16 +5,18 @@ const fs = require('fs');
 const _ = require('lodash');
 const getBems = require('./get-bems');
 const { symmetricDifference, union, intersection, difference } = require('./utils');
-const { warningMessage, rules } = require('./rules');
+const rules = require('./rules');
+const eol = require('os').EOL;
 
+// Class for adding imports. Can be used by webpack plugin or in scripts.
 class Generator {
-  constructor(folders, inject, create) {
-    this.folders = folders;
-    this.inject = inject;
-    this.create = create;
+  constructor(folders, clear, create) {
+    this.folders = folders; // folders to scan
+    this.clear = clear; // should be always true in the new version
+    this.create = create; // boolean, true if creation of missing files is desired
   }
 
-  // Generate dependency files
+  // Main method to generate imports
   generate() {
     this.repeat = false;
     this.prevFiles = this.files;
@@ -27,15 +29,15 @@ class Generator {
     if (!(this.prevFiles && _.isEqual(this.files, this.prevFiles))) {
       this.addDependencies();
     }
-    else {
-      this.depsFiles = null;
-    }
 
+    // Regenerate if new files were added (if this.create is true)
     if (this.repeat) {
       this.generate();
     }
   }
 
+  // Scan folder and get files list, including internal dependencies
+  // (elements and modifiers in block folder)
   scanFolder(root, parent) {
     const entities = fs.readdirSync(root, {
       encoding: 'utf-8',
@@ -80,9 +82,9 @@ class Generator {
     });
   }
 
+  // Add dependencies to this.deps for file and call createDependencies
   addDependencies() {
     this.deps = {};
-    this.depsFiles = { toAdd: {}, toRemove: {} };
     Object.entries(this.files).forEach(item => {
       const [itemName, itemInfo] = item;
       this.deps[itemName] = {};
@@ -121,6 +123,7 @@ class Generator {
     });
   }
 
+  // Get parents to exclude from dependencies list while getting it from pug file
   getParents(itemName) {
     if (this.files[itemName].parent) {
       return [itemName].concat(this.getParents(this.files[itemName].parent));
@@ -130,6 +133,7 @@ class Generator {
     }
   }
 
+  // Get file's dependencies for which update is needed and call writeDependencyFiles
   createDependencies(itemName) {
     const existingDeps = this.deps[itemName].content ?
       this.deps[itemName].content.filter(bem => bem in this.files) :
@@ -139,7 +143,7 @@ class Generator {
       const deps = {};
       if (this.prevDeps[itemName].content) {
         var prevExistingDeps = this.prevDeps[itemName].content.filter(bem => {
-          bem in this.prevFiles
+          return bem in this.prevFiles
         });
       }
       else {
@@ -174,6 +178,7 @@ class Generator {
     this.writeDependencyFiles(itemName, dependencyFiles);
   }
 
+  // Check if dependencies files list was changed
   checkDependencies(deps) {
     let changedExts = [];
     deps.forEach(depName => {
@@ -184,7 +189,7 @@ class Generator {
           delete fileInfo.generated;
         }
       });
-      // Check if dependencies files list was changed
+
       changedExts = union(changedExts, (symmetricDifference(
         Object.keys(this.files[depName].files),
         Object.keys(this.prevFiles[depName].files)
@@ -193,6 +198,7 @@ class Generator {
     return changedExts;
   }
 
+  // Get file list for dependencies
   getDependencyFiles(depItems, extensions) {
     const dependencyFiles = {};
     extensions.forEach(ext => {
@@ -212,6 +218,7 @@ class Generator {
     return dependencyFiles;
   }
 
+  // Write dependencies.* files
   writeDependencyFiles(itemName, dependencyFiles) {
     const extendsFiles = this.deps[itemName].extends_ ?
       this.files[this.deps[itemName].extends_].files :
@@ -219,35 +226,26 @@ class Generator {
     Object.entries(this.files[itemName].files).forEach(itemFile => {
       const [ext, fileInfo] = itemFile;
       if (dependencyFiles[ext]) {
-        const dependencyPath = path.join(path.dirname(fileInfo.path), 'dependencies' + ext);
-        const message = warningMessage.join(rules[ext].commentStart);
-        let imports = '';
+        let neededImports = [];
         dependencyFiles[ext].forEach(depFile => {
           if (extendsFiles[ext] && depFile === extendsFiles[ext].path) {
-            imports += rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
+            var importString = rules[ext].addBem(extendsFiles[ext].path, fileInfo.path, true);
           }
           else {
-            imports += rules[ext].addBem(depFile, fileInfo.path);
+            var importString = rules[ext].addBem(depFile, fileInfo.path);
+          }
+          if (importString) {
+            neededImports.push(importString);
           }
         });
-        if (imports) {
-          fs.writeFileSync(dependencyPath, message + imports);
-          this.depsFiles.toAdd[fileInfo.path] = dependencyPath;
-          fileInfo.depFile = dependencyPath;
-          this.injectImports(fileInfo.path, dependencyPath);
-        }
-        else {
-          this.depsFiles.toRemove[fileInfo.path] = dependencyPath;
-          if (fileInfo.depFile) {
-            fs.unlinkSync(dependencyPath);
-            delete fileInfo.depFile;
-          }
-          this.injectImports(fileInfo.path, dependencyPath, false);
-        }
+        
+        this.injectImports(fileInfo.path, neededImports);
       }
     });
   }
 
+  // Create missing files (if entity depends on other entity which has files with
+  // extension not presented in files of that entity)
   createMissingFiles(itemName, dependencyFiles) {
     Object.entries(dependencyFiles).forEach(depsType => {
       const [ext, paths] = depsType;
@@ -265,31 +263,52 @@ class Generator {
     });
   }
 
-  injectImports(itemFile, depFile, add = true) {
-    const itemFileContent = fs.readFileSync(itemFile, { encoding: 'utf-8' });
+  // Inject import into special block of entity file. If particular import occurs
+  // elsewhere outside special block it won't be duplicated.
+  injectImports(itemFile, neededImports) {
     const ext = path.extname(itemFile);
-    const importString = rules[ext].addBem(depFile, itemFile);
-    if (add && !itemFileContent.includes(importString.trim())) {
-      // Special case for pug extends. Include can't be injected elsewhere except block
-      // (or mixin)
-      if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
-        const firstBlock = itemFileContent.match(/^block .+(\s+)/m);
-        const splittedContent = itemFileContent.split(firstBlock[0]);
-        splittedContent.splice(1, 0, firstBlock[0], importString, firstBlock[1]);
-        var newContent = splittedContent.join('');
+    const itemFileContent = fs.readFileSync(itemFile, { encoding: 'utf-8' });
+    const blockContent = itemFileContent.match(rules[ext].blockRe);
+    const mainContent = itemFileContent.replace(rules[ext].blockRe, '');
+    if (!neededImports.length) {
+      // There is no need to import
+      if (mainContent.match(/\S/) || !(this.clear && blockContent)) {
+        // File has some content beside import block or generator is setted to
+        // not clear files or file wasn't created by generator (no block content).
+        fs.writeFileSync(itemFile, mainContent);
       }
       else {
-        var newContent = importString + itemFileContent;
-      }
-      fs.writeFileSync(itemFile, newContent);
-    }
-    else if (!add && itemFileContent.includes(importString.trim())) {
-      const newContent = itemFileContent.replace(importString, '');
-      if (!newContent.match(/\S/)) {
         fs.unlinkSync(itemFile);
         this.repeat = true;
       }
-      else {
+    }
+    else {
+      // Need to import some files
+      const mainImports = mainContent.match(rules[ext].importsRe);
+      const blockImports = blockContent ? blockContent[0].match(rules[ext].importsRe) : [];
+      const importsToAdd = difference(neededImports, mainImports);
+      if (!_.isEqual(importsToAdd, blockImports)) {
+        // Need to change block imports
+        if (ext === '.pug' && itemFileContent.match(/^extends .+\s+/m)) {
+          // Special case for pug with extends.
+          const newBlock = rules[ext].startMessage.concat(importsToAdd).concat(rules[ext].endMessage);
+          var newContent = injectWithExtends(mainContent, newBlock);
+        }
+        else {
+          const newBlock = arrayToString(
+            rules[ext].startMessage.concat(importsToAdd).concat(rules[ext].endMessage),
+            '',
+            eol
+          );
+          if (blockContent) {
+            // Already has import block, just update
+            var newContent = itemFileContent.replace(blockContent[0], newBlock);
+          }
+          else {
+            // Doesn't have import block, prepend file content
+            var newContent = newBlock + mainContent;
+          }
+        }
         fs.writeFileSync(itemFile, newContent);
       }
     }
@@ -306,6 +325,30 @@ function constructName(folder, name) {
   else {
     return name;
   }
+}
+
+function arrayToString(array, prepend='', append='') {
+  const newArray = [];
+  array.forEach(value => {
+    if (value) {
+      newArray.push(prepend + value + append);
+    }
+  });
+  return newArray.join('');
+}
+
+// Function to handle special case for pug with extends: includes can't be
+// injected elsewhere except block (or mixin)
+//   fileContent - string with file content
+//   toInject - array of strings to form injected block
+function injectWithExtends(fileContent, toInject) {
+  const blockRegExp = new RegExp(`(^block .+(?:${eol})*)([ \\t]+)`, 'm');
+  const firstBlock = fileContent.match(blockRegExp);
+  const splittedContent = fileContent.split(firstBlock[1]);
+  const indentation = firstBlock[2];
+  const newBlock = arrayToString(toInject, indentation, eol);
+  splittedContent.splice(1, 0, firstBlock[1], newBlock);
+  return splittedContent.join('');
 }
 
 module.exports = Generator;

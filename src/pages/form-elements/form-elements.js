@@ -1,4 +1,15 @@
-import './dependencies.js';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+import '../../blocks/input/input.js';
+import '../../blocks/dropdown/dropdown.js';
+import '../../blocks/date-picker/date-picker.js';
+import '../../blocks/subscription/subscription.js';
+import '../../blocks/list/list.js';
+import '../../blocks/like/like.js';
+import '../../blocks/slider/slider.js';
+import '../../blocks/exp-list/exp-list.js';
+import '../../blocks/comment/comment.js';
+// End of block with automatically generated imports.
 $( document ).ready(function(jQery) {
   $( '.date-picker' ).eq(0).find('.input').eq(1).val('19.08.2019');
 

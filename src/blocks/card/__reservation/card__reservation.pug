@@ -1,11 +1,16 @@
-include dependencies.pug
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../../room-header/room-header.pug
+include ../../date-picker/date-picker.pug
+include ../../dropdown/dropdown.pug
+include ../__calculation/card__calculation.pug
+include ../../button/button.pug
+//- End of block with automatically generated imports.
 mixin card__reservation(room)
-  - const rooms = require('blocksPath/rooms-info/rooms-info');
-
   form.card__reservation&attributes(attributes)
     +room-header(room)(class='card__header text_level_h1')
     +date-picker('double', 'Прибытие', 'Выезд')(class='card__dates')
-    +guests()(class='card__guests')
+    +dropdown('Гости', 'guests')(class='card__guests')
     +card__calculation
     +button(
       {text: 'Забронировать', icon: 'arrow_forward'},

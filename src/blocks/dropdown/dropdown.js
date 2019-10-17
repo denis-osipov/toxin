@@ -1,3 +1,10 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+import './_type_conveniences/dropdown_type_conveniences.js';
+import './_type_guests/dropdown_type_guests.js';
+import './__total/dropdown__total.js';
+import '../control/control.js';
+// End of block with automatically generated imports.
 // Dropdown with counting
 // Should be setted on inputs: $(selector).dropdown(settings)
 //
@@ -12,10 +19,10 @@
 //   wording: $.fn.dropdown.format // if setted must be function (for total: true) or array of functions (for total: false)
 //                                 // function get integer and must return formatted string,
 //   control                       // string containing jQuery selector for control element
+//   maxGroups                      // should be integer to denote maximum number of showed groups
 // };
 
-import './dependencies.js';
-const connect = require('blocksPath/connect/connect').connect;
+const connect = require('blocksPath/connect/connect');
 
 (function( $ ) {
   // Main method creating dropdown
@@ -55,6 +62,17 @@ const connect = require('blocksPath/connect/connect').connect;
 
       dropdown.total.on('click', dropdown.expand);
       dropdown.items.on('click', '.dropdown__button', dropdown.change);
+
+      $( document ).on('click', function(event) {
+        const target = $( event.target );
+        const parentDropdown = target.closest('.dropdown');
+        if (
+          !(parentDropdown[0] === dropdown.dropdown[0]) &&
+          target.parent().length
+        ) {
+          dropdown.dropdown.removeClass('dropdown_expanded');
+        }
+      });
 
       $.data(this, 'dropdown', dropdown);
 
@@ -111,7 +129,11 @@ const connect = require('blocksPath/connect/connect').connect;
       });
       const generalSum = values.reduce((prev, current) => prev + current);
       totals.splice(0, 0, this.settings.wording(generalSum));
-      this.input.val(totals.join(this.settings.sep));
+      let value = totals.slice(0, this.settings.maxGroups).join(this.settings.sep);
+      if (this.settings.maxGroups < totals.length) {
+        value += '...';
+      }
+      this.input.val(value);
     }
     // All values are separate
     else {
@@ -119,7 +141,11 @@ const connect = require('blocksPath/connect/connect').connect;
       this.settings.wording.forEach((fun, index) => {
         totals.push(fun(this.values[index]));
       });
-      this.input.val(totals.join(this.settings.sep));
+      let value = totals.slice(0, this.settings.maxGroups).join(this.settings.sep);
+      if (this.settings.maxGroups < totals.length) {
+        value += '...';
+      }
+      this.input.val(value);
     }
   };
 

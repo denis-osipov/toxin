@@ -1,5 +1,9 @@
-include dependencies.pug
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include __header/exp-list__header.pug
+include ../list/list.pug
+//- End of block with automatically generated imports.
 mixin exp-list(name, items)
   .exp-list&attributes(attributes)
     +exp-list__header(name)
-    +list(items, 'checkbox')(class='exp-list__list')
+    +list('', items, 'checkbox')(class='exp-list__list')

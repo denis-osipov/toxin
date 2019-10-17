@@ -1,8 +1,11 @@
 extends ../ui-kit/ui-kit
 
 block title
-  include dependencies.pug
-
+  //- Automatically generated imports.
+  //- Any changes in this block will be discarded during next compilation.
+  include ../../blocks/header/header.pug
+  include ../../blocks/footer/footer.pug
+  //- End of block with automatically generated imports.
   = 'Headers & Footers'
 
 block content

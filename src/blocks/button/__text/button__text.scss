@@ -1,4 +1,8 @@
-@import 'dependencies.scss';
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '_color_dark-50/button__text_color_dark-50.scss';
+@import '_color_primary-color/button__text_color_primary-color.scss';
+// End of block with automatically generated imports.
 .button__text {
   .button_type_border & {
     color: $primary-color;
