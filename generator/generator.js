@@ -18,7 +18,6 @@ class Generator {
 
   // Main method to generate imports
   generate() {
-    const start = new Date();
     this.repeat = false;
     this.prevFiles = this.files;
     this.prevDeps = this.deps;
@@ -35,8 +34,6 @@ class Generator {
     if (this.repeat) {
       this.generate();
     }
-    const finish = new Date();
-    console.log(`Generator worked ${(finish - start) / 1000} s.`);
   }
 
   // Scan folder and get files list, including internal dependencies

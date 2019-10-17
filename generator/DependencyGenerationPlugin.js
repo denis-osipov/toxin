@@ -16,7 +16,6 @@ class DependencyGenerationPlugin {
     compiler.hooks.entryOption.tap(
       'DependencyGenerationPlugin',
       (context, entry) => {
-        const start = new Date();
         // Get paths
         if (!this.options.folders) {
           this.options.folders = [path.resolve(context, 'blocks')];
@@ -28,8 +27,6 @@ class DependencyGenerationPlugin {
           this.options.clear,
           this.options.create);
         this.generator.generate();
-        const finish = new Date();
-        console.log(`Plugin worked ${(finish - start) / 1000} s.`);
       }
     );
 
@@ -37,12 +34,8 @@ class DependencyGenerationPlugin {
     compiler.hooks.invalid.tap(
       'DependencyGenerationPlugin',
       (fileName, changeTime) => {
-        const start = new Date();
-
         // To simplify adding new files we need regenerate dependencies for each invalidation.
         this.generator.generate();
-        const finish = new Date();
-        console.log(`Plugin worked ${(finish - start) / 1000} s.`);
       }
     );
   }
