@@ -7,6 +7,6 @@ mixin room-plate__gallery(room)
   - const images = require('blocksPath/rooms-images/rooms-images');
 
   .room-plate__gallery
-    img(src=images[room][0], alt=`Номер ${room}`, class='room-plate__image')
+    img(src=images[room].small[0], alt=`Номер ${room}`, class='room-plate__image')
     +room-plate__arrows
-    +room-plate__switcher(images[room])
+    +room-plate__switcher(images[room].small)
