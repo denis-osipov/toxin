@@ -1,0 +1,8 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../comment/comment.pug
+//- End of block with automatically generated imports.
+mixin comments(items)
+  section.comments
+    each item in items
+      +comment(item)
