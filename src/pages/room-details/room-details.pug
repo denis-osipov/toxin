@@ -1,1 +1,35 @@
 extends ../toxin/toxin
+
+block content
+  //- Automatically generated imports.
+  //- Any changes in this block will be discarded during next compilation.
+  include ../../blocks/photo/photo.pug
+  include ../../blocks/list/list.pug
+  include ../../blocks/pie-chart/pie-chart.pug
+  include ../../blocks/comments/comments.pug
+  //- End of block with automatically generated imports.
+  +photo(888)
+  +list('Сведения о номере', [
+      ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
+      ['location_city', 'Удобство', 'Окно в каждой из спален'],
+      ['whatshot', 'Уют', 'Номер оснащён камином']
+    ], 'icon')
+  +pie-chart([
+    { name: 'Великолепно', amount: 130 },
+    { name: 'Хорошо', amount: 65 },
+    { name: 'Удовлетворительно', amount: 65},
+    { name: 'Разочарован', amount: 0}
+  ])
+  +comments([
+    {
+      userName: 'Мурад Сарафанов',
+      date: '5 дней назад',
+      message: 'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
+      like: 12
+    },
+    {
+      userName: 'Патрисия Стёклышкова',
+      date: 'Неделю назад',
+      message: 'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент',
+      like: 2}
+  ])
