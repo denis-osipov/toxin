@@ -1,5 +1,47 @@
 mixin pie-chart(items, name='')
+  -
+    const size = 120;
+    const baseWidth = 4;
+    const accentWidth = 10;
+    const gap = 2;
+    const radius = (size - baseWidth) / 2;
+    const accentRadius = radius - (accentWidth - baseWidth) / 2;
+    let total = 0;
+    items.forEach(item => total += item.amount);
+    const totalLength = 2 * Math.PI * radius;
+    items.forEach(item => {
+      item.length = item.amount ? item.amount / total * totalLength - gap : 0;
+    });
+    let position = -(totalLength / 4 + gap / 2);
+
   .pie-chart
     h2.text_level_h2= name
+    p= total
     each item in items
-      p= `${item.name}: ${item.amount}`
+      p= item.length
+    svg(width='120' height='120')
+      defs
+        linearGradient#gradient0
+          stop(offset='0%' stop-color='#919191')
+          stop(offset='100%' stop-color='#3d4975')
+        linearGradient#gradient1
+          stop(offset='0%' stop-color='#bc9cff')
+          stop(offset='100%' stop-color='#8ba4f9')
+        linearGradient#gradient2
+          stop(offset='0%' stop-color='#6fcf97')
+          stop(offset='100%' stop-color='#66d2ea')
+        linearGradient#gradient3
+          stop(offset='0%' stop-color='#ffe39c')
+          stop(offset='100%' stop-color='#ffba9c')
+      each item, index in items
+        circle(
+          r=radius
+          cx='50%'
+          cy='50%'
+          fill='none'
+          stroke= item.color ? item.color : `url(#gradient${index})`
+          stroke-width=baseWidth
+          stroke-dasharray=`${item.length} ${totalLength - item.length}`
+          stroke-dashoffset= -position
+        )
+        - position += item.length + gap;
