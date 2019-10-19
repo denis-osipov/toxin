@@ -1,5 +1,6 @@
 //- Automatically generated imports.
 //- Any changes in this block will be discarded during next compilation.
+include __chart/pie-chart__chart.pug
 include __diagram/pie-chart__diagram.pug
 include __gradients/pie-chart__gradients.pug
 include __legend/pie-chart__legend.pug
@@ -20,6 +21,4 @@ mixin pie-chart(items, name='')
   .pie-chart
     h2.text_level_h2= name
     +pie-chart__gradients
-    .pie-chart__chart
-      +pie-chart__diagram(items)
-      +pie-chart__legend(items)
+    +pie-chart__chart(items)

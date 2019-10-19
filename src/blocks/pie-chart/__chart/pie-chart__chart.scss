@@ -1,0 +1,10 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../__diagram/pie-chart__diagram.scss';
+@import '../__legend/pie-chart__legend.scss';
+// End of block with automatically generated imports.
+.pie-chart__chart {
+  column-gap: 30px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+}

@@ -1,5 +1,11 @@
 .pie-chart__total {
+  align-content: center;
+  bottom: 0;
+  display: grid;
+  left: 0;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: -1;
 }
