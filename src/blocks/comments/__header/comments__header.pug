@@ -1,0 +1,5 @@
+mixin comments__header(name, amount)
+  - const wording = require('utils/wording');
+  .comments__header
+    h2.text_level_h2= name
+    span.comments__amount= wording(amount, ['0 отзывов', 'отзыв', 'отзыва', 'отзывов'])

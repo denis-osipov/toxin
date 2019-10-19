@@ -1,9 +1,10 @@
 // Automatically generated imports.
 // Any changes in this block will be discarded during next compilation.
-@import '__amount/comments__amount.scss';
-@import '__header/comments__header.scss';
-@import '../comment/comment.scss';
+@import '../../text/_level_h2/text_level_h2.scss';
 // End of block with automatically generated imports.
-.comments {
-  margin-left: -1px;
+
+.comments__header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }

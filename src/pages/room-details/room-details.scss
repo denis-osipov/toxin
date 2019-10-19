@@ -20,6 +20,7 @@
       @include calc-air;
       @include calc-air($ref-air: 70px, $sides: ('top', 'bottom'));
       align-items: start;
+      border-bottom: 2px solid $dark-25;
       column-gap: 70px;
       display: grid;
       grid-template-columns: 712fr 380fr;
@@ -38,6 +39,30 @@
 
     &__comments {
       grid-column-end: span 2;
+    }
+
+    &__rules {
+      padding-right: 30px;
+      padding-top: 14px;
+
+      .room-details__header {
+        padding-bottom: 1px;
+        padding-left: 19px;
+      }
+
+      .list__list,
+      .list__item:last-child {
+        margin-bottom: 2px;
+      }
+    }
+
+    &__cancellation {
+      padding-right: 10px;
+      padding-top: 14px;
+
+      .room-details__header {
+        padding-bottom: 1px;
+      }
     }
   }
 

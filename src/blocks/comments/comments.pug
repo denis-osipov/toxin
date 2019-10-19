@@ -1,9 +1,10 @@
 //- Automatically generated imports.
 //- Any changes in this block will be discarded during next compilation.
+include __header/comments__header.pug
 include ../comment/comment.pug
 //- End of block with automatically generated imports.
 mixin comments(items, name)
   section.comments&attributes(attributes)
-    h2.text_level_h2= name
+    +comments__header(name, items.length)
     each item in items
       +comment(item)
