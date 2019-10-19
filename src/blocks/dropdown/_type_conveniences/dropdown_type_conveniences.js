@@ -1,4 +1,4 @@
-const wording = require('../../../../utils/wording');
+const wording = require('utils/wording');
 
 function setConveniences( jQuery ) {
   $( '.dropdown_type_conveniences' ).dropdown({
