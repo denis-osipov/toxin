@@ -25,6 +25,11 @@
       grid-template-columns: 712fr 380fr;
     }
 
+    &__header {
+      margin-top: 0;
+      padding-bottom: 5px;
+    }
+
     &__info {
       column-gap: 70px;
       display: grid;
@@ -34,5 +39,11 @@
     &__comments {
       grid-column-end: span 2;
     }
+  }
+
+  .list__item_type_icon:last-child {
+    border-bottom: none;
+    margin-bottom: 17px;
+    padding-bottom: 0;
   }
 }
