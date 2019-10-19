@@ -1,6 +1,10 @@
 // Automatically generated imports.
 // Any changes in this block will be discarded during next compilation.
-@import '__diagram/pie-chart__diagram.scss';
-@import '__total/pie-chart__total.scss';
-@import '../text/_level_h2/text_level_h2.scss';
+@import '../__total/pie-chart__total.scss';
 // End of block with automatically generated imports.
+
+.pie-chart__diagram {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}

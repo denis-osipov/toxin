@@ -1,0 +1,8 @@
+mixin pie-chart__legend(items)
+  ul.pie-chart__legend
+    each item, index in items.reverse()
+          li
+            div
+              svg(width=10 height=10)
+                circle(r=5 cx='50%' cy='50%' fill=item.color)
+            =item.name

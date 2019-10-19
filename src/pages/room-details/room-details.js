@@ -6,3 +6,8 @@ import '../../blocks/pie-chart/pie-chart.js';
 import '../../blocks/comments/comments.js';
 import '../../blocks/card/card.js';
 // End of block with automatically generated imports.
+
+$( document ).ready(function(jQery) {
+  const chart = $( '.pie-chart' ).data('chart');
+  chart.setActive(1);
+});

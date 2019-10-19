@@ -1,38 +1,63 @@
 (function( $ ) {
   $.fn.chart = function() {
     return this.each(function() {
+      const $this = $( this );
       const chart = {
-        container: $( this ),
-        element: $( this ).children('circle'),
-        init: () => chart.element.hover($.fn.chart.accent, $.fn.chart.normalize)
+        pie: $this.find('.pie-chart__pie'),
+        init: () => {
+          chart.accentWidth = chart.pie.attr('data-accent-width');
+          chart.pieElements = chart.pie.find('circle');
+
+          chart.setStates();
+
+          chart.pieElements.each(function(index, element) {
+            $( element ).hover(
+              () => $( element ).attr(chart.states[index].accent),
+              () => $( element ).attr(chart.states[index].normal),
+            );
+          });
+        },
+        setStates: () => {
+          chart.states = [];
+          chart.pieElements.each(function(index, element) {
+            const $el = $( element );
+
+            const normal = {
+              r: $el.attr('r'),
+              'stroke-width': $el.attr('stroke-width'),
+              'stroke-dasharray': $el.attr('stroke-dasharray'),
+              'stroke-dashoffset': $el.attr('stroke-dashoffset')
+            }
+
+            const accent = {
+              r: normal.r - (chart.accentWidth - normal['stroke-width']) / 2,
+              'stroke-width': chart.accentWidth
+            }
+
+            const coef = accent.r / normal.r;
+            accent['stroke-dashoffset'] = normal['stroke-dashoffset'] * coef;
+            const dasharray = [];
+            normal['stroke-dasharray'].split(' ').forEach(value => {
+              dasharray.push(value * coef);
+            });
+            accent['stroke-dasharray'] = dasharray.join(' ');
+
+            chart.states.push({ normal: normal, accent: accent });
+          });
+        },
+        setActive: (index) => {
+          $( chart.pieElements[index] ).attr(chart.states[index].accent);
+        }
       };
       chart.init();
+
+      $.data(this, 'chart', chart);
     });
-  };
-
-  $.fn.chart.accent = function() {
-    $( this ).attr('r', '55');
-    $( this ).attr('stroke-width', '10');
-    const dash = $( this ).attr('stroke-dasharray');
-    const [length, gap] = dash.split(' ');
-    $( this ).attr('stroke-dasharray', `${length * 55 / 58} ${gap * 55 / 58}`);
-    const offset = $( this ).attr('stroke-dashoffset');
-    $( this ).attr('stroke-dashoffset', `${offset * 55 / 58 }`);
-  };
-
-  $.fn.chart.normalize = function() {
-    $( this ).attr('r', '58');
-    $( this ).attr('stroke-width', '4');
-    const dash = $( this ).attr('stroke-dasharray');
-    const [length, gap] = dash.split(' ');
-    $( this ).attr('stroke-dasharray', `${length * 58 / 55} ${gap * 58 / 55}`);
-    const offset = $( this ).attr('stroke-dashoffset');
-    $( this ).attr('stroke-dashoffset', `${offset * 58 / 55 }`);
   };
 })( jQuery );
 
 function setPieChart( jQuery ) {
-  $( '.pie-chart svg' ).chart();
+  $( '.pie-chart' ).chart();
 }
 
 $( document ).ready( setPieChart );
