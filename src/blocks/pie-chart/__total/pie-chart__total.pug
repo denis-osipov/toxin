@@ -1,4 +1,6 @@
 mixin pie-chart__total(amount)
+  - const wording = require('utils/wording');
   .pie-chart__total
-    .pie-chart__total-amount= amount
-    .pie-chart__total-word голосов
+    - const total = wording(amount, ['0 голосов', 'голос', 'голоса', 'голосов']).split(' ')
+    .pie-chart__total-amount= total[0]
+    .pie-chart__total-word= total[1]
