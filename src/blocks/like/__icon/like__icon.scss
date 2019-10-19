@@ -1,11 +1,11 @@
 .like__icon {
   justify-self: end;
 
-  .like_liked &::after {
+  .like_liked_true &::after {
     content: 'favorite';
   }
 
-  &::after {
+  .like_liked_false &::after {
     content: 'favorite_border';
   }
 }
