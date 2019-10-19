@@ -19,6 +19,5 @@ mixin pie-chart(items, name='')
     });
 
   .pie-chart
-    h2.text_level_h2= name
-    +pie-chart__gradients
+    h2.text_level_h2.pie-chart__header= name
     +pie-chart__chart(items)

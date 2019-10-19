@@ -4,6 +4,7 @@
 @import '../__legend/pie-chart__legend.scss';
 // End of block with automatically generated imports.
 .pie-chart__chart {
+  align-items: end;
   column-gap: 30px;
   display: grid;
   grid-template-columns: 120px 1fr;

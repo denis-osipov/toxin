@@ -1,3 +1,7 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../__gradients/pie-chart__gradients.pug
+//- End of block with automatically generated imports.
 mixin pie-chart__pie(items, totalAmount)
   -
     const size = 120;
@@ -13,6 +17,7 @@ mixin pie-chart__pie(items, totalAmount)
     });
 
   svg.pie-chart__pie(width=size, height=size, data-accent-width= accentWidth)
+    +pie-chart__gradients
     each item in items
       circle(
         r=radius
