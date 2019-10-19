@@ -32,9 +32,13 @@
     }
 
     &__info {
-      column-gap: 70px;
+      column-gap: 12px;
       display: grid;
       grid-template-columns: 1fr 1fr;
+    }
+
+    &__icon-list {
+      padding-right: 70px;
     }
 
     &__comments {
@@ -42,7 +46,7 @@
     }
 
     &__rules {
-      padding-right: 30px;
+      padding-right: 90px;
       padding-top: 14px;
 
       .room-details__header {
