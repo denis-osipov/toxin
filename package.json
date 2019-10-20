@@ -5,12 +5,12 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "open": "webpack-dev-server --open",
-    "hot": "webpack-dev-server --hot",
-    "dev": "webpack",
-    "dev-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
-    "server-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "open": "webpack-dev-server --open --config webpack.dev.js",
+    "hot": "webpack-dev-server --hot --config webpack.dev.js",
+    "dev": "webpack --config webpack.dev.js",
+    "dev-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js --config webpack.dev.js",
+    "server-debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.dev.js",
     "deps": "node generator/createDeps",
     "rm-deps": "find src -name dependencies.\\* -type f -delete",
     "rm-empty": "find src -empty -type f -delete"
