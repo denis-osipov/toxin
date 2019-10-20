@@ -7,16 +7,13 @@ const DependencyGenerationPlugin = require('./generator/DependencyGenerationPlug
 const toDashString = require('./utils/convert').toDashString;
 
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-source-map',
-  devServer: {
-    writeToDisk: true
-  },
+  mode: 'production',
+  devtool: 'none', // 'source-map'
   context: path.resolve(__dirname, 'src'),
   entry: {},
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'docs')
   },
   module: {
     rules: [
@@ -100,14 +97,14 @@ const types = ['.js', '.scss'];
 
 [
   'colorsAndType',
-  'formElements',
-  'cards',
-  'headersAndFooters',
-  'landingPage',
-  'searchRoom',
-  'roomDetails',
-  'registration',
-  'signIn'
+  // 'formElements',
+  // 'cards',
+  // 'headersAndFooters',
+  // 'landingPage',
+  // 'searchRoom',
+  // 'roomDetails',
+  // 'registration',
+  // 'signIn'
 ].forEach(entryName => {
   const entryFiles = [];
   const dashedName = toDashString(entryName);
