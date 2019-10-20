@@ -7,7 +7,11 @@ $( document ).ready(function(jQery) {
 
   const footers = $( '.footer' );
 
-  matchMedia('(max-width: 1120px)').addEventListener("change", setCreative);
+  const media = matchMedia('(max-width: 1120px)');
+
+  setCreative(media);
+
+  media.addEventListener("change", setCreative);
 
   function setCreative(e) {
     if (e.matches) {
