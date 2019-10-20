@@ -89,7 +89,8 @@ module.exports = {
   resolve: {
     alias: {
       blocksPath: path.resolve(__dirname, 'src/blocks'), // for correct paths to required assets in pug mixins
-      images: path.resolve(__dirname, 'src/images')
+      images: path.resolve(__dirname, 'src/images'),
+      utils: path.resolve(__dirname, 'utils')
     }
   }
 }
@@ -103,7 +104,8 @@ const types = ['.js', '.scss'];
   'cards',
   'headersAndFooters',
   'landingPage',
-  'searchRoom'
+  'searchRoom',
+  'roomDetails'
 ].forEach(entryName => {
   const entryFiles = [];
   const dashedName = toDashString(entryName);

@@ -1,0 +1,9 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include __section/photo__section.pug
+//- End of block with automatically generated imports.
+mixin photo(room)
+  - const images = require('blocksPath/rooms-images/rooms-images')[room];
+  .photo
+    +photo__section(images.large)
+    +photo__section(images.normal)

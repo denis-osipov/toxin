@@ -1,20 +1,21 @@
 // Automatically generated imports.
 // Any changes in this block will be discarded during next compilation.
+@import '../__prev/room-plate__prev.scss';
 @import '../../icon/icon.scss';
 @import '../__arrow/room-plate__arrow.scss';
+@import '../__next/room-plate__next.scss';
 // End of block with automatically generated imports.
 .room-plate__arrows {
+  bottom: 0;
   color: $light;
   display: flex;
-  font-size: 24px / $ref-rem;
+  font-size: 24px;
   justify-content: space-between;
   left: 0;
   line-height: 1;
-  padding-left: 11px;
-  padding-right: 9px;
   position: absolute;
   right: 0;
-  top: calc(50% - #{24px / $ref-rem / 2});
+  top: 0;
   visibility: hidden;
 
   .room-plate:hover &,

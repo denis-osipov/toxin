@@ -5,10 +5,6 @@
 @import '../../blocks/results/results.scss';
 // End of block with automatically generated imports.
 .toxin {
-  &__body {
-    width: 1440px;
-    margin: 0;
-  }
   &__main {
     @include calc-air($min-width: 700px);
     border-bottom: 2px solid $dark-25;

@@ -1,0 +1,23 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include __chart/pie-chart__chart.pug
+include __diagram/pie-chart__diagram.pug
+include __gradients/pie-chart__gradients.pug
+include __legend/pie-chart__legend.pug
+include __pie/pie-chart__pie.pug
+include __total/pie-chart__total.pug
+//- End of block with automatically generated imports.
+mixin pie-chart(items, name='')
+  //- Creates pie-chart for given items, an array of object with properties
+  //- name, amount and color (optional).
+  -
+    let colorToUse = 0;
+    items.forEach((item, index) => {
+      if (!item.color) {
+        item.color = `url(#gradient${colorToUse++})`;
+      }
+    });
+
+  .pie-chart
+    h2.text_level_h2.pie-chart__header= name
+    +pie-chart__chart(items)

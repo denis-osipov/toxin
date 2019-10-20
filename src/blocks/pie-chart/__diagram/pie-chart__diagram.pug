@@ -1,0 +1,16 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../__pie/pie-chart__pie.pug
+include ../__total/pie-chart__total.pug
+//- End of block with automatically generated imports.
+mixin pie-chart__diagram(items)
+  -
+    let totalAmount = 0;
+
+    items.forEach(item => {
+      totalAmount += item.amount;
+    });
+
+  .pie-chart__diagram
+    +pie-chart__pie(items, totalAmount)
+    +pie-chart__total(totalAmount)

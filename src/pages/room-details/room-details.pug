@@ -1,0 +1,56 @@
+extends ../toxin/toxin
+
+block title
+  ='Room details'
+
+block content
+  //- Automatically generated imports.
+  //- Any changes in this block will be discarded during next compilation.
+  include ../../blocks/photo/photo.pug
+  include ../../blocks/list/list.pug
+  include ../../blocks/pie-chart/pie-chart.pug
+  include ../../blocks/comments/comments.pug
+  include ../../blocks/text-block/text-block.pug
+  include ../../blocks/card/card.pug
+  //- End of block with automatically generated imports.
+  +photo(888)
+  section.room-details__main
+    section.room-details__info
+      .room-details__icon-list
+        h2.text_level_h2.room-details__header Сведения о номере
+        +list('', [
+            ['insert_emoticon', 'Комфорт', 'Шумопоглощающие стены'],
+            ['location_city', 'Удобство', 'Окно в каждой из спален'],
+            ['whatshot', 'Уют', 'Номер оснащён камином']
+          ], 'icon')
+      +pie-chart([
+        { name: 'Разочарован', amount: 0 },
+        { name: 'Удовлетворительно', amount: 65 },
+        { name: 'Хорошо', amount: 65 },
+        { name: 'Великолепно', amount: 130 }
+      ], 'Впечатления от номера')
+      +comments([
+        {
+          userName: 'Мурад Сарафанов',
+          date: '5 дней назад',
+          message: 'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
+          like: [true, 12]
+        },
+        {
+          userName: 'Патрисия Стёклышкова',
+          date: 'Неделю назад',
+          message: 'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент',
+          like: [false, 2]
+        }
+      ], 'Отзывы посетителей номера')(class='room-details__comments')
+      .room-details__rules
+        h2.text_level_h2.room-details__header Правила
+        +list('', [
+              'Нельзя с питомцами',
+              'Без вечеринок и мероприятий',
+              'Время прибытия — после 13:00, а выезд до 12:00'
+          ])
+      .room-details__cancellation
+        h2.text_level_h2.room-details__header Отмена
+        +text-block('', 'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.')
+    +card('reservation', 888)(class='room-details__reservation')

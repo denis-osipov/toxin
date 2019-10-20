@@ -1,0 +1,111 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../toxin/toxin.scss';
+@import '../../blocks/photo/photo.scss';
+@import '../../blocks/text/_level_h2/text_level_h2.scss';
+@import '../../blocks/list/list.scss';
+@import '../../blocks/pie-chart/pie-chart.scss';
+@import '../../blocks/comments/comments.scss';
+@import '../../blocks/text-block/text-block.scss';
+@import '../../blocks/card/card.scss';
+// End of block with automatically generated imports.
+.toxin {
+  .room-details {
+    &__main {
+      @include calc-air;
+      @include calc-air($ref-air: 70px, $sides: ('top', 'bottom'));
+      align-items: start;
+      border-bottom: 2px solid $dark-25;
+      column-gap: percentage(70px / $parent-width);
+      display: grid;
+      grid-template-columns: 712fr minmax(320px, 380fr);
+
+      @media (max-width: 1120px) {
+        grid-template-columns: auto;
+        grid-template-areas: 'reservation' 
+                             'info';
+        row-gap: 40px;
+      }
+    }
+
+    &__header {
+      margin-top: 0;
+      padding-bottom: 5px;
+    }
+
+    &__info {
+      column-gap: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      @media (max-width: 1120px) {
+        grid-area: info;
+      }
+
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+      }
+    }
+
+    &__icon-list {
+      @include calc-air(
+        $ref-air: 70px,
+        $min-air: 10px,
+        $ref-width: 350px,
+        $min-width: 210px,
+        $sides: 'right'
+      );
+    }
+
+    &__comments {
+
+      @media (min-width: 600px) {
+        grid-column-end: span 2;
+      }
+    }
+
+    &__rules {
+      @include calc-air(
+        $ref-air: 90px,
+        $min-air: 10px,
+        $ref-width: 350px,
+        $min-width: 210px,
+        $sides: 'right'
+      );
+      padding-top: 14px / $ref-rem;
+
+      .room-details__header {
+        padding-bottom: 1px;
+        padding-left: 19px / $ref-rem;
+      }
+
+      .list__list,
+      .list__item:last-child {
+        margin-bottom: 2px;
+      }
+    }
+
+    &__cancellation {
+      padding-right: 10px / $ref-rem;
+      padding-top: 14px / $ref-rem;
+
+      .room-details__header {
+        padding-bottom: 1px;
+      }
+    }
+
+    &__reservation {
+      @media (max-width: 1120px) {
+        grid-area: reservation;
+        justify-self: center;
+      }
+    }
+  }
+
+  .list__item_type_icon:last-child {
+    border-bottom: none;
+    margin-bottom: 17px / $ref-rem;
+    padding-bottom: 0;
+  }
+}

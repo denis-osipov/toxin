@@ -4,9 +4,9 @@ include ../__arrows/room-plate__arrows.pug
 include ../__switcher/room-plate__switcher.pug
 //- End of block with automatically generated imports.
 mixin room-plate__gallery(room)
-  - const images = require('blocksPath/rooms-images/rooms-images');
+  - const images = require('blocksPath/rooms-images/rooms-images')[room];
 
   .room-plate__gallery
-    img(src=images[room][0], alt=`Номер ${room}`, class='room-plate__image')
+    img(src=images.small[0], alt=`Номер ${room}`, class='room-plate__image')
     +room-plate__arrows
-    +room-plate__switcher(images[room])
+    +room-plate__switcher(images.small)

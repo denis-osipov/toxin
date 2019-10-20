@@ -1,0 +1,32 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../__gradients/pie-chart__gradients.pug
+//- End of block with automatically generated imports.
+mixin pie-chart__pie(items, totalAmount)
+  -
+    const size = 120;
+    const baseWidth = 4;
+    const accentWidth = 10;
+    const gap = 2;
+    const radius = (size - baseWidth) / 2;
+    const totalLength = 2 * Math.PI * radius;
+    let position = -(totalLength / 4 + gap / 2);
+
+    items.forEach(item => {
+      item.length = item.amount ? item.amount / totalAmount * totalLength - gap : 0;
+    });
+
+  svg.pie-chart__pie(width=size, height=size, data-accent-width= accentWidth)
+    +pie-chart__gradients
+    each item in items
+      circle(
+        r=radius
+        cx='50%'
+        cy='50%'
+        fill='none'
+        stroke= item.color
+        stroke-width=baseWidth
+        stroke-dasharray=`${item.length} ${totalLength - item.length}`
+        stroke-dashoffset= -position
+      )
+      - position += item.length + gap;

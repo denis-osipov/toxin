@@ -1,0 +1,9 @@
+//- Automatically generated imports.
+//- Any changes in this block will be discarded during next compilation.
+include ../__diagram/pie-chart__diagram.pug
+include ../__legend/pie-chart__legend.pug
+//- End of block with automatically generated imports.
+mixin pie-chart__chart(items)
+  .pie-chart__chart
+    +pie-chart__diagram(items)
+    +pie-chart__legend(items)

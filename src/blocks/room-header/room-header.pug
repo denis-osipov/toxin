@@ -3,12 +3,12 @@
 include __cost/room-header__cost.pug
 //- End of block with automatically generated imports.
 mixin room-header(room)
-  - const rooms = require('blocksPath/rooms-info/rooms-info');
+  - const info = require('blocksPath/rooms-info/rooms-info')[room];
   .room-header&attributes(attributes)
     div
       span.room-header__number-sign= '№ '
       span.room-header__number= room
-      if rooms[room].type
+      if info.type
         span.text_level_h3
-          span.room-header__type= ` ${rooms[room].type}`
-    +room-header__cost(rooms[room].cost, 'в сутки')
+          span.room-header__type= ` ${info.type}`
+    +room-header__cost(info.cost, 'в сутки')

@@ -7,7 +7,7 @@ mixin calendar(options)
   //- air-datepicker docs. Also connect: true should be set to trigger
   //- 'calendar:date' event on date selection (selected dates will be supplied).
   .calendar&attributes(attributes)
-    - const toDataAttrs = require('../../../utils/convert').toDataAttrs;
+    - const toDataAttrs = require('utils/convert').toDataAttrs;
     .calendar__picker&attributes(options ? toDataAttrs(options) : {})
     +control(
       [

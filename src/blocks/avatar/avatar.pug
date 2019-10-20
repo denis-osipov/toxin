@@ -1,6 +1,7 @@
 mixin avatar(name)
   -
     const avatars = {
-      'Мурад Сарафанов': require('images/avatars/murad_sarafanov.jpg')
+      'Мурад Сарафанов': require('images/avatars/murad_sarafanov.jpg'),
+      'Патрисия Стёклышкова': require('images/avatars/patricia_styoklyshkova.jpg')
     }
   img.avatar(src=avatars[name], alt=name)&attributes(attributes)

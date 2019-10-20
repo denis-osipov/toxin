@@ -4,8 +4,8 @@ include ../../room-header/room-header.pug
 include ../__rating/room-plate__rating.pug
 //- End of block with automatically generated imports.
 mixin room-plate__info(room)
-  - const rooms = require('blocksPath/rooms-info/rooms-info');
+  - const info = require('blocksPath/rooms-info/rooms-info')[room];
 
   .room-plate__info
     +room-header(room)(class='room-plate__header text_level_h2')
-    +room-plate__rating(rooms[room].rating, rooms[room].comments)
+    +room-plate__rating(info.rating, info.comments)

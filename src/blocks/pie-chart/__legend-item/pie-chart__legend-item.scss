@@ -1,0 +1,8 @@
+.pie-chart__legend-item {
+  align-items: center;
+  column-gap: 5px;
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  line-height: 20px / $ref-rem;
+  padding-top: 4px;
+}

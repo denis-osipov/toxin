@@ -17,7 +17,8 @@ import '../control/control.js';
 //   zeroSpecial: false,           // should special sums be shown if equal to 0
 //   sep: ', ',                    // separator for items quantities if total is false
 //   wording: $.fn.dropdown.format // if setted must be function (for total: true) or array of functions (for total: false)
-//                                 // function get integer and must return formatted string,
+//                                 // function get integer and array of words and must return formatted string,
+//   words: ['item', 'items']      // an array of words for using by wording function
 //   control                       // string containing jQuery selector for control element
 //   maxGroups                      // should be integer to denote maximum number of showed groups
 // };
@@ -111,7 +112,7 @@ const connect = require('blocksPath/connect/connect');
     // Construct total input value
     // One total value
     if (this.settings.total && !this.settings.special.length) {
-      this.input.val(this.settings.wording(sum));
+      this.input.val(this.settings.wording(sum, this.settings.words));
     }
     // Total value and special cases
     else if (this.settings.total && this.settings.special.length) {
@@ -124,11 +125,11 @@ const connect = require('blocksPath/connect/connect');
           values[index] = 0;
         });
         if (sum > 0 || this.settings.zeroSpecial) {
-          totals.push(specialCase.wording(sum));
+          totals.push(specialCase.wording(sum, specialCase.words));
         }
       });
       const generalSum = values.reduce((prev, current) => prev + current);
-      totals.splice(0, 0, this.settings.wording(generalSum));
+      totals.splice(0, 0, this.settings.wording(generalSum, this.settings.words));
       let value = totals.slice(0, this.settings.maxGroups).join(this.settings.sep);
       if (this.settings.maxGroups < totals.length) {
         value += '...';
@@ -139,7 +140,7 @@ const connect = require('blocksPath/connect/connect');
     else {
       let totals = [];
       this.settings.wording.forEach((fun, index) => {
-        totals.push(fun(this.values[index]));
+        totals.push(fun(this.values[index], this.settings.words[index]));
       });
       let value = totals.slice(0, this.settings.maxGroups).join(this.settings.sep);
       if (this.settings.maxGroups < totals.length) {
@@ -181,12 +182,12 @@ const connect = require('blocksPath/connect/connect');
   }
 
   // Format total string depending on value
-  $.fn.dropdown.format = function(value) {
+  $.fn.dropdown.format = function(value, words) {
     if (value === 1) {
-      return value + ' item';
+      return `${value} ${words[0]}`;
     }
     else {
-      return value + ' items';
+      return `${value} ${words[1]}`;
     }
   };
 
@@ -207,7 +208,8 @@ const connect = require('blocksPath/connect/connect');
     special: [],
     zeroSpecial: false,
     sep: ', ',
-    wording: $.fn.dropdown.format
+    wording: $.fn.dropdown.format,
+    words: ['item', 'items']
   };
 
 })( jQuery );

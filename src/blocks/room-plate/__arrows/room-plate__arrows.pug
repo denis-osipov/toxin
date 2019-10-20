@@ -4,5 +4,7 @@ include ../../icon/icon.pug
 //- End of block with automatically generated imports.
 mixin room-plate__arrows
   .room-plate__arrows
-    +icon('expand_more')(class='room-plate__arrow')
-    +icon('expand_less')(class='room-plate__arrow')
+    .room-plate__prev
+      +icon('expand_more')(class='room-plate__arrow')
+    .room-plate__next
+      +icon('expand_less')(class='room-plate__arrow')

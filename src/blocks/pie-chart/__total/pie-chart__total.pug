@@ -1,0 +1,8 @@
+mixin pie-chart__total(amount)
+  - const wording = require('utils/wording');
+  .pie-chart__total
+    - const total = wording(amount, ['0 голосов', 'голос', 'голоса', 'голосов']).split(' ')
+    .text_level_h1
+      span.pie-chart__total-line= total[0]
+    .text_level_h3
+      span.pie-chart__total-line= total[1]
