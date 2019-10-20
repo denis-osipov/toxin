@@ -5,10 +5,9 @@
 // End of block with automatically generated imports.
 
 .toxin__main {
-  background-position: 50% 98%;
+  background-position: 50% 80%;
 }
 
 .account-card {
-  padding-bottom: 25px / $ref-rem;
-  padding-top: 30px / $ref-rem;
+  @include calc-air($ref-air: 164px, $min-air: 20px, $sides: ('bottom', 'top'))
 }
