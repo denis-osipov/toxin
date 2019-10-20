@@ -105,7 +105,9 @@ const types = ['.js', '.scss'];
   'headersAndFooters',
   'landingPage',
   'searchRoom',
-  'roomDetails'
+  'roomDetails',
+  'registration',
+  'signIn'
 ].forEach(entryName => {
   const entryFiles = [];
   const dashedName = toDashString(entryName);

@@ -1,0 +1,13 @@
+// Automatically generated imports.
+// Any changes in this block will be discarded during next compilation.
+@import '../account-page/account-page.scss';
+@import '../../blocks/card/card.scss';
+// End of block with automatically generated imports.
+
+.toxin__main {
+  background-position: 50% 80%;
+}
+
+.account-card {
+  @include calc-air($ref-air: 164px, $min-air: 20px, $sides: ('bottom', 'top'))
+}
