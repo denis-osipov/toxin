@@ -3,7 +3,6 @@ const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const DependencyGenerationPlugin = require('./generator/DependencyGenerationPlugin');
 const toDashString = require('./utils/convert').toDashString;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
@@ -81,13 +80,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new DependencyGenerationPlugin({
-      folders: [
-        path.resolve(__dirname, 'src/blocks'),
-        path.resolve(__dirname, 'src/pages')
-      ],
-      clear: true
-    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
