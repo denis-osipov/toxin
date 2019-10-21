@@ -12,7 +12,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {},
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[contenthash].js',
     path: path.resolve(__dirname, 'docs')
   },
   module: {
