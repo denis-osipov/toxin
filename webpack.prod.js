@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DependencyGenerationPlugin = require('./generator/DependencyGenerationPlugin');
 const toDashString = require('./utils/convert').toDashString;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
@@ -38,9 +39,9 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(c|sc)ss$/i,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'resolve-url-loader',
@@ -105,7 +106,7 @@ const types = ['.js', '.scss'];
 
 [
   'colorsAndType',
-  // 'formElements',
+  'formElements',
   // 'cards',
   // 'headersAndFooters',
   // 'landingPage',
@@ -134,3 +135,7 @@ const types = ['.js', '.scss'];
     }),
   );
 });
+
+module.exports.plugins.push(new MiniCssExtractPlugin({
+  filename: '[contenthash].css'
+}));
