@@ -99,17 +99,17 @@ module.exports = {
       new TerserJSPlugin({}),
       new OptimizeCSSAssetsPlugin({})
     ],
-    // moduleIds: 'hashed',
-    // runtimeChunk: 'single',
-    // splitChunks: {
-    //   chunks: 'all',
-    //   cacheGroups: {
-    //     vendor: {
-    //       test: /[\\/]node_modules[\\/]/,
-    //       name: 'vendors'
-    //     }
-    //   }
-    // }
+    moduleIds: 'hashed',
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors'
+        }
+      }
+    }
   },
   resolve: {
     alias: {
