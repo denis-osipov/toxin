@@ -3,39 +3,43 @@ const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const DependencyGenerationPlugin = require('./generator/DependencyGenerationPlugin');
 const toDashString = require('./utils/convert').toDashString;
 
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-source-map',
-  devServer: {
-    writeToDisk: true
-  },
   context: path.resolve(__dirname, 'src'),
   entry: {},
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'scripts/[name].[contenthash].js'
   },
   module: {
     rules: [
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use:[
-          'file-loader'
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
+        include: path.resolve(__dirname, 'src/fonts'),
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[contenthash].[ext]'
+            }
+          },
         ]
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.pug$/i,
         use: [
-          'file-loader'
+          {
+            loader: 'pug-loader',
+            options: {
+              // Base dir for absolute imports
+              root: path.resolve(__dirname, 'src/blocks')
+            }
+          }
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(c|sc)ss$/i,
         use: [
-          'style-loader',
           'css-loader',
           {
             loader: 'resolve-url-loader',
@@ -57,29 +61,10 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.pug$/,
-        use: [
-          {
-            loader: 'pug-loader',
-            options: {
-              // Base dir for absolute imports
-              root: path.resolve(__dirname, 'src/blocks')
-            }
-          }
-        ]
       }
     ]
   },
   plugins: [
-    new DependencyGenerationPlugin({
-      folders: [
-        path.resolve(__dirname, 'src/blocks'),
-        path.resolve(__dirname, 'src/pages')
-      ],
-      clear: true
-    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
@@ -93,7 +78,7 @@ module.exports = {
       utils: path.resolve(__dirname, 'utils')
     }
   }
-}
+};
 
 const pathToEntries = path.join(module.exports.context, 'pages');
 const types = ['.js', '.scss'];
