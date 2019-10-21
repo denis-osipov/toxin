@@ -18,13 +18,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif)$/i,
+        exclude: path.resolve(__dirname, 'src/fonts'),
         use:[
-          'file-loader'
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          }
         ]
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
+        include: path.resolve(__dirname, 'src/fonts'),
         use: [
           'file-loader'
         ]
