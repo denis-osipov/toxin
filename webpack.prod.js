@@ -6,6 +6,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DependencyGenerationPlugin = require('./generator/DependencyGenerationPlugin');
 const toDashString = require('./utils/convert').toDashString;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -92,6 +94,23 @@ module.exports = {
     }),
     new CleanWebpackPlugin()
   ],
+  optimization: {
+    minimizer: [
+      new TerserJSPlugin({}),
+      new OptimizeCSSAssetsPlugin({})
+    ],
+    // moduleIds: 'hashed',
+    // runtimeChunk: 'single',
+    // splitChunks: {
+    //   chunks: 'all',
+    //   cacheGroups: {
+    //     vendor: {
+    //       test: /[\\/]node_modules[\\/]/,
+    //       name: 'vendors'
+    //     }
+    //   }
+    // }
+  },
   resolve: {
     alias: {
       blocksPath: path.resolve(__dirname, 'src/blocks'), // for correct paths to required assets in pug mixins
