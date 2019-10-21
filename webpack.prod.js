@@ -14,7 +14,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {},
   output: {
-    filename: '[contenthash].js',
+    filename: 'scripts/[name].[contenthash].js',
     path: path.resolve(__dirname, 'docs')
   },
   module: {
@@ -27,6 +27,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
+              name: 'images/[name].[contenthash].[ext]'
             }
           },
           'image-webpack-loader'
@@ -36,13 +37,23 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
         include: path.resolve(__dirname, 'src/fonts'),
         use: [
-          'file-loader'
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[contenthash].[ext]'
+            }
+          },
         ]
       },
       {
         test: /\.(c|sc)ss$/i,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           'css-loader',
           {
             loader: 'resolve-url-loader',
@@ -103,6 +114,9 @@ module.exports = {
       }
     }
   },
+  // performance: {
+  //   hints: 'error'
+  // },
   resolve: {
     alias: {
       blocksPath: path.resolve(__dirname, 'src/blocks'), // for correct paths to required assets in pug mixins
@@ -118,13 +132,13 @@ const types = ['.js', '.scss'];
 [
   'colorsAndType',
   'formElements',
-  // 'cards',
-  // 'headersAndFooters',
-  // 'landingPage',
-  // 'searchRoom',
-  // 'roomDetails',
-  // 'registration',
-  // 'signIn'
+  'cards',
+  'headersAndFooters',
+  'landingPage',
+  'searchRoom',
+  'roomDetails',
+  'registration',
+  'signIn'
 ].forEach(entryName => {
   const entryFiles = [];
   const dashedName = toDashString(entryName);
@@ -148,5 +162,5 @@ const types = ['.js', '.scss'];
 });
 
 module.exports.plugins.push(new MiniCssExtractPlugin({
-  filename: '[contenthash].css'
+  filename: 'styles/[name].[contenthash].css'
 }));
